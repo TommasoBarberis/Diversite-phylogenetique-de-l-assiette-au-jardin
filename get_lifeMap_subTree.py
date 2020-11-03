@@ -1,17 +1,19 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from get_NCBI_taxonomy import get_taxid
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
-# Pré requis : Téléchargez le binaire WebDriver pris en charge par votre navigateur et placez-le dans le repertoire du script.
-# https://www.selenium.dev/documentation/fr/webdriver/driver_requirements/
+# Pré-requis : 
+# pip install selenium
+# pip install webdriver_manager
 
 
-# Driver au choix suivant votre navigateur ( le driver dans être placé dans le répertoire du script)
 
 try :
-    driver = webdriver.Firefox(executable_path='geckodriver.exe')
+    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
 except:
-    driver = webdriver.Chrome(executable_path= "chromedriver.exe")
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
 # Création de la liste ID à partir de la liste espèce donnée
 liste_espece = ['Homo sapiens', 'primate']
