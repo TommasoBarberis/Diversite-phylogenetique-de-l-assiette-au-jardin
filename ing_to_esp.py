@@ -59,6 +59,9 @@ dicto_esp={}
 
 etape1=search_in_dict(correspondences, dicto_esp, liste_ing)
 etape2=with_endswith(correspondences,etape1, liste_ing)
-etape3=by_fields(correspondences, etape2, liste_ing)
 
-print(etape3)
+def etape3 ():
+    dicto_final=by_fields(correspondences, etape2, liste_ing)
+    return dicto_final
+
+print(etape3())

@@ -1,0 +1,9 @@
+1604417696866	geckodriver	INFO	Listening on 127.0.0.1:38483
+1604417696877	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileV6rBOI"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1604417702286	Marionette	INFO	Listening on port 40231
+1604417702345	Marionette	WARN	TLS certificate errors will be ignored for this session
+Gdk-Message: 16:41:23.529: /usr/lib/firefox/firefox: Fatal IO error 11 (Ressource temporairement non disponible) on X server :0.
+
+Gdk-Message: 16:41:23.573: firefox: Fatal IO error 11 (Ressource temporairement non disponible) on X server :0.
+
