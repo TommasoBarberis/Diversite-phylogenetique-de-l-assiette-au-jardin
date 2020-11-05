@@ -21,7 +21,7 @@ except :
 
 # Création de la liste ID à partir de la liste espèce donnée
 liste_espece = ['Homo sapiens', 'primate']
-liste_ID = list(get_taxid(liste_espece))
+liste_ID = (get_taxid(liste_espece))
 # Ouverture du navigateur sur le site suivant
 driver.get("http://lifemap-ncbi.univ-lyon1.fr/")
 # Ajout des éléments dans la zone de texte

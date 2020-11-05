@@ -1,4 +1,5 @@
 from ete3 import NCBITaxa
+import itertools
 ncbi = NCBITaxa()
 
 # Si on veut mettre à jour la base de données :
@@ -8,11 +9,17 @@ ncbi = NCBITaxa()
 def get_taxid(liste_espece):
     if not isinstance(liste_espece, list):
         liste_espece=list(liste_espece)
-    return ncbi.get_name_translator(liste_espece).values()
+    # Obtention des valeurs du dictionnaire
+    Liste =[(ncbi.get_name_translator(liste_espece).values())]
+    # Obtention d'une liste des valeurs du dictionnaire
+    liste_nettoyée = list(itertools.chain(*[ss_elt for elt in Liste for ss_elt in zip(*elt)]))
+    return liste_nettoyée
 
-if __name__=="__main__":
+if __name__ == "__main__":
     #Définition des arguments
     liste_espece = ['Homo sapiens', 'primate']
-    tests = get_taxid(liste_espece)
-    for test in tests:
-        print (test)
+    test = get_taxid(liste_espece)
+    print (test)
+    tree = ncbi.get_topology(test)
+    print (tree)
+    print (tree.get_ascii(attributes=["sci_name", "rank"]))
