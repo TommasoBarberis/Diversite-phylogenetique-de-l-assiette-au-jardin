@@ -30,8 +30,7 @@ driver.get("http://lifemap-ncbi.univ-lyon1.fr/")
 inputElement = driver.find_element_by_id("textarea")
 inputElement.send_keys(str(liste_ID))
 # Détéction du bouton View et click effectué
-View = driver.find_element_by_id("viewMulti")
-View.click()
+View = driver.find_element_by_id("viewMulti").click()
 
 # obtain newick tree
 
@@ -50,5 +49,4 @@ driver.get("https://phylot.biobyte.de/")
 inputElement = driver.find_element_by_id("treeElements")
 inputElement.send_keys(str(liste_ID))
 # Détéction du bouton View et click effectué
-View = driver.find_element_by_class_name("submit")
-View.click()
+View = driver.find_element_by_xpath("//input[@type='submit']").click()
