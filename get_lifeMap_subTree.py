@@ -3,17 +3,21 @@ from selenium.webdriver.common.keys import Keys
 from get_NCBI_taxonomy import get_taxid
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 # Pré-requis : 
 # pip install selenium
 # pip install webdriver_manager
 
-
-
+# test pour connaitre quel navigateur est sur la machine
 try :
     driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-except:
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+except :
+    try:
+        driver = webdriver.Chrome(ChromeDriverManager().install())
+    except :
+        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+
 
 # Création de la liste ID à partir de la liste espèce donnée
 liste_espece = ['Homo sapiens', 'primate']
