@@ -4,7 +4,7 @@ from get_NCBI_taxonomy import get_taxid
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-
+import os, sys
 # Pré-requis : 
 # pip install ete3
 # pip install selenium
@@ -33,10 +33,17 @@ inputElement.send_keys(str(liste_ID))
 View = driver.find_element_by_id("viewMulti").click()
 
 # obtain newick tree
-
+directory = os.path.abspath(sys.argv[0])
 # test pour connaitre quel navigateur est sur la machine
 try :
-    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    firefox_options = webdriver.FirefoxProfile()
+    firefox_options.set_preference("browser.download.folderList", 2)
+    firefox_options.set_preference("browser.download.manager.showWhenStarting", False)
+    firefox_options.set_preference("browser.download.dir", directory)
+    firefox_options.set_preference("browser.helperApps.alwaysAsk.force", False)
+    firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
+                          "text/plain, application/octet-stream, application/binary, attachment/csv, application/csv, application/excel, text/comma-separated-values, text/xml, application/xml")
+    driver = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
 except :
     try:
         driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -49,4 +56,4 @@ driver.get("https://phylot.biobyte.de/")
 inputElement = driver.find_element_by_id("treeElements")
 inputElement.send_keys(str(liste_ID))
 # Détéction du bouton View et click effectué
-View = driver.find_element_by_xpath("//input[@type='submit']").click()
+driver.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
