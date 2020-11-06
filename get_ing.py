@@ -72,7 +72,7 @@ def get_ing_only (ing_line):
             ing = ing[9:]
         elif ing.startswith('gousses d\'') or ing.startswith('verres de') or ing.startswith('sachet de') or ing.startswith('copeau de ') or ing.startswith('paquet de') or ing.startswith('pincée de ') or ing.startswith('gousse de '):
             ing = ing[10:]
-        elif ing.startswith('feuille de') or ing.startswith('rouleau de ') or ing.startswith('cuillère d\'') or ing.startswith('poignée de') or ing.startswith('gousses de ') or ing.startswith('copeaux de ') or ing.startswith("bouquet de") or ing.startswith("tranche de "):
+        elif ing.startswith('feuille de') or ing.startswith('rouleau de ') or ing.startswith("branche de ") or ing.startswith('cuillère d\'') or ing.startswith('poignée de') or ing.startswith('gousses de ') or ing.startswith('copeaux de ') or ing.startswith("bouquet de") or ing.startswith("tranche de "):
             ing = ing[11:]
         elif ing.startswith('feuilles de') or ing.startswith("noisette de") or ing.startswith("tranches de ") or ing.startswith('marmelade d\'') or ing.startswith('cuillère de') or ing.startswith('cuillères d\'') or ing.startswith("bouquets de"):
             ing = ing[12:]
@@ -93,7 +93,7 @@ def get_ing_only (ing_line):
     
     if ing.endswith('sec'):
         ing = ing[:-4]     
-    if ing.endswith('rapé') or ing.endswith('râpé') or ing.endswith("amer"):
+    if ing.endswith('rapé') or ing.endswith('râpé') or ing.endswith("amer") or ing.endswith("noir"):
         ing = ing[:-5]   
     elif ing.endswith('glace') or ing.endswith("frais"):
         ing = ing[:-6]  
@@ -105,6 +105,8 @@ def get_ing_only (ing_line):
         ing = ing[:-9]         
     elif ing.endswith('en poudre') or ing.endswith('en grains') or ing.endswith('pâtissier'):
         ing = ing[:-10] 
+    elif ing.endswith("demi-écrémé"):
+        ing = ing[:-12]
     comp[0] = ing
     return comp
 
@@ -202,5 +204,5 @@ def getCuisineaz(soup):
 
 if __name__ == "__main__":
 
-    url = 'https://www.marmiton.org/recettes/recette_tarte-au-chocolat-carambar-et-beurre-de-cacahuetes_392592.aspx'
+    url = 'https://www.marmiton.org/recettes/recette_carrot-cupcake-de-paques_305392.aspx'
     print(process(url))

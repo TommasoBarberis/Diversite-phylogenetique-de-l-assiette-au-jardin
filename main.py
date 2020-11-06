@@ -1,0 +1,30 @@
+# import get_lifeMap_subTree
+import get_ing
+import ing_to_esp
+
+print("\n")
+
+url = 'https://www.marmiton.org/recettes/recette_biscuits-a-la-pistache_45673.aspx'
+ingredients = get_ing.process(url)
+especes = ing_to_esp.recherche_globale(ingredients)
+nbing = len(ingredients)
+nbspec = len(especes)
+species_not_found = []
+if nbing != nbspec :
+    complete = False
+    for key in ingredients:
+        if key not in especes and key[:-1] not in especes.keys():
+            species_not_found.append(key)
+
+######## printting part ########
+
+print("\n" +str(nbspec)+ " species were found from the "+ str(nbing)+ " different ingredients.")
+if not complete :
+    print("the missing species are :")
+    for missing in species_not_found:
+        print("\t" + missing)
+
+print("\ningredients :")
+print(ingredients)
+print("species :")
+print(especes)
