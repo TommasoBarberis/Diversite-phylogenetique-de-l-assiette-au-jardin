@@ -18,9 +18,9 @@ def db_to_dicto (path):
 def condition (dicto1, dicto2, k):
     k2=k.capitalize()
     if k in dicto1.keys(): 
-        dicto2[k]=dicto1[k]
+        dicto2[k.lower()]=dicto1[k]
     elif k2 in dicto1.keys():
-        dicto2[k2]=dicto1[k2]
+        dicto2[k2.lower()]=dicto1[k2]
     return dicto2
 
 def search_in_dict (dicto1, dicto2, liste):
@@ -35,6 +35,7 @@ def with_endswith (dicto1, dicto2, liste):
             cond=condition(dicto1, dicto2, a)
     return dicto2
 
+#pas necessair ?
 def by_fields (dicto1, dicto2, liste):
     for k in liste:
         if " " in k:
@@ -46,21 +47,24 @@ def by_fields (dicto1, dicto2, liste):
                     cond=condition(dicto1, dicto2, a)
     return dicto2
 
-def recherche_globale ():
+def recherche_globale (dicto_ing):
+    correspondences=db_to_dicto("scientific_name_db.txt")
+    dicto_esp={}
+    liste_ing=[]
+    for k in dicto_ing.keys():
+        liste_ing.append(k)
     etape1=search_in_dict(correspondences, dicto_esp, liste_ing)    
-    etape2=with_endswith(correspondences,etape1, liste_ing)
-    dicto_final=by_fields(correspondences, etape2, liste_ing)
+    dicto_final=with_endswith(correspondences,etape1, liste_ing)
+    # etape2=with_endswith(correspondences,etape1, liste_ing)
+    # dicto_final=by_fields(correspondences, etape2, liste_ing)
     return dicto_final
 
+
 #################MAIN#########################
-correspondences=db_to_dicto("/home/tommaso/Semestre_1/Projet_S1/div-phylo-alim/scientific_name_db.txt")
+if __name__ == "__main__":
 
-dicto_ing = {'farine': 200.0, 'beurre demi-sel': 100.0, 'eau': 50.0, 'sel': 1.0, 'crème': 250.0, 'carambar©': 320.0, 'chocolat': 100.0, 'beurre de cacahuètes': 2.0}
-liste_ing=[]
-for k in dicto_ing.keys():
-    liste_ing.append(k)
+    dicto_ing = {'farine': 200.0, 'beurre demi-sel': 100.0, 'eau': 50.0, 'sel': 1.0, 'crème': 250.0, 'carambar©': 320.0, 'chocolat': 100.0, 'beurre de cacahuètes': 2.0}
 
-#print(liste_ing)
-dicto_esp={}
+    #print(liste_ing)
 
-print(recherche_globale())
+    print(recherche_globale())
