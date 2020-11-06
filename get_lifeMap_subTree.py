@@ -5,6 +5,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import os, sys
+
+
+
 # Pré-requis : 
 # pip install ete3
 # pip install selenium
@@ -33,7 +36,7 @@ inputElement.send_keys(str(liste_ID))
 View = driver.find_element_by_id("viewMulti").click()
 
 # obtain newick tree
-directory = os.path.abspath(sys.argv[0])
+directory = ""
 # test pour connaitre quel navigateur est sur la machine
 try :
     firefox_options = webdriver.FirefoxProfile()
