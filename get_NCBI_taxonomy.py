@@ -1,4 +1,5 @@
-from ete3 import NCBITaxa
+from ete3 import NCBITaxa, Tree
+import ing_to_esp
 import itertools
 ncbi = NCBITaxa()
 
@@ -17,9 +18,7 @@ def get_taxid(liste_espece):
 
 if __name__ == "__main__":
     #Définition des arguments
-    liste_espece = ['Homo sapiens', 'primate']
+    liste_espece = [" Homo sapiens, Primates" ]
     test = get_taxid(liste_espece)
     print (test)
-    tree = ncbi.get_topology(test)
-    print (tree)
-    print (tree.get_ascii(attributes=["sci_name", "rank"]))
+
