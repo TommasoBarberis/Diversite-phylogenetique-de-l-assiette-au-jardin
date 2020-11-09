@@ -18,7 +18,7 @@ def get_taxid(liste_espece):
 
 if __name__ == "__main__":
     #Définition des arguments
-    liste_espece = [" Homo sapiens, Primates" ]
+    liste_espece = ['Gallus gallus domesticus', 'Gasteracanthus cataphractus', 'Geboscon obliquum', 'Bergera koenigii']
     test = get_taxid(liste_espece)
     print (test)
 

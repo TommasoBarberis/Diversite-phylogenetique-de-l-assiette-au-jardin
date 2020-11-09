@@ -4,7 +4,7 @@ from get_NCBI_taxonomy import get_taxid
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from ete3 import Tree
+from ete3 import Tree, PhyloTree
 import os, sys, time
 
 
@@ -25,7 +25,7 @@ except :
 
 
 # Création de la liste ID à partir de la liste espèce donnée
-liste_espece = ['Homo sapiens', 'primate']
+liste_espece = ['Saccharum officinarum', 'Gallus gallus domesticus', 'Rhodocera rhamni', 'Pistacia vera']
 liste_ID = (get_taxid(liste_espece))
 liste_ID = str(liste_ID).strip('[]')
 # Ouverture du navigateur sur le site suivant
@@ -66,3 +66,6 @@ time.sleep(3)
 driver2.close()
 
 # Load a tree structure from a newick file.
+
+tree = PhyloTree('phyloT_generated_phyloT_generated_tree_1604945244_newick.txt')
+
