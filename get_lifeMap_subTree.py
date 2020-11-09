@@ -4,7 +4,8 @@ from get_NCBI_taxonomy import get_taxid
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-import os, sys
+from ete3 import Tree
+import os, sys, time
 
 
 
@@ -35,7 +36,7 @@ inputElement.send_keys(str(liste_ID))
 # Détéction du bouton View et click effectué
 View = driver.find_element_by_id("viewMulti").click()
 
-# obtain newick tree
+# obtain newick tree file
 directory = ""
 # test pour connaitre quel navigateur est sur la machine
 try :
@@ -46,17 +47,22 @@ try :
     firefox_options.set_preference("browser.helperApps.alwaysAsk.force", False)
     firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
                           "text/plain, application/octet-stream, application/binary, attachment/csv, application/csv, application/excel, text/comma-separated-values, text/xml, application/xml")
-    driver = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
+    driver2 = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
 except :
     try:
-        driver = webdriver.Chrome(ChromeDriverManager().install())
+        driver2 = webdriver.Chrome(ChromeDriverManager().install())
     except :
-        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
-
+        driver2 = webdriver.Edge(EdgeChromiumDriverManager().install())
+driver2.minimize_window()
+driver.maximize_window()
 # Ouverture du navigateur sur le site suivant
-driver.get("https://phylot.biobyte.de/")
+driver2.get("https://phylot.biobyte.de/")
 # Ajout des éléments dans la zone de texte
-inputElement = driver.find_element_by_id("treeElements")
+inputElement = driver2.find_element_by_id("treeElements")
 inputElement.send_keys(str(liste_ID))
 # Détéction du bouton View et click effectué
-driver.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
+driver2.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
+time.sleep(3)
+driver2.close()
+
+# Load a tree structure from a newick file.
