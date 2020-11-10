@@ -1,3 +1,5 @@
+ # -*- coding: utf-8 -*-
+
 # import get_lifeMap_subTree
 import get_ing
 import ing_to_esp

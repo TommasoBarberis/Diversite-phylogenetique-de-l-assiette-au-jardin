@@ -1,0 +1,802 @@
+Abelmoschus esculentus	Gombo
+Abelmoschus esculentus	Okra
+Acmella oleracea	Brède mafane
+Acmella oleracea	Cresson du Pará
+Actinidia arguta	Kiwaï
+Actinidia chinensis	Kiwi
+Adansonia digitata	Pain de singe
+Agaricus bisporus	Champignon de Paris
+Allium ampeloprasum	Ail Faux-Poireau
+Allium cepa	Oignon
+Allium chinense	Oignon de Chine
+Allium porrum	Poireau
+Allium ampeloprasum	Poireau perpétuel
+Allium ampeloprasum	Ail d'Orient
+Allium ascalonicum	Échalote
+Allium fistulosum	Ciboule
+Allium sativum	Ail
+Allium schoenoprasum	Civette
+Allium scorodoprasum	Ail rocambole
+Allium scorodoprasum	Rocambole
+Allium schoenoprasum	Ciboulette
+Allium tuberosum	Ciboule de Chine
+Althaea officinalis	Guimauve
+Amaranthus	Amarante
+Amelanchier ovalis	Amelanchier
+Anacardium occidentale	Cajou
+Anacardium occidentale	Noix de cajou
+Anacardium occidentale	Anacarde
+Anacardium occidentale	Pomme cajou
+Ananas comosus	Ananas
+Anarhichas lupus	Loup de mer
+Anarhichas lupus	Bar
+Anas platyrhynchos	Canard
+Anas platyrhynchos	Viande de canard
+Anas platyrhynchos	Cou du canard
+Anas platyrhynchos	Cuisses de canard
+Anas platyrhynchos	Manchons de canard
+Anas platyrhynchos	Aiguillette de canard
+Anas platyrhynchos	Aile de canard
+Anas platyrhynchos	Ailes de canard
+Anas platyrhynchos	Magret de canard
+Anas platyrhynchos	Magrets de canard
+Anas platyrhynchos	Filet de canard
+Anas platyrhynchos	Gésier de canard
+Anas platyrhynchos	Gésiers de canard
+Anas platyrhynchos	Manchon de canard
+Anas platyrhynchos	Pilon de canard
+Anas platyrhynchos	Foie gras de canard
+Anas platyrhynchos	Graisse de canard
+Anas platyrhynchos	Canard colvert
+Anas platyrhynchos	Confit de canard
+Anethum graveolens	Fenouil bâtard
+Anguilla anguilla	Anguille
+Annona cherimola	Chérimolier
+Annona cherimola	Cherimole
+Annona cherimola	Cherimoya
+Annona muricata	Grand corossol
+Annona muricata	Corossol
+Annona reticulata	Coeur de boeuf
+Annona squamosa	Attier
+Annona squamosa	Pomme cannelle
+Annona reticulata	Cachiman
+Anser anser domesticus	Oie
+Anser anser domesticus	Viande d'oie
+Anthemis nobilis	Camomille romaine
+Anthriscus cerefolium	Cerfeuil cultivé
+Apios americana	Glycine tubéreuse
+Apium graveolens	Céleri
+Apium graveolens	Céleri-rave
+Arachis hypogaea	Pistache de Terre
+Arachis hypogaea	Arachide
+Aralia californica	Aralia
+Aralia californica	Udo
+Arbutus unedo	Arbouse
+Arctium	Bardane
+Arctium lappa	Grande bardane
+Armoracia lapathifolia	Grand Raifort
+Armoracia rusticana	Raifort
+Armoracia rusticana	Raifort Cran
+Aronia melanocarpa	gueules noires
+Artemisia dracunculus	Estragon
+Artemisia vulgaris	herbe Saint-Jean
+Artocarpus altilis	Arbre à pain
+Artocarpus communis	Arbre-à-pain
+Artocarpus heterophyllus	jacquier
+Artocarpus heterophyllus	Jacque
+Asimina triloba	Asimine
+Asparagus officinalis	Asperge officinale
+Asparagus officinalis	Asperge
+Atriplex hortensis	Arroche des jardins
+Atriplex hortensis	Arroche
+Avena sativa	Avoine cultivée
+Averrhoa carambola	Carambolier
+Averrhoa carambola	Carambole
+Averrhoa carambola	Pomme de Goa
+Bambusa vulgaris	Pousse de bambou
+Bambusa vulgaris	Bambou
+Basella alba	Baselle
+Basella alba	épinard de Malabar
+Barbarea verna	Cresson de terre
+Barbarea vulgaris	Cresson d'hiver
+Barbarea vulgaris	Herbe de Sainte-Barbe
+Batoidea	Raie
+Benincasa hispida	Courge cireuse
+Benincasa hispida	Bénincasa
+Berberis vulgaris	Épine-vinette
+Beta vulgaris	Betterave
+Beta vulgaris	Bette
+Beta vulgaris	Côte de bette
+Beta vulgaris	Blette
+Beta vulgaris	Bette à carde
+Blitum bonus-henricus	Chénopode bon-Henri
+Borago officinalis	Bourrache officinale
+Bos taurus	Boeuf
+Bos taurus	Viande de boeuf
+Bos taurus	Bœuf
+Bos taurus	Viande de bœuf
+Bos taurus	Bavette de bœuf
+Bos taurus	Côte de bœuf
+Bos taurus	Découpe du bœuf
+Bos taurus	Entrecôte de bœuf
+Bos taurus	Faux-filet de bœuf
+Bos taurus	Filet de bœuf
+Bos taurus	Filet mignon de bœuf
+Bos taurus	Gîte de bœuf
+Bos taurus	Joue de bœuf
+Bos taurus	Langue de bœuf
+Bos taurus	Onglet de bœuf
+Bos taurus	Queue de bœuf
+Bos taurus	Rumsteck de bœuf
+Bos taurus	Steak de bœuf
+Bos taurus	Steak haché de bœuf
+Bos taurus	Turnedos de bœuf
+Bos taurus	Paleron de bœuf
+Bos taurus	Rôti de bœuf
+Bos taurus	Hampe
+Bos taurus	Rosbeef
+Bos taurus	Tende de tranche
+Bos taurus	Veau
+Bos taurus	Viande de veau
+Bos taurus	Veau de lait
+Bos taurus	Côte découverte de veau
+Bos taurus	Côte première de veau
+Bos taurus	Longe de veau
+Bos taurus	Quasi de veau
+Bos taurus	Collier de veau
+Bos taurus	Côtes de veau
+Bos taurus	Côtes secondes de veau
+Bos taurus	Côtes premières de veau
+Bos taurus	Filet de veau
+Bos taurus	Longe filet de veau
+Bos taurus	Noix de veau
+Bos taurus	Noix pâtissière de veau
+Bos taurus	Nous-noix de veau
+Bos taurus	Flanchet de veau
+Bos taurus	Tendron de veau
+Bos taurus	Poitrine de veau
+Bos taurus	Epaule de veau
+Bos taurus	Gîte de veau
+Bos taurus	Jarret de veau
+Bos taurus	Escalope de veau
+Bos taurus	Escalopes de veau
+Bos taurus	Langue de veau
+Bos taurus	Ris de veau
+Bos taurus	Tendrons de veau
+Bos taurus	Rognons
+Bos taurus	Tournedos
+Bos taurus	Tripes
+Bos taurus	Viande des Grisons
+Brassica campestris	Navette d'été
+Brassica hirta	Moutarde blanche
+Brassica juncea	Moutarde de Sarepta
+Brassica napus	Colza
+Brassica napus	Rutabaga
+Brassica napus	Chou-navet
+Brassica napus napus	Navette
+Brassica oleracea	Brocoli
+Brassica oleracea	Brocoli chinois
+Brassica oleracea	Chou
+Brassica oleracea	Chou cabus
+Brassica oleracea	Chou-fleur
+Brassica oleracea	Chou frisé
+Brassica oleracea botrytis	chou fleur d'hiver
+Brassica oleracea botrytis	Chou romanesco
+Brassica oleracea botrytis	Brocoli à pomme
+Brassica oleracea capitata	chou rouge
+Brassica oleracea gemmifera	chou de Bruxelles
+Brassica oleracea gongylodes	chou rave
+Brassica oleracea gongylodes	Chou-rave
+Brassica oleracea sabauda	chou de Savoie
+Brassica rapa	Navette des champs
+Brassica rapa	Chou de Pékin
+Brassica rapa	Pe-tsaï
+Brassica rapa	Komatsuna
+Brassica rapa	Moutarde épinard
+Brassica rapa chinensis	Chou de Chine
+Brassica rapa chinensis	Bok choy
+Brassica rapa chinensis	Pak choï
+Brassica rapa rapa	Navet
+Bunias orientalis	Bunias d'Orient
+Bunias orientalis	Bunias
+Byrsonima crassifolia	maurissi
+Cajanus cajan	Pois d'Angole
+Camellia sinensis	théier
+Canavalia gladiata	Haricot sabre
+Canavalia gladiata	Pois sabre
+Canna indica	Canna
+Cantharellus cibarius	Girolle
+Capreolus capreolus	Chevreuil
+Capreolus capreolus	Viande de Chevreuil
+Capreolus capreolus	Filet de chevreuil
+Capparis rupestris	Câprier des rochers
+Capparis spinosa	câprier Commun
+Capra hircus	Chèvre
+Capra hircus	Viande de chèvre
+Capra hircus	Cabri
+Capra hircus	Haut de côte de chevreau
+Capsicum annuum	Piment ornemental
+Capsicum annuum	Piment
+Capsicum annuum	Poivron
+Capsicum frutescens	Piment enragé
+Carica papaya	Papayer
+Carica papaya	Papaye
+Carthamus tinctorius	Safran bâtard
+Carum carvi	Anis des Vosges
+Castanea crenata	châtaignier du Japon
+Castanea sativa	Châtaignier commun
+Castanea sativa	Châtaigne
+Castanea sativa	Marron
+Ceratonia siliqua	Caroubier
+Cervus elaphus	Cerf
+Cervus elaphus	Viande de cerf
+Chaerophyllum bulbosum	Cerfeuil tubéreux
+Chamaemelum nobile	Camomille romaine
+Chenopodium quinoa	Quinoa
+Chrysanthemum coronarium	Chrysanthème des jardins
+Chrysophyllum cainito	Pomme de lait
+Chrysophyllum cainito	Caïmite
+Cicer arietinum	Pois chiche
+Cichorium endivia	Chicorée de Belgique
+Cichorium endivia crispum	Chicorée frisée
+Cichorium endivia latifolium	Chicorée scarole
+Cichorium intybus	Chicorée de Bruxelles
+Cichorium intybus	Endive
+Cichorium intybus	Chicon
+Cichorium intybus	Chicorée
+Cichorium intybus	Radicchio
+Citrullus lanatus	Pastèque
+Citrus aurantifolia	Limetier
+Citrus aurantifolia	Lime
+Citrus aurantifolia	Citron vert
+Citrus aurantium	Bigarade
+Citrus aurantium	Orange amère
+Citrus bergamia	Bergamote
+Citrus clementina	Clémentine
+Citrus hystrix	Combava
+Citrus limon	Citronnier
+Citrus limon	Citron
+Citrus maxima	shadek
+Citrus reticulata	Mandarinier
+Citrus reticulata	Mandarine
+Citrus sinensis	Oranger
+Citrus sinensis	Orange
+Citrus ×junos	Yuzu
+Citrus ×paradisi	Pamplemousse
+Citrus ×paradisi	Pomélo
+Claytonia perfoliata	Claytone de Cuba
+Cocos nucifera	Coco
+Cocos nucifera	Noix de coco
+Cocos nucifera	Lait de coco
+Coffea arabica	caféier d'Arabie
+Coffea canephora	caféier robuste
+Columba palumbus	Palombe
+Columba palumbus	Pigeon
+Columba palumbus	Pigeonneau
+Columba palumbus	Poitrine de pigeonneau
+Columba palumbus	Viande de palombe
+Columba palumbus	Viande de pigeon
+Conopodium majus	Châtaigne de terre
+Corchorus olitorius	corète potagère
+Coriandrum sativum	Coriandre cultivée
+Corylus avellana	Noisetier
+Corylus avellana	Noisette
+Coryphaena hippurus	Dorade Coryphène
+Coturnix japonica	Caille
+Coturnix japonica	Viande de Caille
+Crocus sativus	Safran cultivé
+Cucumis melo	Melon
+Cucumis melo	Cantaloup
+Cucumis metulifer	Kiwano
+Cucumis sativus	Concombre
+Cucumis sativus	Cornichon
+Cucurbita ficifolia	Courge de Siam
+Cucurbita maxima	Potimarron
+Cucurbita maxima	Potiron
+Cucurbita maxima	Courge
+Cucurbita maxima	Citrouille
+Cucurbita moschata	Coruge musquée
+Cucurbita pepo	Pâtisson
+Cucurbita pepo	Courgette
+Cuminum cyminum	cumin de Maroc
+Curcuma longa	safran des Indes
+Curcuma longa	Curcuma
+Cydonia oblonga	Cognassier
+Cymbopogon citratus	verveine des Indes
+Cynara cardunculus	Cardon
+Cynara cardunculus	Cardon d'Espagne
+Cynara scolymus	Artichaut
+Cyperus esculentus	Souchet
+Cyprinus carpio	Carpe Koï
+Daucus carota	Daucus carotte
+Dimocarpus longan	Longane
+Dioscorea alata	Igname
+Diospyros kaki	Plaqueminier du Japon
+Diospyros kaki	Kaki
+Diospyros virginiana	plaqueminier d'Amérique
+Durio zibethinus	Durian
+Eleocharis dulcis	Châtaigne d'eau chinoise
+Empetrum nigrum	Camarine noire
+Engraulidae	Anchois
+Equus ferus caballus	Cheval
+Equus ferus caballus	Viande de cheval
+Equus ferus caballus	Steak de cheval
+Equus ferus caballus	Bavette de cheval
+Eriobotrya japonica	Néflier du Japon
+Eriobotrya japonica	Nèfle du Japon
+Eruca sativa	Roquette
+Ervum lens	Lentille alimentaire
+Esox lucius	Brochet
+Eugenia jambolana	Jamelonier
+Eugenia uniflora	Cerise de Cayenne
+Eutrema japonicum	Wasabi
+Fagopyrum esculentum	Blé de Barbarie
+Fagopyrum tataricum	Sarrasin de Tartarie
+Feijoa sellowiana	Feijoa
+Ficus carica	Figuier de Carie
+Ficus carica	Figue
+Flammulina velutipes	Collybie à pied velouté
+Foeniculum vulgare	Fenouil
+Fortunella japonica	Kumquat
+Fragaria ×ananassa	Fraise
+Gadus morhua	Cabillaud
+Gadus morhua	Morue
+Gallus gallus domesticus	Poulet
+Gallus gallus domesticus	Poule
+Gallus gallus domesticus	Poularde
+Gallus gallus domesticus	Poularde de Bresse
+Gallus gallus domesticus	Coq
+Gallus gallus domesticus	Chapon
+Gallus gallus domesticus	Coquelet
+Gallus gallus domesticus	Viande de chapon
+Gallus gallus domesticus	Viande de coq
+Gallus gallus domesticus	Viande de poule
+Gallus gallus domesticus	Viande de poulet
+Gallus gallus domesticus	Filet de poulet
+Gallus gallus domesticus	Aiguillette de poulet
+Gallus gallus domesticus	Aiguillettes de poulet
+Gallus gallus domesticus	Escalope de poulet
+Gallus gallus domesticus	Escalopes de poulet
+Gallus gallus domesticus	Filet mignon de poulet
+Gallus gallus domesticus	Suprême de poulet
+Gallus gallus domesticus	Aileron de poulet
+Gallus gallus domesticus	Manchon de poulet
+Gallus gallus domesticus	Osso Bucco de poulet
+Gallus gallus domesticus	Haute de cuisse de poulet
+Gallus gallus domesticus	Pilon de poulet
+Gallus gallus domesticus	Pilons de poulet
+Gallus gallus domesticus	Cuisse de poulet
+Gallus gallus domesticus	Cuisses de poulet
+Gallus gallus domesticus	Foie de poularde
+Gallus gallus domesticus	Oeuf
+Gallus gallus domesticus	Crête de coq
+Garcinia mangostana	mangoustanier
+Garcinia mangostana	Mangoustan
+Gaylussacia baccata	gaylussaquier à fruits bacciformes
+Ginkgo biloba	noyer du Japon
+Glycine max	Soja
+Grifola frondosa	Polypore en touffes
+Gundelia tournefortii	Gundelia
+Helianthus annuus	tournesol
+Helianthus strumosus	Hélianthi
+Helianthus strumosus	Hélianthe scrofuleux
+Helianthus strumosus	Hélianti
+Helianthus tuberosus	Patate de Virginie
+Helianthus tuberosus	Topinambour
+Hibiscus sabdariffa	oseille de Guinée
+Hippoglossus hippoglossus	Flétan
+Hippophae rhamnoides	Saule épineux
+Hordeum vulgare	Orge à quatre rangs
+Hosta plantaginea	Hosta
+Houttuynia cordata	Houttuynia
+Hylocereus undatus	Pitaya
+Hylocereus undatus	Pithaya
+Hylocereus undatus	Putahaya
+Hylocereus undatus	Fruit du dragon
+Hyssopus officinalis	Hysope
+Ictalurus punctatus	Barbue d'Amérique
+Illicium verum	badiane de Chine
+Ipomoea aquatica	Liseron d'eau
+Ipomoea aquatica	Kancon
+Ipomoea batatas	Patate douce
+Ipomoea reptans	Liseron d'eau
+Juglans cinerea	noyer cendré
+Juglans nigra	noyer noir d'Amérique
+Juglans regia	Noyer commun
+Juglans regia	Noix
+Katsuwonus pelamis	Thon
+Lablab purpureus	Pois de Senteur
+Lactuca sativa	Salade des jardins
+Lactuca sativa longifolia	Laitue romaine
+Lactuca virosa	Laitue
+Lagenaria leucantha	Gourde
+Lathyrus sativus	Lentille d'Espagne
+Lathyrus sativus	Gesse
+Laurus nobilis	Laurier-sauce
+Lens culinaris	Lentille
+Lentinus edodes	Shi take
+Lepidium sativum	Passerage cultivée
+Lepidium sativum	Cresson alénois
+Lepus europaeus	Lièvre
+Lepus europaeus	Viande de lièvre
+Lepus europaeus	Râble de lièvre
+Lilium lancifolium	Lis tigré
+Lilium lancifolium	Lys asiatique comestible
+Linum usitatissimum	Lin cultivé
+Lippia citriodora	Verveine du Pérou
+Lippia graveolens	origan marjolaine
+Litchi chinensis	litchi de Chine
+Litchi chinensis	Litchi
+Lota lota	Lotte
+Luffa aegyptiaca	Luffa
+Lupinus albus	Lupin Blanc
+Lycopersicon esculentum	Pomme d'amour
+Majorana hortensis	Origan des jardins
+Malus domestica	Pommier cultivé
+Malus domestica	Pomme
+Malus pumila	Pommier Paradis
+Malpighia emarginata	Acérola
+Malpighia emarginata	cerise des Antilles
+Malva sylvestris	Malva
+Malva sylvestris	Mauve
+Mammea americana	abricotier des Antilles
+Mangifera indica	Manguier
+Mangifera indica	Mangue
+Manilkara zapota	Sapotille
+Manihot esculenta	Manioc
+Matricaria chamomilla	Matricaire Camomille
+Matteuccia struthiopteris	Matteuccie
+Medicago sativa	Luzerne Cultivee
+Meleagris gallopavo	Dinde
+Meleagris gallopavo	Viande de dinde
+Melicoccus bijugatus	Quenette
+Melissa officinalis	Mélisse officinale
+Melothria scabra	Cucamelon
+Mentha aquatica	Menthe Aquatique
+Mentha arvensis	Menthe
+Mentha crispa	Menthe verte
+Mentha longifolia	Menthe à Longues Feuilles
+Mentha spicata	Menthe en Grappe
+Mentha x piperita	Menthe poivrée
+Merlangius merlangus	Merlan
+Mesembryanthemum crystallinum	ficoïde glaciale
+Mespilus germanica	Néflier
+Mespilus germanica	Nèfle
+Metroxylon sagu	sagoutier
+Microstomus kitt	Limande-sole
+Momordica charantia	Margose
+Momordica charantia	Melon amer
+Momordica charantia	Paroka
+Moringa oleifera	pois quénique
+Morus nigra	Mûrier noir
+Mullus barbatus	Rouget barbet
+Mullus barbatus	Rouget-barbet
+Musa acuminata	bananier nain
+Musa acuminata	Banane
+Musa ×paradisiaca	Banane plantain
+Myrciaria dubia	Camu-camu
+Myristica fragrans	Noix muscade
+Myristica fragrans	Noix de muscade
+Myrtus communis	Myrte
+Mytilus edulis	moule commune
+Nasturtium officinale	Cresson de Fontaine
+Nasturtium officinale	Cresson de fontaine
+Nelumbo nucifera	fève d'Egypte
+Nephelium lappaceum	Ramboutan
+Ocimum basilicum	Basilic aux sauces
+Ocimum basilicum	Basilic
+Olea europaea	huile d'olive
+Olea europaea	Olive
+Oenothera biennis	Œnothère
+Oenothera biennis	Oenothera
+Opuntia ficus-indica	Figue de barbarie
+Origanum majorana	Origan des jardins
+Origanum vulgare	Origan
+Oryctolagus cuniculus	Lapin
+Oryctolagus cuniculus	Lapin de garenne
+Oryctolagus cuniculus	Lapereau
+Oryctolagus cuniculus	Viande de lapin
+Oryctolagus cuniculus	Émincé de lapin
+Oryctolagus cuniculus	Filet de lapin
+Oryctolagus cuniculus	Râble de lapin
+Oryctolagus cuniculus	Saucisse de lapin
+Oryctolagus cuniculus	Foie de lapin
+Oryctolagus cuniculus	Lapin entier
+Oryctolagus cuniculus	Demi lapin
+Oryctolagus cuniculus	Cuisse de lapin
+Oryctolagus cuniculus	Cuisses de lapin
+Oryctolagus cuniculus	Gigolette de lapin
+Oryctolagus cuniculus	Escalope de lapin
+Oryctolagus cuniculus	Escalopes de lapin
+Oryctolagus cuniculus	Gigolette de lapin
+Oryza sativa	Riz
+Ovis aries	Agneau
+Ovis aries	Mouton
+Ovis aries	Viande d'agneau
+Ovis aries	Viande de mouton
+Ovis aries	Brochettes d'agneau
+Ovis aries	Carré d'agneau
+Ovis aries	Collier d'agneau
+Ovis aries	Côtelette d'agneau
+Ovis aries	Côtelettes d'agneau
+Ovis aries	épaule d'agneau
+Ovis aries	épigramme
+Ovis aries	Filet d'agneau
+Ovis aries	Gigot d'agneau
+Ovis aries	Gigot raccourci
+Ovis aries	Haut de côtes d'agneau
+Ovis aries	Haut-de-côtes d'agneau
+Ovis aries	Poitrine d'agneau
+Ovis aries	Selle d'agneau
+Ovis aries	Souris d'agneau
+Oxalis tuberosa	Oca du Pérou
+Pachyrhizus erosus	Pois Manioc
+Panicum miliaceum	Panic à fleurs dichotomes
+Papaver somniferum	Pavot somnifère
+Passiflora caerulea	Passiflore
+Passiflora edulis	Grenadille
+Passiflora edulis	Fruit de la passion
+Passiflora edulis	Fruit de pourpre
+Passiflora edulis	Maracudja
+Passiflora ligularis	Grenadelle
+Passiflora ligularis	Grenadille sucrée
+Passiflora quadrangularis	Barbadine
+Passiflora tarminiana	Taxo
+Pastinaca sativa	Pastinacier
+Pastinaca sativa	Panais
+Perca fluviatilis	Perche
+Persea americana	Avocatier
+Persea americana	Avocat
+Persica vulgaris	Pêcher
+Perilla frutescens	Pérille
+Perilla frutescens	Périlla
+Perilla frutescens	Shiso
+Petasites japonicus	Pétasite du Japon
+Petroselinum crispum	persil
+Phaseolus coccineus	Haricot a Fleurs Rouges
+Phaseolus coccineus	Haricot d'Espagne
+Phaseolus lunatus	Pois De Sept Ans
+Phaseolus lunatus	Haricot de Lima
+Phaseolus multiflorus	Haricot écarlate
+Phaseolus vulgaris	Haricots de Bourbon
+Phaseolus vulgaris	Haricot
+Phasianus colchicus	Faisan
+Phasianus colchicus	Viande de faisan
+Phasianus colchicus	Poule faisane
+Phasianus colchicus	Poitrine de poule faisane
+Phasianus colchicus	Suprême de poule faisane
+Phoenix dactylifera	Dattier
+Phoenix dactylifera	Datte
+Phyllanthus acidus	Girembelle
+Phyllanthus acidus	Surelle
+Phyllanthus acidus	Surette
+Phyllanthus acidus	Groseille étoilée
+Physalis alkekengi	Alkékenge
+Physalis alkekengi	Physalis
+Physalis peruviana	Coqueret du Pérou
+Phytolacca americana	Vigne de Judée
+Pimenta dioica	Grand piment
+Pimpinella anisum	Boucage anis
+Piper nigrum	poivre noir
+Pistacia vera	Pistachier
+Pistacia vera	Pistache
+Pisum sativum	Petit Pois Sucres
+Pisum sativum	Petit pois
+Pisum sativum	Pois
+Pithecellobium dulce	Tamarin d'inde
+Pleuronectes platessa	Plie
+Pleuronectes platessa	Carrelet
+Portulaca oleracea	Pourpier maraîcher
+Praecitrullus fistulosus	Tinda
+Prunus amygdalus	Amandier amer
+Prunus amygdalus	Amande
+Prunus armeniaca	Prunier Crèque
+Prunus armeniaca	Abricot
+Prunus avium	cerisier de France
+Prunus avium	Cerise
+Prunus cerasus	Griottier
+Prunus cerasus	Griotte
+Prunus communis	Prunier domestique
+Prunus communis	Prune
+Prunus domestica	prunier de l'Islet
+Prunus domestica	Pruneaux
+Prunus domestica	Mirabelle
+Prunus domestica	Quetsche
+Prunus domestica	Reine-claude
+Prunus domestica	Prune citron
+Prunus dulcis	Amandier amer
+Prunus persica	Pêcher
+Prunus persica	Pêche
+Prunus persica	Brugnon
+Prunus persica	Nectarine
+Prunus persica	Pavie
+Prunus virginiana	Cerisier de Virginie
+Psidium guajava	Goyavier
+Psidium guajava	Goyave
+Psophocarpus tetragonolobus	Haricot ailé
+Psophocarpus tetragonolobus	Pois carré
+Punica granatum	Grenadier commun
+Punica granatum	Grenade
+Pyrus communis	Poirier sauvage
+Pyrus communis	Poire
+Raphanus sativus	Radis
+Raphanus sativus longipinnatus	Radis blanc
+Raphanus sativus longipinnatus	Radis du Japon
+Raphanus sativus niger	Radis noir
+Raphanus sativus niger	Radis d'Espagne
+Raphanus sativus niger	Radis d'hiver
+Raphanus sativus niger	Raifort des Parisiens
+Rheum rhabarbarum	Rhubarbe
+Ribes nigrum	Cassis
+Ribes nigrum	Groseillier noir
+Ribes rubrum	Groseillier à grappes
+Ribes rubrum	Groseille
+Rosmarinus officinalis	Romarin officinal
+Rubus chamaemorus	Plaquebière
+Rubus idaeus	ronce du mont Ida
+Rubus idaeus	Framboise
+Rubus occidentalis	framboisier de Virginie
+Rubus ulmifolius	Mûre
+Rumex acetosa	Rumex oseille
+Rumex arifolius	Oseille
+Saccharina latissima	Kombu
+Saccharina latissima	Konbu
+Saccharum	sucre
+Salacca zalacca	Salak
+Salmo salar	Saumon
+Salmo trutta	Truite
+Salicornia europaea	Salicorne
+Salvelinus alpinus	Omble chevalier
+Salvia officinalis	Sauge Officinale
+Salvia hispanica	Chia
+Sambucus nigra	Sureau noir
+Sander lucioperca	Sandre
+Sapote mamey	Sapote
+Sardina pilchardus	Sardine
+Sardina pilchardus	Sardines
+Satureja montana	Sarriette vivace
+Scophthalmus maximus	Turbot
+Scorzonera hispanica	Scorzonère d'Espagne
+Scorzonera hispanica	Scorsonère
+Secale cereale	Seigle
+Sechium edule	Chayote
+Sechium edule	Chayotte
+Sechium edule	Christofine
+Sesamum indicum	sésame
+Sinapis alba	Moutarde blanche
+Sium sisarum	Chervis
+Smallanthus sonchifolius	Poire de terre
+Smallanthus sonchifolius	Yacón
+Smyrnium olusatrum	Maceron
+Soja max	Soja
+Solanum betaceum	Tamarillo
+Solanum lycopersicum	Pomme d'amour
+Solanum lycopersicum	Tomate
+Solanum melongena	Marignan
+Solanum melongena	Aubergine
+Solanum muricatum	Pepino
+Solanum tuberosum	Pomme de terre
+Solea solea	Sole
+Sorbus aucuparia	Sorbier sauvage
+Sorghum bicolor	Sorgho
+Sparus aurata	Dorade royale
+Sparus aurata	Daurade royale
+Sparus aurata	Dorade
+Spinacia oleracea	épinard
+Spondias dulcis	Prune de Cythère
+Spondias mombin	Mombin
+Stachys affinis	Crosne du Japon
+Stachys affinis	Crosne
+Struthio camelus camelus	Autruche
+Struthio camelus camelus	Viande de autruche
+Sus scrofa	Sanglier
+Sus scrofa	Viande de sanglier
+Sus scrofa domesticus	Porc
+Sus scrofa domesticus	Viande de porc
+Sus scrofa domesticus	Cochon de lait
+Sus scrofa domesticus	Coppa
+Sus scrofa domesticus	Chorizo
+Sus scrofa domesticus	Jambon
+Sus scrofa domesticus	Jambon San Daniele
+Sus scrofa domesticus	Jambon fumé
+Sus scrofa domesticus	Lard
+Sus scrofa domesticus	Lard fumé
+Sus scrofa domesticus	Lardons
+Sus scrofa domesticus	Pancetta
+Sus scrofa domesticus	Andouille
+Sus scrofa domesticus	Andouillette
+Sus scrofa domesticus	Boudin noir
+Sus scrofa domesticus	Chipolata
+Sus scrofa domesticus	Couenne
+Sus scrofa domesticus	Merguez
+Sus scrofa domesticus	Jambon blanc
+Sus scrofa domesticus	Jambon cru
+Sus scrofa domesticus	Jambon cuit
+Sus scrofa domesticus	Jambon de cerda
+Sus scrofa domesticus	Jambon de parme
+Sus scrofa domesticus	Mortadelle
+Sus scrofa domesticus	Saindoux
+Sus scrofa domesticus	Saucisse
+Sus scrofa domesticus	Saucisse de Francfort
+Sus scrofa domesticus	Saucisse de Montbéliard
+Sus scrofa domesticus	Saucisse de Morteau
+Sus scrofa domesticus	Saucisse de Strasbourg
+Sus scrofa domesticus	Saucisse de Toulouse
+Sus scrofa domesticus	Saucisson
+Sus scrofa domesticus	Poitrine de porc
+Sus scrofa domesticus	Filet mignon de porc
+Sus scrofa domesticus	Echine de porc
+Sus scrofa domesticus	Jambonneau de porc
+Sus scrofa domesticus	Jarret du porc
+Sus scrofa domesticus	Kakos
+Sus scrofa domesticus	Palette de porc
+Sus scrofa domesticus	Travers de porc
+Sus scrofa domesticus	Grillade porc
+Syzygium aromaticum	giroflier
+Syzygium cumini	Jamelonier
+Syzygium malaccense	Jambose
+Syzygium jambos	Pomme rose
+Syzygium samarangense	Jamalac
+Tamarindus indica	Tamarinier des Bas
+Tamarindus indica	Tamarin
+Taraxacum officinale	Taraxacum section Ruderalia
+Tetragonia tetragonioides	Épinard de (la) Nouvelle-Zélande
+Tetragonia tetragonioides	Tétragone cornue
+Theobroma cacao	cacaoyer
+Theobroma cacao	Cacao
+Theobroma cacao	Fève de cacao
+Theragra chalcogramma	Colin
+Theragra chalcogramma	Merlu
+Theragra chalcogramma	Lieu noir
+Thymus vulgaris	Thym 
+Tilia argentea	Tilleul argenté
+Tilia cordata	tilleul d'Europe
+Trapa bicornis	Mâcre bicorne
+Trapa natans	Mâcre nageante
+Trichosanthes cucumerina	Serpent végétal
+Trigonella foenum-graecum	Trigonelle Fenugrec
+Triticum aestivum	farine
+Triticum vulgare	Froment
+Tropaeolum tuberosum	Capucine tubéreuse
+Typha angustifolia	Massette à Feuilles Étroites
+Umbilicus rupestris	Nombril de Vénus
+Undaria pinnatifida	Wakamé
+Urtica dioica	Ortie
+Vaccinium	Airelles
+Vaccinium angustifolium	airelle de Pennsylvanie
+Vaccinium corymbosum	airelle d'Amérique
+Vaccinium corymbosum	Bleuet
+Vaccinium macrocarpon	Airelle à gros fruits
+Vaccinium myrtillus	Myrtille
+Vaccinium oxycoccos	Canneberge
+Vaccinium vitis-idaea	vigne du mont Ida
+Valerianella locusta	Mâche
+Valerianella locusta	Blanchette
+Valerianella locusta	Boursette
+Valerianella locusta	Clairette
+Valerianella locusta	Raiponce
+Valerianella locusta	Oreillette
+Vangueria madagascariensis	Tamarin des Indes
+Verbena officinalis	Veine de Vénus
+Vicia faba	Feve De Calabar
+Vicia faba	Fève
+Vigna aconitifolia	haricot mat
+Vigna angularis	Amberique Gros
+Vigna angularis	Haricot azuki
+Vigna angularis	Haricot rouge du Japon
+Vigna angularis	Azuki
+Vigna radiata	Pois De Ieruzalem
+Vigna radiata	Haricot mungo
+Vigna umbellata	haricot riz
+Vigna unguiculata	Niébé
+Vigna unguiculata	Pois Manger Cochon
+Vigna unguiculata sesquipedalis	Dolique asperge
+Vitis rotundifolia	Vigne à feuilles rondes
+Vitis rotundifolia	Raisin
+Vitis vinifera	Vigne Sauvage
+Wasabia japonica	Raifort Japonais
+Zea mays	blé d’Inde
+Zea mays	Maïs
+Zeus faber	Saint-Pierre
+Zingiber officinale	Gingembre
+Ziziphus zizyphus	Jujube

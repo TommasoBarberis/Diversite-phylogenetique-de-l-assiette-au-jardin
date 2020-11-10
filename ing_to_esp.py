@@ -1,3 +1,5 @@
+ # -*- coding: utf-8 -*-
+
 def db_to_dicto (path):
     """
     Pour creer un dictionnaire a partir du fichier ayant les noms scientifiques des especes de M. De Vienne.
