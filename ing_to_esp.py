@@ -5,7 +5,7 @@ def db_to_dicto (path):
     Pour creer un dictionnaire a partir du fichier ayant les noms scientifiques des especes de M. De Vienne.
     Les clefs sont les noms verniculaires et les valeurs les noms scientifiques.
     """
-    f=open(path,"r")
+    f=open(path,"r", encoding='utf-8')
     line=f.readline()
     dicto={}
     while line:
