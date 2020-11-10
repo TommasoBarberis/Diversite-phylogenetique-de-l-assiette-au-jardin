@@ -1,3 +1,4 @@
+# -- coding: utf-8 --
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from get_NCBI_taxonomy import get_taxid
@@ -36,17 +37,20 @@ inputElement.send_keys(str(liste_ID))
 # Détéction du bouton View et click effectué
 View = driver.find_element_by_id("viewMulti").click()
 
-# obtain newick tree file
-directory = ""
+# obtain directory for download
+
+directory = repr(os.path.dirname(os.path.realpath(sys.argv[0]))).strip("'")
+
 # test pour connaitre quel navigateur est sur la machine
 try :
     firefox_options = webdriver.FirefoxProfile()
-    firefox_options.set_preference("browser.download.folderList", 2)
+    firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
+                          "text/plain, text/html, text/css, text/javascript")
     firefox_options.set_preference("browser.download.manager.showWhenStarting", False)
     firefox_options.set_preference("browser.download.dir", directory)
-    firefox_options.set_preference("browser.helperApps.alwaysAsk.force", False)
-    firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
-                          "text/plain, application/octet-stream, application/binary, attachment/csv, application/csv, application/excel, text/comma-separated-values, text/xml, application/xml")
+    firefox_options.set_preference("browser.download.folderList", 2)
+    firefox_options.set_preference("pdfjs.disabled", True)
+
     driver2 = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
 except :
     try:
@@ -60,12 +64,19 @@ driver2.get("https://phylot.biobyte.de/")
 # Ajout des éléments dans la zone de texte
 inputElement = driver2.find_element_by_id("treeElements")
 inputElement.send_keys(str(liste_ID))
-# Détéction du bouton View et click effectué
+driver2.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']\
+                            /div[@class='col']/form[@id='phylotForm']/div[@id='options']/div[@class='col'][2]/div[@class='row'][1]/div[@class='col-sm']\
+                                [2]/input[@class='form-control']").send_keys('Tree.txt')
+
+driver2.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']\
+                        /div[@class='col']/form[@id='phylotForm']/div[@id='options']/div[@class='col'][1]/div[@class='row'][1]/div[@class='col-sm']\
+                            [3]/div[@class='radio'][2]/label/input").send_keys(Keys.ENTER)
+
+# Détéction du bouton generate tree file et Enter effectué
 driver2.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
 time.sleep(3)
 driver2.close()
 
 # Load a tree structure from a newick file.
 
-tree = PhyloTree('phyloT_generated_phyloT_generated_tree_1604945244_newick.txt')
 
