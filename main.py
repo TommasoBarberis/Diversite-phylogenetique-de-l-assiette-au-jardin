@@ -3,6 +3,7 @@
 # import get_lifeMap_subTree
 import get_ing
 import ing_to_esp
+import get_dp
 
 print("\n")
 
@@ -18,6 +19,8 @@ if nbing != nbspec :
         if key not in especes and key[:-1] not in especes.keys():
             species_not_found.append(key)
 
+dp=get_dp.calculation("exemple_newick.txt")
+
 ######## printting part ########
 
 print("\n" +str(nbspec)+ " species were found from the "+ str(nbing)+ " different ingredients.")
@@ -30,3 +33,5 @@ print("\ningredients :")
 print(ingredients)
 print("species :")
 print(especes)
+print("Diversité phylogénétique (en nb de branches) :")
+print(dp)
