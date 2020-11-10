@@ -46,7 +46,7 @@ def getNutInfo(ing,book):
 
 #{"ingredient" : [dry_matter,glucide,lipides,sucres]}
 def getDictNut(ing_dict):
-    myBook = openBook("nutrition_db/Table Ciqual 2020_FR_2020 07 07.xls")
+    myBook = openBook("nutrition_db/Table_Ciqual_2020_FR_2020_07_07.xls")
     output={}
     for ing in ing_dict :
         ingredient = ing.capitalize()
