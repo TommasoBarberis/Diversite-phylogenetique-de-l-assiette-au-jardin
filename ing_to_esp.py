@@ -50,7 +50,7 @@ def by_fields (dicto1, dicto2, liste):
     return dicto2
 
 def recherche_globale (dicto_ing):
-    correspondences=db_to_dicto("scientific_name_db.txt")
+    correspondences=db_to_dicto("filtered_scientific_name_db.txt")
     dicto_esp={}
     liste_ing=[]
     for k in dicto_ing.keys():
