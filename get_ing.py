@@ -204,5 +204,5 @@ def getCuisineaz(soup):
 
 if __name__ == "__main__":
 
-    url = 'https://www.marmiton.org/recettes/recette_carrot-cupcake-de-paques_305392.aspx'
+    url = 'https://www.marmiton.org/recettes/recette_pizza-gaufree-au-fromage_347268.aspx'
     print(process(url))
