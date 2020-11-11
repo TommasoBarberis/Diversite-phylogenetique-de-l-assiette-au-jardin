@@ -6,6 +6,8 @@ import xlrd
 # lipides % 17 
 # sucres % 18
 
+#faire une classe ingrédient ?
+
 def openBook(file):
     book = xlrd.open_workbook(file)
     return book
@@ -18,7 +20,7 @@ def getNutInfo(ing,book):
     nut_info = []
     final_nut_info = []
     for cel in sheet.col(7):
-        if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and "crue" in cel.value:
+        if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and ("crue" in cel.value or "cru" in cel.value):
             # print(cel.value)
             found_in_book = True
             break
@@ -45,18 +47,50 @@ def getNutInfo(ing,book):
     return final_nut_info
 
 #{"ingredient" : [dry_matter,glucide,lipides,sucres]}
-def getDictNut(ing_dict):
+def getDictNut(dict_ing):
     myBook = openBook("nutrition_db/Table_Ciqual_2020_FR_2020_07_07.xls")
     output={}
-    for ing in ing_dict :
-        ingredient = ing.capitalize()
-        output[ingredient] = getNutInfo(ingredient,myBook)
+    for ing in dict_ing :
+        ingredient = ing.capitalize()  
+        nut_info =  getNutInfo(ingredient,myBook)
+        if nut_info != []:
+            output[ingredient] = nut_info
     return output
+
+def getDictNutPond(dict_ing, dict_nut):
+    dict_pond = {}
+    for ing in dict_nut :
+        dict_pond[ing] = []
+        dict_pond[ing].append(dict_nut[ing][0])
+
+        qtt = dict_ing[ing.lower()]
+        print(qtt)
+        wat_pond = int(qtt) * int(dict_nut[ing][1])/100 
+        gluc_pond = int(qtt) * int(dict_nut[ing][2])/100
+        lip_pond = int(qtt) * int(dict_nut[ing][3])/100
+        suc_pond = int(qtt) * int(dict_nut[ing][4])/100
+
+        
+
+
+
+def nutPrinter(nut_dict):
+    print('{:10.20}'.format("Database name"),'{:10.15}'.format("Quantité d'eau(%)"),'{:10.15}'.format("Glucides (%)"),'{:10.15}'.format("Lipides "),'{:10.15}'.format("sucres") , sep="\t \t")
+    for names in nut_dict :
+        if nut_dict[names] != []:
+            for element in nut_dict[names]:
+
+                print('{:10.15}'.format(element), end= "\t \t")
+            print("")
 
 if __name__ == "__main__":
 
     dico = {'boule de pâte à pizza': 1.0, 'olive': 1.0, 'boule de mozzarella': 1.0, 'origan': 1.0, 'coulis de tomate': 300.0, 'jambon cru': 4.0, 'champignon de paris': 200.0, 'pâte à pizza': 1.0, 'boules de mozzarella': 2.0, 'coulis': 300.0, 'jambon': 4.0}
     getDictNut(dico)
     output = getDictNut(dico)
-    print(output)
+    # for key in output :
+    #     if output[key] != []:
+    #         print(output[key])
     # print(getNutInfo("Tomate",myBook))
+    # nutPrinter(output)
+    getDictNutPond(dico,output)

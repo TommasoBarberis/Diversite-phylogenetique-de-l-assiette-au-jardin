@@ -4,10 +4,11 @@
 import get_ing
 import ing_to_esp
 import get_dp
+import ing_properties
 
 print("\n")
 
-url = 'https://www.marmiton.org/recettes/recette_biscuits-a-la-pistache_45673.aspx'
+url = 'https://www.marmiton.org/recettes/recette_poke-bowl-avocat-et-thon-marine_344612.aspx'
 ingredients = get_ing.process(url)
 especes = ing_to_esp.recherche_globale(ingredients)
 nbing = len(ingredients)
@@ -20,6 +21,7 @@ if nbing != nbspec :
             species_not_found.append(key)
 
 dp=get_dp.calculation("exemple_newick.txt")
+dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
 
 ######## printting part ########
 
@@ -28,6 +30,7 @@ if not complete :
     print("the missing species are :")
     for missing in species_not_found:
         print("\t" + missing)
+ing_properties.nutPrinter(dictionnaire_nutrition)
 
 print("\ningredients :")
 print(ingredients)
