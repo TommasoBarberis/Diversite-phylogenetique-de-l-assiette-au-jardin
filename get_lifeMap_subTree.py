@@ -39,7 +39,8 @@ View = driver.find_element_by_id("viewMulti").click()
 
 # obtain directory for download
 
-directory = repr(os.path.dirname(os.path.realpath(sys.argv[0]))).strip("'")
+directory_firefox = repr(os.path.dirname(os.path.realpath(sys.argv[0]))).strip("'")
+directory_chrome = repr(os.path.dirname(os.path.realpath(sys.argv[0])))
 
 # test pour connaitre quel navigateur est sur la machine
 try :
@@ -47,16 +48,24 @@ try :
     firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
                           "text/plain, text/html, text/css, text/javascript")
     firefox_options.set_preference("browser.download.manager.showWhenStarting", False)
-    firefox_options.set_preference("browser.download.dir", directory)
+    firefox_options.set_preference("browser.download.dir", directory_firefox)
     firefox_options.set_preference("browser.download.folderList", 2)
-    firefox_options.set_preference("pdfjs.disabled", True)
 
-    driver2 = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
+    driver2 = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManagers().install())
 except :
     try:
-        driver2 = webdriver.Chrome(ChromeDriverManager().install())
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option("prefs", {
+        "download.default_directory": directory_chrome, 
+        "download.prompt_for_download": False,
+        "download.directory_upgrade": True,
+        "safebrowsing.enabled": True
+        })
+
+        driver2 = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=chrome_options)
     except :
         driver2 = webdriver.Edge(EdgeChromiumDriverManager().install())
+
 driver2.minimize_window()
 driver.maximize_window()
 # Ouverture du navigateur sur le site suivant
