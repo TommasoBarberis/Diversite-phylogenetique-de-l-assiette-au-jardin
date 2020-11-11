@@ -68,9 +68,9 @@ driver2.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylo
                             /div[@class='col']/form[@id='phylotForm']/div[@id='options']/div[@class='col'][2]/div[@class='row'][1]/div[@class='col-sm']\
                                 [2]/input[@class='form-control']").send_keys('Tree.txt')
 
-driver2.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']\
-                        /div[@class='col']/form[@id='phylotForm']/div[@id='options']/div[@class='col'][1]/div[@class='row'][1]/div[@class='col-sm']\
-                            [3]/div[@class='radio'][2]/label/input").send_keys(Keys.ENTER)
+driver2.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']/div[@class='col']\
+                            /form[@id='phylotForm']/div[@id='options']/div[@class='col'][1]/div[@class='row'][1]/div[@class='col-sm'][3]/div[@class='radio']\
+                                [1]/label/input").send_keys(Keys.ARROW_DOWN)
 
 # Détéction du bouton generate tree file et Enter effectué
 driver2.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
