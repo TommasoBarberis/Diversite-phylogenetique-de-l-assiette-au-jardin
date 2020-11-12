@@ -20,20 +20,30 @@ def getNutInfo(ing,book):
     nut_info = []
     final_nut_info = []
     for cel in sheet.col(7):
-        if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and ("crue" in cel.value or "cru" in cel.value):
-            # print(cel.value)
-            found_in_book = True
-            break
+        if ing.endswith("s"):
+            if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and ("crue" in cel.value or "cru" in cel.value):
+                found_in_book = True
+                break
+        else :
+            if (cel.value.startswith(ing)) and ("crue" in cel.value or "cru" in cel.value):
+                found_in_book = True
+                break
         cpt +=1
     
     if not found_in_book :
         cpt = 0
-        for cel in sheet.col(7):
-            if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])):
-                # print(cel.value)
-                found_in_book = True
-                break
-            cpt +=1
+        if ing.endswith("s"):
+            for cel in sheet.col(7):
+                if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])):
+                    found_in_book = True
+                    break
+                cpt +=1
+        else : 
+            for cel in sheet.col(7):
+                if (cel.value.startswith(ing)):
+                    found_in_book = True
+                    break
+                cpt +=1
 
     if found_in_book : 
         for cel in sheet.row(cpt) :
@@ -46,7 +56,7 @@ def getNutInfo(ing,book):
         final_nut_info.append(nut_info[18])
     return final_nut_info
 
-#{"ingredient" : [dry_matter,glucide,lipides,sucres]}
+#{"ingredient" : [db_name,water_qtt,glucide,lipides,sucres]}
 def getDictNut(dict_ing):
     myBook = openBook("nutrition_db/Table_Ciqual_2020_FR_2020_07_07.xls")
     output={}
