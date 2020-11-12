@@ -1,6 +1,6 @@
  # -*- coding: utf-8 -*-
 
-# import get_lifeMap_subTree
+import get_lifeMap_subTree
 import get_ing
 import ing_to_esp
 import get_dp
@@ -38,3 +38,5 @@ print("species :")
 print(especes)
 print("Diversité phylogénétique (en nb de branches) :")
 print(dp)
+get_lifeMap_subTree.get_subTree(especes)
+get_lifeMap_subTree.get_newick(especes)
