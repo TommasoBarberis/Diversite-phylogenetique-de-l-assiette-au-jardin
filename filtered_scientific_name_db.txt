@@ -341,35 +341,35 @@ Fortunella japonica	Kumquat
 Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
-Gallus gallus domesticus	Poulet
-Gallus gallus domesticus	Poule
-Gallus gallus domesticus	Poularde
-Gallus gallus domesticus	Poularde de Bresse
-Gallus gallus domesticus	Coq
-Gallus gallus domesticus	Chapon
-Gallus gallus domesticus	Coquelet
-Gallus gallus domesticus	Viande de chapon
-Gallus gallus domesticus	Viande de coq
-Gallus gallus domesticus	Viande de poule
-Gallus gallus domesticus	Viande de poulet
-Gallus gallus domesticus	Filet de poulet
-Gallus gallus domesticus	Aiguillette de poulet
-Gallus gallus domesticus	Aiguillettes de poulet
-Gallus gallus domesticus	Escalope de poulet
-Gallus gallus domesticus	Escalopes de poulet
-Gallus gallus domesticus	Filet mignon de poulet
-Gallus gallus domesticus	Suprême de poulet
-Gallus gallus domesticus	Aileron de poulet
-Gallus gallus domesticus	Manchon de poulet
-Gallus gallus domesticus	Osso Bucco de poulet
-Gallus gallus domesticus	Haute de cuisse de poulet
-Gallus gallus domesticus	Pilon de poulet
-Gallus gallus domesticus	Pilons de poulet
-Gallus gallus domesticus	Cuisse de poulet
-Gallus gallus domesticus	Cuisses de poulet
-Gallus gallus domesticus	Foie de poularde
-Gallus gallus domesticus	Oeuf
-Gallus gallus domesticus	Crête de coq
+Gallus gallus	Poulet
+Gallus gallus	Poule
+Gallus gallus	Poularde
+Gallus gallus	Poularde de Bresse
+Gallus gallus	Coq
+Gallus gallus	Chapon
+Gallus gallus	Coquelet
+Gallus gallus	Viande de chapon
+Gallus gallus	Viande de coq
+Gallus gallus	Viande de poule
+Gallus gallus	Viande de poulet
+Gallus gallus	Filet de poulet
+Gallus gallus	Aiguillette de poulet
+Gallus gallus	Aiguillettes de poulet
+Gallus gallus	Escalope de poulet
+Gallus gallus	Escalopes de poulet
+Gallus gallus	Filet mignon de poulet
+Gallus gallus	Suprême de poulet
+Gallus gallus	Aileron de poulet
+Gallus gallus	Manchon de poulet
+Gallus gallus	Osso Bucco de poulet
+Gallus gallus	Haute de cuisse de poulet
+Gallus gallus	Pilon de poulet
+Gallus gallus	Pilons de poulet
+Gallus gallus	Cuisse de poulet
+Gallus gallus	Cuisses de poulet
+Gallus gallus	Foie de poularde
+Gallus gallus	Oeuf
+Gallus gallus	Crête de coq
 Garcinia mangostana	mangoustanier
 Garcinia mangostana	Mangoustan
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
