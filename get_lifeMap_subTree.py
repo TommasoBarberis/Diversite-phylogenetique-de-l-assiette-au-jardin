@@ -5,7 +5,7 @@ from get_NCBI_taxonomy import get_taxid
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from ete3 import Tree, PhyloTree
+from ete3 import Tree, TreeStyle
 import os, sys, time
 
 
@@ -79,6 +79,7 @@ def get_newick(especes):
     liste_ID = str(liste_ID).strip('[]')
     # Ouverture du navigateur sur le site suivant
     driver.get("https://phylot.biobyte.de/")
+    driver.minimize_window()
     # Ajout des éléments dans la zone de texte
     driver.find_element_by_id("treeElements").send_keys(str(liste_ID))
     driver.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']\
@@ -95,4 +96,10 @@ def get_newick(especes):
     time.sleep(3)
     driver.close()
 
+def subtree_from_newick():
+    t = Tree('Tree.txt', quoted_node_names=True, format=1)
+    ts = TreeStyle()
+    ts.show_leaf_name = True
+    ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
+    t.show(tree_style=ts)
 
