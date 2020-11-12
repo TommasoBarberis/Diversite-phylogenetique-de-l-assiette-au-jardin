@@ -8,6 +8,7 @@ ncbi = NCBITaxa()
 
 # Permet d'obtenir l'ID NCBI de l'espèce
 def get_taxid(liste_espece):
+    liste_espece = liste_espece.values()
     if not isinstance(liste_espece, list):
         liste_espece=list(liste_espece)
     # Obtention des valeurs du dictionnaire
