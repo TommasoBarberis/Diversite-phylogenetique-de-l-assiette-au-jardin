@@ -308,7 +308,7 @@ Cynara cardunculus	Cardon d'Espagne
 Cynara scolymus	Artichaut
 Cyperus esculentus	Souchet
 Cyprinus carpio	Carpe Koï
-Daucus carota	Daucus carotte
+Daucus carota	Carotte
 Dimocarpus longan	Longane
 Dioscorea alata	Igname
 Diospyros kaki	Plaqueminier du Japon
@@ -407,6 +407,7 @@ Juglans regia	Noix
 Katsuwonus pelamis	Thon
 Lablab purpureus	Pois de Senteur
 Lactuca sativa	Salade des jardins
+Lactuca sativa	Salade
 Lactuca sativa longifolia	Laitue romaine
 Lactuca virosa	Laitue
 Lagenaria leucantha	Gourde
