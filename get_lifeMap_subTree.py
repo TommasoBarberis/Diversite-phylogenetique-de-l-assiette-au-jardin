@@ -51,7 +51,7 @@ try :
     firefox_options.set_preference("browser.download.dir", directory_firefox)
     firefox_options.set_preference("browser.download.folderList", 2)
 
-    driver2 = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManagers().install())
+    driver2 = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
 except :
     try:
         chrome_options = webdriver.ChromeOptions()
