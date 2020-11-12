@@ -5,7 +5,7 @@ import get_ing
 import ing_to_esp
 import get_dp
 import ing_properties
-
+import os
 print("\n")
 
 url = 'https://www.marmiton.org/recettes/recette_poke-bowl-avocat-et-thon-marine_344612.aspx'
@@ -41,3 +41,4 @@ print(dp)
 get_lifeMap_subTree.get_newick(especes)
 get_lifeMap_subTree.get_subTree(especes)
 get_lifeMap_subTree.subtree_from_newick()
+os.remove("Tree.txt")
