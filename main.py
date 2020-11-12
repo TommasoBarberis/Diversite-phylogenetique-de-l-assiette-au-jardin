@@ -6,9 +6,9 @@ import ing_to_esp
 import get_dp
 import ing_properties
 import os
-print("\n")
 
-url = "https://www.marmiton.org/recettes/recette_gratin-de-pates-moelleux-facile-et-pas-cher_53247.aspx"
+url = input("Entrez l'url de la recette choisie.\n") 
+print("\n")
 ingredients = get_ing.process(url)
 especes = ing_to_esp.recherche_globale(ingredients)
 dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
@@ -32,7 +32,6 @@ if nbing != nbnut :
             nut_not_found.append(key.capitalize())
 else : complete_nut = True
 
-dp=get_dp.calculation("exemple_newick.txt")
 
 ######## printting part ########
 
@@ -58,7 +57,8 @@ print(ingredients)
 print("species :")
 print(especes)
 print("Diversité phylogénétique (en nb de branches) :")
-print(dp)
 get_lifeMap_subTree.get_newick(especes)
+dp=get_dp.calculation("Tree.txt")
+print(dp)
 get_lifeMap_subTree.get_subTree(especes)
 os.remove("Tree.txt")
