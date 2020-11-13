@@ -7,7 +7,7 @@ import get_dp
 import ing_properties
 import os
 
-url = input("Entrez l'url de la recette choisie.\n") 
+url = input("Entrez l'url de la recette choisie. (préférence : Marmiton) \n") 
 print("\n")
 ingredients = get_ing.process(url)
 especes = ing_to_esp.recherche_globale(ingredients)
@@ -62,4 +62,3 @@ dp=get_dp.calculation("Tree.txt")
 print(dp)
 get_lifeMap_subTree.get_subTree(especes)
 get_lifeMap_subTree.subtree_from_newick()
-os.remove("Tree.txt")

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.parse import urlparse
 import re
+import sys
 
 
 #tout convertire en matières sèches ?
@@ -112,6 +113,7 @@ def get_ing_only (ing_line):
 
 def process(url):
 
+
     req = requests.get(url)
     domain = urlparse(url).netloc
     soup = BeautifulSoup(req.content, 'html.parser')
@@ -121,6 +123,9 @@ def process(url):
         ingredients = get750g(soup)
     elif domain == "www.cuisineaz.com" :
         ingredients = getCuisineaz(soup)
+    else :
+        print("Invalid domain")
+        sys.exit(1)
     
     return ingredients
 
@@ -132,7 +137,7 @@ def getMarmiton(soup):
     ingredients = {}
     og_ing = []
 
-    print("recette marmiton")
+    # print("recette marmiton")
     html_title = soup.findAll("h1",{"class":'main-title'}) 
     html_ing = soup.findAll('span',{"class":'ingredient'})
     html_qtt = soup.findAll('span',{"class":'recipe-ingredient-qt'}) 
@@ -143,7 +148,7 @@ def getMarmiton(soup):
     # print(html_nb_unit)
     string_title = html_title[0].get_text()
     string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
-    print(string_title)
+    print(string_title[1:])
     qtt = [d.text for d in html_qtt]
     # print(qtt)
     for i in range(0,len(html_ing)) :

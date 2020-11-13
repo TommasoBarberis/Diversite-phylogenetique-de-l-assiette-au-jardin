@@ -9,7 +9,6 @@ from ete3 import Tree, TreeStyle
 import os, sys, time
 
 
-
 # Pré-requis : 
 # pip install ete3
 # pip install selenium
@@ -41,7 +40,6 @@ def get_driver():
     # obtain directory for download
     directory_firefox = repr(os.path.dirname(os.path.realpath(sys.argv[0]))).strip("'")
     directory_chrome = repr(os.path.dirname(os.path.realpath(sys.argv[0])))
-
     # test pour connaitre quel navigateur est sur la machine
     try :
         firefox_options = webdriver.FirefoxProfile()
@@ -72,7 +70,10 @@ def get_newick(especes):
 
     ''' fonction qui permait de télécharger l'arbre phylogénétique sous format newick. 
     Le fichier newick sera téléchargé dans le repertoire où se trouve le script qui s'exécute '''
-
+    try:
+        os.remove("Tree.txt")
+    except :
+        pass
     driver = get_driver()
     driver.minimize_window()
     liste_ID = (get_taxid(especes))
