@@ -8,7 +8,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from ete3 import Tree, TreeStyle
 import os, sys, time
 
-
+os.environ['WDM_LOG_LEVEL'] = '0'
 # Pré-requis : 
 # pip install ete3
 # pip install selenium
