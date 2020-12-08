@@ -2,6 +2,7 @@ Abelmoschus esculentus	Gombo
 Abelmoschus esculentus	Okra
 Acmella oleracea	Brède mafane
 Acmella oleracea	Cresson du Pará
+Achillea millefolium	Achillée
 Actinidia arguta	Kiwaï
 Actinidia chinensis	Kiwi
 Adansonia digitata	Pain de singe
@@ -20,6 +21,8 @@ Allium scorodoprasum	Ail rocambole
 Allium scorodoprasum	Rocambole
 Allium schoenoprasum	Ciboulette
 Allium tuberosum	Ciboule de Chine
+Aloysia citrodora	Verveine citronnelle
+Aloysia citrodora	Verveine citronnelle
 Althaea officinalis	Guimauve
 Amaranthus	Amarante
 Amelanchier ovalis	Amelanchier
@@ -49,7 +52,9 @@ Anas platyrhynchos	Foie gras de canard
 Anas platyrhynchos	Graisse de canard
 Anas platyrhynchos	Canard colvert
 Anas platyrhynchos	Confit de canard
+Anethum graveolens	Aneth
 Anethum graveolens	Fenouil bâtard
+Angelica archangelica	Angélique
 Anguilla anguilla	Anguille
 Annona cherimola	Chérimolier
 Annona cherimola	Cherimole
@@ -63,7 +68,7 @@ Annona reticulata	Cachiman
 Anser anser domesticus	Oie
 Anser anser domesticus	Viande d'oie
 Anthemis nobilis	Camomille romaine
-Anthriscus cerefolium	Cerfeuil cultivé
+Anthriscus cerefolium	Cerfeuil
 Apios americana	Glycine tubéreuse
 Apium graveolens	Céleri
 Apium graveolens	Céleri-rave
@@ -110,7 +115,7 @@ Beta vulgaris	Côte de bette
 Beta vulgaris	Blette
 Beta vulgaris	Bette à carde
 Blitum bonus-henricus	Chénopode bon-Henri
-Borago officinalis	Bourrache officinale
+Borago officinalis	Bourrache
 Bos taurus	Boeuf
 Bos taurus	Viande de boeuf
 Bos taurus	Bœuf
@@ -201,6 +206,7 @@ Bunias orientalis	Bunias d'Orient
 Bunias orientalis	Bunias
 Byrsonima crassifolia	maurissi
 Cajanus cajan	Pois d'Angole
+Calendula officinalis	souci
 Camellia sinensis	théier
 Canavalia gladiata	Haricot sabre
 Canavalia gladiata	Pois sabre
@@ -210,11 +216,13 @@ Capreolus capreolus	Chevreuil
 Capreolus capreolus	Viande de Chevreuil
 Capreolus capreolus	Filet de chevreuil
 Capparis rupestris	Câprier des rochers
-Capparis spinosa	câprier Commun
+Capparis spinosa	Câpre
 Capra hircus	Chèvre
 Capra hircus	Viande de chèvre
 Capra hircus	Cabri
 Capra hircus	Haut de côte de chevreau
+Capsicum annuum	Chili
+Capsicum annuum	Paprika
 Capsicum annuum	Piment ornemental
 Capsicum annuum	Piment
 Capsicum annuum	Poivron
@@ -223,6 +231,9 @@ Carica papaya	Papayer
 Carica papaya	Papaye
 Carthamus tinctorius	Safran bâtard
 Carum carvi	Anis des Vosges
+Carum carvi	Carvi
+Carum carvi	Cumin des prés
+Cassia fistula	Cassia
 Castanea crenata	châtaignier du Japon
 Castanea sativa	Châtaignier commun
 Castanea sativa	Châtaigne
@@ -232,6 +243,7 @@ Cervus elaphus	Cerf
 Cervus elaphus	Viande de cerf
 Chaerophyllum bulbosum	Cerfeuil tubéreux
 Chamaemelum nobile	Camomille romaine
+Chamaemelum nobile	Camomille
 Chenopodium quinoa	Quinoa
 Chrysanthemum coronarium	Chrysanthème des jardins
 Chrysophyllum cainito	Pomme de lait
@@ -245,6 +257,7 @@ Cichorium intybus	Endive
 Cichorium intybus	Chicon
 Cichorium intybus	Chicorée
 Cichorium intybus	Radicchio
+Cinnamomum verum	Cannelle
 Citrullus lanatus	Pastèque
 Citrus aurantifolia	Limetier
 Citrus aurantifolia	Lime
@@ -268,8 +281,9 @@ Claytonia perfoliata	Claytone de Cuba
 Cocos nucifera	Coco
 Cocos nucifera	Noix de coco
 Cocos nucifera	Lait de coco
-Coffea arabica	caféier d'Arabie
+Coffea arabica	Café
 Coffea canephora	caféier robuste
+Colocasia esculenta	Taro
 Columba palumbus	Palombe
 Columba palumbus	Pigeon
 Columba palumbus	Pigeonneau
@@ -278,13 +292,13 @@ Columba palumbus	Viande de palombe
 Columba palumbus	Viande de pigeon
 Conopodium majus	Châtaigne de terre
 Corchorus olitorius	corète potagère
-Coriandrum sativum	Coriandre cultivée
+Coriandrum sativum	Coriandre
 Corylus avellana	Noisetier
 Corylus avellana	Noisette
 Coryphaena hippurus	Dorade Coryphène
 Coturnix japonica	Caille
 Coturnix japonica	Viande de Caille
-Crocus sativus	Safran cultivé
+Crocus sativus	Safran
 Cucumis melo	Melon
 Cucumis melo	Cantaloup
 Cucumis metulifer	Kiwano
@@ -298,16 +312,19 @@ Cucurbita maxima	Citrouille
 Cucurbita moschata	Coruge musquée
 Cucurbita pepo	Pâtisson
 Cucurbita pepo	Courgette
-Cuminum cyminum	cumin de Maroc
+Cuminum cyminum	Cumin
+Cuminum cyminum	Cumin noir
 Curcuma longa	safran des Indes
 Curcuma longa	Curcuma
 Cydonia oblonga	Cognassier
+Cymbopogon citratus	Citronnelle
 Cymbopogon citratus	verveine des Indes
 Cynara cardunculus	Cardon
 Cynara cardunculus	Cardon d'Espagne
 Cynara scolymus	Artichaut
 Cyperus esculentus	Souchet
 Cyprinus carpio	Carpe Koï
+Dactylopius coccus	Carmin
 Daucus carota	Carotte
 Dimocarpus longan	Longane
 Dioscorea alata	Igname
@@ -316,6 +333,7 @@ Diospyros kaki	Kaki
 Diospyros virginiana	plaqueminier d'Amérique
 Durio zibethinus	Durian
 Eleocharis dulcis	Châtaigne d'eau chinoise
+Elettaria cardamomum	Cardamome
 Empetrum nigrum	Camarine noire
 Engraulidae	Anchois
 Equus ferus caballus	Cheval
@@ -333,6 +351,7 @@ Eutrema japonicum	Wasabi
 Fagopyrum esculentum	Blé de Barbarie
 Fagopyrum tataricum	Sarrasin de Tartarie
 Feijoa sellowiana	Feijoa
+Ferula assa-foetida	Ase fétide
 Ficus carica	Figuier de Carie
 Ficus carica	Figue
 Flammulina velutipes	Collybie à pied velouté
@@ -383,6 +402,7 @@ Helianthus strumosus	Hélianthe scrofuleux
 Helianthus strumosus	Hélianti
 Helianthus tuberosus	Patate de Virginie
 Helianthus tuberosus	Topinambour
+Helichrysum stoechas	Helichrysum
 Hibiscus sabdariffa	oseille de Guinée
 Hippoglossus hippoglossus	Flétan
 Hippophae rhamnoides	Saule épineux
@@ -394,8 +414,10 @@ Hylocereus undatus	Pithaya
 Hylocereus undatus	Putahaya
 Hylocereus undatus	Fruit du dragon
 Hyssopus officinalis	Hysope
+Hypericum perforatum	Millepertuis
 Ictalurus punctatus	Barbue d'Amérique
 Illicium verum	badiane de Chine
+Illicium verum	Badiane chinoise
 Ipomoea aquatica	Liseron d'eau
 Ipomoea aquatica	Kancon
 Ipomoea batatas	Patate douce
@@ -414,6 +436,8 @@ Lagenaria leucantha	Gourde
 Lathyrus sativus	Lentille d'Espagne
 Lathyrus sativus	Gesse
 Laurus nobilis	Laurier-sauce
+Laurus nobilis	Laurier
+Lavandula angustifolia	Lavande
 Lens culinaris	Lentille
 Lentinus edodes	Shi take
 Lepidium sativum	Passerage cultivée
@@ -421,6 +445,7 @@ Lepidium sativum	Cresson alénois
 Lepus europaeus	Lièvre
 Lepus europaeus	Viande de lièvre
 Lepus europaeus	Râble de lièvre
+Levisticum officinale	Livèche
 Lilium lancifolium	Lis tigré
 Lilium lancifolium	Lys asiatique comestible
 Linum usitatissimum	Lin cultivé
@@ -451,7 +476,7 @@ Medicago sativa	Luzerne Cultivee
 Meleagris gallopavo	Dinde
 Meleagris gallopavo	Viande de dinde
 Melicoccus bijugatus	Quenette
-Melissa officinalis	Mélisse officinale
+Melissa officinalis	Mélisse
 Melothria scabra	Cucamelon
 Mentha aquatica	Menthe Aquatique
 Mentha arvensis	Menthe
@@ -465,6 +490,7 @@ Mespilus germanica	Néflier
 Mespilus germanica	Nèfle
 Metroxylon sagu	sagoutier
 Microstomus kitt	Limande-sole
+Monarda didyma	Monarde
 Momordica charantia	Margose
 Momordica charantia	Melon amer
 Momordica charantia	Paroka
@@ -472,6 +498,7 @@ Moringa oleifera	pois quénique
 Morus nigra	Mûrier noir
 Mullus barbatus	Rouget barbet
 Mullus barbatus	Rouget-barbet
+Murraya koenigii	Kaloupilé
 Musa acuminata	bananier nain
 Musa acuminata	Banane
 Musa ×paradisiaca	Banane plantain
@@ -492,6 +519,7 @@ Oenothera biennis	Œnothère
 Oenothera biennis	Oenothera
 Opuntia ficus-indica	Figue de barbarie
 Origanum majorana	Origan des jardins
+Origanum majorana	Marjolaine
 Origanum vulgare	Origan
 Oryctolagus cuniculus	Lapin
 Oryctolagus cuniculus	Lapin de garenne
@@ -553,7 +581,7 @@ Perilla frutescens	Pérille
 Perilla frutescens	Périlla
 Perilla frutescens	Shiso
 Petasites japonicus	Pétasite du Japon
-Petroselinum crispum	persil
+Petroselinum crispum	Persil
 Phaseolus coccineus	Haricot a Fleurs Rouges
 Phaseolus coccineus	Haricot d'Espagne
 Phaseolus lunatus	Pois De Sept Ans
@@ -577,8 +605,10 @@ Physalis alkekengi	Physalis
 Physalis peruviana	Coqueret du Pérou
 Phytolacca americana	Vigne de Judée
 Pimenta dioica	Grand piment
+Pimpinella anisum	Anis vert
 Pimpinella anisum	Boucage anis
-Piper nigrum	poivre noir
+Piper nigrum	Poivre
+Piper nigrum	Poivre noir
 Pistacia vera	Pistachier
 Pistacia vera	Pistache
 Pisum sativum	Petit Pois Sucres
@@ -640,6 +670,7 @@ Rubus occidentalis	framboisier de Virginie
 Rubus ulmifolius	Mûre
 Rumex acetosa	Rumex oseille
 Rumex arifolius	Oseille
+Ruta graveolens	Rue
 Saccharina latissima	Kombu
 Saccharina latissima	Konbu
 Saccharum	sucre
@@ -648,13 +679,18 @@ Salmo salar	Saumon
 Salmo trutta	Truite
 Salicornia europaea	Salicorne
 Salvelinus alpinus	Omble chevalier
-Salvia officinalis	Sauge Officinale
 Salvia hispanica	Chia
+Salvia officinalis	Sauge Officinale
+Salvia pratensis	Sauge
+Salvia rosmarinus	Romarin
+Sambucus nigra	Sureau
 Sambucus nigra	Sureau noir
 Sander lucioperca	Sandre
+Sanguisorba minor	Pimprenelle
 Sapote mamey	Sapote
 Sardina pilchardus	Sardine
 Sardina pilchardus	Sardines
+Satureja hortensis	Sarriette
 Satureja montana	Sarriette vivace
 Scophthalmus maximus	Turbot
 Scorzonera hispanica	Scorzonère d'Espagne
@@ -677,6 +713,7 @@ Solanum melongena	Marignan
 Solanum melongena	Aubergine
 Solanum muricatum	Pepino
 Solanum tuberosum	Pomme de terre
+Solanum tuberosum	Fécule
 Solea solea	Sole
 Sorbus aucuparia	Sorbier sauvage
 Sorghum bicolor	Sorgho
@@ -733,7 +770,7 @@ Sus scrofa domesticus	Kakos
 Sus scrofa domesticus	Palette de porc
 Sus scrofa domesticus	Travers de porc
 Sus scrofa domesticus	Grillade porc
-Syzygium aromaticum	giroflier
+Syzygium aromaticum	Girofle
 Syzygium cumini	Jamelonier
 Syzygium malaccense	Jambose
 Syzygium jambos	Pomme rose
@@ -752,14 +789,17 @@ Theragra chalcogramma	Lieu noir
 Thymus vulgaris	Thym 
 Tilia argentea	Tilleul argenté
 Tilia cordata	tilleul d'Europe
+Trachyspermum ammi	Ajowan
 Trapa bicornis	Mâcre bicorne
 Trapa natans	Mâcre nageante
 Trichosanthes cucumerina	Serpent végétal
+Trigonella foenum-graecum	Fenugrec
 Trigonella foenum-graecum	Trigonelle Fenugrec
 Triticum aestivum	farine
 Triticum vulgare	Froment
 Tropaeolum tuberosum	Capucine tubéreuse
 Typha angustifolia	Massette à Feuilles Étroites
+Tuber aestivum	Truffe
 Umbilicus rupestris	Nombril de Vénus
 Undaria pinnatifida	Wakamé
 Urtica dioica	Ortie
@@ -778,6 +818,7 @@ Valerianella locusta	Clairette
 Valerianella locusta	Raiponce
 Valerianella locusta	Oreillette
 Vangueria madagascariensis	Tamarin des Indes
+Vanilla planifolia	Vanille
 Verbena officinalis	Veine de Vénus
 Vicia faba	Feve De Calabar
 Vicia faba	Fève
