@@ -73,15 +73,26 @@ def getDictNutPond(dict_ing, dict_nut):
         dict_pond[ing] = []
         dict_pond[ing].append(dict_nut[ing][0])
 
-        qtt = dict_ing[ing.lower()]
-        print(qtt)
-        wat_pond = int(qtt) * int(dict_nut[ing][1])/100 
-        gluc_pond = int(qtt) * int(dict_nut[ing][2])/100
-        lip_pond = int(qtt) * int(dict_nut[ing][3])/100
-        suc_pond = int(qtt) * int(dict_nut[ing][4])/100
+        qtt = str(dict_ing[ing.lower()])
+        qtt  = format_float(qtt)
+        wat_unpond = format_float(str(dict_nut[ing][1]))
+        gluc_unpond = format_float(str(dict_nut[ing][2]))
+        lip_unpond = format_float(str(dict_nut[ing][3]))
+        suc_unpond = format_float(str(dict_nut[ing][4]))
 
-        
+        wat_pond = round(float(qtt) * float(wat_unpond)/100,2) 
+        gluc_pond = round(float(qtt) * float(gluc_unpond)/100,2)
+        lip_pond = round(float(qtt) * float(lip_unpond)/100,2) 
+        suc_pond = round(float(qtt) * float(suc_unpond)/100,2) 
+        #unités ????
+        print("og qtté = " +str(qtt) +" water_pond = " + str(wat_pond) + " gluc_pond = " + str(gluc_pond)+ " lip_pond = " + str(lip_pond)+ " suc_pond = " + str(suc_pond))
 
+def format_float(input_string):
+    if "-" in input_string or "traces" in input_string:
+        return 0
+    else :
+        return input_string.replace("< ","").replace(",",".")
+ 
 
 
 def nutPrinter(nut_dict):
