@@ -58,7 +58,7 @@ def get_ing_only (ing_line):
         elif ing.startswith('cl de'):
             ing = ing[6:]
             comp[1] =comp[1]* 10
-
+    #Rassembler tout ce qui est à retirer dans un fichier ?
         elif ing.startswith('g d\''):
             ing = ing[4:]
         elif ing.startswith('g de') or ing.startswith("ml d\'") or ing.startswith("gros"):

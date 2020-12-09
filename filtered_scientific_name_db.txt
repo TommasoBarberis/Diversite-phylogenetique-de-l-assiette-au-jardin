@@ -172,6 +172,11 @@ Bos taurus	Rognons
 Bos taurus	Tournedos
 Bos taurus	Tripes
 Bos taurus	Viande des Grisons
+Bos taurus	Crème fraîche
+Bos taurus	Crème fraiche
+Bos taurus	Crème
+Bos taurus	Beurre
+Bos taurus	Lait
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
 Brassica juncea	Moutarde de Sarepta
@@ -361,10 +366,12 @@ Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
 Gallus gallus	Poulet
+Gallus gallus	Blancs de poulet
+Gallus gallus	Cuisses de poulet
 Gallus gallus	Poule
 Gallus gallus	Poularde
 Gallus gallus	Poularde de Bresse
-Gallus gallus	Coq
+Gallus gallus	coq
 Gallus gallus	Chapon
 Gallus gallus	Coquelet
 Gallus gallus	Viande de chapon
@@ -503,6 +510,7 @@ Musa acuminata	bananier nain
 Musa acuminata	Banane
 Musa ×paradisiaca	Banane plantain
 Myrciaria dubia	Camu-camu
+Myristica fragrans	Muscade
 Myristica fragrans	Noix muscade
 Myristica fragrans	Noix de muscade
 Myrtus communis	Myrte
@@ -674,6 +682,9 @@ Ruta graveolens	Rue
 Saccharina latissima	Kombu
 Saccharina latissima	Konbu
 Saccharum	sucre
+Saccharum officinarum	Cassonade
+Saccharum officinarum	Sucre roux
+Saccharum officinarum	Canne à sucre
 Salacca zalacca	Salak
 Salmo salar	Saumon
 Salmo trutta	Truite
@@ -771,6 +782,7 @@ Sus scrofa domesticus	Palette de porc
 Sus scrofa domesticus	Travers de porc
 Sus scrofa domesticus	Grillade porc
 Syzygium aromaticum	Girofle
+Syzygium aromaticum	Clou de girofle
 Syzygium cumini	Jamelonier
 Syzygium malaccense	Jambose
 Syzygium jambos	Pomme rose
@@ -783,6 +795,7 @@ Tetragonia tetragonioides	Tétragone cornue
 Theobroma cacao	cacaoyer
 Theobroma cacao	Cacao
 Theobroma cacao	Fève de cacao
+Theobroma cacao	Chocolat
 Theragra chalcogramma	Colin
 Theragra chalcogramma	Merlu
 Theragra chalcogramma	Lieu noir
