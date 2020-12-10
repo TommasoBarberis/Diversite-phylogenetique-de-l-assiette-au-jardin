@@ -1,6 +1,9 @@
 # -- coding: utf-8 --
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from get_NCBI_taxonomy import get_taxid
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
@@ -84,6 +87,8 @@ def get_newick(especes):
     # Ajout des éléments dans la zone de texte
     driver.find_element_by_id("textarea").send_keys(str(liste_ID))
     driver.find_element_by_id("getSubtree").click()
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][2]/div[@class='radio'][2]/label/input"))).click()
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][3]/div[@class='radio'][2]/label/input"))).click()
     #driver.find_element_by_id("treeElements").send_keys(str(liste_ID))
     #driver.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']\
     #                            /div[@class='col']/form[@id='phylotForm']/div[@id='options']/div[@class='col'][2]/div[@class='row'][1]/div[@class='col-sm']\
@@ -100,7 +105,7 @@ def get_newick(especes):
     with open("Tree.txt","w") as tree:
         tree.write(str(driver.find_element_by_xpath('//*[@id="TreeTextarea"]').get_attribute("value")))
     driver.find_element_by_xpath('//*[@id="ModalTreeFormat"]/div/div/div[4]/div/div[2]/button').click()
-
+    driver.close()
 
 def subtree_from_newick():
     try:
