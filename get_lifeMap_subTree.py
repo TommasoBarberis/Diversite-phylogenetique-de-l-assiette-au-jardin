@@ -98,9 +98,12 @@ def get_newick(especes):
     driver.close()
 
 def subtree_from_newick():
-    t = Tree('Tree.txt', quoted_node_names=True, format=1)
-    ts = TreeStyle()
-    ts.show_leaf_name = True
-    ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
-    t.show(tree_style=ts)
+    try:
+        t = Tree('Tree.txt', quoted_node_names=True, format=1)
+        ts = TreeStyle()
+        ts.show_leaf_name = True
+        ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
+        t.show(tree_style=ts)
+    except:
+        pass
 

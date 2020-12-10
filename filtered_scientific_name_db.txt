@@ -9,6 +9,7 @@ Adansonia digitata	Pain de singe
 Agaricus bisporus	Champignon de Paris
 Allium ampeloprasum	Ail Faux-Poireau
 Allium cepa	Oignon
+Allium cepa	Oignon	rouge
 Allium chinense	Oignon de Chine
 Allium porrum	Poireau
 Allium ampeloprasum	Poireau perpétuel
@@ -21,7 +22,6 @@ Allium scorodoprasum	Ail rocambole
 Allium scorodoprasum	Rocambole
 Allium schoenoprasum	Ciboulette
 Allium tuberosum	Ciboule de Chine
-Aloysia citrodora	Verveine citronnelle
 Aloysia citrodora	Verveine citronnelle
 Althaea officinalis	Guimauve
 Amaranthus	Amarante
@@ -177,6 +177,7 @@ Bos taurus	Crème fraiche
 Bos taurus	Crème
 Bos taurus	Beurre
 Bos taurus	Lait
+Bos taurus	Parmesan
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
 Brassica juncea	Moutarde de Sarepta
@@ -566,6 +567,7 @@ Ovis aries	Haut-de-côtes d'agneau
 Ovis aries	Poitrine d'agneau
 Ovis aries	Selle d'agneau
 Ovis aries	Souris d'agneau
+Ovis aries	Feta
 Oxalis tuberosa	Oca du Pérou
 Pachyrhizus erosus	Pois Manioc
 Panicum miliaceum	Panic à fleurs dichotomes
@@ -585,6 +587,7 @@ Perca fluviatilis	Perche
 Persea americana	Avocatier
 Persea americana	Avocat
 Persica vulgaris	Pêcher
+Persica vulgaris	Pêche
 Perilla frutescens	Pérille
 Perilla frutescens	Périlla
 Perilla frutescens	Shiso
@@ -615,6 +618,7 @@ Phytolacca americana	Vigne de Judée
 Pimenta dioica	Grand piment
 Pimpinella anisum	Anis vert
 Pimpinella anisum	Boucage anis
+Pinus pinea	Pignons de pin
 Piper nigrum	Poivre
 Piper nigrum	Poivre noir
 Pistacia vera	Pistachier
@@ -628,7 +632,7 @@ Pleuronectes platessa	Carrelet
 Portulaca oleracea	Pourpier maraîcher
 Praecitrullus fistulosus	Tinda
 Prunus amygdalus	Amandier amer
-Prunus amygdalus	Amande
+Prunus dulcis	Amande
 Prunus armeniaca	Prunier Crèque
 Prunus armeniaca	Abricot
 Prunus avium	cerisier de France
@@ -720,6 +724,7 @@ Soja max	Soja
 Solanum betaceum	Tamarillo
 Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Tomate
+Solanum lycopersicum	Tomates cerises
 Solanum melongena	Marignan
 Solanum melongena	Aubergine
 Solanum muricatum	Pepino
@@ -799,7 +804,7 @@ Theobroma cacao	Chocolat
 Theragra chalcogramma	Colin
 Theragra chalcogramma	Merlu
 Theragra chalcogramma	Lieu noir
-Thymus vulgaris	Thym 
+Thymus vulgaris	Thym
 Tilia argentea	Tilleul argenté
 Tilia cordata	tilleul d'Europe
 Trachyspermum ammi	Ajowan
@@ -808,7 +813,8 @@ Trapa natans	Mâcre nageante
 Trichosanthes cucumerina	Serpent végétal
 Trigonella foenum-graecum	Fenugrec
 Trigonella foenum-graecum	Trigonelle Fenugrec
-Triticum aestivum	farine
+Triticum aestivum	Farine
+Triticum durum	Boulgour
 Triticum vulgare	Froment
 Tropaeolum tuberosum	Capucine tubéreuse
 Typha angustifolia	Massette à Feuilles Étroites
@@ -852,6 +858,7 @@ Vitis vinifera	Vigne Sauvage
 Wasabia japonica	Raifort Japonais
 Zea mays	blé d’Inde
 Zea mays	Maïs
+Zea mays	maïzena
 Zeus faber	Saint-Pierre
 Zingiber officinale	Gingembre
 Ziziphus zizyphus	Jujube
