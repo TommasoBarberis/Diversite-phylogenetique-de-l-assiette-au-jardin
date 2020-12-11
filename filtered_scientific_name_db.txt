@@ -119,25 +119,25 @@ Borago officinalis	Bourrache
 Bos taurus	Boeuf
 Bos taurus	Viande de boeuf
 Bos taurus	Bœuf
-Bos taurus	Viande de bœuf
-Bos taurus	Bavette de bœuf
-Bos taurus	Côte de bœuf
-Bos taurus	Découpe du bœuf
-Bos taurus	Entrecôte de bœuf
-Bos taurus	Faux-filet de bœuf
-Bos taurus	Filet de bœuf
-Bos taurus	Filet mignon de bœuf
-Bos taurus	Gîte de bœuf
-Bos taurus	Joue de bœuf
-Bos taurus	Langue de bœuf
-Bos taurus	Onglet de bœuf
-Bos taurus	Queue de bœuf
-Bos taurus	Rumsteck de bœuf
-Bos taurus	Steak de bœuf
-Bos taurus	Steak haché de bœuf
-Bos taurus	Turnedos de bœuf
-Bos taurus	Paleron de bœuf
-Bos taurus	Rôti de bœuf
+Bos taurus	Viande de boeuf
+Bos taurus	Bavette de boeuf
+Bos taurus	Côte de boeuf
+Bos taurus	Découpe du boeuf
+Bos taurus	Entrecôte de boeuf
+Bos taurus	Faux-filet de boeuf
+Bos taurus	Filet de boeuf
+Bos taurus	Filet mignon de boeuf
+Bos taurus	Gîte de boeuf
+Bos taurus	Joue de boeuf
+Bos taurus	Langue de boeuf
+Bos taurus	Onglet de boeuf
+Bos taurus	Queue de boeuf
+Bos taurus	Rumsteck de boeuf
+Bos taurus	Steak de boeuf
+Bos taurus	Steak haché de boeuf
+Bos taurus	Turnedos de boeuf
+Bos taurus	Paleron de boeuf
+Bos taurus	Rôti de boeuf
 Bos taurus	Hampe
 Bos taurus	Rosbeef
 Bos taurus	Tende de tranche
