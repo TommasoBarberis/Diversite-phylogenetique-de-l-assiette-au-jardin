@@ -5,8 +5,20 @@ from urllib.parse import urlparse
 import re
 import sys
 
-
-#tout convertire en matières sèches ?
+def clean(ing_input):
+    f = open("ing_filter_start.txt", "r")
+    elem_list_start = f.read().splitlines()
+    f2 = open("ing_filter_end.txt", "r")
+    elem_list_end = f2.read().splitlines()
+    ingredient  = ing_input
+    for it in range(0,2) :
+        for line in elem_list_start:
+            if ingredient.startswith(line):
+                ingredient = ingredient[len(line):]
+        for line in elem_list_end:
+            if ingredient.endswith(line) :
+                ingredient = ingredient[:len(line)]
+    return ingredient
 
 #base units : g /  ml 
 def get_ing_only (ing_line):
@@ -33,81 +45,34 @@ def get_ing_only (ing_line):
         ing = ing[1:]
 
     #comment gérer les qttés des doublons ?
-    for it in range (0,2) : #2 itérations de nettoyage
-        if ing.startswith('l d\''):
-            ing = ing[4:]
-            comp[1] = comp[1]*1000
-        elif ing.startswith('l de'):
-            ing = ing[5:]
-            comp[1] = comp[1]*1000
-        elif ing.startswith('kg d\''):
-            ing = ing[5:]
-            comp[1] = comp[1]*1000
-        elif ing.startswith('kg de'):
-            ing = ing[6:]
-            comp[1] = comp[1]*1000
-        elif ing.startswith('mg d\''):
-            ing = ing[5:]
-            comp[1] =comp[1]*0.001
-        elif ing.startswith('mg de'):
-            ing = ing[6:]
-            comp[1] =comp[1]*0.001
-        elif ing.startswith('cl d\''):
-            ing = ing[5:]
-            comp[1] =comp[1]* 10
-        elif ing.startswith('cl de'):
-            ing = ing[6:]
-            comp[1] =comp[1]* 10
-    #Rassembler tout ce qui est à retirer dans un fichier ?
-        elif ing.startswith('g d\''):
-            ing = ing[4:]
-        elif ing.startswith('g de') or ing.startswith("ml d\'") or ing.startswith("gros"):
-            ing = ing[5:]
-        elif ing.startswith('sauce') or ing.startswith('ml de '):
-            ing = ing[6:]
-        elif ing.startswith('pot de') or ing.startswith('jus de '):
-            ing = ing[7:]
-        elif ing.startswith('pâte de') or ing.startswith('pate de') or ing.startswith('huile d\'') or ing.startswith("brin de ") or ing.startswith('blanc d\'') or ing.startswith('jaune d\'') or ing.startswith('boîte d\'') :
-            ing = ing[8:]
-        elif ing.startswith('verre de') or ing.startswith('gousse d\'') or ing.startswith('poudre d\'') or ing.startswith('zeste de ') or ing.startswith('bâton de') or ing.startswith('blancs d\'') or ing.startswith('jaunes d\'') or ing.startswith('boite de') or ing.startswith('boîte de'):
-            ing = ing[9:]
-        elif ing.startswith('gousses d\'') or ing.startswith('verres de') or ing.startswith('sachet de') or ing.startswith('copeau de ') or ing.startswith('paquet de') or ing.startswith('pincée de ') or ing.startswith('gousse de '):
-            ing = ing[10:]
-        elif ing.startswith('feuille de') or ing.startswith('rouleau de ') or ing.startswith("branche de ") or ing.startswith('cuillère d\'') or ing.startswith('poignée de') or ing.startswith('gousses de ') or ing.startswith('copeaux de ') or ing.startswith("bouquet de") or ing.startswith("tranche de "):
-            ing = ing[11:]
-        elif ing.startswith('feuilles de') or ing.startswith("noisette de") or ing.startswith("tranches de ") or ing.startswith('marmelade d\'') or ing.startswith('cuillère de') or ing.startswith('cuillères d\'') or ing.startswith("bouquets de"):
-            ing = ing[12:]
-        elif ing.startswith('cuillères de') or ing.startswith("concentré de") or ing.startswith("noisette de") or ing.startswith("tranche de "):
-            ing = ing[13:]
-        elif ing.startswith('petit verre de'):
-            ing = ing[15:]
-        elif ing.startswith("petit morceau de "):
-            ing = ing[17:]  
-        elif ing.startswith('cuillère à café d\'') or ing.startswith('cuillère a café d\'') :
-            ing = ing[18:]  
-        elif ing.startswith('cuillère à soupe d\'') or ing.startswith("petits morceaux de ")  or ing.startswith('cuillère a soupe d\'') or ing.startswith('cuillère à café de ') or ing.startswith('cuillère a café de ') or ing.startswith('cuillères à café d\'') or ing.startswith('cuillères a café d\''):
-            ing = ing[19:]
-        elif ing.startswith('cuillères à soupe d\'') or ing.startswith('cuillères a soupe d\'') or ing.startswith('cuillères à café de ') or ing.startswith('cuillères a café de ') or ing.startswith('cuillère à soupe de ') or ing.startswith('cuillère a soupe de '):
-            ing = ing[20:]
-        elif ing.startswith('cuillères à soupe de') or ing.startswith('cuillères a soupe de') :
-            ing = ing[21:]
+
+    if ing.startswith('l d\''):
+        ing = ing[4:]
+        comp[1] = comp[1]*1000
+    elif ing.startswith('l de'):
+        ing = ing[5:]
+        comp[1] = comp[1]*1000
+    elif ing.startswith('kg d\''):
+        ing = ing[5:]
+        comp[1] = comp[1]*1000
+    elif ing.startswith('kg de'):
+        ing = ing[6:]
+        comp[1] = comp[1]*1000
+    elif ing.startswith('mg d\''):
+        ing = ing[5:]
+        comp[1] =comp[1]*0.001
+    elif ing.startswith('mg de'):
+        ing = ing[6:]
+        comp[1] =comp[1]*0.001
+    elif ing.startswith('cl d\''):
+        ing = ing[5:]
+        comp[1] =comp[1]* 10
+    elif ing.startswith('cl de'):
+        ing = ing[6:]
+        comp[1] =comp[1]* 10
     
-    if ing.endswith('sec'):
-        ing = ing[:-4]     
-    if ing.endswith('rapé') or ing.endswith('râpé') or ing.endswith("amer") or ing.endswith("noir"):
-        ing = ing[:-5]   
-    elif ing.endswith('glace') or ing.endswith("frais"):
-        ing = ing[:-6]  
-    elif ing.endswith('nature'):
-        ing = ing[:-7]  
-    elif ing.endswith('épaisse') or ing.endswith("liquide"):
-        ing = ing[:-8]   
-    elif ing.endswith('fraîches'):
-        ing = ing[:-9]         
-    elif ing.endswith('en poudre') or ing.endswith('en grains') or ing.endswith('pâtissier'):
-        ing = ing[:-10] 
-    elif ing.endswith("demi-écrémé"):
-        ing = ing[:-12]
+    ing = clean(ing)
+
     comp[0] = ing
     return comp
 
@@ -211,3 +176,5 @@ if __name__ == "__main__":
 
     url = 'https://www.marmiton.org/recettes/recette_pizza-gaufree-au-fromage_347268.aspx'
     print(process(url))
+    yo = 0
+    clean("g d'cuillères a café de eau")
