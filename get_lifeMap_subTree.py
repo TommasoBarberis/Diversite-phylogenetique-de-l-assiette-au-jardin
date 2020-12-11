@@ -19,11 +19,11 @@ os.environ['WDM_LOG_LEVEL'] = '0'
 
 
 
-'''
+
 def get_subTree(especes):
-
+    '''
      fonction qui permait d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
-
+    '''
     # Création de la liste ID à partir de la liste espèce donnée
     liste_ID = (get_taxid(especes))
     liste_ID = str(liste_ID).strip('[]')
@@ -36,7 +36,7 @@ def get_subTree(especes):
     # Détéction du bouton View et click effectué
     driver.find_element_by_id("viewMulti").click()
     driver.maximize_window()
-'''
+
 
 def get_driver():
 
@@ -80,32 +80,21 @@ def get_newick(especes):
     except :
         pass
     driver = get_driver()
-    #driver.minimize_window()
     liste_ID = (get_taxid(especes))
     liste_ID = str(liste_ID).strip('[]')
     # Ouverture du navigateur sur le site suivant
-    #driver.get("https://phylot.biobyte.de/")
     driver.get("http://lifemap-ncbi.univ-lyon1.fr/#")
     # Ajout des éléments dans la zone de texte
     driver.find_element_by_id("textarea").send_keys(str(liste_ID))
     driver.find_element_by_id("getSubtree").click()
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][2]/div[@class='radio'][2]/label/input"))).click()
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][3]/div[@class='radio'][2]/label/input"))).click()
-    #driver.find_element_by_id("treeElements").send_keys(str(liste_ID))
-    #driver.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']\
-    #                            /div[@class='col']/form[@id='phylotForm']/div[@id='options']/div[@class='col'][2]/div[@class='row'][1]/div[@class='col-sm']\
-    #                                [2]/input[@class='form-control']").send_keys('Tree.txt')
-
-    #driver.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']/div[@class='col']\
-    #                           /form[@id='phylotForm']/div[@id='options']/div[@class='col'][1]/div[@class='row'][1]/div[@class='col-sm'][3]/div[@class='radio']\
-    #                               [1]/label/input").send_keys(Keys.ARROW_DOWN)
-    # Détéction du bouton generate tree file et Enter effectué
-    #driver.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
-    # Wait 3 seconds for downloading
-    #driver.close()
+    #time.sleep(5)
+    driver.minimize_window()
     with open("Tree.txt","w") as tree:
         tree.write(str(driver.find_element_by_xpath('//*[@id="TreeTextarea"]').get_attribute("value")))
     driver.find_element_by_xpath('//*[@id="ModalTreeFormat"]/div/div/div[4]/div/div[2]/button').click()
+    driver.close()
 
 
 def subtree_from_newick():
