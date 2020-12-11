@@ -17,9 +17,12 @@ os.environ['WDM_LOG_LEVEL'] = '0'
 # pip install selenium
 # pip install webdriver_manager
 
+
+
+'''
 def get_subTree(especes):
 
-    ''' fonction qui permait d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr. '''
+     fonction qui permait d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
 
     # Création de la liste ID à partir de la liste espèce donnée
     liste_ID = (get_taxid(especes))
@@ -33,8 +36,7 @@ def get_subTree(especes):
     # Détéction du bouton View et click effectué
     driver.find_element_by_id("viewMulti").click()
     driver.maximize_window()
-
-
+'''
 
 def get_driver():
 
@@ -97,7 +99,6 @@ def get_newick(especes):
     #driver.find_element_by_xpath("/html/body/div[@class='container']/div[@id='phylotContent']/div[@id='ncbi']/div[@id='mainForm']/div[@class='col']\
     #                           /form[@id='phylotForm']/div[@id='options']/div[@class='col'][1]/div[@class='row'][1]/div[@class='col-sm'][3]/div[@class='radio']\
     #                               [1]/label/input").send_keys(Keys.ARROW_DOWN)
-    time.sleep(0.5)
     # Détéction du bouton generate tree file et Enter effectué
     #driver.find_element_by_xpath("//input[@type='submit']").send_keys(Keys.ENTER)
     # Wait 3 seconds for downloading
@@ -105,7 +106,7 @@ def get_newick(especes):
     with open("Tree.txt","w") as tree:
         tree.write(str(driver.find_element_by_xpath('//*[@id="TreeTextarea"]').get_attribute("value")))
     driver.find_element_by_xpath('//*[@id="ModalTreeFormat"]/div/div/div[4]/div/div[2]/button').click()
-    driver.close()
+
 
 def subtree_from_newick():
     try:
