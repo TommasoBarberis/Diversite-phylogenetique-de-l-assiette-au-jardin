@@ -6,9 +6,9 @@ import re
 import sys
 
 def clean(ing_input):
-    f = open("ing_filter_start.txt", "r")
+    f = open("filtering/ing_filter_start.txt", "r")
     elem_list_start = f.read().splitlines()
-    f2 = open("ing_filter_end.txt", "r")
+    f2 = open("filtering/ing_filter_end.txt", "r")
     elem_list_end = f2.read().splitlines()
     ingredient  = ing_input
     for it in range(0,2) :
