@@ -12,6 +12,7 @@ Allium cepa	Oignon
 Allium cepa	Oignon	rouge
 Allium chinense	Oignon de Chine
 Allium porrum	Poireau
+Allium porrum	Poireaux
 Allium ampeloprasum	Poireau perpétuel
 Allium ampeloprasum	Ail d'Orient
 Allium ascalonicum	Échalote

@@ -12,38 +12,52 @@ def openBook(file):
     book = xlrd.open_workbook(file)
     return book
 
+def getDefaultLineNumber(ingredient):
+    f = open("nutrition_db/default.txt", "r")
+    default_list = f.read().splitlines()
+    for line in default_list :
+        if ingredient in line : 
+            value = line.split(" ")
+            return int(value[1])-1
+    return 0
+        
 def getNutInfo(ing,book):
     sheet = book.sheets()[0]
-    cpt = 0
+    print(ing)
+    cpt = getDefaultLineNumber(ing.lower())
     found_in_book = False
     # ing = "Pomme de terre"
     nut_info = []
     final_nut_info = []
-    for cel in sheet.col(7):
-        if ing.endswith("s"):
-            if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and ("crue" in cel.value or "cru" in cel.value):
-                found_in_book = True
-                break
-        else :
-            if (cel.value.startswith(ing)) and ("crue" in cel.value or "cru" in cel.value):
-                found_in_book = True
-                break
-        cpt +=1
+    if cpt !=0:
+        found_in_book = True
+    else :
+        for cel in sheet.col(7):
+            if ing.endswith("s"):
+                if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and ("crue" in cel.value or "cru" in cel.value):
+                    found_in_book = True
+                    break
+            else :
+                if (cel.value.startswith(ing)) and ("crue" in cel.value or "cru" in cel.value):
+                    found_in_book = True
+                    break
+            cpt +=1
     
-    if not found_in_book :
-        cpt = 0
-        if ing.endswith("s"):
-            for cel in sheet.col(7):
-                if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])):
-                    found_in_book = True
-                    break
-                cpt +=1
-        else : 
-            for cel in sheet.col(7):
-                if (cel.value.startswith(ing)):
-                    found_in_book = True
-                    break
-                cpt +=1
+        if not found_in_book :
+            cpt = 0
+            if ing.endswith("s"):
+                for cel in sheet.col(7):
+                    if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])):
+                        found_in_book = True
+                        break
+                    cpt +=1
+            else : 
+                for cel in sheet.col(7):
+                    if (cel.value.startswith(ing)):
+                        found_in_book = True
+                        break
+                    cpt +=1
+
 
     if found_in_book : 
         for cel in sheet.row(cpt) :
@@ -85,7 +99,7 @@ def getDictNutPond(dict_ing, dict_nut):
         lip_pond = round(float(qtt) * float(lip_unpond)/100,2) 
         suc_pond = round(float(qtt) * float(suc_unpond)/100,2) 
         #unités ????
-        print("og qtté = " +str(qtt) +" water_pond = " + str(wat_pond) + " gluc_pond = " + str(gluc_pond)+ " lip_pond = " + str(lip_pond)+ " suc_pond = " + str(suc_pond))
+        print("ingrédient : "+ ing + " og qtté = " +str(qtt) +" water_pond = " + str(wat_pond) + " gluc_pond = " + str(gluc_pond)+ " lip_pond = " + str(lip_pond)+ " suc_pond = " + str(suc_pond))
 
 def format_float(input_string):
     if "-" in input_string or "traces" in input_string:
@@ -115,3 +129,4 @@ if __name__ == "__main__":
     # print(getNutInfo("Tomate",myBook))
     # nutPrinter(output)
     getDictNutPond(dico,output)
+    getDefaultLineNumber("sel")

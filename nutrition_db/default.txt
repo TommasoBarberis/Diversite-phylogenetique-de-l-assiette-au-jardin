@@ -1,0 +1,7 @@
+sel 3041
+lait 1936
+poireau 356
+poireaux 356
+huile 2903 (huile de tournesole)
+beurre 2862
+farine 1104 (farine de blé T55)
