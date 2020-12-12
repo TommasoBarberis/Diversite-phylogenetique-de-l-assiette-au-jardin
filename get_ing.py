@@ -94,6 +94,14 @@ def process(url):
     
     return ingredients
 
+def get_title(url):
+    req = requests.get(url)
+    soup = BeautifulSoup(req.content, 'html.parser')
+    html_title = soup.findAll("h1",{"class":'main-title'}) 
+    string_title = html_title[0].get_text()
+    string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
+    return string_title
+
 def getMarmiton(soup):
 
     html_ing = []
