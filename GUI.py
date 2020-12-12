@@ -4,59 +4,81 @@ from tkinter import *
 from tkinter import font
 import requests
 from urllib.parse import urlparse
-#import webbrowser
+import webbrowser
 #from PIL import Image, ImageTk
 
 class MainWindow:
     def __init__(self, main_window):
         self.main_window = main_window
-
-       # window setting 
+        
+        # window setting 
         main_window.title("Diversité phylogénétique de l’alimentation")
         main_window.geometry("1080x740")
         main_window.minsize(800,400)
         main_window.config(background="#2a9d8f")
 
-        # title # -*- coding: utf-8 -*-
-
+        # title 
         label_title=Label(self.main_window, text="Diversité phylogénétique \nde l’alimentation", font='Helvetica 35 bold', bg='#2a9d8f', fg="#f0efeb")
-        label_title.grid(row=1, column=3, pady=10)#, columnspan=5)
+        label_title.grid(row=1, column=3, pady=10)
+
+        def open_site (url):
+            webbrowser.open_new(url)
+        def underline (label):
+            label.config(font=("Arial", 20, "underline"))
+        def desunderline (label):
+            label.config(font=("Arial", 20))
+
+        # label (sites)
+        label1=Label(self.main_window, text="Sites optimisés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#656565')
+        label1.grid(row=7, column=3, sticky=W)
+        label2=Label(self.main_window, text="\twww.marmitton.org", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
+        label2.grid(row=8,column=3, sticky=W)
+        label2.bind('<Button-1>', lambda x: open_site("https://www.marmiton.org/"))
+        label2.bind('<Enter>', lambda x: underline(label2))
+        label2.bind('<Leave>', lambda x: desunderline(label2))
+        label3=Label(self.main_window, text="Autres sites implementés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#656565')
+        label3.grid(row=9, column=3, sticky=W)
+        label4=Label(self.main_window, text="\twww.750g.com", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
+        label4.grid(row=10, column=3, sticky=W)
+        label4.bind('<Button-1>', lambda x: open_site("https://www.750g.com/"))
+        label4.bind('<Enter>', lambda x: underline(label4))
+        label4.bind('<Leave>', lambda x: desunderline(label4))
+        label5=Label(self.main_window, text="\twww.cuisineaz.com", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
+        label5.grid(row=11, column=3, sticky=W)
+        label5.bind('<Button-1>', lambda x: open_site("https://www.cuisineaz.com/"))
+        label5.bind('<Enter>', lambda x: underline(label5))
+        label5.bind('<Leave>', lambda x: desunderline(label5))
 
         # gitlab button
         def open_gitlab():
             webbrowser.open_new("http://pedago-service.univ-lyon1.fr:2325/tfroute/div-phylo-alim")
         gitlab_button=Button(self.main_window, text="GitLab", font='button_font 20 bold', bg="#f0efeb", fg="#2a9d8f", width=10, command=open_gitlab)
-        gitlab_button.grid(row=7, column=1)
+        gitlab_button.grid(row=8, column=1)
 
         # ucbl button
         def open_ucbl():
             webbrowser.open_new("https://www.univ-lyon1.fr/")
         ucbl_button=Button(self.main_window, text="UCBL", font='button_font 20 bold', bg='#f0efeb', fg='#2a9d8f', width=10, command=open_ucbl)
-        ucbl_button.grid(row=8,column=1)
+        ucbl_button.grid(row=10,column=1)
 
         # entry
         label_entry=Label(self.main_window, text="Entrez l'url d'une recette:", font=("Arial", 20, 'bold'), bg='#2a9d8f', fg='#f0efeb')
         label_entry.grid(row=3,column=3, pady=10)
         self.url_entry=Entry(self.main_window, font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb', width=40)
         self.url_entry.grid(row=4,column=3, pady=10)
-
-        # submit
-        submit=Button(self.main_window, text = 'Entrer', font='Helvetica 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
-        submit.grid(row=5,column=3)
-
+    
         main_window.grid_rowconfigure(0, weight=1)
         main_window.grid_rowconfigure(2, weight=1)
         main_window.grid_rowconfigure(6, weight=1)
-        main_window.grid_rowconfigure(10, weight=1)
+        main_window.grid_rowconfigure(12, weight=1)
 
         main_window.grid_columnconfigure(0, weight=1)
         main_window.grid_columnconfigure(2, weight=1)
         main_window.grid_columnconfigure(4, weight=1)
 
-        #ne fonctionne pas
-        def clicker ():
-            self.test_domain()
-        main_window.bind('<Return>', lambda x: clicker())
+        # submit
+        submit=Button(self.main_window, text = 'Entrer', font='Helvetica 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
+        submit.grid(row=5,column=3)
 
     def test_domain (self):
         url=self.url_entry.get()
