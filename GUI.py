@@ -5,19 +5,25 @@ from tkinter import font
 import requests
 from urllib.parse import urlparse
 import webbrowser
+import get_ing
+import ing_to_esp
 #from PIL import Image, ImageTk
 
 class MainWindow:
+    '''
+    fenetre principale.
+    lien vers les sites importantes et champ pour rentrer l'url de la recette a sousmettre.
+    '''
     def __init__(self, main_window):
         self.main_window = main_window
         
-        # window setting 
+    # window setting 
         main_window.title("Diversité phylogénétique de l’alimentation")
         main_window.geometry("1080x740")
         main_window.minsize(800,400)
         main_window.config(background="#2a9d8f")
 
-        # title 
+    # title 
         label_title=Label(self.main_window, text="Diversité phylogénétique \nde l’alimentation", font='Helvetica 35 bold', bg='#2a9d8f', fg="#f0efeb")
         label_title.grid(row=1, column=3, pady=10)
 
@@ -28,7 +34,7 @@ class MainWindow:
         def desunderline (label):
             label.config(font=("Arial", 20))
 
-        # label (sites)
+    # labels (sites)
         label1=Label(self.main_window, text="Sites optimisés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#656565')
         label1.grid(row=7, column=3, sticky=W)
         label2=Label(self.main_window, text="\twww.marmitton.org", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
@@ -49,24 +55,24 @@ class MainWindow:
         label5.bind('<Enter>', lambda x: underline(label5))
         label5.bind('<Leave>', lambda x: desunderline(label5))
 
-        # gitlab button
+    # gitlab button
         def open_gitlab():
             webbrowser.open_new("http://pedago-service.univ-lyon1.fr:2325/tfroute/div-phylo-alim")
         gitlab_button=Button(self.main_window, text="GitLab", font='button_font 20 bold', bg="#f0efeb", fg="#2a9d8f", width=10, command=open_gitlab)
         gitlab_button.grid(row=8, column=1)
 
-        # ucbl button
+    # ucbl button
         def open_ucbl():
             webbrowser.open_new("https://www.univ-lyon1.fr/")
         ucbl_button=Button(self.main_window, text="UCBL", font='button_font 20 bold', bg='#f0efeb', fg='#2a9d8f', width=10, command=open_ucbl)
         ucbl_button.grid(row=10,column=1)
 
-        # entry
+    # entry
         label_entry=Label(self.main_window, text="Entrez l'url d'une recette:", font=("Arial", 20, 'bold'), bg='#2a9d8f', fg='#f0efeb')
         label_entry.grid(row=3,column=3, pady=10)
         self.url_entry=Entry(self.main_window, font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb', width=40)
         self.url_entry.grid(row=4,column=3, pady=10)
-    
+    # grid
         main_window.grid_rowconfigure(0, weight=1)
         main_window.grid_rowconfigure(2, weight=1)
         main_window.grid_rowconfigure(6, weight=1)
@@ -76,11 +82,15 @@ class MainWindow:
         main_window.grid_columnconfigure(2, weight=1)
         main_window.grid_columnconfigure(4, weight=1)
 
-        # submit
+    # submit
         submit=Button(self.main_window, text = 'Entrer', font='Helvetica 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
         submit.grid(row=5,column=3)
 
     def test_domain (self):
+        '''
+        pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenetre pour afficher les resultats,
+        autrement il affiche une fenetre d'erreur.
+        '''
         url=self.url_entry.get()
         domain=""
         try:
@@ -93,34 +103,44 @@ class MainWindow:
             self.error_window()
     
     def error_window(self):
+        '''
+        Ouvre la fenetre d'erreur.
+        '''
         self.error=Toplevel(self.main_window)
         self.app=Error(self.error)
 
 
-    def results_window(self):    
+    def results_window(self): 
+        '''
+        Ouvre la fenetre des resultats.
+        '''   
         self.results = Toplevel(self.main_window)
-        self.app = Results(self.results)
+        self.app = Results(self.results, url_recipe=self.url_entry.get())
 
 class Error:
+    '''
+    Creation de la fenetre pour le message d'erreur.
+    '''
     def __init__(self, error_window):
         self.error_window=error_window
         
-        # window setting 
+    # window setting 
         error_window.title("Error")
         error_window.geometry("700x200")
         error_window.minsize(700,200)
         error_window.config(background="white")
 
-        # label
+    # label
         error_message=Label(self.error_window, text="L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correcte et réessayez", font='Arial 13 bold', bg='white')
         error_message.grid(row=1, column=1)
 
-        # close button
+    # close button
         def close ():
             error_window.destroy()
         close_button=Button(self.error_window, text="Fermer", command=close)
         close_button.grid(row=3, column=1)
 
+    # grid
         error_window.grid_rowconfigure(0, weight=1)
         error_window.grid_rowconfigure(2, weight=1)
         error_window.grid_rowconfigure(4, weight=1)
@@ -129,9 +149,54 @@ class Error:
 
 
 class Results:
-    def __init__(self, newWindow):
-        self.newWindow=newWindow
+    '''
+    Creation de la fenetre pour les resulats.
+    '''
+    def __init__(self, results_window, url_recipe):
+        self.results_window=results_window
+        self.url_recipe=url_recipe
     
+    # window setting 
+        results_window.title("Résultats")
+        results_window.geometry("1080x740")
+        results_window.minsize(700,200) #encore a voir
+        results_window.config(background="#A6D3A0")
+
+    #some fonctions
+        def open_site (url):
+            webbrowser.open_new(url)
+        def underline (label):
+            label.config(font=("Arial", 18, "underline"))
+        def desunderline (label):
+            label.config(font=("Arial", 18))
+
+
+    # recipe's name 
+        name_recipe=get_ing.get_title(self.url_recipe)
+        label1=Label(self.results_window, text="Nom de la recette: ", font='Arial 18', bg='#A6D3A0', fg="#656565")
+        label1.grid(row=1, column=1)
+        recipe=Label(self.results_window, text=name_recipe, font='Arial 18', bg='#A6D3A0', fg="#000000")
+        recipe.grid(row=1, column=2, sticky=W)
+        label2=Label(self.results_window, text="Site de la recette: ", font='Arial 18', bg='#A6D3A0', fg="#656565")
+        label2.grid(row=2, column=1)
+    # site
+        site=Label(self.results_window, text=self.url_recipe, font='Arial 18', bg='#A6D3A0', fg="#000000")
+        site.grid(row=2, column=2)
+        site.bind('<Button-1>', lambda x: open_site(self.url_recipe))
+        site.bind('<Enter>', lambda x: underline(site))
+        site.bind('<Leave>', lambda x: desunderline(site))
+
+        ingredients=get_ing.process(self.url_recipeurl)
+        species=ing_to_esp.recherche_globale(ingredients)
+    # missing species
+        string1="On a trouve" #completer
+        missing_species=Label(self.results_window, text=string1)
+print("\n" +str(nbspec)+ " species were found from the "+ str(nbing)+ " different ingredients.")
+
+    # grid
+        results_window.grid_columnconfigure(0, weight=1)
+        results_window.grid_columnconfigure(3, weight=1)
+        #results_window.grid_columnconfigure(6, weight=1)
 
 def main(): 
     root = Tk()
