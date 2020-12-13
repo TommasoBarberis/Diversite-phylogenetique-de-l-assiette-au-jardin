@@ -2,4 +2,9 @@ GUI :
 le bouton entrer de la mainwindow n'est pas bind avec la touche entrer du clavier
 
 main:
-il bug quand il y a une seule espece reconnue parmi les ingredients car c'est pas possible de generer le newick   
+il bug quand il y a une seule espece reconnue parmi les ingredients car c'est pas possible de generer le newick
+
+Nettoyage ingredients:
+il nettoie pas cuilleres a soupe de alors qu'il est bien dans la liste  
+
+il faudrait pouvoir generer le sous-arbre ete et l'arbre newick sans forcement ouvrir lifemap sur le broswer (de facon a laisser le choix a l'utilisateur) 

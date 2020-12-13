@@ -23,7 +23,7 @@ def getDefaultLineNumber(ingredient):
         
 def getNutInfo(ing,book):
     sheet = book.sheets()[0]
-    print(ing)
+    #print(ing)
     cpt = getDefaultLineNumber(ing.lower())
     found_in_book = False
     # ing = "Pomme de terre"
