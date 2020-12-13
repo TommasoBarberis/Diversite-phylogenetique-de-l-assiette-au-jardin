@@ -89,7 +89,7 @@ def process(url):
     elif domain == "www.cuisineaz.com" :
         ingredients = getCuisineaz(soup)
     else :
-        print("Invalid domain")
+        #print("Invalid domain")
         sys.exit(1)
     
     return ingredients
@@ -121,7 +121,7 @@ def getMarmiton(soup):
     # print(html_nb_unit)
     string_title = html_title[0].get_text()
     string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
-    print(string_title[1:])
+    #print(string_title[1:])
     qtt = [d.text for d in html_qtt]
     # print(qtt)
     for i in range(0,len(html_ing)) :

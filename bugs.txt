@@ -1,2 +1,5 @@
-GUI : 
-bouton Results ouvre une fenêtre vide
+GUI :
+le bouton entrer de la mainwindow n'est pas bind avec la touche entrer du clavier
+
+main:
+il bug quand il y a une seule espece reconnue parmi les ingredients car c'est pas possible de generer le newick   

@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 import webbrowser
 import get_ing
 import ing_to_esp
+import ing_properties
 #from PIL import Image, ImageTk
 
 class MainWindow:
@@ -186,17 +187,55 @@ class Results:
         site.bind('<Enter>', lambda x: underline(site))
         site.bind('<Leave>', lambda x: desunderline(site))
 
-        ingredients=get_ing.process(self.url_recipeurl)
+        ingredients=get_ing.process(self.url_recipe)
         species=ing_to_esp.recherche_globale(ingredients)
     # missing species
-        string1="On a trouve" #completer
-        missing_species=Label(self.results_window, text=string1)
-print("\n" +str(nbspec)+ " species were found from the "+ str(nbing)+ " different ingredients.")
+        string1="On a trouvé {} espèces pour les {} ingrédients.".format(len(species),len(ingredients))
+        missing_species1=Label(self.results_window, text=string1, font='Arial 18', bg='#A6D3A0', fg="#656565")
+        missing_species1.grid(row=3, column=1, sticky=W, columnspan=2)
+        missing_sp_list=missing_species(ingredients,species)
+        if not missing_lsp_ist[1]:
+            missing_species2=Label(self.results_window, text="Les ingrédients pour lesquels manque l’espèce sont:", font='Arial 18', bg='#A6D3A0', fg="#656565")
+            missing_species2.grid(row=4, column=1, sticky=W, columnspan=2)
+            for add, sp in enumerate(missing_sp_list[0]):
+                missing=Label(self.results_window, text="\t"+sp, font='Arial 18', bg='#A6D3A0', fg="#000000")
+                missing.grid(row=5+add, column=1, sticky=W)
+        else:
+            not_missing=Label(self.results_window, text="Aucune espèce manque", font='Arial 18', bg='#A6D3A0', fg="#000000")
+
+    # missing ingredients in nutritional db
+
+        string2="On a trouvé {} espèces pour les {} ingrédients.".format(len(species),len(ingredients))
 
     # grid
+        results_window.rowconfigure(0, weight=1)
+        results_window.rowconfigure(6+add, weight=1)
+
         results_window.grid_columnconfigure(0, weight=1)
         results_window.grid_columnconfigure(3, weight=1)
         #results_window.grid_columnconfigure(6, weight=1)
+
+def missing_species(ingredients, especes):
+    species_not_found = []
+    if len(ingredients) != len(especes) :
+        complete_spec = False
+        for key in ingredients:
+            if key not in especes and key[:-1] not in especes.keys():
+                species_not_found.append(key)
+    else : complete_spec = True
+    return (species_not_found, complete_spec)
+
+def missing_nutrition (ingredients):
+    dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
+    nbnut =len(dictionnaire_nutrition)
+    nut_not_found = []
+    if len(ingredients) != nbnut :
+        complete_nut = False
+        for key in ingredients:
+            if key.capitalize() not in dictionnaire_nutrition:
+                nut_not_found.append(key.capitalize())
+    else : complete_nut = True
+    return (nut_not_found, complete_nut)
 
 def main(): 
     root = Tk()

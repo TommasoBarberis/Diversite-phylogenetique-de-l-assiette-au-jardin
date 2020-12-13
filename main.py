@@ -15,15 +15,18 @@ dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
 nbing = len(ingredients)
 nbspec = len(especes)
 nbnut =len(dictionnaire_nutrition)
-species_not_found = []
 nut_not_found = []
 
-if nbing != nbspec :
-    complete_spec = False
-    for key in ingredients:
-        if key not in especes and key[:-1] not in especes.keys():
-            species_not_found.append(key)
-else : complete_spec = True
+def missing_species(ingredients, especes):
+    species_not_found = []
+    if nbing != nbspec :
+        complete_spec = False
+        for key in ingredients:
+            if key not in especes and key[:-1] not in especes.keys():
+                species_not_found.append(key)
+    else : complete_spec = True
+    return (species_not_found, complete_spec)
+
 
 if nbing != nbnut :
     complete_nut = False
@@ -37,11 +40,12 @@ else : complete_nut = True
 
 print("\n" +str(nbspec)+ " species were found from the "+ str(nbing)+ " different ingredients.")
 
-if not complete_spec :
+var=missing_species(ingredients, especes)
+if not var[1] :
     print("the missing species are :")
-    for missing in species_not_found:
+    for missing in var[0]:
         print("\t" + missing)
-
+        
 print("\n" +str(nbnut)+ " ingredients were found in the nutrition database ,from the "+ str(nbing)+ " different ingredients.")
 if not complete_nut :
     print("these ingredients are missing nutrition information :")
