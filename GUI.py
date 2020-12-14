@@ -9,7 +9,8 @@ import get_ing
 import ing_to_esp
 import ing_properties
 import get_lifeMap_subTree
-import os
+import pyperclip
+import get_dp
 #from PIL import Image, ImageTk
 
 class MainWindow:
@@ -38,14 +39,14 @@ class MainWindow:
             label.config(font=("Arial", 20))
 
     # labels (sites)
-        label1=Label(self.main_window, text="Sites optimisés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#656565')
+        label1=Label(self.main_window, text="Sites optimisés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#000000')
         label1.grid(row=7, column=3, sticky=W)
         label2=Label(self.main_window, text="\twww.marmitton.org", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
         label2.grid(row=8,column=3, sticky=W)
         label2.bind('<Button-1>', lambda x: open_site("https://www.marmiton.org/"))
         label2.bind('<Enter>', lambda x: underline(label2))
         label2.bind('<Leave>', lambda x: desunderline(label2))
-        label3=Label(self.main_window, text="Autres sites implementés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#656565')
+        label3=Label(self.main_window, text="Autres sites implementés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#000000')
         label3.grid(row=9, column=3, sticky=W)
         label4=Label(self.main_window, text="\twww.750g.com", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
         label4.grid(row=10, column=3, sticky=W)
@@ -61,13 +62,13 @@ class MainWindow:
     # gitlab button
         def open_gitlab():
             webbrowser.open_new("http://pedago-service.univ-lyon1.fr:2325/tfroute/div-phylo-alim")
-        gitlab_button=Button(self.main_window, text="GitLab", font='button_font 20 bold', bg="#f0efeb", fg="#2a9d8f", width=10, command=open_gitlab)
+        gitlab_button=Button(self.main_window, text="GitLab", font='arial 20 bold', bg="#f0efeb", fg="#2a9d8f", width=10, command=open_gitlab)
         gitlab_button.grid(row=8, column=1)
 
     # ucbl button
         def open_ucbl():
             webbrowser.open_new("https://www.univ-lyon1.fr/")
-        ucbl_button=Button(self.main_window, text="UCBL", font='button_font 20 bold', bg='#f0efeb', fg='#2a9d8f', width=10, command=open_ucbl)
+        ucbl_button=Button(self.main_window, text="UCBL", font='arial 20 bold', bg='#f0efeb', fg='#2a9d8f', width=10, command=open_ucbl)
         ucbl_button.grid(row=10,column=1)
 
     # entry
@@ -88,6 +89,7 @@ class MainWindow:
     # submit
         submit=Button(self.main_window, text = 'Entrer', font='Helvetica 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
         submit.grid(row=5,column=3)
+        self.main_window.bind('<Return>', lambda x: self.test_domain())
 
     def test_domain (self):
         '''
@@ -161,9 +163,13 @@ class Results:
     
     # window setting 
         results_window.title("Résultats")
-        results_window.geometry("1400x1000")
+        results_window.geometry("1400x900")
         results_window.minsize(1080,720)
-        results_window.config(background="#A6D3A0")
+        results_window.config(background="#C8BFC7")
+
+    # scrollbar
+        y_scroll=Scrollbar(self.results_window, orient=VERTICAL)
+        #y_scroll.grid(column=9)
 
     #some fonctions
         def open_site (url):
@@ -177,43 +183,43 @@ class Results:
     # recipe's name 
         name_recipe=get_ing.get_title(self.url_recipe)
         name_recipe=name_recipe[1:]
-        label1=Label(self.results_window, text="Nom de la recette: ", font='Arial 18', bg='#A6D3A0', fg="#656565")
+        label1=Label(self.results_window, text="Nom de la recette: ", font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
         label1.grid(row=1, column=1, sticky=W, columnspan=6)
-        recipe=Label(self.results_window, text=name_recipe, font='Arial 18', bg='#A6D3A0', fg="#000000")
+        recipe=Label(self.results_window, text=name_recipe, font='Arial 18', bg='#C8BFC7', fg="#000000")
         recipe.grid(row=1, column=3, sticky="NESW", columnspan=6)
     
         ingredients=get_ing.process(self.url_recipe)
         species=ing_to_esp.recherche_globale(ingredients)
     # missing species
         string1="{} espèces ont été trouvé pour les {} ingrédients.".format(len(species),len(ingredients))
-        missing_species1=Label(self.results_window, text=string1, font='Arial 18', bg='#A6D3A0', fg="#656565")
+        missing_species1=Label(self.results_window, text=string1, font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
         missing_species1.grid(row=3, column=1, sticky=W, columnspan=6)
         missing_sp_list=missing_species(ingredients,species)
         if not missing_sp_list[1]:
-            missing_species2=Label(self.results_window, text="Les ingrédients pour lesquels l’espèce manque:", font='Arial 18', bg='#A6D3A0', fg="#656565")
+            missing_species2=Label(self.results_window, text="Les ingrédients pour lesquels l’espèce manque:", font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
             missing_species2.grid(row=4, column=1, sticky=W, columnspan=6)
             save_row=5
             for add, sp in enumerate(missing_sp_list[0]):
                 save_row+=add
-                missing=Label(self.results_window, text="\t"+sp, font='Arial 18', bg='#A6D3A0', fg="#000000")
+                missing=Label(self.results_window, text="\t"+sp, font='Arial 18', bg='#C8BFC7', fg="#000000")
                 missing.grid(row=save_row, column=1, sticky=W, columnspan=6)
         else:
-            not_missing=Label(self.results_window, text="Aucune espèce manque", font='Arial 18', bg='#A6D3A0', fg="#000000")
+            not_missing=Label(self.results_window, text="Aucune espèce manque", font='Arial 18', bg='#C8BFC7', fg="#000000")
 
     # missing ingredients in nutritional db
         missing_ing_list=missing_nutrition(ingredients)
         string2="{}/{} ingrédients ont été trouvé dans la table Ciqual (base de données).".format(str(len(ingredients)-len(missing_ing_list[0])),len(ingredients))
-        missing_ing1=Label(self.results_window, text=string2, font='Arial 18', bg='#A6D3A0', fg="#656565")
+        missing_ing1=Label(self.results_window, text=string2, font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
         save_row+=1
         missing_ing1.grid(row=save_row, column=1, sticky=W, columnspan=6)
         if not missing_ing_list[1]: 
-            missing_ing2=Label(self.results_window, text="Ingrédients pour lesquels aucune information a été trouvé:", font='Arial 18', bg='#A6D3A0', fg="#656565")
+            missing_ing2=Label(self.results_window, text="Ingrédients pour lesquels aucune information a été trouvé:", font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
             save_row+=1
             missing_ing2.grid(row=save_row, column=1, sticky=W, columnspan=6)
             save_row+=1
             for add1, ing in enumerate(missing_ing_list[0]):
                 save_row+=add1
-                missing1=Label(self.results_window, text="\t"+ing, font='Arial 18', bg='#A6D3A0', fg="#000000")
+                missing1=Label(self.results_window, text="\t"+ing, font='Arial 18', bg='#C8BFC7', fg="#000000")
                 missing1.grid(row=save_row, column=1, sticky=W, columnspan=6)
 
     # table
@@ -222,50 +228,67 @@ class Results:
         save_row+=1
 
         for i in range(len(list_column)):
-            table_header=Label(self.results_window, text=list_column[i], font="Arial 16", bg='#A6D3A0', fg="#656565", justify=CENTER, relief=GROOVE, width=20)
+            table_header=Label(self.results_window, text=list_column[i], font="Arial 16", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=20)
             table_header.grid(row=save_row, column=1+i, sticky=W)
         for j in dict_row.keys():
             line=dict_row[j]
             save_row+=1
             for ind, k in enumerate(line):
-                table_cell=Label(self.results_window, text=k, font="Arial 16", bg='#A6D3A0', fg="#000000", justify=CENTER, relief=GROOVE, width=20, wraplength=300)
+                table_cell=Label(self.results_window, text=k, font="Arial 16", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=20, wraplength=300)
                 table_cell.grid(row=save_row, column=1+ind, sticky=W)
 
-    # buttons
         results_window.rowconfigure(save_row+1, weight=1)
         save_row+=2
+
+    # buttons
         def get_lifemap (especes):
             get_lifeMap_subTree.get_subTree(especes)
-        lifemap=Button(self.results_window, text="LifeMap Tree", font="helvetica 16 bold", bg='#808782', fg="#000000")
-        lifemap.grid(row=save_row, column=3)
+        lifemap=Button(self.results_window, text="LifeMap Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
+        lifemap.grid(row=save_row, column=3, pady=10, sticky=W)
         lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
         
-        results_window.rowconfigure(save_row+1, weight=1)
-        save_row+=2
+        save_row+=1
         
         def get_ete ():
             get_lifeMap_subTree.subtree_from_newick()
-        ete=Button(self.results_window, text="Ete Sub-tree", font="helvetica 16 bold", bg='#808782', fg="#000000")
-        ete.grid(row=save_row, column=3)
+        ete=Button(self.results_window, text="Ete Sub-tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
+        ete.grid(row=save_row, column=3, pady=10, sticky=W)
         ete.bind('<Button-1>', lambda x: get_ete())
 
-        results_window.rowconfigure(save_row+1, weight=1)
-        save_row+=2
+        save_row+=1
 
         def get_newick ():
             with open ("Tree.txt","r") as tree:
-                copy=tree.readlines()
-                
-        newick=Button(self.results_window, text="Newick Tree", font="helvetica 16 bold", bg='#808782', fg="#000000")
-        newick.grid(row=save_row, column=3)
+                newick_tree=str(tree.readlines())
+                pyperclip.copy(newick_tree)
+        newick=Button(self.results_window, text="Newick Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
+        newick.grid(row=save_row, column=3, pady=10, sticky=W)
         newick.bind('<Button-1>', lambda x: get_newick())
+
+        def enter_button():
+            label_info.config(text='Le bouton "Newick Tree" \npermet de recopier le sous-arbre \nde newick dans le clipboard')
+        def leave_button():
+            label_info.config(text="")
+        label_info=Label(self.results_window, text="", bg='#C8BFC7', fg="#8A7E72", width=40)
+        label_info.grid(row=save_row-1, column=4, columnspan=2, sticky=W)
+        newick_info=Button(self.results_window, text="?", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=2)
+        newick_info.grid(row=save_row, column=4, pady=10, sticky=W)
+        newick_info.bind('<Enter>', lambda x: enter_button())
+        newick_info.bind('<Leave>', lambda x: leave_button())
+
+    # DP
+        dp=get_dp.calculation("Tree.txt")
+        label6=Label(self.results_window, text="Diversité phylogénétique (en nb de branches):", font='Arial 14 bold', bg='#C8BFC7', fg="#8A7E72")
+        label6.grid(row=save_row-2, column=5, columnspan=3, sticky=W)
+        dp_label=Label(self.results_window, text=dp, font='Arial 18 bold', bg='#C8BFC7', fg="#090302", justify=CENTER, relief=RAISED, width=7, height=3)
+        dp_label.grid(row=save_row-1, column=5, columnspan=3)
 
     # grid
         results_window.rowconfigure(0, weight=1)
         results_window.rowconfigure(save_row+1, weight=1)
 
         results_window.grid_columnconfigure(0, weight=1)
-        results_window.grid_columnconfigure(2+ind, weight=1)
+        results_window.grid_columnconfigure(8, weight=1)
 
 def missing_species(ingredients, especes):
     species_not_found = []
