@@ -101,6 +101,20 @@ def getDictNutPond(dict_ing, dict_nut):
         #unités ????
         print("ingrédient : "+ ing + " og qtté = " +str(qtt) +" water_pond = " + str(wat_pond) + " gluc_pond = " + str(gluc_pond)+ " lip_pond = " + str(lip_pond)+ " suc_pond = " + str(suc_pond))
 
+def dryMatterDicUpdate(dict_ing, dict_nut):
+    
+    for ing in dict_ing : 
+        if ing.capitalize() in dict_nut and dict_ing[ing] != 0 :
+            wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
+            qtt = str(dict_ing[ing])
+            qtt  = float(qtt)
+            dry_matter = round(qtt - qtt * wat/100,2) 
+            dict_ing[ing] = dry_matter
+        else : 
+            dict_ing[ing] = "NA"
+
+
+
 def format_float(input_string):
     if "-" in input_string or "traces" in input_string:
         return 0
@@ -121,12 +135,13 @@ def nutPrinter(nut_dict):
 if __name__ == "__main__":
 
     dico = {'boule de pâte à pizza': 1.0, 'olive': 1.0, 'boule de mozzarella': 1.0, 'origan': 1.0, 'coulis de tomate': 300.0, 'jambon cru': 4.0, 'champignon de paris': 200.0, 'pâte à pizza': 1.0, 'boules de mozzarella': 2.0, 'coulis': 300.0, 'jambon': 4.0}
-    getDictNut(dico)
-    output = getDictNut(dico)
-    # for key in output :
-    #     if output[key] != []:
-    #         print(output[key])
+    dicnut = getDictNut(dico)
+    dryMatterDicUpdate(dico,dicnut)
+    print(dico)
+    # for key in dicnut :
+    #     print(key)
+    #     print(dicnut[key])
+
     # print(getNutInfo("Tomate",myBook))
     # nutPrinter(output)
-    getDictNutPond(dico,output)
-    getDefaultLineNumber("sel")
+    # getDictNutPond(dico,output)

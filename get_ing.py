@@ -5,76 +5,58 @@ from urllib.parse import urlparse
 import re
 import sys
 
-def clean(ing_input):
+def cleanAndPonderate(ing_comp_input):
+    ing_comp_output = ing_comp_input.copy()
     f = open("filtering/ing_filter_start.txt", "r")
     elem_list_start = f.read().splitlines()
     f2 = open("filtering/ing_filter_end.txt", "r")
     elem_list_end = f2.read().splitlines()
-    ingredient  = ing_input
-    for it in range(0,2) :
-        for line in elem_list_start:
-            if ingredient.startswith(line):
-                ingredient = ingredient[len(line):]
-        for line in elem_list_end:
-            if ingredient.endswith(line) :
-                ingredient = ingredient[:len(line)]
-    return ingredient
+    ingredient  = ing_comp_input[0]
+    for line in elem_list_start:
+        values = line.split("/")
+        if ingredient.startswith(values[0]):
+            ingredient = ingredient[len(values[0]):]
+            if len(values) >1 :
+                ing_comp_output[1] *= int(values[1])
+                ing_comp_output[2] = "True"
+                print('yo')
+            
+    for line in elem_list_end:
+        if ingredient.endswith(line) :
+            ingredient = ingredient[:len(line)]
+    ing_comp_output[0] = ingredient
+    return ing_comp_output
 
 #base units : g /  ml 
 def get_ing_only (ing_line):
     
-    comp =['',1]
-    ing = ing_line.lower()
+    ing_comp =['',1,False] # format : ["name", "quantity" , "ponderable"]
+    ing_comp[0]= ing_line.lower()
 
     #remove space before number
-    if ing.startswith(' ') :
-        ing = ing_line[1:]
+    if ing_comp[0].startswith(' ') :
+        ing_comp[0]= ing_comp[0][1:]
     
     #enlève la quantité si elle est présente au début de la ligne
-    temp = re.findall(r'\d+', ing) 
+    temp = re.findall(r'\d+', ing_comp[0]) 
     res = list(map(int, temp))
     if res != [] : 
-        ing = ing[(len(str(res[0]))):]
-        comp[1] = res[0]
-        if ing.startswith(',') :
-            ing = ing[(len(str(res[1]))+1):]
-            comp[1] = comp[1] + res[1]*0.1
+        ing_comp[0] = ing_comp[0][(len(str(res[0]))):]
+        ing_comp[1] = res[0]
+        if ing_comp[0].startswith(',') :
+            ing_comp[0] = ing_comp[0][(len(str(res[1]))+1):]
+            ing_comp[1] = ing_comp[1] + res[1]*0.1
             
     #remove space after number
-    if ing.startswith(' ') :
-        ing = ing[1:]
+    if ing_comp[0].startswith(' ') :
+        ing_comp[0] = ing_comp[0][1:]
 
     #comment gérer les qttés des doublons ?
-
-    if ing.startswith('l d\''):
-        ing = ing[4:]
-        comp[1] = comp[1]*1000
-    elif ing.startswith('l de'):
-        ing = ing[5:]
-        comp[1] = comp[1]*1000
-    elif ing.startswith('kg d\''):
-        ing = ing[5:]
-        comp[1] = comp[1]*1000
-    elif ing.startswith('kg de'):
-        ing = ing[6:]
-        comp[1] = comp[1]*1000
-    elif ing.startswith('mg d\''):
-        ing = ing[5:]
-        comp[1] =comp[1]*0.001
-    elif ing.startswith('mg de'):
-        ing = ing[6:]
-        comp[1] =comp[1]*0.001
-    elif ing.startswith('cl d\''):
-        ing = ing[5:]
-        comp[1] =comp[1]* 10
-    elif ing.startswith('cl de'):
-        ing = ing[6:]
-        comp[1] =comp[1]* 10
+        
+    output = cleanAndPonderate(ing_comp)
     
-    ing = clean(ing)
 
-    comp[0] = ing
-    return comp
+    return output
 
 def process(url):
 
@@ -110,7 +92,6 @@ def getMarmiton(soup):
     ingredients = {}
     og_ing = []
 
-    # print("recette marmiton")
     html_title = soup.findAll("h1",{"class":'main-title'}) 
     html_ing = soup.findAll('span',{"class":'ingredient'})
     html_qtt = soup.findAll('span',{"class":'recipe-ingredient-qt'}) 
@@ -133,8 +114,7 @@ def getMarmiton(soup):
             if "/" not in qtt[i]:
                 ingredients[ing[0]] = ing[1]*float(qtt[i])
             else: 
-                ingredients[ing[0]] = ing[1] 
-                pass
+                ingredients[ing[0]] = ing[1]*0.5
         else :
             ingredients[ing[0]] = ing[1] #useless ?
     return ingredients
@@ -183,6 +163,4 @@ def getCuisineaz(soup):
 if __name__ == "__main__":
 
     url = 'https://www.marmiton.org/recettes/recette_pizza-gaufree-au-fromage_347268.aspx'
-    print(process(url))
-    yo = 0
-    clean("g d'cuillères a café de eau")
+    print(get_title(url))

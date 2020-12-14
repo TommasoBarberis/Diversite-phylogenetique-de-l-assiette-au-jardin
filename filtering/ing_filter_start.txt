@@ -1,9 +1,17 @@
-g d'
-g de 
-ml d' 
-gros 
+g d'/1
+g de /1
+ml d'/1
+ml de /1
+l de /1000
+l d'/1000
+kg de /1000
+kg d'/1000
+mg d'/0.001
+mg de /0.001
+cl de /10
+cl d'/10
+gros /1
 sauce 
-ml de 
 pot de 
 jus de 
 pâte de 
