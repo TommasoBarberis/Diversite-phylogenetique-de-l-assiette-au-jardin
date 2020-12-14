@@ -11,6 +11,8 @@ import ing_properties
 import get_lifeMap_subTree
 import pyperclip
 import get_dp
+import get_NCBI_taxonomy
+from ete3 import NCBITaxa
 #from PIL import Image, ImageTk
 
 class MainWindow:
@@ -167,11 +169,7 @@ class Results:
         results_window.minsize(1080,720)
         results_window.config(background="#C8BFC7")
 
-    # scrollbar
-        y_scroll=Scrollbar(self.results_window, orient=VERTICAL)
-        #y_scroll.grid(column=9)
-
-    #some fonctions
+    #some functions
         def open_site (url):
             webbrowser.open_new(url)
         def underline (label):
@@ -179,14 +177,13 @@ class Results:
         def desunderline (label):
             label.config(font=("Arial", 18))
 
-
     # recipe's name 
         name_recipe=get_ing.get_title(self.url_recipe)
         name_recipe=name_recipe[1:]
         label1=Label(self.results_window, text="Nom de la recette: ", font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
         label1.grid(row=1, column=1, sticky=W, columnspan=6)
-        recipe=Label(self.results_window, text=name_recipe, font='Arial 18', bg='#C8BFC7', fg="#000000")
-        recipe.grid(row=1, column=3, sticky="NESW", columnspan=6)
+        recipe=Label(self.results_window, text=name_recipe, font='Arial 18', bg='#C8BFC7', fg="#000000", justify=LEFT)
+        recipe.grid(row=1, column=3, sticky=W, columnspan=6)
     
         ingredients=get_ing.process(self.url_recipe)
         species=ing_to_esp.recherche_globale(ingredients)
@@ -224,7 +221,7 @@ class Results:
 
     # table
         dict_row=table_row(ingredients, species)
-        list_column=["Ingrédient","Espèce","Quantité","Eau","Glucides","Lipides","Sucres"]
+        list_column=["Ingrédient","Espèce","Quantité","Eau (%)","Glucides (%)","Lipides (%)","Sucres (%)"]
         save_row+=1
 
         for i in range(len(list_column)):
@@ -248,7 +245,18 @@ class Results:
         lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
         
         save_row+=1
-        
+
+        list_ID = get_NCBI_taxonomy.get_taxid(species)
+        ncbi=NCBITaxa()
+        tree=ncbi.get_topology((list_ID), intermediate_nodes=True)
+        tree=tree.write(format=100, features=["sci_name"]).replace('[&&NHX:sci_name=','').replace(']','')
+        try:
+            os.remove("Tree.txt")
+        except :
+            pass
+        with open("Tree.txt","w") as Tree:
+            Tree.write(tree)
+
         def get_ete ():
             get_lifeMap_subTree.subtree_from_newick()
         ete=Button(self.results_window, text="Ete Sub-tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
@@ -283,12 +291,26 @@ class Results:
         dp_label=Label(self.results_window, text=dp, font='Arial 18 bold', bg='#C8BFC7', fg="#090302", justify=CENTER, relief=RAISED, width=7, height=3)
         dp_label.grid(row=save_row-1, column=5, columnspan=3)
 
+    # scrollbar
+
     # grid
         results_window.rowconfigure(0, weight=1)
         results_window.rowconfigure(save_row+1, weight=1)
 
         results_window.grid_columnconfigure(0, weight=1)
         results_window.grid_columnconfigure(8, weight=1)
+
+class AutoScrollbar(Scrollbar):
+    '''
+    A scrollbar that hides itself if it's not needed. Only works if you use the grid geometry manager.
+    '''
+    def set(self, lo, hi):
+        if float(lo) <= 0.0 and float(hi) >= 1.0:
+            # grid_remove is currently missing from Tkinter!
+            self.tk.call("grid", "remove", self)
+        else:
+            self.grid()
+        tk.Scrollbar.set(self, lo, hi)
 
 def missing_species(ingredients, especes):
     species_not_found = []

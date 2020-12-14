@@ -189,6 +189,7 @@ Brassica napus napus	Navette
 Brassica oleracea	Brocoli
 Brassica oleracea	Brocoli chinois
 Brassica oleracea	Chou
+Brassica oleracea	Choucroute
 Brassica oleracea	Chou cabus
 Brassica oleracea	Chou-fleur
 Brassica oleracea	Chou frisé
@@ -435,6 +436,7 @@ Juglans cinerea	noyer cendré
 Juglans nigra	noyer noir d'Amérique
 Juglans regia	Noyer commun
 Juglans regia	Noix
+Juniperus communis	Genièvre
 Katsuwonus pelamis	Thon
 Lablab purpureus	Pois de Senteur
 Lactuca sativa	Salade des jardins
@@ -730,6 +732,7 @@ Solanum melongena	Marignan
 Solanum melongena	Aubergine
 Solanum muricatum	Pepino
 Solanum tuberosum	Pomme de terre
+Solanum tuberosum	Pommes de terre
 Solanum tuberosum	Fécule
 Solea solea	Sole
 Sorbus aucuparia	Sorbier sauvage
@@ -781,12 +784,15 @@ Sus scrofa domesticus	Saucisson
 Sus scrofa domesticus	Poitrine de porc
 Sus scrofa domesticus	Filet mignon de porc
 Sus scrofa domesticus	Echine de porc
+Sus scrofa domesticus	Échine de porc
 Sus scrofa domesticus	Jambonneau de porc
 Sus scrofa domesticus	Jarret du porc
 Sus scrofa domesticus	Kakos
 Sus scrofa domesticus	Palette de porc
 Sus scrofa domesticus	Travers de porc
 Sus scrofa domesticus	Grillade porc
+Sus scrofa domesticus	Lard fumé
+Sus scrofa domesticus	Couenne
 Syzygium aromaticum	Girofle
 Syzygium aromaticum	Clou de girofle
 Syzygium cumini	Jamelonier
@@ -856,6 +862,7 @@ Vigna unguiculata sesquipedalis	Dolique asperge
 Vitis rotundifolia	Vigne à feuilles rondes
 Vitis rotundifolia	Raisin
 Vitis vinifera	Vigne Sauvage
+Vitis vinifera	Vin
 Wasabia japonica	Raifort Japonais
 Zea mays	blé d’Inde
 Zea mays	Maïs
