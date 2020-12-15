@@ -221,17 +221,39 @@ class Results:
 
     # table
         dict_row=table_row(ingredients, species)
-        list_column=["Ingrédient","Espèce","Quantité","Qté de matière sèche (g)","Glucides (%)","Lipides (%)","Sucres (%)","Protéines (%)"]
+        list_column=["Ingrédient","Espèce","Quantité","Qté de matière\n sèche (g)","Glucides (%)","Lipides (%)","Sucres (%)","Protéines (%)"]
         save_row+=1
 
         for i in range(len(list_column)):
-            table_header=Label(self.results_window, text=list_column[i], font="Arial 16", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=20)
+            if i==2:
+                table_header=Label(self.results_window, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=11, height=3)
+            elif i==3:
+                table_header=Label(self.results_window, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=16, height=3)
+            elif i==4:
+                table_header=Label(self.results_window, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=14, height=3)
+            elif i==5:
+                table_header=Label(self.results_window, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=14, height=3)
+            elif i==6:
+                table_header=Label(self.results_window, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=13, height=3)
+            else:
+                table_header=Label(self.results_window, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=18, height=3) 
             table_header.grid(row=save_row, column=1+i, sticky=W)
         for j in dict_row.keys():
             line=dict_row[j]
             save_row+=1
             for ind, k in enumerate(line):
-                table_cell=Label(self.results_window, text=k, font="Arial 16", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=20, wraplength=300)
+                if ind==2:
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=11, wraplength=300)
+                elif ind==3:
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=16, wraplength=300)
+                elif ind==4:
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300)
+                elif ind==5:
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300)
+                elif ind==6:
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=13, wraplength=300)
+                else:
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=18, wraplength=300)
                 table_cell.grid(row=save_row, column=1+ind, sticky=W)
 
         #results_window.rowconfigure(save_row+1, weight=1)
@@ -244,7 +266,7 @@ class Results:
             label_photo_info.config(text="")
         photo=PhotoImage(file = r"download_arrow.png")
         sub_photo=photo.subsample(7,7)
-        download=Button(self.results_window, image=sub_photo,  bg='#8A7E72', width=50, height=50, command=self.download_button)
+        download=Button(self.results_window, image=sub_photo,  bg='#8A7E72', width=40, height=40, command=self.download_button)
         download.image=sub_photo
         download.grid(row=save_row-1, column=0, pady=10, columnspan=3)
         download.bind('<Enter>', lambda x: enter_download())
@@ -255,7 +277,7 @@ class Results:
         def get_lifemap (especes):
             get_lifeMap_subTree.get_subTree(especes)
         lifemap=Button(self.results_window, text="LifeMap Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
-        lifemap.grid(row=save_row, column=3, pady=10, sticky=W)
+        lifemap.grid(row=save_row, column=3, pady=10, sticky=W, columnspan=2)
         lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
         
         save_row+=1
@@ -274,7 +296,7 @@ class Results:
         def get_ete ():
             get_lifeMap_subTree.subtree_from_newick()
         ete=Button(self.results_window, text="Ete Sub-tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
-        ete.grid(row=save_row, column=3, pady=10, sticky=W)
+        ete.grid(row=save_row, column=3, pady=10, sticky=W, columnspan=2)
         ete.bind('<Button-1>', lambda x: get_ete())
 
         save_row+=1
@@ -284,7 +306,7 @@ class Results:
                 newick_tree=str(tree.readlines())
                 pyperclip.copy(newick_tree)
         newick=Button(self.results_window, text="Newick Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
-        newick.grid(row=save_row, column=3, pady=10, sticky=W)
+        newick.grid(row=save_row, column=3, pady=10, sticky=W, columnspan=2)
         newick.bind('<Button-1>', lambda x: get_newick())
 
         def enter_button():
@@ -292,18 +314,18 @@ class Results:
         def leave_button():
             label_info.config(text="")
         label_info=Label(self.results_window, text="", bg='#C8BFC7', fg="#8A7E72", width=40)
-        label_info.grid(row=save_row-1, column=4, columnspan=2, sticky=W)
+        label_info.grid(row=save_row, column=5, columnspan=3, sticky=W)
         newick_info=Button(self.results_window, text="?", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=2)
-        newick_info.grid(row=save_row, column=4, pady=10, sticky=W)
+        newick_info.grid(row=save_row, column=4, pady=10, sticky=E)
         newick_info.bind('<Enter>', lambda x: enter_button())
         newick_info.bind('<Leave>', lambda x: leave_button())
 
     # DP
         dp=get_dp.calculation("Tree.txt")
         label6=Label(self.results_window, text="Diversité phylogénétique (en nb de branches):", font='Arial 14 bold', bg='#C8BFC7', fg="#8A7E72")
-        label6.grid(row=save_row-2, column=5, columnspan=3, sticky=W)
+        label6.grid(row=save_row-2, column=5, columnspan=4, sticky=W)
         dp_label=Label(self.results_window, text=dp, font='Arial 18 bold', bg='#C8BFC7', fg="#090302", justify=CENTER, relief=RAISED, width=7, height=3)
-        dp_label.grid(row=save_row-1, column=5, columnspan=3)
+        dp_label.grid(row=save_row-1, column=5, columnspan=4)
 
     # grid
         results_window.rowconfigure(0, weight=1)
@@ -352,12 +374,15 @@ class Download:
         dico_nut=ing_properties.getDictNut(ingredients)
         dry_dico=ing_properties.dryMatterDicUpdate(ingredients, dico_nut)
 
-        def action ():
-            ing_properties.writeTsv(file_name.get(),ingredients,species,dry_dico,dico_nut)
+        def action (file_name):
+            file_name=file_name.get()
+            if not file_name.endswith(".tsv"):
+                file_name+=".tsv"
+            ing_properties.writeTsv(file_name,ingredients,species,dry_dico,dico_nut)
             self.download_window.destroy()
         confirm_button=Button(self.download_window, text="Enregistrer", font="arial 11", width=10)
         confirm_button.grid(row=4, column=1)
-        confirm_button.bind("<Button-1>", lambda x: action())
+        confirm_button.bind("<Button-1>", lambda x: action(file_name))
 
         download_window.grid_rowconfigure(5, weight=1)
         download_window.grid_columnconfigure(0, weight=1)
