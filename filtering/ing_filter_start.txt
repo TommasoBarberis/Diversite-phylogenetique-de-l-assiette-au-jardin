@@ -16,13 +16,12 @@ pot de
 jus de 
 pâte de 
 pate de 
-huile d'
-brin de 
+brin de /5
 blanc d'
 jaune d'
 boîte d' 
-verre de 
-gousse d'
+verre de /240
+gousse d'/8
 poudre d'
 zeste de 
 bâton de 
@@ -30,45 +29,44 @@ blancs d'
 jaunes d'
 boite de 
 boîte de 
-gousses d'
-verres de 
-sachet de 
+gousses d'/8
+verres de /240
+sachet de /10
 copeau de 
 paquet de 
-pincée de 
-gousse de 
-feuille de 
+pincée de /3
+gousse de /8
+feuille de /2
 rouleau de 
 branche de 
-cuillère d'
-poignée de 
-gousses de 
+cuillère d'/10
+poignée de /50
+gousses de /8
 copeaux de 
 bouquet de 
-tranche de 
-feuilles de 
-noisette de 
-tranches de 
+tranche de /10
+feuilles de /2
+tranches de /10
 marmelade d'
-cuillère de 
-cuillères d'
-bouquets de 
-cuillères de 
+cuillère de /10
+cuillères d'/10
+bouquets de /10
+cuillères de /10
 concentré de 
-noisette de 
-tranche de 
-petit verre de 
-petit morceau de 
-d' cuillère a café d'
-cuillère à soupe d'
-petits morceaux de 
-cuillère a soupe d'
-cuillère à café de 
-cuillère a café de 
-cuillères à café d'
-cuillères à soupe d'
-cuillères a soupe d'
-cuillères à café de 
-cuillères a café de 
-cuillère à soupe de 
-cuillère a soupe de 
+noisette de /8
+tranche de /10
+petit verre de /120
+petit morceau de /4
+cuillère a café d'/4
+cuillère à soupe d'/10
+petits morceaux de /4
+cuillère a soupe d'/10
+cuillère à café de /4
+cuillère a café de /4
+cuillères à café d'/4
+cuillères à soupe d'/10
+cuillères a soupe d'/10
+cuillères à café de /4
+cuillères a café de /4
+cuillère à soupe de /10
+cuillère a soupe de /10
