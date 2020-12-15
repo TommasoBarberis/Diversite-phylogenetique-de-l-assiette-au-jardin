@@ -164,7 +164,7 @@ class Results:
     
     # window setting 
         results_window.title("Résultats")
-        results_window.geometry("1400x900")
+        results_window.geometry("1600x900")
         results_window.minsize(1080,720)
         results_window.config(background="#C8BFC7")
 
@@ -221,7 +221,7 @@ class Results:
 
     # table
         dict_row=table_row(ingredients, species)
-        list_column=["Ingrédient","Espèce","Quantité","Eau (%)","Glucides (%)","Lipides (%)","Sucres (%)"]
+        list_column=["Ingrédient","Espèce","Quantité","Qté de matière sèche (g)","Glucides (%)","Lipides (%)","Sucres (%)","Protéines (%)"]
         save_row+=1
 
         for i in range(len(list_column)):
@@ -234,7 +234,7 @@ class Results:
                 table_cell=Label(self.results_window, text=k, font="Arial 16", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=20, wraplength=300)
                 table_cell.grid(row=save_row, column=1+ind, sticky=W)
 
-        results_window.rowconfigure(save_row+1, weight=1)
+        #results_window.rowconfigure(save_row+1, weight=1)
         save_row+=2
 
     # buttons
@@ -244,7 +244,7 @@ class Results:
             label_photo_info.config(text="")
         photo=PhotoImage(file = r"download_arrow.png")
         sub_photo=photo.subsample(7,7)
-        download=Button(self.results_window, image=sub_photo,  bg='#8A7E72', width=40, height=40, command=self.download_button)
+        download=Button(self.results_window, image=sub_photo,  bg='#8A7E72', width=50, height=50, command=self.download_button)
         download.image=sub_photo
         download.grid(row=save_row-1, column=0, pady=10, columnspan=3)
         download.bind('<Enter>', lambda x: enter_download())
@@ -405,7 +405,7 @@ def table_row (ingredients, especes):
                 else:
                     list_row.append(val)
         else:
-            for k in range(4):
+            for k in range(5):
                 list_row.append("-")
         dict_row[ing]=list_row
     return dict_row
