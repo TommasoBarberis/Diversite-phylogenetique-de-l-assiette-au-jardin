@@ -57,8 +57,8 @@ def recherche_globale (dicto_ing):
         liste_ing.append(k)
     etape1=search_in_dict(correspondences, dicto_esp, liste_ing)    
     dicto_final=with_endswith(correspondences,etape1, liste_ing)
-    # etape2=with_endswith(correspondences,etape1, liste_ing)
-    # dicto_final=by_fields(correspondences, etape2, liste_ing)
+    #etape2=with_endswith(correspondences,etape1, liste_ing)
+    #dicto_final=by_fields(correspondences, etape2, liste_ing)
     return dicto_final
 
 

@@ -2,6 +2,7 @@
 
 from tkinter import *
 from tkinter import font
+from tkinter import ttk
 import requests
 from urllib.parse import urlparse
 import webbrowser
@@ -13,7 +14,6 @@ import pyperclip
 import get_dp
 import get_NCBI_taxonomy
 from ete3 import NCBITaxa
-#from PIL import Image, ImageTk
 
 class MainWindow:
     '''
@@ -89,9 +89,9 @@ class MainWindow:
         main_window.grid_columnconfigure(4, weight=1)
 
     # submit
-        submit=Button(self.main_window, text = 'Entrer', font='Helvetica 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
+        submit=Button(self.main_window, text = 'Entrer', font='arial 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
         submit.grid(row=5,column=3)
-        self.main_window.bind('<Return>', lambda x: self.test_domain())
+        self.main_window.bind('<Return>', lambda x: self.test_domain()) #ne marche pas
 
     def test_domain (self):
         '''
@@ -154,7 +154,6 @@ class Error:
         error_window.grid_columnconfigure(0, weight=1)
         error_window.grid_columnconfigure(2, weight=1)
 
-
 class Results:
     '''
     Creation de la fenetre pour les resulats.
@@ -187,6 +186,7 @@ class Results:
     
         ingredients=get_ing.process(self.url_recipe)
         species=ing_to_esp.recherche_globale(ingredients)
+
     # missing species
         string1="{} espèces ont été trouvé pour les {} ingrédients.".format(len(species),len(ingredients))
         missing_species1=Label(self.results_window, text=string1, font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
@@ -238,6 +238,20 @@ class Results:
         save_row+=2
 
     # buttons
+        def enter_download():
+            label_photo_info.config(text='Télécharger le tableau au format tsv')
+        def leave_download():
+            label_photo_info.config(text="")
+        photo=PhotoImage(file = r"download_arrow.png")
+        sub_photo=photo.subsample(7,7)
+        download=Button(self.results_window, image=sub_photo,  bg='#8A7E72', width=40, height=40, command=self.download_button)
+        download.image=sub_photo
+        download.grid(row=save_row-1, column=0, pady=10, columnspan=3)
+        download.bind('<Enter>', lambda x: enter_download())
+        download.bind('<Leave>', lambda x: leave_download())
+        label_photo_info=Label(self.results_window, text="", bg='#C8BFC7', fg="#8A7E72")
+        label_photo_info.grid(row=save_row, column=1, columnspan=2, sticky=N)
+
         def get_lifemap (especes):
             get_lifeMap_subTree.get_subTree(especes)
         lifemap=Button(self.results_window, text="LifeMap Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
@@ -291,8 +305,6 @@ class Results:
         dp_label=Label(self.results_window, text=dp, font='Arial 18 bold', bg='#C8BFC7', fg="#090302", justify=CENTER, relief=RAISED, width=7, height=3)
         dp_label.grid(row=save_row-1, column=5, columnspan=3)
 
-    # scrollbar
-
     # grid
         results_window.rowconfigure(0, weight=1)
         results_window.rowconfigure(save_row+1, weight=1)
@@ -300,17 +312,56 @@ class Results:
         results_window.grid_columnconfigure(0, weight=1)
         results_window.grid_columnconfigure(8, weight=1)
 
-class AutoScrollbar(Scrollbar):
+    def download_button (self):
+        self.file_name_window()
+
+    def file_name_window(self):
+        '''
+        Ouvre la fenetre pour nommer le fichier qui aura le tableau au format tsv.
+        '''
+        self.download=Toplevel(self.results_window)
+        self.app=Download(self.download, url_recipe=self.url_recipe)
+
+class Download:
     '''
-    A scrollbar that hides itself if it's not needed. Only works if you use the grid geometry manager.
+    Creation de la fenetre qui permet de rentrer le nom du fichier dans lequel on souhaite telecharger le tableau au format csv ou tsv.
     '''
-    def set(self, lo, hi):
-        if float(lo) <= 0.0 and float(hi) >= 1.0:
-            # grid_remove is currently missing from Tkinter!
-            self.tk.call("grid", "remove", self)
-        else:
-            self.grid()
-        tk.Scrollbar.set(self, lo, hi)
+    def __init__(self, download_window, url_recipe):
+        self.download_window=download_window
+        self.url_recipe=url_recipe
+        
+    # window setting 
+        download_window.title("Enregistrement")
+        download_window.geometry("700x200")
+        download_window.minsize(800,200)
+        download_window.config(background="#C8BFC7")
+        download_window.grid_rowconfigure(0, weight=1)
+
+    # introducing label
+        intro_label=Label(self.download_window, text="Le fichier sera enregistré dans le répertoire contenant le programme au format tsv.\nChoississez le nom du fichier:", font="arial 11", bg="#C8BFC7", justify=CENTER)
+        intro_label.grid(row=1, column=1)
+    # file name entry
+        file_name=Entry(self.download_window, font="arial 11", width=40)
+        file_name.grid(row=2, column=1)
+
+        download_window.grid_rowconfigure(3, weight=1)
+
+    # confirm button
+        ingredients=get_ing.process(self.url_recipe)
+        species=ing_to_esp.recherche_globale(ingredients)
+        dico_nut=ing_properties.getDictNut(ingredients)
+        dry_dico=ing_properties.dryMatterDicUpdate(ingredients, dico_nut)
+
+        def action ():
+            ing_properties.writeTsv(file_name.get(),ingredients,species,dry_dico,dico_nut)
+            self.download_window.destroy()
+        confirm_button=Button(self.download_window, text="Enregistrer", font="arial 11", width=10)
+        confirm_button.grid(row=4, column=1)
+        confirm_button.bind("<Button-1>", lambda x: action())
+
+        download_window.grid_rowconfigure(5, weight=1)
+        download_window.grid_columnconfigure(0, weight=1)
+        download_window.grid_columnconfigure(2, weight=1)
 
 def missing_species(ingredients, especes):
     species_not_found = []
