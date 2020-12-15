@@ -94,7 +94,7 @@ def get_newick(especes):
     with open("Tree.txt","w") as tree:
         tree.write(str(driver.find_element_by_xpath('//*[@id="TreeTextarea"]').get_attribute("value")))
     driver.find_element_by_xpath('//*[@id="ModalTreeFormat"]/div/div/div[4]/div/div[2]/button').click()
-    driver.close()
+    #driver.close()
 
 
 def subtree_from_newick():
