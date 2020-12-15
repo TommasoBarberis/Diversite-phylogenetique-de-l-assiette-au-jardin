@@ -90,7 +90,7 @@ def get_newick(especes):
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][2]/div[@class='radio'][2]/label/input"))).click()
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][3]/div[@class='radio'][2]/label/input"))).click()
     #time.sleep(5)
-    driver.minimize_window()
+    #driver.minimize_window()
     with open("Tree.txt","w") as tree:
         tree.write(str(driver.find_element_by_xpath('//*[@id="TreeTextarea"]').get_attribute("value")))
     driver.find_element_by_xpath('//*[@id="ModalTreeFormat"]/div/div/div[4]/div/div[2]/button').click()
