@@ -1,5 +1,5 @@
 import xlrd
-
+import csv
 # name : 7 
 # water % : 13
 # glucides % 16
@@ -63,11 +63,13 @@ def getNutInfo(ing,book):
         for cel in sheet.row(cpt) :
             nut_info.append(cel.value)
 
-        final_nut_info.append(nut_info[7])
-        final_nut_info.append(nut_info[13])
-        final_nut_info.append(nut_info[16])
-        final_nut_info.append(nut_info[17])
-        final_nut_info.append(nut_info[18])
+        final_nut_info.append(nut_info[7]) #name
+        final_nut_info.append(nut_info[13]) #water
+        final_nut_info.append(nut_info[16]) #glucides
+        final_nut_info.append(nut_info[17]) #lipides
+        final_nut_info.append(nut_info[18]) #sucres
+        final_nut_info.append(nut_info[14]) #protéines
+
     return final_nut_info
 
 #{"ingredient" : [db_name,water_qtt,glucide,lipides,sucres]}
@@ -102,16 +104,21 @@ def getDictNutPond(dict_ing, dict_nut):
         print("ingrédient : "+ ing + " og qtté = " +str(qtt) +" water_pond = " + str(wat_pond) + " gluc_pond = " + str(gluc_pond)+ " lip_pond = " + str(lip_pond)+ " suc_pond = " + str(suc_pond))
 
 def dryMatterDicUpdate(dict_ing, dict_nut):
-    
+    dry_matter_dict = {}
     for ing in dict_ing : 
-        if ing.capitalize() in dict_nut and dict_ing[ing] != 0 :
-            wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
+        if ing.capitalize() in dict_nut and dict_ing[ing] != 0 and dict_nut[ing.capitalize()][1] != '-':
+            if "<" in dict_nut[ing.capitalize()][1] :
+                wat = float(format_float(str(dict_nut[ing.capitalize()][1][2:])))
+            else :
+                wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
             qtt = str(dict_ing[ing])
             qtt  = float(qtt)
             dry_matter = round(qtt - qtt * wat/100,2) 
-            dict_ing[ing] = dry_matter
+            dry_matter_dict[ing] = dry_matter
         else : 
-            dict_ing[ing] = "NA"
+            dry_matter_dict[ing] = "NA"
+
+    return dry_matter_dict
 
 
 
@@ -131,13 +138,45 @@ def nutPrinter(nut_dict):
 
                 print('{:10.15}'.format(element), end= "\t \t")
             print("")
+    #    def writeTsv(file_name,dico_ing,dico_matier_seche, dico_nut, dico_especes): 
+
+def writeTsv(file_name,dico_ing,dico_especes,dry_matter_dico,dico_nut):
+    ing_list = list(dico_ing.keys())
+    list_column=["Ingrédient","Espèce","Quantité ","Matière sèche (g)","Glucides (%)","Lipides (%)","Sucres (%)" ,"Protéines, N x facteur de Jones (%)"]
+    with open(file_name, 'w', newline='') as tsvfile:
+        for element in list_column :
+            tsvfile.write(element)
+            tsvfile.write("\t")
+        tsvfile.write("\n")
+        for ing in ing_list:
+            tsvfile.write(ing)
+            tsvfile.write("\t")
+            ing_cap = ing.capitalize() 
+            if ing in dico_especes :
+                tsvfile.write(dico_especes[ing])
+            else :
+                tsvfile.write("-")
+            tsvfile.write("\t")
+            tsvfile.write(str(dico_ing[ing]))
+            tsvfile.write("\t")
+            tsvfile.write(str(dry_matter_dico[ing]))
+            tsvfile.write("\t")
+            if ing_cap in dico_nut :
+                for i in range(2,len(dico_nut[ing_cap])) :
+                    tsvfile.write(dico_nut[ing_cap][i])
+                    tsvfile.write("\t")
+            else :
+                tsvfile.write("-\t-\t-\t-")
+            tsvfile.write("\n")
+
 
 if __name__ == "__main__":
 
     dico = {'boule de pâte à pizza': 1.0, 'olive': 1.0, 'boule de mozzarella': 1.0, 'origan': 1.0, 'coulis de tomate': 300.0, 'jambon cru': 4.0, 'champignon de paris': 200.0, 'pâte à pizza': 1.0, 'boules de mozzarella': 2.0, 'coulis': 300.0, 'jambon': 4.0}
     dicnut = getDictNut(dico)
-    dryMatterDicUpdate(dico,dicnut)
-    print(dico)
+    drymatterdico =dryMatterDicUpdate(dico,dicnut)
+    print(drymatterdico)
+
     # for key in dicnut :
     #     print(key)
     #     print(dicnut[key])

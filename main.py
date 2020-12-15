@@ -35,6 +35,8 @@ if nbing != nbnut :
             nut_not_found.append(key.capitalize())
 else : complete_nut = True
 
+dry_matter_dict = ing_properties.dryMatterDicUpdate(ingredients,dictionnaire_nutrition)
+ing_properties.writeTsv("new.tsv",ingredients,especes,dry_matter_dict,dictionnaire_nutrition)
 
 ######## printting part ########
 

@@ -19,7 +19,6 @@ def cleanAndPonderate(ing_comp_input):
             if len(values) >1 :
                 ing_comp_output[1] *= int(values[1])
                 ing_comp_output[2] = "True"
-                print('yo')
             
     for line in elem_list_end:
         if ingredient.endswith(line) :
