@@ -26,6 +26,7 @@ Abricot/055
 Ananas/2000
 Banane/150
 Citron/100
+Endive/100
 Clémentine/70
 Datte/35
 Figue noire/50
@@ -37,3 +38,13 @@ Poire/120
 Pomme/200
 Oeuf/55
 Biscuit/9
+Cuisse de poulet/310
+Pilon de poulet/100
+bifteck/125
+Faux-filet/165
+Entrecôte/200
+Steaks hachés/110
+Côte d’agneau/90
+Filet d’agneau/90
+Gigot/145
+Foie/135

@@ -30,7 +30,7 @@ def cleanAndPonderate(ing_comp_input):
         default_mass_list = f3.read().splitlines()
         for ing in default_mass_list :
             ingandmass = ing.split("/")
-            score = similar(ingandmass[0],ing_comp_input[0].capitalize())
+            score = similar(ingandmass[0].lower(),ing_comp_input[0])
             if score >= similarity_threshold :
                 # print(str(ingandmass[0]) +" / " + str(ing_comp_input[0])+ " / score : " + str(score) )
                 ing_comp_output[1] *= float(ingandmass[1])
@@ -128,8 +128,10 @@ def getMarmiton(soup):
         # print(ing_line)
         og_ing.append(ing_line)
         ing = get_ing_only(ing_line)
-        if ing[2]: 
-            if "/" not in qtt[i]:
+        if ing[2] : 
+            if qtt[i] == "" :
+                qtt[i] =1
+            if "/" not in str(qtt[i]):
                 ingredients[ing[0]] = int(ing[1])*float(qtt[i])
             else: 
                 ingredients[ing[0]] = ing[1]*0.5

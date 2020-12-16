@@ -19,7 +19,7 @@ pate de
 brin de /5
 blanc d'
 jaune d'
-boîte d' 
+boîte d' /250
 verre de /240
 gousse d'/8
 poudre d'
@@ -27,8 +27,8 @@ zeste de
 bâton de 
 blancs d'
 jaunes d'
-boite de 
-boîte de 
+boite de /250
+boîte de /250
 gousses d'/8
 verres de /240
 sachet de /10
@@ -53,7 +53,8 @@ cuillères d'/10
 bouquets de /10
 cuillères de /10
 concentré de 
-noisette de /8
+noisette de /4
+noix de /15
 tranche de /10
 petit verre de /120
 petit morceau de /4
