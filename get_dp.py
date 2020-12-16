@@ -1,28 +1,51 @@
 from collections import Counter
 
+def length_root_to_knot (path):
+  """Permet de construire un dictionnaire qui contient comme cle chaque noeud de l'arbre phylogenetique et comme valeur
+  la distance en nb de branches entre la racine et le noeud.
+  """
+  f=open(path, "r", encoding="utf8")
+  tree=f.read()
+  tree=tree.replace('[','').replace(']','').replace("'","").replace(';','')
+  dp=0
+  sp=""
+  c=1
+  iterator=0
+  dico_lengths={}
+  for ind,char in enumerate(tree):
+    if char==",":
+      c+=1
+    if char=="(":
+      iterator+=1
+    elif char==")" or char==",":
+      iterator-=1
+      if sp!="":
+        dico_lengths[sp]=iterator+c
+        sp=""
+    elif char!="(" and char!=")" and char!=",":
+      sp+=char
+  return dico_lengths
 
-def calculation (path):
-    """Permet de calculer la diversité phylogénétique d'une recette. Cela est calculée en comptant le nb de branches
-    qui constituent le sous-arbre le plus petit possible correspondant aux espèces des ingrédients. Les branches sont
-    comptes à partir de l'arbre au format Newick (format texte qui permet la représentation des arbres) en comptant 
-    la fréquence de certains caractères, tels que '(' et ')'.
-    """
-    try:
-        f=open(path, "r", encoding="utf8")
-        tree=f.read()
-        lines=tree.split(",")
-        dp=0
-        for line in lines:
-            if line == lines[-1]:
-                frequency=Counter(line)
-                nb=frequency['(']
-                dp+=nb
-            else:
-                frequency=Counter(line)
-                nb=frequency[')']+1
-                dp+=nb
-        dp+=1
-        f.close()
-        return dp
-    except:
-        pass
+def filter_dico_lengths (path,species):
+  dico_lengths=length_root_to_knot(path)
+  new_dico={}
+  for knot in dico_lengths.keys():
+    if knot in species.values():
+      new_dico[knot]=dico_lengths[knot]
+  return new_dico
+
+def phylogenetic_diversity (path, species):
+  dico=filter_dico_lengths(path, species)
+  pd=0
+  for i in dico:
+    pd+=dico[i]
+  return pd
+
+def weighted_phylogenetic_diversity (path, species, dict_sp_drym):
+  dico=filter_dico_lengths(path, species)
+  wpd=0
+  for i in dico:
+    wpd+=(dico[i]*dict_sp_drym[i])
+  return wpd
+
+

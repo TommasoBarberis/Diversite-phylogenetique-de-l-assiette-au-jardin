@@ -216,16 +216,16 @@ class Results:
         missing_species1=Label(main_frame, text=string1, font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
         missing_species1.grid(row=3, column=1, sticky=W, columnspan=6)
         missing_sp_list=missing_species(ingredients,species)
+        save_row=5
         if not missing_sp_list[1]:
             missing_species2=Label(main_frame, text="Les ingrédients pour lesquels l’espèce manque:", font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
             missing_species2.grid(row=4, column=1, sticky=W, columnspan=6)
-            save_row=5
             for add, sp in enumerate(missing_sp_list[0]):
                 save_row+=add
                 missing=Label(main_frame, text="\t"+sp, font='Arial 18', bg='#C8BFC7', fg="#000000")
                 missing.grid(row=save_row, column=1, sticky=W, columnspan=6)
         else:
-            not_missing=Label(main_frame, text="Aucune espèce manque", font='Arial 18', bg='#C8BFC7', fg="#000000")
+            not_missing=Label(main_frame, text="Aucune espèce manque", font='Arial 18', bg='#C8BFC7', fg="#000000").grid(row=save_row, column=1, sticky=W, columnspan=6)
 
     # missing ingredients in nutritional db
         missing_ing_list=missing_nutrition(ingredients)
@@ -337,18 +337,40 @@ class Results:
         def leave_button():
             label_info.config(text="")
         label_info=Label(main_frame, text="", bg='#C8BFC7', fg="#8A7E72", width=40)
-        label_info.grid(row=save_row, column=5, columnspan=3, sticky=W)
+        label_info.grid(row=save_row+1, column=4, columnspan=3, sticky=NSEW)
         newick_info=Button(main_frame, text="?", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=2)
         newick_info.grid(row=save_row, column=4, pady=10, sticky=E)
         newick_info.bind('<Enter>', lambda x: enter_button())
         newick_info.bind('<Leave>', lambda x: leave_button())
 
     # DP
-        dp=get_dp.calculation("Tree.txt")
-        label6=Label(main_frame, text="Diversité phylogénétique (en nb de branches):", font='Arial 14 bold', bg='#C8BFC7', fg="#8A7E72")
-        label6.grid(row=save_row-2, column=5, columnspan=4, sticky=W)
+            
+        dp=get_dp.phylogenetic_diversity("Tree.txt", species)
+        label6=Label(main_frame, text="Diversité phylogénétique (en nb de branches):", font='Arial 14 bold', bg='#C8BFC7', fg="#8A7E72", justify=CENTER)
+        label6.grid(row=save_row-2, column=5, columnspan=4, sticky=NSEW)
         dp_label=Label(main_frame, text=dp, font='Arial 18 bold', bg='#C8BFC7', fg="#090302", justify=CENTER, relief=RAISED, width=7, height=3)
         dp_label.grid(row=save_row-1, column=5, columnspan=4)
+
+        dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
+        drym_dict=ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
+        dict_sp_drym={}
+        bool_var=TRUE
+        for ing in ingredients.keys():
+            try:
+                dict_sp_drym[ingredients[ing]]=dictionnaire_nutrition[ing]
+            except:
+                bool_var=FALSE
+                break
+        
+        if bool_var==TRUE:
+            wdp=get_dp.weighted_phylogenetic_diversity("Tree.txt", species, dict_sp_drym)
+        else:
+            wdp="NA"
+        
+        label7=Label(main_frame, text="Diversité phylogénétique pondérée:", font='Arial 14 bold', bg='#C8BFC7', fg="#8A7E72", justify=CENTER)
+        label7.grid(row=save_row, column=5, columnspan=4, sticky=NSEW)
+        wdp_label=Label(main_frame, text=wdp,  font='Arial 18 bold', bg='#C8BFC7', fg="#090302", justify=CENTER, relief=RAISED, width=7, height=3)
+        wdp_label.grid(row=save_row+1, column=5, columnspan=4)
 
     # grid
         results_window.rowconfigure(0, weight=1)

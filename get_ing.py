@@ -97,9 +97,12 @@ def process(url):
 def get_title(url):
     req = requests.get(url)
     soup = BeautifulSoup(req.content, 'html.parser')
-    html_title = soup.findAll("h1",{"class":'main-title'}) 
-    string_title = html_title[0].get_text()
-    string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
+    html_title = soup.findAll("h1",{"class":'main-title'})
+    try:
+        string_title = html_title[0].get_text()
+        string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
+    except:
+        string_title="\tRecipe title not found"
     return string_title
 
 def getMarmiton(soup):
@@ -139,7 +142,7 @@ def getMarmiton(soup):
             ingredients[ing[0]] = "Non ponderable"
     return ingredients
 
-def get750(soup):
+def get750g(soup):
 
     html_ing = []
     html_qtt = []
