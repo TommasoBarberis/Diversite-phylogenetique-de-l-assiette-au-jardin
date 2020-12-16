@@ -9,6 +9,6 @@ Before using, execute the following lines:
 
 To execute the program : 
 
-    python main.py
+    python GUI.py
 
     
