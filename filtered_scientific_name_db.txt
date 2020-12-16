@@ -688,6 +688,8 @@ Rumex arifolius	Oseille
 Ruta graveolens	Rue
 Saccharina latissima	Kombu
 Saccharina latissima	Konbu
+Saccharomyces cerevisiae	Levure
+Saccharomyces cerevisiae	levure de bière
 Saccharum	sucre
 Saccharum officinarum	Cassonade
 Saccharum officinarum	Sucre roux

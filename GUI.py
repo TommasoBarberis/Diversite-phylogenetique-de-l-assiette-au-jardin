@@ -224,7 +224,7 @@ class Results:
 
     # table
         dict_row=table_row(ingredients, species)
-        list_column=["Ingrédient","Espèce","Quantité","Qté de matière\n sèche (g)","Glucides (%)","Lipides (%)","Sucres (%)","Protéines (%)"]
+        list_column=["Ingrédient","Espèce","Quantité","Qté de matière\n sèche (g)","Eau (%)","Glucides (%)","Lipides (%)","Protéines (%)"]
         save_row+=1
 
         for i in range(len(list_column)):
@@ -415,6 +415,7 @@ def missing_nutrition (ingredients):
 
 def table_row (ingredients, especes):
     dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
+    dry_matter_dico=ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
     dict_row={}
     for key in ingredients.keys():
         ing=str(key)
@@ -423,9 +424,14 @@ def table_row (ingredients, especes):
         list_row=[ing]
         if ing in especes.keys():
             list_row.append(especes[ing])
+        
         else:
             list_row.append("-")
         list_row.append(ingredients[key])
+        if ing in dry_matter_dico.keys():
+            list_row.append(dry_matter_dico[ing])
+        else:
+            list_row.append("-")
         if ing.capitalize() in dictionnaire_nutrition.keys():
             for i, val in enumerate(dictionnaire_nutrition[ing.capitalize()]):
                 if i==0:
@@ -433,7 +439,7 @@ def table_row (ingredients, especes):
                 else:
                     list_row.append(val)
         else:
-            for k in range(5):
+            for k in range(4):
                 list_row.append("-")
         dict_row[ing]=list_row
     return dict_row

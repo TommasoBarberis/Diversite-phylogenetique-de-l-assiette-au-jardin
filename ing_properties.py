@@ -67,7 +67,7 @@ def getNutInfo(ing,book):
         final_nut_info.append(nut_info[13]) #water
         final_nut_info.append(nut_info[16]) #glucides
         final_nut_info.append(nut_info[17]) #lipides
-        final_nut_info.append(nut_info[18]) #sucres
+        #final_nut_info.append(nut_info[18]) #sucres
         final_nut_info.append(nut_info[14]) #protéines
 
     return final_nut_info
@@ -116,7 +116,7 @@ def dryMatterDicUpdate(dict_ing, dict_nut):
             dry_matter = round(qtt - qtt * wat/100,2) 
             dry_matter_dict[ing] = dry_matter
         else : 
-            dry_matter_dict[ing] = "NA"
+            dry_matter_dict[ing] = "-"
 
     return dry_matter_dict
 
