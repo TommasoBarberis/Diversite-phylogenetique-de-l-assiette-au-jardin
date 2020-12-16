@@ -164,7 +164,10 @@ class Results:
     
     # window setting 
         results_window.title("Résultats")
-        results_window.geometry("1600x900")
+        w = results_window.winfo_screenwidth()
+        h = results_window.winfo_screenheight()
+        results_window.geometry("%dx%d+0+0" % (w, h))
+        #results_window.geometry("1600x900")
         results_window.minsize(1080,720)
         results_window.config(background="#C8BFC7")
 
@@ -243,17 +246,17 @@ class Results:
             save_row+=1
             for ind, k in enumerate(line):
                 if ind==2:
-                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=11, wraplength=300)
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=11, wraplength=300, height=2)
                 elif ind==3:
-                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=16, wraplength=300)
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=16, wraplength=300, height=2)
                 elif ind==4:
-                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300)
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300, height=2)
                 elif ind==5:
-                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300)
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300, height=2)
                 elif ind==6:
-                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=13, wraplength=300)
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=13, wraplength=300, height=2)
                 else:
-                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=18, wraplength=300)
+                    table_cell=Label(self.results_window, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=18, wraplength=300, height=2)
                 table_cell.grid(row=save_row, column=1+ind, sticky=W)
 
         #results_window.rowconfigure(save_row+1, weight=1)
