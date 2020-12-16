@@ -106,7 +106,7 @@ def getDictNutPond(dict_ing, dict_nut):
 def dryMatterDicUpdate(dict_ing, dict_nut):
     dry_matter_dict = {}
     for ing in dict_ing : 
-        if ing.capitalize() in dict_nut and dict_ing[ing] != 0 and dict_nut[ing.capitalize()][1] != '-':
+        if ing.capitalize() in dict_nut and dict_ing[ing] != 0 and dict_nut[ing.capitalize()][1] != '-' and dict_ing[ing] != "Non ponderable":
             if "<" in dict_nut[ing.capitalize()][1] :
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1][2:])))
             else :
@@ -120,7 +120,8 @@ def dryMatterDicUpdate(dict_ing, dict_nut):
 
     return dry_matter_dict
 
-
+def scoreDict():
+    pass
 
 def format_float(input_string):
     if "-" in input_string or "traces" in input_string:

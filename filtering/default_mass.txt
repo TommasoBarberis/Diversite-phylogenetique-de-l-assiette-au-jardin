@@ -5,40 +5,23 @@ Artichaut Castel/500
 Artichaut Poivrade/60
 Artichaut Violet/150
 Asperges/50
-Aubergine P/200
-Aubergine M/400
-Aubergine G/500+
+Aubergine/350
 Carotte/125
 Céleri-rave/1000
 Chou-fleur/1500
 Chou Vert/2000
-Concombre/0200
-Courgette P/0100
-Courgette M/0.200
-Courgette G/0.350
-Cresson (botte)/200
-Échalote P/025
-Échalote M/040
+Concombre/200
+Courgette/200
+Cresson/200
+Échalote/030
 Laitue/250
 Navet long/300
-Navet rond P/100
-Navet rond M/200
-Navet rond G/350
-Navet rond T/500
-Oignon M/100
-Oignon G/150
-Oignon T/200
+Navet rond/200
+Oignon/140
 Poireau/150
-Poivron P/100
-Poivron M/150
-Poivron G/250
-Poivron T/350
-Pomme de terre G/200
-Pomme de terre M/120
-Pomme de terre P/080
-Tomate G/200
-Tomate P/075
-Variété/Poids moyen (kg)
+Poivron/200
+Pomme de terre/130
+Tomate/120
 Abricot/055
 Ananas/2000
 Banane/150
@@ -46,11 +29,11 @@ Citron/100
 Clémentine/70
 Datte/35
 Figue noire/50
-Melon G/800
-Melon P/500
+Melon/650
 Orange/200
 Pamplemousse/400
-Pêche M/150
+Pêche/150
 Poire/120
-Pomme G/200
-Pomme M/150
+Pomme/200
+Oeuf/55
+Biscuit/9

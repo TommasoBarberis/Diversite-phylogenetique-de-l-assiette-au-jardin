@@ -6,6 +6,7 @@
  glace
  frais
  nature
+ liquide
  épaisse liquide
  fraîches
  en poudre
