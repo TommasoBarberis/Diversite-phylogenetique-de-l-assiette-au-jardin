@@ -175,18 +175,19 @@ class Results:
     # Main canvas
         self.main_canvas=Canvas(self.results_window, bg="#C8BFC7")
         main_frame=Frame(self.main_canvas, bg="#C8BFC7")
-        y_scrollbar = Scrollbar(self.results_window)
-        #x_scrollbar = Scrollbar(self.results_window)
+        y_scrollbar = Scrollbar(self.main_canvas)
+        x_scrollbar = Scrollbar(self.main_canvas)
 
         def updateScrollRegion():
             self.main_canvas.update_idletasks()
             self.main_canvas.config(scrollregion=main_frame.bbox())
 
         def createScrollableContainer():
-            self.main_canvas.config(yscrollcommand=y_scrollbar.set, highlightthickness=0)    #  xscrollcommand=x_scrollbar.set, 
-            #x_scrollbar.config(orient=HORIZONTAL, command=self.main_canvas.xview)
+            self.main_canvas.config(xscrollcommand=x_scrollbar.set, highlightthickness=0)      
+            self.main_canvas.config(yscrollcommand=y_scrollbar.set, highlightthickness=0)      
+            x_scrollbar.config(orient=HORIZONTAL, command=self.main_canvas.xview)
             y_scrollbar.config(orient=VERTICAL, command=self.main_canvas.yview)
-            #x_scrollbar.pack(fill=X, side=BOTTOM, expand=FALSE)
+            x_scrollbar.pack(fill=X, side=BOTTOM, expand=FALSE)
             y_scrollbar.pack(fill=Y, side=RIGHT, expand=FALSE)
             self.main_canvas.pack(fill=BOTH, side=LEFT, expand=TRUE)
             self.main_canvas.create_window(0, 0, window=main_frame, anchor=NW)
@@ -365,22 +366,7 @@ class Results:
         self.results_window.bind('<Button-4>', lambda event : self.main_canvas.yview('scroll', -1, 'units'))
         self.results_window.bind('<Button-5>', lambda event : self.main_canvas.yview('scroll', 1, 'units'))
         self.results_window.bind('<MouseWheel>', lambda event : self.main_canvas.yview('scroll', 1, 'units'))
-        
-        def _bound_to_mousewheel(event):
-            self.main_canvas.bind_all("<MouseWheel>", _on_mousewheel) 
-            self.main_canvas.bind_all("<Button-4>", _on_mousewheel) 
-            self.main_canvas.bind_all("<Button-5>", _on_mousewheel) 
-
-        def _unbound_to_mousewheel(event):
-            self.main_canvas.unbind_all("<MouseWheel>") 
-            self.main_canvas.unbind_all("<Button-4>") 
-            self.main_canvas.unbind_all("<Button-5>") 
-
-        def _on_mousewheel(event):
-            self.main_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-
-        #self.main_canvas.bind('<Enter>', _bound_to_mousewheel)
-        #self.main_canvas.bind('<Leave>', _unbound_to_mousewheel)
+        self.results_window.bind('<MouseWheel>', lambda event : self.main_canvas.yview('scroll', -1, 'units'))
 
     def download_button (self):
         self.file_name_window()
