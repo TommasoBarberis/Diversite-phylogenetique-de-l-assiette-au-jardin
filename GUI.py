@@ -168,9 +168,9 @@ class Results:
         w = results_window.winfo_screenwidth()
         h = results_window.winfo_screenheight()
         results_window.geometry("%dx%d+0+0" % (w, h))
-        #results_window.geometry("1600x900")
         results_window.minsize(1080,720)
         results_window.config(background="#C8BFC7")
+        results_window.grid_columnconfigure(0, weight=1)
 
     # Main canvas
         self.main_canvas=Canvas(self.results_window, bg="#C8BFC7")
@@ -355,10 +355,10 @@ class Results:
         drym_dict=ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
         dict_sp_drym={}
         bool_var=TRUE
-        for ing in ingredients.keys():
-            try:
-                dict_sp_drym[ingredients[ing]]=dictionnaire_nutrition[ing]
-            except:
+        for sp in species.keys():
+            if sp in drym_dict.keys():
+                dict_sp_drym[species[sp]]=drym_dict[sp]
+            else:
                 bool_var=FALSE
                 break
         
@@ -376,7 +376,6 @@ class Results:
         results_window.rowconfigure(0, weight=1)
         results_window.rowconfigure(save_row+1, weight=1)
 
-        results_window.grid_columnconfigure(0, weight=1)
         results_window.grid_columnconfigure(8, weight=1)
 
         main_frame.pack()

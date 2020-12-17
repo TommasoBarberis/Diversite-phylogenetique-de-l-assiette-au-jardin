@@ -46,6 +46,11 @@ def weighted_phylogenetic_diversity (path, species, dict_sp_drym):
   wpd=0
   for i in dico:
     wpd+=(dico[i]*dict_sp_drym[i])
+  sum_wight=0
+  for i in dict_sp_drym.values():
+    sum_wight+=i
+  wpd/=sum_wight
+  wpd='{0:.3g}'.format(wpd)
   return wpd
 
 

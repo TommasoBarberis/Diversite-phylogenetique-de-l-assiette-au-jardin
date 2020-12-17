@@ -11,8 +11,11 @@ mg de /0.001
 cl de /10
 cl d'/10
 gros /1
-sauce 
-pot de 
+sauce
+pot d' 
+pot de
+pots d'
+pots de 
 jus de 
 pâte de 
 pate de 
