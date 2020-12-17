@@ -6,6 +6,9 @@ import ing_to_esp
 import get_dp
 import ing_properties
 import os
+import get_NCBI_taxonomy
+from ete3 import NCBITaxa
+
 
 url = input("Entrez l'url de la recette choisie. (préférence : Marmiton) \n") 
 print("\n")
@@ -35,14 +38,43 @@ if nbing != nbnut :
             nut_not_found.append(key.capitalize())
 else : complete_nut = True
 
-dry_matter_dict = ing_properties.dryMatterDicUpdate(ingredients,dictionnaire_nutrition)
-ing_properties.writeTsv("new.tsv",ingredients,especes,dry_matter_dict,dictionnaire_nutrition)
+drym_dict = ing_properties.dryMatterDicUpdate(ingredients,dictionnaire_nutrition)
+ing_properties.writeTsv("results.tsv",ingredients,especes,drym_dict,dictionnaire_nutrition)
+
+list_ID = get_NCBI_taxonomy.get_taxid(especes)
+ncbi=NCBITaxa()
+tree=ncbi.get_topology((list_ID), intermediate_nodes=True)
+tree=tree.write(format=100, features=["sci_name"]).replace('[&&NHX:sci_name=','').replace(']','')
+try:
+    os.remove("Tree.txt")
+except :
+    pass
+with open("Tree.txt","w") as Tree:
+    Tree.write(tree)
+
+dp=get_dp.phylogenetic_diversity("Tree.txt", especes)    #diversite phylogenetique
+var=missing_species(ingredients, especes)
+
+dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
+drym_dict=ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
+dict_sp_drym={}
+bool_var=True
+for sp in especes.keys():
+  if sp in drym_dict.keys():
+    dict_sp_drym[especes[sp]]=drym_dict[sp]
+  else:
+    bool_var=False
+    break
+        
+if bool_var==True:
+  wdp=get_dp.weighted_phylogenetic_diversity("Tree.txt", especes, dict_sp_drym)  #diversite ponderee
+else:
+  wdp="NA"
 
 ######## printting part ########
 
 print("\n" +str(nbspec)+ " species were found from the "+ str(nbing)+ " different ingredients.")
 
-var=missing_species(ingredients, especes)
 if not var[1] :
     print("the missing species are :")
     for missing in var[0]:
@@ -63,9 +95,10 @@ print(ingredients)
 print("species :")
 print(especes)
 print("dry matter :")
-print(dry_matter_dict)
+print(drym_dict)
 get_lifeMap_subTree.get_newick(especes)
-print("Diversité phylogénétique (en nb de branches) :")
-dp=get_dp.calculation("Tree.txt")
+print("Diversité phylogénétique :")
 print(dp)
-get_lifeMap_subTree.subtree_from_newick()
+print("Diversité phylogénétique pondérée:")
+print(wdp)
+print("All results were saved in the results.tsv file.")

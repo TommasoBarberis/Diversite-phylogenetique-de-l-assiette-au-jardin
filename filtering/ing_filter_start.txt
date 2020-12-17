@@ -10,7 +10,7 @@ mg d'/0.001
 mg de /0.001
 cl de /10
 cl d'/10
-gros /1
+gros 
 sauce
 pot d' 
 pot de

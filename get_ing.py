@@ -45,7 +45,7 @@ def cleanAndPonderate(ing_comp_input):
     ing_comp_output[0] = ingredient
     return ing_comp_output
 
-#base units : g /  ml 
+#base units : g 
 def get_ing_only (ing_line):
     
     ing_comp =['',1,False] # format : ["name", "quantity" , "ponderable"]

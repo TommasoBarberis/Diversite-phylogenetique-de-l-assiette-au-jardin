@@ -1,4 +1,5 @@
  # -*- coding: utf-8 -*-
+import get_ing
 
 def db_to_dicto (path):
     """
@@ -49,6 +50,33 @@ def by_fields (dicto1, dicto2, liste):
                     cond=condition(dicto1, dicto2, a)
     return dicto2
 
+def last_try(ing, dico_espece, score_thresh):
+    best_match= []
+    best_score = score_thresh
+    match_cpt=1
+    for key in dico_espece :
+        score = get_ing.similar(ing, dico_espece[key])
+        if score > score_thresh :
+            best_match.append([dico_espece[key],key,match_cpt])
+            match_cpt = match_cpt+1
+            if score > score_thresh:
+                best_score = score
+    if best_score >=0.8 :
+        return best_match[-1][1]
+    elif best_match != [] : 
+        selected  = int(input ("please choose the correct specie's number (from 1 to "+str(len(best_match))+")"+ " for \n" +str(ing)+" (if nothing is correct type 0) \n" + str(best_match) )+"\n")
+        if selected != 0 and selected < len(best_match) : 
+            return best_match[selected-1][1]
+        else :
+            return None
+    else :
+        return None
+
+    
+            
+
+
+
 def recherche_globale (dicto_ing):
     correspondences=db_to_dicto("filtered_scientific_name_db.txt")
     dicto_esp={}
@@ -57,6 +85,12 @@ def recherche_globale (dicto_ing):
         liste_ing.append(k)
     etape1=search_in_dict(correspondences, dicto_esp, liste_ing)    
     dicto_final=with_endswith(correspondences,etape1, liste_ing)
+    for k in dicto_ing.keys():
+        if k not in dicto_final and k[:len(k)-1] not in dicto_final:
+            specie =  last_try(k,correspondences,0.5)
+            if specie != None:
+                dicto_final[k] =specie
+    
     #etape2=with_endswith(correspondences,etape1, liste_ing)
     #dicto_final=by_fields(correspondences, etape2, liste_ing)
     return dicto_final

@@ -1,7 +1,15 @@
-sel 3041
-lait 1936
-poireau 356
-poireaux 356
-huile 2903 (huile de tournesole)
-beurre 2862
-farine 1104 (farine de blé T55)
+sel/3041
+poivre/3049
+pomme de terre/647
+lait/1936
+poireaux/356
+poivrons/357
+huile/2903/(huile de tournesole)
+beurre/2862
+farine/1104/(farine de blé T55)
+huile d'olive/2897
+ail/3072
+lardons/1573
+crème fraîche/2224
+oeufs/1909
+emmental/2160

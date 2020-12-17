@@ -1,5 +1,6 @@
 import xlrd
 import csv
+import get_ing
 # name : 7 
 # water % : 13
 # glucides % 16
@@ -17,11 +18,12 @@ def getDefaultLineNumber(ingredient):
     default_list = f.read().splitlines()
     for line in default_list :
         if ingredient in line : 
-            value = line.split(" ")
+            value = line.split("/")
             return int(value[1])-1
     return 0
         
 def getNutInfo(ing,book):
+    score_threshold = 0.5
     sheet = book.sheets()[0]
     #print(ing)
     cpt = getDefaultLineNumber(ing.lower())
@@ -29,40 +31,34 @@ def getNutInfo(ing,book):
     # ing = "Pomme de terre"
     nut_info = []
     final_nut_info = []
+    highest_score = 0
+    best_match = []
+    row= 0
+    if ing.endswith("s") :
+        ing = ing[:len(ing)-1]
     if cpt !=0:
         found_in_book = True
+        row =cpt
     else :
         for cel in sheet.col(7):
-            if ing.endswith("s"):
-                if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])) and ("crue" in cel.value or "cru" in cel.value):
+            values = cel.value.split(",")
+            score = get_ing.similar(values[0],ing)
+            if score > highest_score :
+                if cpt != 0 and score >= score_threshold:
+                    highest_score = score
+                    # print(highest_score)
+                    best_match.append([values[0],cpt])
+                    row = cpt 
                     found_in_book = True
-                    break
-            else :
-                if (cel.value.startswith(ing)) and ("crue" in cel.value or "cru" in cel.value):
-                    found_in_book = True
-                    break
             cpt +=1
-    
-        if not found_in_book :
-            cpt = 0
-            if ing.endswith("s"):
-                for cel in sheet.col(7):
-                    if (cel.value.startswith(ing) or cel.value.startswith(ing[:-1])):
-                        found_in_book = True
-                        break
-                    cpt +=1
-            else : 
-                for cel in sheet.col(7):
-                    if (cel.value.startswith(ing)):
-                        found_in_book = True
-                        break
-                    cpt +=1
-
 
     if found_in_book : 
-        for cel in sheet.row(cpt) :
+        for cel in sheet.row(row) :
             nut_info.append(cel.value)
 
+        # print(str(ing) +" " + str(nut_info[7]) + " " + str(highest_score))
+        # for elem in best_match :
+        #     print(elem)
         final_nut_info.append(nut_info[7]) #name
         final_nut_info.append(nut_info[13]) #water
         final_nut_info.append(nut_info[16]) #glucides
