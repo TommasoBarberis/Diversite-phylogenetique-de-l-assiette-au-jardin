@@ -7,6 +7,7 @@ Actinidia arguta	Kiwaï
 Actinidia chinensis	Kiwi
 Adansonia digitata	Pain de singe
 Agaricus bisporus	Champignon de Paris
+Agaricus bisporus	champignon de paris
 Allium ampeloprasum	Ail Faux-Poireau
 Allium cepa	Oignon
 Allium cepa	Oignon	rouge
@@ -181,6 +182,7 @@ Bos taurus	Lait
 Bos taurus	Parmesan
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
+Brassica juncea	Moutarde
 Brassica juncea	Moutarde de Sarepta
 Brassica napus	Colza
 Brassica napus	Rutabaga
@@ -865,6 +867,7 @@ Vitis rotundifolia	Vigne à feuilles rondes
 Vitis rotundifolia	Raisin
 Vitis vinifera	Vigne Sauvage
 Vitis vinifera	Vin
+Vitis vinifera	Vinaigre
 Wasabia japonica	Raifort Japonais
 Zea mays	blé d’Inde
 Zea mays	Maïs

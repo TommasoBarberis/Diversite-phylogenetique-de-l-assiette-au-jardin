@@ -245,12 +245,12 @@ class Results:
 
     # table
         dict_row=table_row(ingredients, species)
-        list_column=["Ingrédient","Espèce","Quantité","Qté de matière\n sèche (g)","Eau (%)","Glucides (%)","Lipides (%)","Protéines (%)"]
+        list_column=["Ingrédient","Espèce","Quantité (g)","Qté de matière\n sèche (g)","Eau (%)","Glucides (%)","Lipides (%)","Protéines (%)"]
         save_row+=1
 
         for i in range(len(list_column)):
             if i==2:
-                table_header=Label(main_frame, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=11, height=3)
+                table_header=Label(main_frame, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=14, height=3)
             elif i==3:
                 table_header=Label(main_frame, text=list_column[i], font="Arial 14", bg='#C8BFC7', fg="#090302", justify=CENTER, relief=GROOVE, width=16, height=3)
             elif i==4:
@@ -267,7 +267,7 @@ class Results:
             save_row+=1
             for ind, k in enumerate(line):
                 if ind==2:
-                    table_cell=Label(main_frame, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=11, wraplength=300, height=2)
+                    table_cell=Label(main_frame, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300, height=2)
                 elif ind==3:
                     table_cell=Label(main_frame, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=16, wraplength=300, height=2)
                 elif ind==4:

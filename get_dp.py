@@ -45,12 +45,16 @@ def weighted_phylogenetic_diversity (path, species, dict_sp_drym):
   dico=filter_dico_lengths(path, species)
   wpd=0
   for i in dico:
-    wpd+=(dico[i]*dict_sp_drym[i])
+    try:
+      wpd+=(int(dico[i])*int(dict_sp_drym[i]))
+    except:
+      wpd="NA"
   sum_wight=0
-  for i in dict_sp_drym.values():
-    sum_wight+=i
-  wpd/=sum_wight
-  wpd='{0:.3g}'.format(wpd)
+  if wpd!="NA":
+    for i in dict_sp_drym.values():
+      sum_wight+=i
+    wpd/=sum_wight
+    wpd='{0:.3g}'.format(wpd)
   return wpd
 
 
