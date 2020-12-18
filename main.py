@@ -55,8 +55,6 @@ with open("Tree.txt","w") as Tree:
 dp=get_dp.phylogenetic_diversity("Tree.txt", especes)    #diversite phylogenetique
 var=missing_species(ingredients, especes)
 
-dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
-drym_dict=ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
 dict_sp_drym={}
 bool_var=True
 for sp in especes.keys():

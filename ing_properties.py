@@ -7,8 +7,6 @@ import get_ing
 # lipides % 17 
 # sucres % 18
 
-#faire une classe ingrédient ?
-
 def openBook(file):
     book = xlrd.open_workbook(file)
     return book
@@ -25,10 +23,8 @@ def getDefaultLineNumber(ingredient):
 def getNutInfo(ing,book):
     score_threshold = 0.5
     sheet = book.sheets()[0]
-    #print(ing)
     cpt = getDefaultLineNumber(ing.lower())
     found_in_book = False
-    # ing = "Pomme de terre"
     nut_info = []
     final_nut_info = []
     highest_score = 0
@@ -46,7 +42,6 @@ def getNutInfo(ing,book):
             if score > highest_score :
                 if cpt != 0 and score >= score_threshold:
                     highest_score = score
-                    # print(highest_score)
                     best_match.append([values[0],cpt])
                     row = cpt 
                     found_in_book = True
@@ -56,9 +51,6 @@ def getNutInfo(ing,book):
         for cel in sheet.row(row) :
             nut_info.append(cel.value)
 
-        # print(str(ing) +" " + str(nut_info[7]) + " " + str(highest_score))
-        # for elem in best_match :
-        #     print(elem)
         final_nut_info.append(nut_info[7]) #name
         final_nut_info.append(nut_info[13]) #water
         final_nut_info.append(nut_info[16]) #glucides
@@ -135,7 +127,6 @@ def nutPrinter(nut_dict):
 
                 print('{:10.15}'.format(element), end= "\t \t")
             print("")
-    #    def writeTsv(file_name,dico_ing,dico_matier_seche, dico_nut, dico_especes): 
 
 def writeTsv(file_name,dico_ing,dico_especes,dry_matter_dico,dico_nut):
     ing_list = list(dico_ing.keys())
@@ -173,11 +164,3 @@ if __name__ == "__main__":
     dicnut = getDictNut(dico)
     drymatterdico =dryMatterDicUpdate(dico,dicnut)
     print(drymatterdico)
-
-    # for key in dicnut :
-    #     print(key)
-    #     print(dicnut[key])
-
-    # print(getNutInfo("Tomate",myBook))
-    # nutPrinter(output)
-    # getDictNutPond(dico,output)

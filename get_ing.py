@@ -32,7 +32,6 @@ def cleanAndPonderate(ing_comp_input):
             ingandmass = ing.split("/")
             score = similar(ingandmass[0].lower(),ing_comp_input[0])
             if score >= similarity_threshold :
-                # print(str(ingandmass[0]) +" / " + str(ing_comp_input[0])+ " / score : " + str(score) )
                 ing_comp_output[1] *= float(ingandmass[1])
                 ing_comp_output[2] = "True"
                 break
@@ -68,16 +67,12 @@ def get_ing_only (ing_line):
     #remove space after number
     if ing_comp[0].startswith(' ') :
         ing_comp[0] = ing_comp[0][1:]
-
-    #comment gérer les qttés des doublons ?
         
     output = cleanAndPonderate(ing_comp)
     
-
     return output
 
 def process(url):
-
 
     req = requests.get(url)
     domain = urlparse(url).netloc
@@ -116,19 +111,11 @@ def getMarmiton(soup):
     html_title = soup.findAll("h1",{"class":'main-title'}) 
     html_ing = soup.findAll('span',{"class":'ingredient'})
     html_qtt = soup.findAll('span',{"class":'recipe-ingredient-qt'}) 
-    # html_nb_unit = soup.findAll("span",{"class":'recipe-ingredients__qt-counter__value_container'}) #YOYOYOY Chopper le nombre d'unités(modifier les qtt)
-    # real_qtt = soup.findAll("data-base-qt") #chopper data-base-qt ? (pb avec 1/2)
-    # print(real_qtt)
-    # print(html_ing)
-    # print(html_nb_unit)
     string_title = html_title[0].get_text()
     string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
-    #print(string_title[1:])
     qtt = [d.text for d in html_qtt]
-    # print(qtt)
     for i in range(0,len(html_ing)) :
         ing_line = html_ing[i].get_text()
-        # print(ing_line)
         og_ing.append(ing_line)
         ing = get_ing_only(ing_line)
         if ing[2] : 
@@ -152,11 +139,10 @@ def get750g(soup):
 
     print("recette 750g")
     html_ing = soup.findAll('span',{"class":'recipe-ingredients-item-label'})
-    # print(html_ing)
     for i in range(0,len(html_ing)) :
         ing_line = html_ing[i].get_text()
         ing = get_ing_only(ing_line) 
-        ingredients[ing[0]] = ing[1] #qtt au début de ing_line
+        ingredients[ing[0]] = ing[1] 
     return ingredients
 
 def getCuisineaz(soup):
