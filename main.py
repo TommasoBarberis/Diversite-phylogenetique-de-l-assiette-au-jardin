@@ -11,9 +11,9 @@ from ete3 import NCBITaxa
 import logging
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("main.py")
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
 file_handler = logging.FileHandler("log.txt")
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -22,6 +22,7 @@ logger.addHandler(file_handler)
 # url input
 url = input("Enter the url recipe. (from Marmiton.org) \n") 
 print("\n")
+logger.info("URL recipe entered by user: "+url)
 
 
 # getting ingredients from web site

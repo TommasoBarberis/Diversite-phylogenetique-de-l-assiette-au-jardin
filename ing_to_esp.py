@@ -1,14 +1,7 @@
  # -*- coding: utf-8 -*-
 
 import get_ing
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
-file_handler = logging.FileHandler("ing_to_esp.log")
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+import inspect
 
 
 def db_to_dicto (path):
@@ -16,21 +9,17 @@ def db_to_dicto (path):
     Pour créer un dictionnaire à partir du fichier ayant les noms scientifiques des espèces (filtered_scientific_name_db.txt).
     Les clefs sont les noms vernaculaires et les valeurs les noms scientifiques.
     """
-    try:
-        f=open(path,"r", encoding='utf-8')
+    f=open(path,"r", encoding='utf-8')
+    line=f.readline()
+    dicto={}
+    while line:
+        colonnes=line.split("\t")
+        clee= colonnes[1].replace("\n","")
+        valeur= colonnes[0]
+        dicto[clee]=valeur
         line=f.readline()
-        dicto={}
-        while line:
-            colonnes=line.split("\t")
-            clee= colonnes[1].replace("\n","")
-            valeur= colonnes[0]
-            dicto[clee]=valeur
-            line=f.readline()
-        f.close()
-        logger.info("dico DONE")
-        return dicto
-    except:
-        logger.exception("Fatal error in creation of dictionnary with scientific names.")
+    f.close()
+    return dicto
 
 def condition (dicto1, dicto2, k):
     k2=k.capitalize()
@@ -64,26 +53,27 @@ def by_fields (dicto1, dicto2, liste):
                     cond=condition(dicto1, dicto2, a)
     return dicto2
 
-def last_try(ing, dico_espece, score_thresh):
+def last_try(ing, dico_espece, score_thresh, caller):
     best_match= []
     best_score = score_thresh
     match_cpt=1
     for key in dico_espece :
         score = get_ing.similar(ing, dico_espece[key])
-        if score > score_thresh :
+        if score > score_thresh:
             best_match.append([dico_espece[key],key,match_cpt])
             match_cpt = match_cpt+1
             if score > score_thresh:
                 best_score = score
-    if best_score >=0.8 :
+    if best_score >=0.8:
         return best_match[-1][1]
-    elif best_match != [] : 
-        selected  = int(input ("please choose the correct specie's number (from 1 to "+str(len(best_match))+")"+ " for \n" +str(ing)+" (if nothing is correct type 0) \n" + str(best_match) )+"\n")
-        if selected != 0 and selected < len(best_match) : 
-            return best_match[selected-1][1]
-        else :
-            return None
-    else :
+    elif best_match != []: 
+        if caller == "main.py":
+            selected  = int(input ("please choose the correct specie's number (from 1 to "+str(len(best_match))+")"+ " for " +str(ing)+" (if nothing is correct type 0): \n" + str(best_match) )+"\n")
+            if selected != 0 and selected < len(best_match) : 
+                return best_match[selected-1][1]
+            else:
+                return None
+    else:
         return None
 
     
@@ -104,10 +94,10 @@ def recherche_globale (dicto_ing):
     dicto_final=with_endswith(correspondences,etape1, liste_ing)
     for k in dicto_ing.keys():
         if k not in dicto_final and k[:len(k)-1] not in dicto_final:
-            specie =  last_try(k,correspondences,0.5)
+            caller = inspect.stack()[1].filename  # in order to distinguish the caller between main.py and GUI.py
+            specie =  last_try(k,correspondences,0.5, caller)
             if specie != None:
-                dicto_final[k] =specie
-    
+                dicto_final[k] = specie
     #etape2=with_endswith(correspondences,etape1, liste_ing)
     #dicto_final=by_fields(correspondences, etape2, liste_ing)
     return dicto_final

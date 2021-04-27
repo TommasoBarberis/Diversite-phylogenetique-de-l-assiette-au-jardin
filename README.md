@@ -9,7 +9,8 @@ Before using, execute the following lines:
 
 To execute the program : 
 
-    python GUI.py
-
+    python3 GUI.py for application with graphic interface
+    or
+    python3 main.py in command line
     
 Work on marmiton.org version of 26/04/2021

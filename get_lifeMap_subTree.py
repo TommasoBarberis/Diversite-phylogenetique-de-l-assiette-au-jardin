@@ -22,7 +22,7 @@ os.environ['WDM_LOG_LEVEL'] = '0'
 
 def get_subTree(especes):
     '''
-     fonction qui permait d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
+     fonction qui permet d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
     '''
     # Création de la liste ID à partir de la liste espèce donnée
     liste_ID = (get_taxid(especes))
@@ -97,13 +97,15 @@ def get_newick(especes):
     #driver.close()
 
 
-def subtree_from_newick():
-    try:
-        t = Tree('Tree.txt', quoted_node_names=True, format=1)
-        ts = TreeStyle()
-        ts.show_leaf_name = True
-        ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
-        t.show(tree_style=ts)
-    except:
-        pass
+def subtree_from_newick(especes):
+    get_newick(especes)
+    t = Tree('Tree.txt', quoted_node_names=True, format=1)   
+    ts = TreeStyle()
+    ts.show_leaf_name = True
+    ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
+    t.show(tree_style=ts)
 
+
+if  __name__ == "__main__":
+    species = {"mucca": "Bos taurus", "pollo":"Gallus gallus","io": "Homo sapiens"}
+    get_subTree(species)

@@ -100,9 +100,10 @@ def dryMatterDicUpdate(dict_ing, dict_nut):
             else :
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
             qtt = str(dict_ing[ing][1])
-            qtt  = float(qtt)
-            dry_matter = round(qtt - qtt * wat/100,2) 
-            dry_matter_dict[ing] = dry_matter
+            if qtt != '':
+                qtt  = float(qtt)
+                dry_matter = round(qtt - qtt * wat/100,2) 
+                dry_matter_dict[ing] = dry_matter
         else: 
             dry_matter_dict[ing] = "-"
 

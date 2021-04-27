@@ -15,12 +15,23 @@ import get_dp
 import get_NCBI_taxonomy
 from ete3 import NCBITaxa
 import os
+import logging
+
+
+logger = logging.getLogger("GUI.py")
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+file_handler = logging.FileHandler("log.txt")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 
 class MainWindow:
     '''
     fenetre principale.
-    lien vers les sites importantes et champ pour rentrer l'url de la recette a sousmettre.
+    lien vers les sites importantes et champ pour entrer l'url de la recette a sousmettre.
     '''
+
     def __init__(self, main_window):
         self.main_window = main_window
         
@@ -44,7 +55,7 @@ class MainWindow:
     # labels (sites)
         label1=Label(self.main_window, text="Sites optimisés:", font=("Arial", 22, 'bold'), bg='#2a9d8f', fg='#000000')
         label1.grid(row=7, column=3, sticky=W)
-        label2=Label(self.main_window, text="\twww.marmitton.org", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
+        label2=Label(self.main_window, text="\twww.marmiton.org", font=("Arial", 20), bg='#2a9d8f', fg='#f0efeb')
         label2.grid(row=8,column=3, sticky=W)
         label2.bind('<Button-1>', lambda x: open_site("https://www.marmiton.org/"))
         label2.bind('<Enter>', lambda x: underline(label2))
@@ -92,7 +103,6 @@ class MainWindow:
     # submit
         submit=Button(self.main_window, text = 'Entrer', font='arial 20 bold', bg='#f0efeb', fg='#2a9d8f', width=12, command=self.test_domain)
         submit.grid(row=5,column=3)
-        self.main_window.bind('<Return>', lambda x: self.test_domain()) #ne marche pas
 
     def test_domain (self):
         '''
@@ -100,22 +110,31 @@ class MainWindow:
         autrement il affiche une fenetre d'erreur.
         '''
         url=self.url_entry.get()
+        logger.info("URL recipe entered by the user: "+url)
         domain=""
         try:
             domain=urlparse(url).netloc
         except:
             pass
         if domain=="www.marmiton.org" or domain == "www.750g.com" or domain == "www.cuisineaz.com":   
-            self.results_window()
+            try:
+                self.results_window()
+                logger.info("Open result window")
+            except:
+                logger.exception("Error in result window opening")
         else:
-            self.error_window()
-    
+            try:
+                self.error_window()
+                logger.info("Open error window for incorrect url")
+            except:
+                logger.exception("Error in error window opening")
+
     def error_window(self):
         '''
         Ouvre la fenetre d'erreur.
         '''
-        self.error=Toplevel(self.main_window)
-        self.app=Error(self.error)
+        self.error = Toplevel(self.main_window)
+        self.app = Error(self.error)
 
 
     def results_window(self): 
@@ -123,6 +142,7 @@ class MainWindow:
         Ouvre la fenetre des resultats.
         '''   
         self.results = Toplevel(self.main_window)
+        ingredients = get_ing.process(self.url_entry.get())
         self.app = Results(self.results, url_recipe=self.url_entry.get())
 
 class Error:
@@ -146,6 +166,7 @@ class Error:
         def close ():
             error_window.destroy()
         close_button=Button(self.error_window, text="Fermer", command=close)
+        logger.info("The user has click to close the error window")
         close_button.grid(row=3, column=1)
 
     # grid
@@ -157,11 +178,11 @@ class Error:
 
 class Results:
     '''
-    Creation de la fenetre pour les resulats.
+    Creation de la fenetre pour les résultats.
     '''
     def __init__(self, results_window, url_recipe):
-        self.results_window=results_window
-        self.url_recipe=url_recipe
+        self.results_window = results_window
+        self.url_recipe = url_recipe
     
     # window setting 
         results_window.title("Résultats")
@@ -202,13 +223,15 @@ class Results:
 
     # recipe's name 
         name_recipe=get_ing.get_title(self.url_recipe)
-        name_recipe=name_recipe[1:]
         label1=Label(main_frame, text="Nom de la recette: ", font='Arial 18 bold', bg='#C8BFC7', fg="#8A7E72")
         label1.grid(row=1, column=1, sticky=W, columnspan=6)
-        recipe=Label(main_frame, text=name_recipe, font='Arial 18', bg='#C8BFC7', fg="#000000", justify=LEFT)
+        recipe=Label(main_frame, text=name_recipe, font='Arial 18', bg='#C8BFC7', fg="#000000", justify=CENTER)
         recipe.grid(row=1, column=3, sticky=W, columnspan=6)
     
+        global ingredients # dictionary at the form: ingredients[ingredient_name] = [[singular_name, plural_name], quantity, [singular_unity, plural_unity]]
         ingredients=get_ing.process(self.url_recipe)
+        
+        global species # dictionary at the form: species[ingredient_name] = specie_name
         species=ing_to_esp.recherche_globale(ingredients)
 
     # missing species
@@ -245,7 +268,7 @@ class Results:
 
     # table
         dict_row=table_row(ingredients, species)
-        list_column=["Ingrédient","Espèce","Quantité (g)","Qté de matière\n sèche (g)","Eau (%)","Glucides (%)","Lipides (%)","Protéines (%)"]
+        list_column=["Ingrédient","Espèce","Quantité","Qté de matière\n sèche (g)","Eau (%)","Glucides (%)","Lipides (%)","Protéines (%)"]
         save_row+=1
 
         for i in range(len(list_column)):
@@ -267,7 +290,7 @@ class Results:
             save_row+=1
             for ind, k in enumerate(line):
                 if ind==2:
-                    table_cell=Label(main_frame, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300, height=2)
+                    table_cell=Label(main_frame, text=k[1]+" "+k[2][1], font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=14, wraplength=300, height=2)
                 elif ind==3:
                     table_cell=Label(main_frame, text=k, font="Arial 14", bg='#C8BFC7', fg="#000000", justify=CENTER, relief=GROOVE, width=16, wraplength=300, height=2)
                 elif ind==4:
@@ -299,6 +322,7 @@ class Results:
 
         def get_lifemap (especes):
             get_lifeMap_subTree.get_subTree(especes)
+            logger.info("The user has click on LifeMap's button")
         lifemap=Button(main_frame, text="LifeMap Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
         lifemap.grid(row=save_row, column=3, pady=10, sticky=W, columnspan=2)
         lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
@@ -318,6 +342,8 @@ class Results:
 
         def get_ete ():
             get_lifeMap_subTree.subtree_from_newick()
+            logger.info("The user has click the ete's button")
+
         ete=Button(main_frame, text="Ete Sub-tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
         ete.grid(row=save_row, column=3, pady=10, sticky=W, columnspan=2)
         ete.bind('<Button-1>', lambda x: get_ete())
@@ -328,6 +354,7 @@ class Results:
             with open ("Tree.txt","r") as tree:
                 newick_tree=str(tree.readlines())
                 pyperclip.copy(newick_tree)
+            logger.info("The user has click the newick's button")
         newick=Button(main_frame, text="Newick Tree", font="arial 20 bold", bg='#8A7E72', fg="#5A2328", width=12)
         newick.grid(row=save_row, column=3, pady=10, sticky=W, columnspan=2)
         newick.bind('<Button-1>', lambda x: get_newick())
@@ -391,6 +418,7 @@ class Results:
 
     def download_button (self):
         self.file_name_window()
+        logger.info("The user has click the download button for the tsv table")
 
     def file_name_window(self):
         '''
@@ -404,8 +432,8 @@ class Download:
     Creation de la fenetre qui permet de rentrer le nom du fichier dans lequel on souhaite telecharger le tableau au format csv ou tsv.
     '''
     def __init__(self, download_window, url_recipe):
-        self.download_window=download_window
-        self.url_recipe=url_recipe
+        self.download_window = download_window
+        self.url_recipe = url_recipe
         
     # window setting 
         download_window.title("Enregistrement")
@@ -415,7 +443,7 @@ class Download:
         download_window.grid_rowconfigure(0, weight=1)
 
     # introducing label
-        intro_label=Label(self.download_window, text="Le fichier sera enregistré dans le répertoire contenant le programme au format tsv.\nChoississez le nom du fichier:", font="arial 11", bg="#C8BFC7", justify=CENTER)
+        intro_label=Label(self.download_window, text="Le fichier sera enregistré dans le répertoire contenant le programme au format tsv.\nChoississez le nom du fichier:", font="arial 11",foreground="black", bg="#C8BFC7", justify=CENTER)
         intro_label.grid(row=1, column=1)
     # file name entry
         file_name=Entry(self.download_window, font="arial 11", width=40)
@@ -424,8 +452,6 @@ class Download:
         download_window.grid_rowconfigure(3, weight=1)
 
     # confirm button
-        ingredients=get_ing.process(self.url_recipe)
-        species=ing_to_esp.recherche_globale(ingredients)
         dico_nut=ing_properties.getDictNut(ingredients)
         dry_dico=ing_properties.dryMatterDicUpdate(ingredients, dico_nut)
 
@@ -433,6 +459,7 @@ class Download:
             file_name=file_name.get()
             if not file_name.endswith(".tsv"):
                 file_name+=".tsv"
+            logger.info("TSV table saved with the filename: "+file_name)
             ing_properties.writeTsv(file_name,ingredients,species,dry_dico,dico_nut)
             self.download_window.destroy()
         confirm_button=Button(self.download_window, text="Enregistrer", font="arial 11", width=10)
@@ -501,5 +528,24 @@ def main():
     app = MainWindow(root)
     root.mainloop()
 
+
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except:
+        logger.exception("Error in the main program")
+
+
+# keep only last 1000 lines of the log file
+try:
+    with open("log.txt", "r") as log:
+        lines = log.readlines()
+        log_length = len(lines)
+        if log_length > 1000:
+            lines = lines [(log_length-1001):-1]
+    
+    with open("log.txt", "w") as log:
+            for line in lines:
+                log.write(line) 
+except:
+    pass
