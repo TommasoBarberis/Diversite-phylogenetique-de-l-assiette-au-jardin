@@ -46,7 +46,6 @@ def cleanAndPonderate(ing_comp_input):
 
 #base units : g 
 def get_ing_only (ing_line):
-    
     ing_comp =['',1,False] # format : ["name", "quantity" , "ponderable"]
     ing_comp[0]= ing_line.lower()
 
@@ -109,24 +108,32 @@ def getMarmiton(soup):
     og_ing = []
 
     html_title = soup.findAll("h1",{"class":'main-title'}) 
-    html_ing = soup.findAll('span',{"class":'ingredient'})
-    html_qtt = soup.findAll('span',{"class":'recipe-ingredient-qt'}) 
     string_title = html_title[0].get_text()
     string_title = re.sub('\s+',' ',string_title) #se débarasse des \t et \n 
-    qtt = [d.text for d in html_qtt]
-    for i in range(0,len(html_ing)) :
-        ing_line = html_ing[i].get_text()
-        og_ing.append(ing_line)
-        ing = get_ing_only(ing_line)
-        if ing[2] : 
-            if qtt[i] == "" :
-                qtt[i] =1
-            if "/" not in str(qtt[i]):
-                ingredients[ing[0]] = int(ing[1])*float(qtt[i])
-            else: 
-                ingredients[ing[0]] = ing[1]*0.5
-        else :
-            ingredients[ing[0]] = "Non ponderable"
+
+    html_ingredients_list = soup.find("div", {"class": "ingredient-list__ingredient-group"}) # select html tag with this class in recipe web page
+    li_tags = html_ingredients_list.findAll("li") # object with all ingredients and quantities for the recipe
+
+    
+    for i in range(0,len(li_tags)):
+        ing = [li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular"), li_tags[i].find("div", {"class": "ingredient-data"}).get("data-plural")]
+        qty = li_tags[i].find("div", {"class": "quantity-data"}).get_text()
+        unit = [li_tags[i].find("div", {"class": "unit-data"}).get("data-singular"), li_tags[i].find("div", {"class": "unit-data"}).get("data-plural")]
+        val = [ing, qty, unit]
+        ingredients[li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular")] = val
+        # ing_line = html_ing[i].get("data-singular")
+        # ingredients[ing_line]=html_qtt.get()
+        # og_ing.append(ing_line)
+        # ing = get_ing_only(ing_line)
+    #     if ing[2] : 
+    #         if qtt[i] == "" :
+    #             qtt[i] =1
+    #         if "/" not in str(qtt[i]):
+    #             ingredients[ing[0]] = int(ing[1])*float(qtt[i])
+    #         else: 
+    #             ingredients[ing[0]] = ing[1]*0.5
+    #     else :
+    #         ingredients[ing[0]] = "Non ponderable"
     return ingredients
 
 def get750g(soup):
@@ -173,3 +180,4 @@ if __name__ == "__main__":
 
     url = 'https://www.marmiton.org/recettes/recette_pizza-gaufree-au-fromage_347268.aspx'
     print(get_title(url))
+    print(process("https://www.marmiton.org/recettes/recette_bruschetta-a-la-mozzarella_30276.aspx"))

@@ -1,22 +1,36 @@
  # -*- coding: utf-8 -*-
+
 import get_ing
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+file_handler = logging.FileHandler("ing_to_esp.log")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 
 def db_to_dicto (path):
     """
-    Pour creer un dictionnaire a partir du fichier ayant les noms scientifiques des especes de M. De Vienne.
-    Les clefs sont les noms verniculaires et les valeurs les noms scientifiques.
+    Pour créer un dictionnaire à partir du fichier ayant les noms scientifiques des espèces (filtered_scientific_name_db.txt).
+    Les clefs sont les noms vernaculaires et les valeurs les noms scientifiques.
     """
-    f=open(path,"r", encoding='utf-8')
-    line=f.readline()
-    dicto={}
-    while line:
-        colonnes=line.split("\t")
-        clee= colonnes[1].replace("\n","")
-        valeur= colonnes[0]
-        dicto[clee]=valeur
+    try:
+        f=open(path,"r", encoding='utf-8')
         line=f.readline()
-    f.close()
-    return dicto
+        dicto={}
+        while line:
+            colonnes=line.split("\t")
+            clee= colonnes[1].replace("\n","")
+            valeur= colonnes[0]
+            dicto[clee]=valeur
+            line=f.readline()
+        f.close()
+        logger.info("dico DONE")
+        return dicto
+    except:
+        logger.exception("Fatal error in creation of dictionnary with scientific names.")
 
 def condition (dicto1, dicto2, k):
     k2=k.capitalize()
@@ -73,11 +87,14 @@ def last_try(ing, dico_espece, score_thresh):
         return None
 
     
-            
-
-
 
 def recherche_globale (dicto_ing):
+    """
+    Permet de trouver la  correspondance entre les noms vernaculaires des ingrédients et leurs espèces.
+    En entrée il prend un dictionnaire ou les clefs sont les noms vernaculaires des ingrédients et retourne
+    un dictionnaire avec comme clef les ingrédients et comme valeurs les noms scientifiques des espèces.
+    """
+    
     correspondences=db_to_dicto("filtered_scientific_name_db.txt")
     dicto_esp={}
     liste_ing=[]
@@ -103,4 +120,4 @@ if __name__ == "__main__":
 
     #print(liste_ing)
 
-    print(recherche_globale())
+    print(recherche_globale(dicto_ing))

@@ -66,7 +66,7 @@ def getDictNut(dict_ing):
     output={}
     for ing in dict_ing :
         ingredient = ing.capitalize()  
-        nut_info =  getNutInfo(ingredient,myBook)
+        nut_info = getNutInfo(ingredient,myBook)
         if nut_info != []:
             output[ingredient] = nut_info
     return output
@@ -93,17 +93,17 @@ def getDictNutPond(dict_ing, dict_nut):
 
 def dryMatterDicUpdate(dict_ing, dict_nut):
     dry_matter_dict = {}
-    for ing in dict_ing : 
-        if ing.capitalize() in dict_nut and dict_ing[ing] != 0 and dict_nut[ing.capitalize()][1] != '-' and dict_ing[ing] != "Non ponderable":
+    for ing in dict_ing:
+        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != '-': # and dict_ing[ing][1] != "Non ponderable":
             if "<" in dict_nut[ing.capitalize()][1] :
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1][2:])))
             else :
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
-            qtt = str(dict_ing[ing])
+            qtt = str(dict_ing[ing][1])
             qtt  = float(qtt)
             dry_matter = round(qtt - qtt * wat/100,2) 
             dry_matter_dict[ing] = dry_matter
-        else : 
+        else: 
             dry_matter_dict[ing] = "-"
 
     return dry_matter_dict
@@ -120,7 +120,7 @@ def format_float(input_string):
 
 
 def nutPrinter(nut_dict):
-    print('{:10.20}'.format("Database name"),'{:10.15}'.format("Quantité d'eau(%)"),'{:10.15}'.format("Glucides (%)"),'{:10.15}'.format("Lipides "),'{:10.15}'.format("sucres") , sep="\t \t")
+    print('{:10.20}'.format("Database name"),'{:10.15}'.format("Water (%)"),'{:10.15}'.format("Glucides (%)"),'{:10.15}'.format("Lipides (%)"),'{:10.15}'.format("Sugar (%)") , sep="\t \t")
     for names in nut_dict :
         if nut_dict[names] != []:
             for element in nut_dict[names]:
