@@ -1,9 +1,6 @@
- # -*- coding: utf-8 -*-
+#  -*- coding: utf-8 -*-
 
-from tkinter import *
-from tkinter import font
-from tkinter import ttk
-import requests
+# from tkinter import *
 from urllib.parse import urlparse
 import webbrowser
 import get_ing
