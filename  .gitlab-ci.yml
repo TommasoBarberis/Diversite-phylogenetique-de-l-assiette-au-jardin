@@ -1,0 +1,37 @@
+image: "python:3.8" 
+
+#commands to run in the Docker container before starting each job.
+before_script:
+  - python3 --version
+  
+# different stages in the pipeline
+stages:
+  - Static Analysis
+  - Test
+
+
+mypy:
+  stage: Static Analysis
+  script:
+  - pip3 install mypy==0.812
+  - pwd
+  - ls -l
+  - python -m mypy *.py
+  
+flake8:
+  stage: Static Analysis
+  script:
+  - pip3 install flake8==3.9.1
+  - flake8 --max-line-length=120 *.py
+  
+  
+pytest:
+  stage: Test
+  script:
+  - pip3 install pytest==6.1.1
+  - pip3 install coverage==5.3
+  - export PYTHONPATH="$PYTHONPATH:."
+  - python -c "import sys;print(sys.path)"
+  - pytest
+  - coverage run -m pytest
+  - coverage report
