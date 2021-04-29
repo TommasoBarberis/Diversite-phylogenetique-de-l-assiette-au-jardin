@@ -1,4 +1,4 @@
-PyQt
+pyqt==5.9.2
 beautifulsoup4==4.9.0
 ete3==3.1.2
 numpy==1.20.0
