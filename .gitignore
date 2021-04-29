@@ -3,3 +3,4 @@ geckodriver.log
 Tree.txt
 log.txt
 results.tsv
+lib/__pycache__/*
