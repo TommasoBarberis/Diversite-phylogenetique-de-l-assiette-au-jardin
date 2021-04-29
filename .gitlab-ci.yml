@@ -13,8 +13,8 @@ pytest:
   script:
   - pip3 install pytest==6.1.1
   - pip3 install coverage==5.3
-  - export PYTHONPATH="$PYTHONPATH:."
-  - python -c "import sys;print(sys.path)"
+  # - export PYTHONPATH="$PYTHONPATH:."
+  # - python -c "import sys;print(sys.path)"
   - pytest
   # - coverage run -m pytest
   # - coverage report
