@@ -1,7 +1,7 @@
 #  -*- coding: utf-8 -*-
 
 # import urllib3
-from bs4 import BeautifulSoup
+import bs4 #import BeautifulSoup
 import requests
 from urllib.parse import urlparse
 import re
@@ -77,7 +77,7 @@ def process(url):
 
     req = requests.get(url)
     domain = urlparse(url).netloc
-    soup = BeautifulSoup(req.content, 'html.parser')
+    soup = bs4.BeautifulSoup(req.content, 'html.parser')
     if domain == "www.marmiton.org":   
         ingredients = getMarmiton(soup)
     elif domain == "www.750g.com":
@@ -93,7 +93,7 @@ def process(url):
 
 def get_title(url):
     req = requests.get(url)
-    soup = BeautifulSoup(req.content, 'html.parser')
+    soup = bs4.BeautifulSoup(req.content, 'html.parser')
     html_title = soup.findAll("h1", {"class": 'main-title'})
     try:
         string_title = html_title[0].get_text()

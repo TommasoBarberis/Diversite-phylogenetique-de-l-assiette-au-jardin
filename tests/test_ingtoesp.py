@@ -1,5 +1,5 @@
-from lib.ing_to_esp import db_to_dicto
+import lib.ing_to_esp as ite
 
 path = "../data/filtered_scientific_name_db.txt"
-def test_db_to_dicto(path):
-    assert test_db_to_dicto(path)
+def test_add():
+    assert isinstance(ite.db_to_dicto(path), dict)
