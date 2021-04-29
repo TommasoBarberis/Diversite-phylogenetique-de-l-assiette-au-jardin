@@ -22,40 +22,16 @@ def db_to_dicto (path):
     return dicto
 
 
-def condition (dicto1, dicto2, k):
-    k2 = k.capitalize()
-    if k in dicto1.keys():
-        dicto2[k.lower()] = dicto1[k]
-    elif k2 in dicto1.keys():
-        dicto2[k2.lower()] = dicto1[k2]
-    return dicto2
-
-
 def search_in_dict(dicto1, dicto2, liste):
     for k in liste:
-        dicto2 = condition(dicto1, dicto2, k)
+        if k in dicto1.keys():
+            dicto2[k.lower()] = dicto1[k]
+        elif k.capitalize() in dicto1.keys():
+            dicto2[k.lower()] = dicto1[k.capitalize()]
+        elif k.endswith("s"):
+            k = k[0:-1]
+            dicto2[k.lower()] = dicto1[k]
     return dicto2
-
-
-def with_endswith(dicto1, dicto2, liste):
-    for k in liste:
-        if k.endswith("s"):
-            a = k[0:-1]
-            dicto2 = condition(dicto1, dicto2, a)
-    return dicto2
-
-
-#pas necessair ?
-# def by_fields (dicto1, dicto2, liste):
-#     for k in liste:
-#         if " " in k:
-#             champs=k.split()
-#             for i in champs:
-#                 cond = condition(dicto1, dicto2, i)
-#                 if i.endswith("s"):
-#                     a = i[0:-1]
-#                     cond = condition(dicto1, dicto2, a)
-#     return dicto2
 
 
 def last_try(ing, dico_espece, score_thresh, caller):
@@ -95,17 +71,14 @@ def recherche_globale(dicto_ing):
     liste_ing = []
     for k in dicto_ing.keys():
         liste_ing.append(k)
-    etape1 = search_in_dict(correspondences, dicto_esp, liste_ing)    
-    dicto_final = with_endswith(correspondences, etape1, liste_ing)
+    dicto_esp = search_in_dict(correspondences, dicto_esp, liste_ing)    
     for k in dicto_ing.keys():
-        if k not in dicto_final and k[:len(k)-1] not in dicto_final:
+        if k not in dicto_esp and k[:len(k)-1] not in dicto_esp:
             caller = inspect.stack()[1].filename  # in order to distinguish the caller between main.py and GUI.py
             specie = last_try(k, correspondences, 0.5, caller)
             if specie is None:
-                dicto_final[k] = '/'
-    # etape2=with_endswith(correspondences,etape1, liste_ing)
-    # dicto_final=by_fields(correspondences, etape2, liste_ing)
-    return dicto_final
+                dicto_esp[k] = '/'
+    return dicto_esp
 
 
 if __name__ == "__main__":
