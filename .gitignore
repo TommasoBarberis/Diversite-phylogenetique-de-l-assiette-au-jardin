@@ -4,3 +4,4 @@ Tree.txt
 log.txt
 results.tsv
 lib/__pycache__/*
+.coverage

@@ -373,8 +373,8 @@ class Results:
         download.bind('<Leave>', lambda x: leave_download(label_photo_info))
 
 
-        def get_lifemap (especes):
-            get_lifeMap_subTree.get_subTree(especes)
+        def get_lifemap (species):
+            get_lifeMap_subTree.get_subTree(species)
             logger.info("The user has click on LifeMap's button")
         lifemap = Button(main_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
         fg = "#5A2328", width = 12)
@@ -599,8 +599,8 @@ def table_row (ingredients, especes):
     return dict_row
 
 def main(): 
-    root = Tk()
-    app = MainWindow(root)
+    root = tkinter.Tk()
+    MainWindow(root)
     root.mainloop()
 
 
@@ -617,10 +617,10 @@ try:
         lines = log.readlines()
         log_length = len(lines)
         if log_length > 1000:
-            lines = lines [(log_length-1001):-1]
-    
+            lines = lines[(log_length-1001):-1]
+
     with open("log.txt", "w") as log:
-            for line in lines:
-                log.write(line) 
+        for line in lines:
+            log.write(line)
 except Exception:
     pass

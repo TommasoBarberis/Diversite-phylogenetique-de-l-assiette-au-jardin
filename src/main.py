@@ -15,7 +15,7 @@ logger.addHandler(file_handler)
 
 
 # url input
-url = input("Enter the url recipe. (from Marmiton.org) \n") 
+url = input("Enter the url recipe. (from Marmiton.org) \n")
 print("\n")
 logger.info("URL recipe entered by user: " + url)
 
@@ -45,9 +45,10 @@ nbspec = len(especes)
 nbnut = len(dictionnaire_nutrition)
 nut_not_found = []
 
+
 def missing_species(ingredients, especes):
     species_not_found = []
-    if nbing != nbspec :
+    if nbing != nbspec:
         complete_spec = False
         for key in ingredients:
             if key not in especes and key[:-1] not in especes.keys():
@@ -56,7 +57,7 @@ def missing_species(ingredients, especes):
         complete_spec = True
     return (species_not_found, complete_spec)
 
-if nbing != nbnut :
+if nbing != nbnut:
     complete_nut = False
     for key in ingredients:
         if key.capitalize() not in dictionnaire_nutrition:
@@ -105,7 +106,7 @@ except Exception:
 
 # computation of the phylogenetic diversity
 try:
-    dp = get_dp.phylogenetic_diversity("Tree.txt", especes) # phylogenetic diversity
+    dp = get_dp.phylogenetic_diversity("Tree.txt", especes)  # phylogenetic diversity
     logger.info("computation of the phylogenetic diversity, DONE")
 except Exception:
     logger.exception("Error in phylogenetic diversity computation")
@@ -129,7 +130,8 @@ try:
             break
 
     if bool_var is True:
-        wdp = get_dp.weighted_phylogenetic_diversity("Tree.txt", especes, dict_sp_drym)  # weighted phylogenetic diversity
+        wdp = get_dp.weighted_phylogenetic_diversity("Tree.txt", especes, dict_sp_drym)  
+        # weighted phylogenetic diversity
     else:
         wdp = "NA"
     logger.info("Computation of weighted phylogenetic diversity, DONE")
@@ -143,8 +145,8 @@ if not var[1]:
     for missing in var[0]:
         print("\t" + missing)
 
-print("\n" + str(nbnut) + " ingredients were found in the nutrition database ,from the " + str(nbing) \
-    + " different ingredients.")
+print("\n" + str(nbnut) + " ingredients were found in the nutrition database ,from the " + str(nbing)
++ " different ingredients.")
 if not complete_nut:
     print("these ingredients are missing nutrition information :")
     for missing in nut_not_found:
@@ -181,6 +183,6 @@ try:
 
     with open("log.txt", "w") as log:
         for line in lines:
-            log.write(line) 
+            log.write(line)
 finally:
     pass
