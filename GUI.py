@@ -599,7 +599,7 @@ def table_row (ingredients, especes):
     return dict_row
 
 def main(): 
-    root = tkinter.Tk()
+    root = Tk()
     MainWindow(root)
     root.mainloop()
 

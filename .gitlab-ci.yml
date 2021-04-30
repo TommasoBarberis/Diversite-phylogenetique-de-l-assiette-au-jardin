@@ -11,9 +11,6 @@ stages:
 pytest:
   stage: Test
   script:
-  # - export PYTHONPATH="$PYTHONPATH:."
-  # - python -c "import sys;print(sys.path)"
   - pip3 install -r requirements.txt
-  - pytest
-  # - coverage run -m pytest
-  # - coverage report
+  - coverage run -m pytest
+  - coverage report

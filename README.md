@@ -14,3 +14,9 @@ To execute the program :
     python3 main.py in command line
     
 Work on marmiton.org version of 26/04/2021
+
+
+Contributors:
+    - Barberis Tommaso
+    - Deguise Victor
+    - Frouté Timothée

@@ -5,3 +5,4 @@ log.txt
 results.tsv
 lib/__pycache__/*
 .coverage
+tests/__pycache__/*

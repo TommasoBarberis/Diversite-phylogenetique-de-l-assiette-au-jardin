@@ -4,11 +4,13 @@ import xlrd
 import csv
 from lib import get_ing
 
-# name : 7 
-# water % : 13
-# glucides % 16
-# lipides % 17 
-# sucres % 18
+# In "Table_Ciqual_2020_FR_2020_07_07.xls":
+# name of ingredient:  column 7 
+# water (%): column 13
+# proteins (%): column 14
+# glucides (%): column 16
+# lipides (%): column 17 
+# sucres (%):column 18
 
 
 def openBook(file):
@@ -17,6 +19,9 @@ def openBook(file):
 
 
 def getDefaultLineNumber(ingredient):
+    """
+    Permet de trouver plus facilement certains ingrédients dans la table Ciqual. 
+    """
     f = open("data/default.txt", "r")
     default_list = f.read().splitlines()
     for line in default_list:
@@ -68,7 +73,7 @@ def getNutInfo(ing, book):
     return final_nut_info
 
 
-# {"ingredient" : [db_name,water_qtt,glucide,lipides,sucres]}
+# {"ingredient" : [db_name,water,glucides,lipides,proteins]}
 def getDictNut(dict_ing):
     myBook = openBook("data/Table_Ciqual_2020_FR_2020_07_07.xls")
     output = {}
@@ -80,7 +85,7 @@ def getDictNut(dict_ing):
     return output
 
 
-def getDictNutPond(dict_ing, dict_nut):
+def getDictNutPond(dict_ing, dict_nut): # a integrer
     dict_pond = {}
     for ing in dict_nut:
         dict_pond[ing] = []
@@ -104,26 +109,26 @@ def getDictNutPond(dict_ing, dict_nut):
 
 def dryMatterDicUpdate(dict_ing, dict_nut):
     dry_matter_dict = {}
+    unit_list = ["g", "kg", "l", "cl"] #ponderable unit measure
     for ing in dict_ing:
-        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != '-': \
-            # and dict_ing[ing][1] != "Non ponderable":
+        # if l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est non
+        # nulle et que la quantite d'eau est non nulle
+        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != '-' \
+        and dict_ing[ing][1] is not None:
             if "<" in dict_nut[ing.capitalize()][1]:
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1][2:])))
             else:
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
             qtt = str(dict_ing[ing][1])
-            if qtt != '':
+            unit = dict_ing[ing][2][1]
+            if qtt != '' and unit in unit_list:
                 qtt  = float(qtt)
                 dry_matter = round(qtt - qtt * wat/100,2) 
-                dry_matter_dict[ing] = dry_matter
+                dry_matter_dict[ing] = [dry_matter, unit]
         else: 
             dry_matter_dict[ing] = "-"
 
     return dry_matter_dict
-
-
-def scoreDict():
-    pass
 
 
 def format_float(input_string):

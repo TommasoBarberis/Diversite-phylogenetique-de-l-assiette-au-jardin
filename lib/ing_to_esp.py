@@ -22,16 +22,17 @@ def db_to_dicto (path):
     return dicto
 
 
-def search_in_dict(dicto1, dicto2, liste):
-    for k in liste:
-        if k in dicto1.keys():
-            dicto2[k.lower()] = dicto1[k]
-        elif k.capitalize() in dicto1.keys():
-            dicto2[k.lower()] = dicto1[k.capitalize()]
+def search_in_dict(correspondences, dicto_esp, liste_ing):
+    for k in liste_ing:
+        if k in correspondences.keys():
+            dicto_esp[k.lower()] = correspondences[k]
+        elif k.capitalize() in correspondences.keys():
+            dicto_esp[k.lower()] = correspondences[k.capitalize()]
         elif k.endswith("s"):
             k = k[0:-1]
-            dicto2[k.lower()] = dicto1[k]
-    return dicto2
+            if k in correspondences.keys():
+                dicto_esp[k.lower()] = correspondences[k]
+    return dicto_esp
 
 
 def last_try(ing, dico_espece, score_thresh, caller):
