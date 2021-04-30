@@ -1,8 +1,4 @@
 import lib.get_dp as gdp
-from testfixtures import TempDirectory
-import pytest
-
-@pytest.fixture()
 
 
 def test_length_root_to_knot():
