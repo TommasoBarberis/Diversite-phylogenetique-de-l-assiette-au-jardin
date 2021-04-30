@@ -1,6 +1,6 @@
 #  -*- coding: utf-8 -*-
 
-from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties, get_NCBI_taxonomy
+from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
 import os
 from ete3 import NCBITaxa
 import logging
@@ -13,19 +13,22 @@ file_handler = logging.FileHandler("log.txt")
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
-
 # url input
 url = input("Enter the url recipe. (from Marmiton.org) \n")
 print("\n")
 logger.info("URL recipe entered by user: " + url)
 
-
-# getting ingredients from web site
-try:
-    ingredients = get_ing.process(url)
-    logger.info("Parsing of ingredients, DONE")
-except Exception:
-    logger.exception("Error in parsing ingredients")
+while True:
+    # getting ingredients from web site
+    try:
+        ingredients = get_ing.process(url)
+        logger.info("Parsing of ingredients, DONE")
+        break
+    except Exception:
+        logger.exception("Error in parsing ingredients")
+    
+    url = input("Please, enter a valid url (recipe from Marmiton.org) \n")
+    logger.info("URL recipe entered by user: " + url)
 
 # getting species
 try:

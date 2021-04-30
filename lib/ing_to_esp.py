@@ -2,6 +2,11 @@
 
 from lib import get_ing
 import inspect
+from difflib import SequenceMatcher
+
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
 
 
 def db_to_dicto (path):
@@ -40,7 +45,7 @@ def last_try(ing, dico_espece, score_thresh, caller):
     best_score = score_thresh
     match_cpt = 1
     for key in dico_espece:
-        score = get_ing.similar(ing, dico_espece[key])
+        score = similar(ing, dico_espece[key])
         if score > score_thresh:
             best_match.append([dico_espece[key], key, match_cpt])
             match_cpt = match_cpt+1
@@ -87,6 +92,5 @@ if __name__ == "__main__":
     dicto_ing = {'farine': 200.0, 'beurre demi-sel': 100.0, 'eau': 50.0, 'sel': 1.0, 'crème': 250.0, 'carambar©': 320.0,\
          'chocolat': 100.0, 'beurre de cacahuètes': 2.0}
 
-# print(liste_ing)
 
     print(recherche_globale(dicto_ing))

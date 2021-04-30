@@ -2,7 +2,7 @@
 
 import xlrd
 import csv
-from lib import get_ing
+from lib.ing_to_esp import similar
 
 # In "Table_Ciqual_2020_FR_2020_07_07.xls":
 # name of ingredient:  column 7 
@@ -49,7 +49,7 @@ def getNutInfo(ing, book):
     else:
         for cel in sheet.col(7):
             values = cel.value.split(",")
-            score = get_ing.similar(values[0],ing)
+            score = similar(values[0],ing)
             if score > highest_score:
                 if cpt != 0 and score >= score_threshold:
                     highest_score = score
@@ -168,7 +168,10 @@ def writeTsv(file_name,dico_ing, dico_especes, dry_matter_dico, dico_nut):
             tsvfile.write("\t")
             tsvfile.write(str(dico_ing[ing][1] + " " + dico_ing[ing][2][1])) # third column - quantity
             tsvfile.write("\t")
-            tsvfile.write(str(dry_matter_dico[ing])) # fourth column - dry matter quantity
+            if ing in dry_matter_dico:
+                tsvfile.write(str(dry_matter_dico[ing][0]) + " " + str(dry_matter_dico[ing][1])) # fourth column - dry matter quantity
+            else:
+                tsvfile.write("-")
             tsvfile.write("\t")
             if ing_cap in dico_nut:
                 for i in range(1, len(dico_nut[ing_cap])):

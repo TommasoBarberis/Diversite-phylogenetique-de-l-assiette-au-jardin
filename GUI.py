@@ -3,7 +3,7 @@
 from tkinter import *
 from urllib.parse import urlparse
 import webbrowser
-from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties, get_NCBI_taxonomy
+from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
 import pyperclip
 from ete3 import NCBITaxa
 import os
@@ -373,17 +373,17 @@ class Results:
         download.bind('<Leave>', lambda x: leave_download(label_photo_info))
 
 
-        def get_lifemap (species):
-            get_lifeMap_subTree.get_subTree(species)
-            logger.info("The user has click on LifeMap's button")
-        lifemap = Button(main_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
-        fg = "#5A2328", width = 12)
-        lifemap.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
+        # def get_lifemap (species):
+        get_lifeMap_subTree.get_subTree(species)
+        logger.info("Opening LifeMap page")
+        # lifemap = Button(main_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
+        # fg = "#5A2328", width = 12)
+        # lifemap.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
+        # lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
         
-        save_row += 1
+        # save_row += 1
 
-        list_ID = get_NCBI_taxonomy.get_taxid(species)
+        list_ID = get_lifeMap_subTree.get_taxid(species)
         ncbi = NCBITaxa()
         tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
         tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
@@ -393,17 +393,21 @@ class Results:
             pass
         with open("Tree.txt","w") as Tree:
             Tree.write(tree)
+            logger.info("Writing Tree.txt")
 
 
-        def get_ete(species):
-            get_lifeMap_subTree.subtree_from_newick(species)
-            logger.info("The user has click the ete's button")
+        def get_ete():
+            try:
+                get_lifeMap_subTree.subtree_from_newick()
+                logger.info("The user has click the ete's button")
+            except Exception:
+                logger.exception("Ete browser doesn't work")
 
 
         ete = Button(main_frame, text = "Ete Sub-tree", font = "arial 20 bold", bg = '#8A7E72', \
         fg = "#5A2328", width = 12)
         ete.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        ete.bind('<Button-1>', lambda x: get_ete(species))
+        ete.bind('<Button-1>', lambda x: get_ete())
 
         save_row += 1
 
