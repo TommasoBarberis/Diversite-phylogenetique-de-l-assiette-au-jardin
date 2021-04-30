@@ -1,7 +1,7 @@
 import lib.get_dp as gdp
 
 
-tree = Path(__file__).parent.joinpath("Tree_test.txt")
+tree = "Tree_test.txt"
 def test_length_root_to_knot(tree):
     dict_lengths = gdp.length_root_to_knot(tree)
     f = open(tree, "r", encoding="utf8")
