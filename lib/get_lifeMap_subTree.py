@@ -156,6 +156,6 @@ def subtree_from_newick():
 
 
 if  __name__ == "__main__":
-    species = {"vache": "Bos taurus", "poulet":"Gallus gallus", "homme": "Homo sapiens"}
-    # get_subTree(species)
-    subtree_from_newick()
+    species = {"boeuf": "Bos taurus", "poulet":"Gallus gallus", "poivre": "Piper nigrum"}
+    print(species)
+    get_subTree(species)
