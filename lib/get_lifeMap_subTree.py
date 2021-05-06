@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
-from ete3 import Tree, TreeStyle,  NCBITaxa
+import ete3 as ete
 import os, sys, time
 import itertools
 import logging
@@ -21,13 +21,9 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 os.environ['WDM_LOG_LEVEL'] = '0'
-# Pré-requis : 
-# pip install ete3
-# pip install selenium
-# pip install webdriver_manager
 
 
-ncbi = NCBITaxa()
+ncbi = ete.NCBITaxa()
 
 def get_taxid(liste_espece):
     liste_espece = liste_espece.values()
@@ -149,8 +145,8 @@ def get_newick(especes):
 
 def subtree_from_newick(tree):
     # get_newick(especes)
-    tree = Tree(tree, quoted_node_names = True, format = 1)    #'Tree.txt'
-    ts = TreeStyle()
+    tree = ete.Tree(tree, quoted_node_names = True, format = 1)    #'Tree.txt'
+    ts = ete.TreeStyle()
     ts.show_leaf_name = True
     ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
     tree.show(tree_style = ts)

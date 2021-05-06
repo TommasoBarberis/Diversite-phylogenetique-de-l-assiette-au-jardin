@@ -2,17 +2,17 @@ name: div-phil-alim
 channels:
   - conda-forge
 dependencies:
-  - PyQt
-  - pytest
-  - beautifulsoup4
+  - pytest = 6.2.4
+  - beautifulsoup4 = 4.9.3
   - ete3 = 3.1.1
-  - numpy
+  - numpy = 1.20.2
   - PyVirtualDisplay = 1.3.2
   - requests = 2.24.0
   - selenium = 3.141.0
   - xlrd = 1.2.0
   - six = 1.15.0
-  - pip
+  - pip = 21.1.1
   - pip:
-        - webdriver-manager
-        - pyperclip
+        - webdriver-manager == 3.4.1
+        - pyperclip == 1.8.2
+        - PyQt5 == 5.15.4
