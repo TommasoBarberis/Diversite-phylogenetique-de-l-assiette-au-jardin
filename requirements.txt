@@ -10,3 +10,4 @@ xlrd==1.2.0
 six==1.15.0
 coverage==5.3
 PyQt5==5.15.4
+pyperclip==1.8.2
