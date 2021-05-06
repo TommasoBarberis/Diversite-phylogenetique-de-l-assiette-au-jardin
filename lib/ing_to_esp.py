@@ -82,8 +82,8 @@ def recherche_globale(dicto_ing):
         if k not in dicto_esp and k[:len(k)-1] not in dicto_esp:
             caller = inspect.stack()[1].filename  # in order to distinguish the caller between main.py and GUI.py
             specie = last_try(k, correspondences, 0.5, caller)
-            if specie is None:
-                dicto_esp[k] = '/'
+            # if specie is None:
+                # dicto_esp[k] = '/'
     return dicto_esp
 
 

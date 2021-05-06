@@ -3,14 +3,14 @@
 from collections import Counter
 
 
-def length_root_to_knot (path):
+def length_root_to_knot (tree):
   """
   Permet de construire un dictionnaire qui contient comme clé chaque noeud de l'arbre phylogenetique et comme valeur
   la distance en nb de branches entre la racine et le nœud a partir d'un arbre phylogénétique de Newick.
   """
-  f = open(path, "r", encoding="utf8")
-  tree = f.read()
-  tree = tree.replace('[', '').replace(']', '').replace("'", "").replace(';', '')
+  # f = open(path, "r", encoding="utf8")
+  # tree = f.read()
+  # tree = tree.replace('[', '').replace(']', '').replace("'", "").replace(';', '')
   dp = 0
   sp = ""
   c = 1
@@ -31,12 +31,12 @@ def length_root_to_knot (path):
   return dico_lengths
 
 
-def filter_dico_lengths (path,species): 
+def filter_dico_lengths (tree,species): 
   """
   Permet de créer un dictionnaire qui contient uniquement les espèces trouvées pour les ingrédients
   avec les longueurs noeud-racine calculées à partir de l'arbre phylogenetique de Newick.
   """
-  dico_lengths = length_root_to_knot(path)
+  dico_lengths = length_root_to_knot(tree)
   new_dico = {}
   for knot in dico_lengths.keys():
     if knot in species.values():
@@ -45,20 +45,20 @@ def filter_dico_lengths (path,species):
   return new_dico
 
 
-def phylogenetic_diversity (path, species):
+def phylogenetic_diversity (tree, species):
   """
   Ensuite à partir de ce dictionnaire on calcule la diversité phylogénétique de la recette en sommant
   les longueurs des branches des espèces présentes dans le plat.
   """
-  dico = filter_dico_lengths(path, species)
+  dico = filter_dico_lengths(tree, species)
   pd = 0
   for i in dico:
     pd += dico[i]
   return pd
 
 
-def weighted_phylogenetic_diversity (path, species, dict_sp_drym):
-  dico = filter_dico_lengths(path, species)
+def weighted_phylogenetic_diversity (tree, species, dict_sp_drym):
+  dico = filter_dico_lengths(tree, species)
   wpd = 0
   for i in dico:
     try:

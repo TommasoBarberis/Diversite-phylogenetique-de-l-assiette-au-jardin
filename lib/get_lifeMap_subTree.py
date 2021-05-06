@@ -5,9 +5,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 from ete3 import Tree, TreeStyle,  NCBITaxa
 import os, sys, time
 import itertools
@@ -33,6 +33,7 @@ def get_taxid(liste_espece):
     liste_espece = liste_espece.values()
     if not isinstance(liste_espece, list):
         liste_espece=list(liste_espece)
+        
     # Obtention des valeurs du dictionnaire
     Liste = [(ncbi.get_name_translator(liste_espece).values())]
     # Obtention d'une liste des valeurs du dictionnaire
@@ -95,7 +96,7 @@ def get_driver():
             "safebrowsing.enabled": True
             })
 
-            driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=chrome_options)
+            driver = webdriver.Chrome(executable_path = ChromeDriverManager().install(), chrome_options=chrome_options)
             logger.info("Opening Chrome")
             return driver
         
@@ -146,16 +147,16 @@ def get_newick(especes):
     # driver.close()
 
 
-def subtree_from_newick():
+def subtree_from_newick(tree):
     # get_newick(especes)
-    t = Tree('Tree.txt', quoted_node_names = True, format = 1)   
+    tree = Tree(tree, quoted_node_names = True, format = 1)    #'Tree.txt'
     ts = TreeStyle()
     ts.show_leaf_name = True
     ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
-    t.show(tree_style = ts)
+    tree.show(tree_style = ts)
 
 
 if  __name__ == "__main__":
     species = {"boeuf": "Bos taurus", "poulet":"Gallus gallus", "poivre": "Piper nigrum"}
-    print(species)
-    get_subTree(species)
+    # print(species)
+    print(get_taxid(species))

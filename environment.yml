@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - PyQt
+  - pytest
   - beautifulsoup4
   - ete3 = 3.1.1
   - numpy

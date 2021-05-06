@@ -1,6 +1,7 @@
 #  -*- coding: utf-8 -*-
 
 from tkinter import *
+from tkinter import ttk
 from urllib.parse import urlparse
 import webbrowser
 from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
@@ -21,7 +22,7 @@ logger.addHandler(file_handler)
 class MainWindow:
     '''
     fenetre principale.
-    lien vers les sites importantes et champ pour entrer l'url de la recette a sousmettre.
+    lien vers les sites importantes et Entry pour entrer l'url de la recette a sousmettre.
     '''
 
 
@@ -30,14 +31,14 @@ class MainWindow:
         
     # window setting 
         main_window.title("Diversité phylogénétique de l’alimentation")
-        main_window.geometry("1080x740")
+        main_window.geometry("800x740")
         main_window.minsize(800,400)
         main_window.config(background = "#2a9d8f")
 
     # title 
         label_title = Label(self.main_window, text = "Diversité phylogénétique \nde l’alimentation", font = 'Helvetica 35 bold', \
             bg = '#2a9d8f', fg = "#f0efeb")
-        label_title.grid(row = 1, column = 3, pady = 10)
+        label_title.grid(row = 1, column = 1, pady = 10)
 
 
         def open_site (url):
@@ -52,72 +53,59 @@ class MainWindow:
             label.config(font = ("Arial", 20))
 
 
+    # entry
+        label_entry = Label(self.main_window, text = "Entrez l'url d'une recette du site marmiton:", font = ("Arial", 20, 'bold'), \
+            bg = '#2a9d8f', fg = '#f0efeb')
+        label_entry.grid(row = 3,column = 1, pady = 10)
+        self.url_entry=Entry(self.main_window, font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb', width = 40)
+        self.url_entry.grid(row = 4,column = 1, pady = 10)
+
+    # submit
+        submit = Button(self.main_window, text = 'Entrer', font = 'arial 20 bold', bg = '#f0efeb', fg = '#2a9d8f', \
+        width = 12, command = self.test_domain)
+        submit.grid(row = 5,column = 1)
+
     # labels (sites)
-        label1 = Label(self.main_window, text = "Sites optimisés:", font = ("Arial", 22, 'bold'), bg = '#2a9d8f', fg = '#000000')
-        label1.grid(row = 7, column = 3, sticky = W)
-        label2 = Label(self.main_window, text = "\twww.marmiton.org", font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb')
-        label2.grid(row = 8,column = 3, sticky = W)
+        label1 = Label(self.main_window, text = "Sites optimisés:", font = ("Arial", 22, 'bold'), bg = '#2a9d8f', fg = '#000000', justify = CENTER)
+        label1.grid(row = 7, column = 1, sticky = W)
+        label2 = Label(self.main_window, text = "\twww.marmiton.org", font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb', justify = CENTER)
+        label2.grid(row = 8,column = 1, sticky = W)
         label2.bind('<Button-1>', lambda x: open_site("https://www.marmiton.org/"))
         label2.bind('<Enter>', lambda x: underline(label2))
         label2.bind('<Leave>', lambda x: desunderline(label2))
-        label3 = Label(self.main_window, text = "Autres sites implementés:", font = ("Arial", 22, 'bold'), bg = '#2a9d8f', \
-        fg = '#000000')
-        label3.grid(row = 9, column = 3, sticky = W)
-        label4 = Label(self.main_window, text = "\twww.750g.com", font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb')
-        label4.grid(row = 10, column = 3, sticky = W)
-        label4.bind('<Button-1>', lambda x: open_site("https://www.750g.com/"))
-        label4.bind('<Enter>', lambda x: underline(label4))
-        label4.bind('<Leave>', lambda x: desunderline(label4))
-        label5 = Label(self.main_window, text = "\twww.cuisineaz.com", font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb')
-        label5.grid(row = 11, column = 3, sticky = W)
-        label5.bind('<Button-1>', lambda x: open_site("https://www.cuisineaz.com/"))
-        label5.bind('<Enter>', lambda x: underline(label5))
-        label5.bind('<Leave>', lambda x: desunderline(label5))
-
 
     # gitlab button
         def open_gitlab():
-            webbrowser.open_new("http://pedago-service.univ-lyon1.fr:2325/tfroute/div-phylo-alim")
+            webbrowser.open_new("https://gitlab.com/TommasoBarberis/diversite-phylogenetique-de-l-assiette-au-jardin")
         gitlab_button=Button(self.main_window, text = "GitLab", font = 'arial 20 bold', bg = "#f0efeb", fg = "#2a9d8f", \
         width = 10, command = open_gitlab)
-        gitlab_button.grid(row = 8, column = 1)
-
+        gitlab_button.grid(row = 10, column = 1)
 
     # ucbl button
         def open_ucbl():
             webbrowser.open_new("https://www.univ-lyon1.fr/")
         ucbl_button=Button(self.main_window, text = "UCBL", font = 'arial 20 bold', bg = '#f0efeb', fg = '#2a9d8f',\
          width = 10, command = open_ucbl)
-        ucbl_button.grid(row = 10,column = 1)
+        ucbl_button.grid(row = 12, column = 1)
 
-
-    # entry
-        label_entry = Label(self.main_window, text = "Entrez l'url d'une recette:", font = ("Arial", 20, 'bold'), \
-            bg = '#2a9d8f', fg = '#f0efeb')
-        label_entry.grid(row = 3,column = 3, pady = 10)
-        self.url_entry=Entry(self.main_window, font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb', width = 40)
-        self.url_entry.grid(row = 4,column = 3, pady = 10)
     # grid
         main_window.grid_rowconfigure(0, weight = 1)
         main_window.grid_rowconfigure(2, weight = 1)
         main_window.grid_rowconfigure(6, weight = 1)
-        main_window.grid_rowconfigure(12, weight = 1)
+        main_window.grid_rowconfigure(9, weight = 1)
+        main_window.grid_rowconfigure(11, weight = 1)
+        main_window.grid_rowconfigure(13, weight = 1)
 
         main_window.grid_columnconfigure(0, weight = 1)
         main_window.grid_columnconfigure(2, weight = 1)
-        main_window.grid_columnconfigure(4, weight = 1)
-
-    # submit
-        submit = Button(self.main_window, text = 'Entrer', font = 'arial 20 bold', bg = '#f0efeb', fg = '#2a9d8f', \
-        width = 12, command = self.test_domain)
-        submit.grid(row = 5,column = 3)
 
 
-    def test_domain (self):
+    def test_domain(self):
         '''
         pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenetre pour afficher les resultats,
         autrement il affiche une fenetre d'erreur.
         '''
+
         url = self.url_entry.get()
         logger.info("URL recipe entered by the user: " + url)
         domain = ""
@@ -125,36 +113,65 @@ class MainWindow:
             domain = urlparse(url).netloc
         except Exception:
             pass
-        if domain == "www.marmiton.org" or domain == "www.750g.com" or domain == "www.cuisineaz.com":   
+        if domain == "www.marmiton.org": # or domain == "www.750g.com" or domain == "www.cuisineaz.com":   
+            
             try:
-                self.results_window()
-                logger.info("Open result window")
+                ingredients = get_ing.process(url)
             except Exception:
-                logger.exception("Error in result window opening")
+                self.results_window(ingredients, species)
+                logger.info("Open result window")
+                logger.exception("Error in the url")
+
+            species = ing_to_esp.recherche_globale(ingredients)
+            dict_nutrition = ing_properties.getDictNut(ingredients)
+            dry_matter_dico = ing_properties.dryMatterDicUpdate(ingredients, dict_nutrition)
+
+
+            if len(ingredients) != len(species) or len(ingredients) != len(dry_matter_dico):
+                try:
+                    self.missing_info_window(ingredients, species, url, dict_nutrition, dry_matter_dico)
+                    logger.info("Open missing information window")
+                except:
+                    logger.exception("Error in 'missing information' window opening")
+            else:
+                try:
+                    self.results_window(ingredients, species)
+                    logger.info("Open result window")
+                except Exception:
+                    logger.exception("Error in 'result' window opening")
+
         else:
             try:
                 self.error_window()
                 logger.info("Open error window for incorrect url")
             except Exception:
-                logger.exception("Error in error window opening")
+                logger.exception("Error in 'error' window opening")
 
 
     def error_window(self):
         '''
         Ouvre la fenetre d'erreur.
         '''
+
         self.error = Toplevel(self.main_window)
         self.app = Error(self.error)
 
 
-    def results_window(self): 
+    def results_window(self, ingredients, species): 
         '''
         Ouvre la fenetre des resultats.
-        '''   
-        self.results = Toplevel(self.main_window)
-        ingredients = get_ing.process(self.url_entry.get())
-        self.app = Results(self.results, url_recipe = self.url_entry.get())
+        '''  
 
+        self.results = Toplevel(self.main_window)
+        self.app = Results(ingredients, species, self.results, url_recipe = self.url_entry.get())
+
+    def missing_info_window(self, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
+        '''
+        Ouvre la fenetre pour rajouter les informations manquantes
+        '''
+
+        self.missing = Toplevel(self.main_window)
+        self.app = MissingPage(ingredients = ingredients, species = species, url_recipe = url_recipe, missing_window = self.missing, dict_nutrition = dict_nutrition, dry_matter_dico = dry_matter_dico)
 
 class Error:
     '''
@@ -163,7 +180,7 @@ class Error:
 
 
     def __init__(self, error_window):
-        self.error_window=error_window
+        self.error_window = error_window
         
     # window setting 
         error_window.title("Error")
@@ -172,7 +189,7 @@ class Error:
         error_window.config(background = "white")
 
     # label
-        error_message = Label(self.error_window, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correcte et réessayez", \
+        error_message = Label(self.error_window, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correct et réessayez", \
             font = 'Arial 13 bold', bg = 'white')
         error_message.grid(row = 1, column = 1)
 
@@ -192,21 +209,254 @@ class Error:
         error_window.grid_columnconfigure(2, weight = 1)
 
 
+# Commons functions for the several windows
+
+def updateScrollRegion(canvas, frame):
+    canvas.update_idletasks()
+    canvas.config(scrollregion = frame.bbox())
+
+
+def createScrollableContainer(canvas, frame, x_scrollbar, y_scrollbar):
+    canvas.config(xscrollcommand = x_scrollbar.set, highlightthickness = 0)      
+    canvas.config(yscrollcommand = y_scrollbar.set, highlightthickness = 0)      
+    x_scrollbar.config(orient = HORIZONTAL, command = canvas.xview)
+    y_scrollbar.config(orient = VERTICAL, command = canvas.yview)
+    x_scrollbar.pack(fill = X, side = BOTTOM, expand = FALSE)
+    y_scrollbar.pack(fill = Y, side = RIGHT, expand = FALSE)
+    canvas.pack(fill = BOTH, side = LEFT, expand = TRUE)
+    canvas.create_window(0, 0, window = frame, anchor = NW)
+
+
+def enter_button(label, text):
+    label.config(text = text)
+
+            
+def leave_button(label):
+    label.config(text = "")
+
+class MissingPage:
+    '''
+    Creation de la fenetre pour recuperer les informations manquantes
+    '''
+
+    def __init__(self, ingredients, species, url_recipe, missing_window, dict_nutrition, dry_matter_dico):
+        self.missing_window = missing_window
+
+    # window setting 
+        missing_window.title("Informations manquantes")
+        missing_window.geometry("1000x740")
+        missing_window.config(background = "#C8BFC7")
+
+
+        container = Frame(self.missing_window, bg = "#C8BFC7")
+        container.pack(side = TOP, fill = BOTH, expand = 1)
+        container.grid_rowconfigure(0, weight = 1)
+        container.grid_columnconfigure(0, weight = 1)
+        
+        self.frames = {}
+
+        for F in (MissingSpeciesPage, MissingQuantitiesPage):
+            frame = F(container, self, missing_window, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico)
+            self.frames[F] = frame
+            frame.grid(row = 0, column = 0, sticky = NSEW)
+
+        if len(ingredients) == len(species):
+            self.show_frame(MissingQuantitiesPage)
+        else:
+            self.show_frame(MissingSpeciesPage)
+    
+    def show_frame(self, name):
+        frame = self.frames[name]
+        frame.tkraise()
+        logger.info("Switch to {}".format(name.__name__))
+
+    
+def results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, *args): 
+    '''
+    Ouvre la fenetre des resultats.
+    '''  
+
+    if str(self) == ".!toplevel.!frame.!missingquantitiespage": # it modify ingredients quantities and units only if the function is called by MissingQuantitesPage
+        for ind, arg in enumerate(args):
+            if ind == 0:
+                quantities = arg
+            elif ind == 1:
+                units = arg
+            elif ind == 2:
+                new_ing = arg
+
+        for ind, ing in enumerate(new_ing):
+            if quantities[ind].get() != "" and units[ind].get() != "": # if any quantities or units is given, the original data are conserved
+                ingredients[ing] = [ingredients[ing][0], quantities[ind].get(), [units[ind].get(),units[ind].get()]]        
+                logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(quantities[ind].get() + " " + str(units[ind].get())), ing))
+
+        dry_matter_dico = ing_properties.dryMatterDicUpdate(ingredients, dict_nutrition)
+
+    self.results = Toplevel(self)
+    self.app = Results(ingredients, species, self.results, url_recipe, dict_nutrition, dry_matter_dico)
+    window.withdraw()
+
+
+class MissingSpeciesPage(Frame):
+
+    def __init__(self, parent, controller, window, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
+        Frame.__init__(self, parent)
+
+        self.config(bg = "#C8BFC7")
+        instruction_frame = Frame(self, bg = "#C8BFC7")
+        instruction_frame.grid_columnconfigure(0, weight = 1)
+        instruction_frame.grid_rowconfigure(0, weight = 1)
+        instruction_label = Label(instruction_frame, text = "Si c'est possible, renseigner les \nespèces pour les ingrédients suivants:", font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
+        instruction_label.grid(row = 1, column = 1, sticky = W)
+        instruction_frame.grid_columnconfigure(2, weight = 1)
+
+        entry_frame = Frame(self, bg = "#C8BFC7")
+        entry_frame.grid_columnconfigure(0, weight = 1)
+        entry_frame.grid_rowconfigure(0, weight = 1)
+        counter_line = 3
+        
+        entries = []
+        for ing in ingredients:
+            if ing not in species:
+                ing_cell = Label(entry_frame, text = ing, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#000000")
+                ing_cell.grid(row = counter_line, column = 1, sticky = E, padx = 20)
+
+                sp_entry = Entry(entry_frame, font = "arial 11", width = 40)
+                sp_entry.grid(row = counter_line, column = 3, sticky = W)
+
+                not_valid_label = Label(entry_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 30)
+                not_valid_label.grid(row = counter_line, column = 5, sticky = NSEW)
+
+                entries.append((ing, sp_entry, counter_line, not_valid_label))
+
+                counter_line += 1
+
+
+        entry_frame.grid_rowconfigure(counter_line + 1, weight = 1)
+
+        buttons_frame = Frame(self, bg = "#C8BFC7")
+        buttons_frame.grid_rowconfigure(0, weight = 1)
+        buttons_frame.grid_columnconfigure(0, weight = 1)
+        
+        test_button = Button(buttons_frame, text = "Test", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
+        test_button.grid(row = 1, column = 1, pady = 10, sticky = W)
+        test_button.bind('<Button-1>', lambda x: test_species(entries))
+        
+
+        label_info = Label(buttons_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 50)
+        label_info.grid(row = 1, column = 3, sticky = NSEW)
+        test_button.bind('<Enter>', lambda x: enter_button(label_info, 'Permet de tester si les espèces rentrées \nsont des noms taxonomiques valides'))
+        test_button.bind('<Leave>', lambda x: leave_button(label_info))
+
+        next_button = Button(buttons_frame, text = "Suivant", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
+        finish_button = Button(buttons_frame, text = "Suivant", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
+
+        if len(ingredients) != len(dry_matter_dico):
+            next_button.grid(row = 3, column = 1, pady = 10, sticky = W)
+            next_button.bind('<Button-1>', lambda x: controller.show_frame(MissingQuantitiesPage))
+        else:
+            finish_button.grid(row = 3, column = 1, pady = 10, sticky = W)
+            next_button.bind('<Button-1>', lambda x: results_window_from_missing_window(self.ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico))
+
+
+        def test_species(entries):
+            '''
+            Permet de tester si les espèces rentrées par l'utilisateur sont des noms taxonomiques valides
+            '''
+            
+            for entry in entries:
+                logger.debug("The user has enter '{}' for the ingredient '{}'".format(entry[1].get(), entry[0]))
+                sp = get_lifeMap_subTree.get_taxid({entry: entry[1].get()})
+
+                if sp != []:
+                    sp = get_lifeMap_subTree.get_taxid({entry: entry[1].get()})
+                    species[entry[0]] = entry[1].get()
+                    entry[3].config(text = "")
+                else:
+                    entry[3].config(text = "Nom taxonomique non valide")
+
+
+        instruction_frame.pack(side = TOP, fill = X, expand = 1,  anchor = CENTER)
+        entry_frame.pack(side = TOP, fill = X, expand = 1, anchor = CENTER)
+        buttons_frame.pack(side = TOP, fill = X, expand = 1, anchor = CENTER)
+
+
+class MissingQuantitiesPage(Frame):
+
+    def __init__(self, parent, controller, window, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
+        Frame.__init__(self, parent)
+        self.config(bg = "#C8BFC7")
+
+        instruction_frame = Frame(self, bg = "#C8BFC7")
+        instruction_label = Label(instruction_frame, text = "Si c'est possible, renseigner les quantités \npour les ingrédients suivants ainsi que leurs unités de mesure:", font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
+        instruction_label.pack(side = TOP, fill = BOTH, expand = 1, anchor = CENTER)
+        instruction_frame.pack(side = TOP, fill = BOTH, expand = 1, anchor = CENTER)
+
+        data_frame = Frame(self, bg = "#C8BFC7")
+        data_frame.grid_columnconfigure(0, weight = 1)
+        data_frame.grid_rowconfigure(0, weight = 1)
+        counter_line = 3
+        
+        quantities = []
+        units = []
+        new_ing = []
+
+        for ing in ingredients:
+            if ing not in dry_matter_dico:
+                ing_label = Label(data_frame, text = ing, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#000000")
+                ing_label.grid(row = counter_line, column = 1, sticky = E, padx = 20)
+
+                quantity_entry = Entry(data_frame, font = "arial 11", width = 40)
+                quantity_entry.grid(row = counter_line, column = 3, sticky = W)
+                quantities.append(quantity_entry)
+
+                unit_choice = ttk.Combobox(data_frame, width = 10)
+                unit_choice['values'] = ('g', 'kg', 'cl', 'dl', 'l')
+                unit_choice.grid(row = counter_line, column = 5, sticky = E, padx = 20)
+                units.append(unit_choice)
+
+                new_ing.append(ing)
+                counter_line += 1
+        
+        data_frame.grid_columnconfigure(6, weight = 1)
+        data_frame.pack(side = TOP, fill = BOTH, expand = 1, anchor = CENTER)
+
+        buttons_frame = Frame(self, bg = "#C8BFC7")
+        buttons_frame.grid_rowconfigure(0, weight = 1)
+        buttons_frame.grid_columnconfigure(0, weight = 1)
+
+        prev_button = Button(buttons_frame, text = "Avant", font = 'arial 20 bold', bg = '#8A7E72', fg = '#5A2328', width = 12)
+        buttons_frame.grid_columnconfigure(2, weight = 1)
+        
+        if len(ingredients) != len(species):
+            prev_button.grid(row = 1, column = 1, pady = 10, sticky = W)
+
+        prev_button.bind('<Button-1>', lambda x: controller.show_frame(MissingSpeciesPage))
+
+        finish_button = Button(buttons_frame, text = "Terminer", font = 'arial 20 bold', bg = '#8A7E72', fg = '#5A2328', width = 12)
+        finish_button.grid(row = 1, column = 3, pady = 10, sticky = W)
+        finish_button.bind('<Button-1>', lambda x: results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, quantities, units, new_ing))
+        buttons_frame.grid_columnconfigure(4, weight = 1)
+
+
+        buttons_frame.pack(side = TOP, fill = X, expand = 1, anchor = CENTER)
+
+
 class Results:
     '''
     Creation de la fenetre pour les résultats.
     '''
 
-
-    def __init__(self, results_window, url_recipe):
+    def __init__(self, ingredients, species, results_window, url_recipe, dict_nutrition, dry_matter_dico):
         self.results_window = results_window
         self.url_recipe = url_recipe
-    
+
     # window setting 
         results_window.title("Résultats")
-        w = results_window.winfo_screenwidth()
-        h = results_window.winfo_screenheight()
-        results_window.geometry("%dx%d+0+0" % (w, h))
+        # w = results_window.winfo_screenwidth()
+        # h = results_window.winfo_screenheight()
+        # results_window.geometry("%dx%d+0+0" % (w, h))
+        results_window.geometry("1800x800")
         results_window.minsize(1080, 720)
         results_window.config(background = "#C8BFC7")
         results_window.grid_columnconfigure(0, weight = 1)
@@ -218,25 +468,7 @@ class Results:
         x_scrollbar = Scrollbar(self.main_canvas)
 
 
-        def updateScrollRegion():
-            self.main_canvas.update_idletasks()
-            self.main_canvas.config(scrollregion = main_frame.bbox())
-
-
-        def createScrollableContainer():
-            self.main_canvas.config(xscrollcommand = x_scrollbar.set, highlightthickness = 0)      
-            self.main_canvas.config(yscrollcommand=y_scrollbar.set, highlightthickness = 0)      
-            x_scrollbar.config(orient = HORIZONTAL, command = self.main_canvas.xview)
-            y_scrollbar.config(orient = VERTICAL, command = self.main_canvas.yview)
-            x_scrollbar.pack(fill = X, side = BOTTOM, expand = FALSE)
-            y_scrollbar.pack(fill = Y, side = RIGHT, expand = FALSE)
-            self.main_canvas.pack(fill = BOTH, side = LEFT, expand = TRUE)
-            self.main_canvas.create_window(0, 0, window = main_frame, anchor = NW)
-
-
     #some functions
-
-
         def open_site (url):
             webbrowser.open_new(url)
 
@@ -256,18 +488,14 @@ class Results:
         recipe = Label(main_frame, text = name_recipe, font = 'Arial 18', bg = '#C8BFC7', fg = "#000000", justify = CENTER)
         recipe.grid(row = 1, column = 3, sticky = W, columnspan = 6)
     
-        global ingredients # dictionary at the form: ingredients[ingredient_name] = [[singular_name, plural_name], quantity, [singular_unity, plural_unity]]
-        ingredients = get_ing.process(self.url_recipe)
-        
-        global species # dictionary at the form: species[ingredient_name] = specie_name
-        species = ing_to_esp.recherche_globale(ingredients)
-
     # missing species
         string1="{} espèces ont été trouvé pour les {} ingrédients.".format(len(species), len(ingredients))
         missing_species1 = Label(main_frame, text = string1, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
         missing_species1.grid(row = 3, column = 1, sticky = W, columnspan = 6)
         missing_sp_list = missing_species(ingredients, species)
+
         save_row = 5
+
         if not missing_sp_list[1]:
             missing_species2 = Label(main_frame, text = "Les ingrédients pour lesquels l’espèce manque:", \
                 font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
@@ -281,7 +509,7 @@ class Results:
             fg = "#000000").grid(row = save_row, column = 1, sticky = W, columnspan = 6)
 
     # missing ingredients in nutritional db
-        missing_ing_list = missing_nutrition(ingredients)
+        missing_ing_list = missing_nutrition(ingredients, dict_nutrition)
         string2="{}/{} ingrédients ont été trouvé dans la table Ciqual (base de données).".format(str(len(ingredients) \
             - len(missing_ing_list[0])),len(ingredients))
         missing_ing1 = Label(main_frame, text = string2, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
@@ -299,7 +527,7 @@ class Results:
                 missing1.grid(row = save_row, column = 1, sticky = W, columnspan = 6)
 
     # table
-        dict_row=table_row(ingredients, species)
+        dict_row = table_row(ingredients, species, dict_nutrition, dry_matter_dico)
         list_column = ["Ingrédient", "Espèce", "Quantité", "Qté de matière\n sèche (g)", "Eau (%)", \
             "Glucides (%)", "Lipides (%)", "Protéines (%)"]
         save_row += 1
@@ -323,7 +551,9 @@ class Results:
             else:
                 table_header = Label(main_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
                 fg = "#090302", justify = CENTER, relief = GROOVE, width = 18, height = 3) 
+
             table_header.grid(row = save_row, column = 1+i, sticky = W)
+
         for j in dict_row.keys():
             line = dict_row[j]
             save_row += 1
@@ -373,15 +603,15 @@ class Results:
         download.bind('<Leave>', lambda x: leave_download(label_photo_info))
 
 
-        # def get_lifemap (species):
-        get_lifeMap_subTree.get_subTree(species)
-        logger.info("Opening LifeMap page")
-        # lifemap = Button(main_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
-        # fg = "#5A2328", width = 12)
-        # lifemap.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        # lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
+        def get_lifemap (species):
+            get_lifeMap_subTree.get_subTree(species)
+            logger.info("Opening LifeMap page")
+        lifemap = Button(main_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
+        fg = "#5A2328", width = 12)
+        lifemap.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
+        lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
         
-        # save_row += 1
+        save_row += 1
 
         list_ID = get_lifeMap_subTree.get_taxid(species)
         ncbi = NCBITaxa()
@@ -396,9 +626,9 @@ class Results:
             logger.info("Writing Tree.txt")
 
 
-        def get_ete():
+        def get_ete(tree):
             try:
-                get_lifeMap_subTree.subtree_from_newick()
+                get_lifeMap_subTree.subtree_from_newick(tree)
                 logger.info("The user has click the ete's button")
             except Exception:
                 logger.exception("Ete browser doesn't work")
@@ -407,37 +637,30 @@ class Results:
         ete = Button(main_frame, text = "Ete Sub-tree", font = "arial 20 bold", bg = '#8A7E72', \
         fg = "#5A2328", width = 12)
         ete.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        ete.bind('<Button-1>', lambda x: get_ete())
+        ete.bind('<Button-1>', lambda x: get_ete(tree))
 
         save_row += 1
 
 
-        def get_newick():
-            with open ("Tree.txt","r") as tree:
-                newick_tree = str(tree.readlines())
-                pyperclip.copy(newick_tree)
+        def get_newick(tree):
+            pyperclip.copy(tree)
             logger.info("The user has click the newick's button")
+
         newick = Button(main_frame, text = "Newick Tree", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
         newick.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        newick.bind('<Button-1>', lambda x: get_newick())
+        newick.bind('<Button-1>', lambda x: get_newick(tree))
 
 
-        def enter_button():
-            label_info.config(text = 'Le bouton "Newick Tree" \npermet de recopier le sous-arbre \nde newick dans le clipboard')
-
-            
-        def leave_button():
-            label_info.config(text = "")
         label_info = Label(main_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 40)
         label_info.grid(row = save_row + 1, column = 4, columnspan = 3, sticky = NSEW)
         newick_info = Button(main_frame, text = "?", font = "arial 20 bold", bg = '#8A7E72', \
         fg = "#5A2328", width = 2)
         newick_info.grid(row = save_row, column = 4, pady = 10, sticky = E)
-        newick_info.bind('<Enter>', lambda x: enter_button())
-        newick_info.bind('<Leave>', lambda x: leave_button())
+        newick_info.bind('<Enter>', lambda x: enter_button(label_info, 'Le bouton "Newick Tree" \npermet de recopier le sous-arbre \nde newick dans le clipboard'))
+        newick_info.bind('<Leave>', lambda x: leave_button(label_info))
 
         # DP
-        dp = get_dp.phylogenetic_diversity("Tree.txt", species)
+        dp = get_dp.phylogenetic_diversity(tree, species)
         label6 = Label(main_frame, text = "Diversité phylogénétique (en nb de branches):", \
             font = 'Arial 14 bold', bg = '#C8BFC7', fg = "#8A7E72", justify = CENTER)
         label6.grid(row = save_row - 2, column = 5, columnspan = 4, sticky = NSEW)
@@ -457,7 +680,7 @@ class Results:
                 break
         
         if bool_var is TRUE:
-            wdp = get_dp.weighted_phylogenetic_diversity("Tree.txt", species, dict_sp_drym)
+            wdp = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
         else:
             wdp = "NA"
         
@@ -476,8 +699,8 @@ class Results:
 
         main_frame.pack()
         self.main_canvas.pack()
-        createScrollableContainer()
-        updateScrollRegion()
+        updateScrollRegion(self.main_canvas, main_frame)
+        createScrollableContainer(self.main_canvas, main_frame, x_scrollbar, y_scrollbar)
 
     # Mousewheel
         self.results_window.bind('<Button-4>', lambda event: self.main_canvas.yview('scroll', -1, 'units'))
@@ -525,16 +748,13 @@ class Download:
         download_window.grid_rowconfigure(3, weight = 1)
 
     # confirm button
-        dico_nut = ing_properties.getDictNut(ingredients)
-        dry_dico = ing_properties.dryMatterDicUpdate(ingredients, dico_nut)
-
 
         def action (file_name):
             file_name = file_name.get()
             if not file_name.endswith(".tsv"):
                 file_name += ".tsv"
             logger.info("TSV table saved with the filename: " + file_name)
-            ing_properties.writeTsv(file_name,ingredients, species, dry_dico, dico_nut)
+            ing_properties.writeTsv(file_name,ingredients, species, dry_matter_dico, dict_nutrition)
             self.download_window.destroy()
         confirm_button=Button(self.download_window, text = "Enregistrer", font  = "arial 11", width = 10)
         confirm_button.grid(row = 4, column = 1)
@@ -545,35 +765,39 @@ class Download:
         download_window.grid_columnconfigure(2, weight = 1)
 
 
-def missing_species(ingredients, especes):
+def missing_species(ingredients, species):
+    """
+    Permet de trouver les ingredients pour lesquels on a pas une espece.
+    """
+
     species_not_found = []
-    if len(ingredients) != len(especes) :
+    if len(ingredients) != len(species) :
         complete_spec = False
         for key in ingredients:
-            if key not in especes and key[:-1] not in especes.keys():
+            if key not in species and key[:-1] not in species.keys():
                 species_not_found.append(key)
     else:
         complete_spec = True
     return (species_not_found, complete_spec)
 
 
-def missing_nutrition (ingredients):
-    dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
-    nbnut = len(dictionnaire_nutrition)
+def missing_nutrition (ingredients, dict_nut):
+    """
+    Permet de trouver les ingredients qui ne sont pas trouve dans la table Ciqual.
+    """
+    nbnut = len(dict_nut)
     nut_not_found = []
     if len(ingredients) != nbnut :
         complete_nut = False
         for key in ingredients:
-            if key.capitalize() not in dictionnaire_nutrition:
+            if key.capitalize() not in dict_nut:
                 nut_not_found.append(key.capitalize())
     else:
         complete_nut = True
     return (nut_not_found, complete_nut)
 
 
-def table_row (ingredients, especes):
-    dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
-    dry_matter_dico = ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
+def table_row(ingredients, especes, dict_nut, dry_matter_dict):
     dict_row = {}
     for key in ingredients.keys():
         ing = str(key)
@@ -586,12 +810,12 @@ def table_row (ingredients, especes):
         else:
             list_row.append("-")
         list_row.append(ingredients[key])
-        if ing in dry_matter_dico.keys():
-            list_row.append(dry_matter_dico[ing])
+        if ing in dry_matter_dict.keys():
+            list_row.append(dry_matter_dict[ing])
         else:
             list_row.append("-")
-        if ing.capitalize() in dictionnaire_nutrition.keys():
-            for i, val in enumerate(dictionnaire_nutrition[ing.capitalize()]):
+        if ing.capitalize() in dict_nut.keys():
+            for i, val in enumerate(dict_nut[ing.capitalize()]):
                 if i == 0:
                     pass
                 else:
