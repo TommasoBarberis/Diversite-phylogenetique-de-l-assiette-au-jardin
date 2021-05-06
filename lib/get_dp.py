@@ -8,9 +8,6 @@ def length_root_to_knot (tree):
   Permet de construire un dictionnaire qui contient comme clé chaque noeud de l'arbre phylogenetique et comme valeur
   la distance en nb de branches entre la racine et le nœud a partir d'un arbre phylogénétique de Newick.
   """
-  # f = open(path, "r", encoding="utf8")
-  # tree = f.read()
-  # tree = tree.replace('[', '').replace(']', '').replace("'", "").replace(';', '')
   dp = 0
   sp = ""
   c = 1
