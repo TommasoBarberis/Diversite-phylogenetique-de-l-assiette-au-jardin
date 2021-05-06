@@ -798,6 +798,11 @@ def missing_nutrition (ingredients, dict_nut):
 
 
 def table_row(ingredients, especes, dict_nut, dry_matter_dict):
+    print(ingredients)
+    print(especes)
+    print(dict_nut)
+    print(dry_matter_dict)
+
     dict_row = {}
     for key in ingredients.keys():
         ing = str(key)
@@ -824,17 +829,20 @@ def table_row(ingredients, especes, dict_nut, dry_matter_dict):
             for k in range(4):
                 list_row.append("-")
         dict_row[ing] = list_row
+    print(dict_row)
     return dict_row
 
-def main(): 
+def main(bool): 
     root = Tk()
+    if bool is True:
+        root.after(2000, root.destroy)
     MainWindow(root)
     root.mainloop()
 
 
 if __name__ == '__main__':
     try:
-        main()
+        main(False)
     except Exception:
         logger.exception("Error in the main program")
 
