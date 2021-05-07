@@ -1,6 +1,7 @@
 #  -*- coding: utf-8 -*-
 
 from collections import Counter
+from ete3 import Tree, NCBITaxa
 
 
 def length_root_to_knot (tree):
@@ -13,7 +14,7 @@ def length_root_to_knot (tree):
   c = 1
   iterator = 0
   dico_lengths = {}
-  for ind,char in enumerate(tree):
+  for ind, char in enumerate(tree):
     if char == ",":
       c += 1
     if char == "(":
@@ -31,7 +32,7 @@ def length_root_to_knot (tree):
 def filter_dico_lengths (tree,species): 
   """
   Permet de créer un dictionnaire qui contient uniquement les espèces trouvées pour les ingrédients
-  avec les longueurs noeud-racine calculées à partir de l'arbre phylogenetique de Newick.
+  avec les longueurs (en nb de branches) noeud-racine calculées à partir de l'arbre phylogenetique de Newick.
   """
   dico_lengths = length_root_to_knot(tree)
   new_dico = {}
@@ -43,15 +44,20 @@ def filter_dico_lengths (tree,species):
 
 
 def phylogenetic_diversity (tree, species):
-  """
-  Ensuite à partir de ce dictionnaire on calcule la diversité phylogénétique de la recette en sommant
-  les longueurs des branches des espèces présentes dans le plat.
-  """
-  dico = filter_dico_lengths(tree, species)
-  pd = 0
-  for i in dico:
-    pd += dico[i]
-  return pd
+  # """
+  # Ensuite à partir de ce dictionnaire on calcule la diversité phylogénétique de la recette en sommant
+  # les longueurs des branches des espèces présentes dans le plat.
+  # """
+  # dico = filter_dico_lengths(tree, species)
+  # pd = 0
+  # for i in dico:
+  #   pd += dico[i]
+  
+  tree = Tree(tree, format = 8, quoted_node_names = True)
+  species = list(species.values())
+  ancestor = tree.get_common_ancestor(species)
+  nodes = ancestor.search_nodes()
+  return len(nodes)
 
 
 def weighted_phylogenetic_diversity (tree, species, dict_sp_drym):
@@ -69,3 +75,23 @@ def weighted_phylogenetic_diversity (tree, species, dict_sp_drym):
     wpd /= sum_wight
     wpd = '{0:.3g}'.format(wpd)
   return wpd
+
+
+def common_ancestor(tree, node):
+  ancestor = tree.get_common_ancestor(node)
+  return ancestor
+
+
+if "__main__" == __name__:
+  tree = "(((((((((((((((Piper nigrum)Piper)Piperaceae)Piperales)Magnoliidae,(((((((Allium sativum,Allium cepa)Allium)Allieae)Allioideae)Amaryllidaceae)Asparagales)Petrosaviidae)Liliopsida,(((((((((((((Daucus carota)Daucus sect. Daucus)Daucus)Daucinae)Scandiceae)Apioideae)Apiaceae)Apiineae)Apiales)campanulids)asterids)Pentapetalae)Gunneridae)eudicotyledons)Mesangiospermae)Magnoliopsida)Spermatophyta)Euphyllophyta)Tracheophyta)Embryophyta)Streptophytina)Streptophyta)Viridiplantae)Eukaryota);"
+  ncbi = NCBITaxa()
+  tree = ncbi.get_topology(([4679, 4682, 4039, 13216]), intermediate_nodes = True)
+  tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+  tree = Tree(tree, format = 8, quoted_node_names = True)
+  nodes = tree.search_nodes()
+  print(tree, "\n", nodes, "\n", len(nodes))
+  ancestor = tree.get_common_ancestor("Piper nigrum", "Allium sativum", "Allium cepa", "Daucus carota")
+  nodes = ancestor.search_nodes()
+  # print(tree.get_common_ancestor())
+  print(ancestor, "\n", nodes, "\n",len(nodes))
+  # print(common_ancestor(tree))

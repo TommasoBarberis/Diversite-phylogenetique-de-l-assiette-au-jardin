@@ -26,6 +26,3 @@ def test_table_row():
     dict_row = gui.table_row(ingredients, species, dict_nut, dry_matter_dict)
     assert len(ingredients) == len(dict_row)
 
-def test_main():
-    resultat = gui.main(True)
-    assert resultat is None

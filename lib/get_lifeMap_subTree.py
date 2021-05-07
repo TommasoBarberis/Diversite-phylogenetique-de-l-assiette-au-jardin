@@ -144,7 +144,6 @@ def get_newick(especes):
 
 
 def subtree_from_newick(tree):
-    # get_newick(especes)
     tree = ete.Tree(tree, quoted_node_names = True, format = 1)    #'Tree.txt'
     ts = ete.TreeStyle()
     ts.show_leaf_name = True

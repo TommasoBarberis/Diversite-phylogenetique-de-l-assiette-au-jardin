@@ -36,7 +36,7 @@ class MainWindow:
         main_window.config(background = "#2a9d8f")
 
     # title 
-        label_title = Label(self.main_window, text = "Diversité phylogénétique \nde l’alimentation", font = 'Helvetica 35 bold', \
+        label_title = Label(self.main_window, text = "Diversité phylogénétique \nde l’alimentation", font = 'Arial 35 bold', \
             bg = '#2a9d8f', fg = "#f0efeb")
         label_title.grid(row = 1, column = 1, pady = 10)
 
@@ -365,13 +365,16 @@ class MissingSpeciesPage(Frame):
             '''
             
             for entry in entries:
-                logger.debug("The user has enter '{}' for the ingredient '{}'".format(entry[1].get(), entry[0]))
+                if entry != "":
+                    logger.debug("The user has enter '{}' for the ingredient '{}'".format(entry[1].get(), entry[0]))
                 sp = get_lifeMap_subTree.get_taxid({entry: entry[1].get()})
 
                 if sp != []:
-                    sp = get_lifeMap_subTree.get_taxid({entry: entry[1].get()})
                     species[entry[0]] = entry[1].get()
                     entry[3].config(text = "")
+
+                    # with open("data/filtered_scientific_name_db.txt", "a") as name_db:
+
                 else:
                     entry[3].config(text = "Nom taxonomique non valide")
 
@@ -617,12 +620,17 @@ class Results:
         ncbi = NCBITaxa()
         tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
         tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+
+        
+        tree_file = ncbi.get_topology((list_ID), intermediate_nodes = False)
+        tree_file = tree_file.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+
         try:
             os.remove("Tree.txt")
         except Exception:
             pass
         with open("Tree.txt","w") as Tree:
-            Tree.write(tree)
+            Tree.write(tree_file)
             logger.info("Writing Tree.txt")
 
 
@@ -637,7 +645,7 @@ class Results:
         ete = Button(main_frame, text = "Ete Sub-tree", font = "arial 20 bold", bg = '#8A7E72', \
         fg = "#5A2328", width = 12)
         ete.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        ete.bind('<Button-1>', lambda x: get_ete(tree))
+        ete.bind('<Button-1>', lambda x: get_ete(tree_file))
 
         save_row += 1
 
@@ -648,7 +656,7 @@ class Results:
 
         newick = Button(main_frame, text = "Newick Tree", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
         newick.grid(row = save_row, column = 3, pady = 10, sticky = W, columnspan = 2)
-        newick.bind('<Button-1>', lambda x: get_newick(tree))
+        newick.bind('<Button-1>', lambda x: get_newick(tree_file))
 
 
         label_info = Label(main_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 40)
@@ -798,11 +806,6 @@ def missing_nutrition (ingredients, dict_nut):
 
 
 def table_row(ingredients, especes, dict_nut, dry_matter_dict):
-    print(ingredients)
-    print(especes)
-    print(dict_nut)
-    print(dry_matter_dict)
-
     dict_row = {}
     for key in ingredients.keys():
         ing = str(key)
@@ -829,20 +832,17 @@ def table_row(ingredients, especes, dict_nut, dry_matter_dict):
             for k in range(4):
                 list_row.append("-")
         dict_row[ing] = list_row
-    print(dict_row)
     return dict_row
 
-def main(bool): 
+def main(): 
     root = Tk()
-    if bool is True:
-        root.after(2000, root.destroy)
     MainWindow(root)
     root.mainloop()
 
 
 if __name__ == '__main__':
     try:
-        main(False)
+        main()
     except Exception:
         logger.exception("Error in the main program")
 
