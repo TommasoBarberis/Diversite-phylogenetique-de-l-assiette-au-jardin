@@ -327,7 +327,7 @@ class MissingSpeciesPage(Frame):
                 not_valid_label = Label(entry_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 30)
                 not_valid_label.grid(row = counter_line, column = 5, sticky = NSEW)
 
-                entries.append((ing, sp_entry, counter_line, not_valid_label))
+                entries.append((ing, sp_entry, not_valid_label))
 
                 counter_line += 1
 
@@ -371,12 +371,31 @@ class MissingSpeciesPage(Frame):
 
                 if sp != []:
                     species[entry[0]] = entry[1].get()
-                    entry[3].config(text = "")
+                    entry[2].config(text = "")
 
-                    # with open("data/filtered_scientific_name_db.txt", "a") as name_db:
+                    with open("data/filtered_scientific_name_db.txt", "a") as name_db:
+                        new_line = str(entry[1].get()) + "\t" + str(entry[0] + "\n")
+                        name_db.write(new_line)
+
+                    with open("data/filtered_scientific_name_db.txt", "r") as name_db:
+                        lines = name_db.readlines()
+
+                    with open("data/filtered_scientific_name_db.txt", "w") as name_db:
+
+                        # conserving unique lines
+                        for line in lines:
+                            if lines.count(line) > 1:
+                                for i in range(lines.count(line)):
+                                    lines.pop(lines.index(line))
+                        
+                        # sorting lines
+                        lines.sort()
+
+                        for line in lines:
+                            name_db.write(line)
 
                 else:
-                    entry[3].config(text = "Nom taxonomique non valide")
+                    entry[2].config(text = "Nom taxonomique non valide")
 
 
         instruction_frame.pack(side = TOP, fill = X, expand = 1,  anchor = CENTER)
@@ -808,22 +827,27 @@ def missing_nutrition (ingredients, dict_nut):
 def table_row(ingredients, especes, dict_nut, dry_matter_dict):
     dict_row = {}
     for key in ingredients.keys():
-        ing = str(key)
-        if ing.endswith("s"):
-            ing = ing[:-1]
-        list_row = [ing]
-        if ing in especes.keys():
-            list_row.append(especes[ing])
-        
+        ing = ingredients[key][0]
+        list_row = [ing[0]]
+
+        if ing[0] in especes.keys():
+            list_row.append(especes[ing[0]])
+        elif ing[0] in especes.keys():
+            list_row.append(especes[ing[0]]) 
         else:
             list_row.append("-")
+
         list_row.append(ingredients[key])
-        if ing in dry_matter_dict.keys():
-            list_row.append(dry_matter_dict[ing])
+
+        if ing[0] in dry_matter_dict.keys():
+            list_row.append(dry_matter_dict[ing[0]])
+        elif ing[1]in dry_matter_dict.keys():
+            list_row.append(dry_matter_dict[ing[1]])
         else:
             list_row.append("-")
-        if ing.capitalize() in dict_nut.keys():
-            for i, val in enumerate(dict_nut[ing.capitalize()]):
+
+        if str(key).capitalize() in dict_nut.keys():
+            for i, val in enumerate(dict_nut[str(key).capitalize()]):
                 if i == 0:
                     pass
                 else:
@@ -831,7 +855,8 @@ def table_row(ingredients, especes, dict_nut, dry_matter_dict):
         else:
             for k in range(4):
                 list_row.append("-")
-        dict_row[ing] = list_row
+
+        dict_row[ing[0]] = list_row
     return dict_row
 
 def main(): 

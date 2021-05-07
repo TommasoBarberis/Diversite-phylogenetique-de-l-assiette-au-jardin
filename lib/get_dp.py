@@ -2,7 +2,14 @@
 
 from collections import Counter
 from ete3 import Tree, NCBITaxa
+import logging
 
+logger = logging.getLogger("get_dp.py")
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+file_handler = logging.FileHandler("log.txt")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 def length_root_to_knot (tree):
   """
@@ -55,8 +62,13 @@ def phylogenetic_diversity (tree, species):
   
   tree = Tree(tree, format = 8, quoted_node_names = True)
   species = list(species.values())
-  ancestor = tree.get_common_ancestor(species)
-  nodes = ancestor.search_nodes()
+  try:
+    ancestor = tree.get_common_ancestor(species)
+    nodes = ancestor.search_nodes()
+    logger.info("The phylogenetic diversity of recipe as the number of nodes of the smallest tree containing all species is {}".format(str(len(nodes))))
+  except:
+    nodes = []
+    logger.debug("Probably some species not have the same name in the tree and the species list, so it is impossible to compute the phylogentic diversity")
   return len(nodes)
 
 

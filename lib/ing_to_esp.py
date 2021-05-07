@@ -30,13 +30,13 @@ def db_to_dicto (path):
 def search_in_dict(correspondences, dicto_esp, liste_ing):
     for k in liste_ing:
         if k in correspondences.keys():
-            dicto_esp[k.lower()] = correspondences[k]
+            dicto_esp[k] = correspondences[k]
         elif k.capitalize() in correspondences.keys():
-            dicto_esp[k.lower()] = correspondences[k.capitalize()]
+            dicto_esp[k] = correspondences[k.capitalize()]
         elif k.endswith("s"):
             k = k[0:-1]
             if k in correspondences.keys():
-                dicto_esp[k.lower()] = correspondences[k]
+                dicto_esp[k] = correspondences[k]
     return dicto_esp
 
 
@@ -83,7 +83,7 @@ def recherche_globale(dicto_ing):
             caller = inspect.stack()[1].filename  # in order to distinguish the caller between main.py and GUI.py
             specie = last_try(k, correspondences, 0.5, caller)
             # if specie is None:
-                # dicto_esp[k] = '/'
+            #     dicto_esp[k] = '/'
     return dicto_esp
 
 
