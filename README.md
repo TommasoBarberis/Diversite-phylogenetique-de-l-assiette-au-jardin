@@ -9,20 +9,25 @@
     <br/>
     - pipenv, you can install it running the following command:
     <br/>
-```sudo apt-get install pipenv```
+    <code>sudo apt-get install pipenv</code>
     <br/>
-
 
 <h2>Before using, execute the following lines in your clone repo:</h2>
 
-```pipenv shell # create a virtual environment using the repository``` \ 
-```pipenv install -r requirements.txt # install all dependencies``` \ 
+<code>pipenv shell # create a virtual environment using the repository</code>
+<br/>
+<code>pipenv install -r requirements.txt # install all dependencies<code>
+<br/><br/>
+Run <code>exit</code> to quit the venv.
+
 
 <h2>To execute the program:</h2>
 
-```python3 GUI.py for application with graphic interface``` \ 
+<code>python3 GUI.py for application with graphic interface</code>
+<br/>
 or
-```python3 main.py in command line``` \
+<br/>
+<code>python3 main.py in command line</code>
 
 
 Work on marmiton.org version of 26/04/2021
