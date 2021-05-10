@@ -4,9 +4,13 @@
     - python (please use system's Python and not Python under Anaconda)
     <br/>
     - pip3, you can install it running the following command:
+    <br/>
         `sudo apt-get install python3-pip`
+    <br/>
     - pipenv, you can install it running the following command:
+    <br/>
         `sudo apt-get install pipenv`
+    <br/>
 
 
 <h2>Before using, execute the following lines in your clone repo:</h2>
