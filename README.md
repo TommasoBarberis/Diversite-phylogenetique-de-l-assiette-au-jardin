@@ -9,7 +9,7 @@
     <br/>
     - pipenv, you can install it running the following command:
     <br/>
-        `sudo apt-get install pipenv`
+        ```sudo apt-get install pipenv```
     <br/>
 
 
