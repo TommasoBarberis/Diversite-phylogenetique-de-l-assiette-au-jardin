@@ -180,6 +180,7 @@ Bos taurus	Veau
 Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
+Bos taurus	yaourt
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
 Brassica juncea	Moutarde
@@ -271,6 +272,7 @@ Cichorium intybus	Endive
 Cichorium intybus	Radicchio
 Cinnamomum verum	Cannelle
 Citrullus lanatus	Pastèque
+Citrus	jus de citron
 Citrus aurantifolia	Citron vert
 Citrus aurantifolia	Lime
 Citrus aurantifolia	Limetier
@@ -307,6 +309,7 @@ Corchorus olitorius	corète potagère
 Coriandrum sativum	Coriandre
 Corylus avellana	Noisetier
 Corylus avellana	Noisette
+Corylus avellana	poudre de noisette
 Coryphaena hippurus	Dorade Coryphène
 Coturnix japonica	Caille
 Coturnix japonica	Viande de Caille
@@ -530,6 +533,7 @@ Ocimum basilicum	Basilic aux sauces
 Oenothera biennis	Oenothera
 Oenothera biennis	Œnothère
 Olea europaea	Olive
+Olea europaea	huile
 Olea europaea	huile d'olive
 Opuntia ficus-indica	Figue de barbarie
 Origanum majorana	Marjolaine
@@ -691,6 +695,7 @@ Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	sucre
+Saccharum	sucre vanillé
 Saccharum officinarum	Canne à sucre
 Saccharum officinarum	Cassonade
 Saccharum officinarum	Sucre roux

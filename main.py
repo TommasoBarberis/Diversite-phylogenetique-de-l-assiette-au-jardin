@@ -38,7 +38,7 @@ except Exception:
     logger.exception("Error in conversion of ingredients to species")
 
 try:
-    dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
+    dictionnaire_nutrition = ing_properties.get_dict_nut(ingredients)
     logger.info("Get nutritional information, DONE")
 except Exception:
     logger.exception("Error in getting nutritional information")
@@ -69,14 +69,14 @@ else:
     complete_nut = True
 
 try:
-    drym_dict = ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
+    drym_dict = ing_properties.dry_matter_dict_update(ingredients, dictionnaire_nutrition)
     logger.info("Process the quantity of dry matter of ingredients, DONE")
 except Exception:
     logger.exception("Error in processing quantity of dry matter")
 
 
 try:
-    ing_properties.writeTsv("results.tsv", ingredients, especes, drym_dict, dictionnaire_nutrition)
+    ing_properties.write_tsv("results.tsv", ingredients, especes, drym_dict, dictionnaire_nutrition)
     logger.info("Sum-up of informations in a .tsv file, DONE")
 except Exception:
     logger.exception("Error in writing .tsv")
@@ -157,7 +157,7 @@ if not complete_nut:
 
 print("\n")
 
-ing_properties.nutPrinter(dictionnaire_nutrition)
+ing_properties.nut_printer(dictionnaire_nutrition)
 
 print("\ningredients :")
 ingredients_list = []

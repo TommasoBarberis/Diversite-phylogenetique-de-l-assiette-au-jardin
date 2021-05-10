@@ -132,8 +132,8 @@ class MainWindow:
                 logger.exception("Error in the url")
 
             species = ing_to_esp.recherche_globale(ingredients)
-            dict_nutrition = ing_properties.getDictNut(ingredients)
-            dry_matter_dico = ing_properties.dryMatterDicUpdate(ingredients, dict_nutrition)
+            dict_nutrition = ing_properties.get_dict_nut(ingredients)
+            dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
 
 
             if len(ingredients) != len(species) or len(ingredients) != len(dry_matter_dico):
@@ -296,7 +296,7 @@ def results_window_from_missing_window(self, ingredients, species, url_recipe, w
                 ingredients[ing] = [ingredients[ing][0], quantities[ind].get(), [units[ind].get(),units[ind].get()]]        
                 logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(quantities[ind].get() + " " + str(units[ind].get())), ing))
 
-        dry_matter_dico = ing_properties.dryMatterDicUpdate(ingredients, dict_nutrition)
+        dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
 
     self.results = Toplevel(self)
     self.app = Results(ingredients, species, self.results, url_recipe, dict_nutrition, dry_matter_dico)
@@ -701,13 +701,11 @@ class Results:
         fg = "#090302", justify = CENTER, relief = RAISED, width = 7, height = 3)
         dp_label.grid(row = save_row - 1, column = 5, columnspan = 4)
 
-        dictionnaire_nutrition = ing_properties.getDictNut(ingredients)
-        drym_dict = ing_properties.dryMatterDicUpdate(ingredients, dictionnaire_nutrition)
         dict_sp_drym = {}
         bool_var = TRUE
         for sp in species.keys():
-            if sp in drym_dict.keys():
-                dict_sp_drym[species[sp]] = drym_dict[sp]
+            if sp in dry_matter_dico.keys():
+                dict_sp_drym[species[sp]] = dry_matter_dico[sp]
             else:
                 bool_var = FALSE
                 break

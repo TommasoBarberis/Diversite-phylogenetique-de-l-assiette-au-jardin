@@ -3,14 +3,14 @@
 import xlrd
 import csv
 from lib.ing_to_esp import similar
+import logging
 
-# In "Table_Ciqual_2020_FR_2020_07_07.xls":
-# name of ingredient:  column 7 
-# water (%): column 13
-# proteins (%): column 14
-# glucides (%): column 16
-# lipides (%): column 17 
-# sucres (%):column 18
+logger = logging.getLogger("ing_properties.py")
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+file_handler = logging.FileHandler("log.txt")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 
 def open_book(file):
@@ -18,7 +18,7 @@ def open_book(file):
     return book
 
 
-def getDefaultLineNumber(ingredient):
+def get_default_line_number(ingredient):
     """
     Permet de trouver plus facilement certains ingrédients dans la table Ciqual. 
     """
@@ -31,10 +31,10 @@ def getDefaultLineNumber(ingredient):
     return 0
 
 
-def getNutInfo(ing, book):
-    score_threshold = 0.5
+def get_nut_info(ing, book):
+    score_threshold = 0.9
     sheet = book.sheets()[0]
-    cpt = getDefaultLineNumber(ing.lower())
+    cpt = get_default_line_number(ing.lower())
     found_in_book = False
     nut_info = []
     final_nut_info = []
@@ -63,55 +63,40 @@ def getNutInfo(ing, book):
         for cel in sheet.row(row):
             nut_info.append(cel.value)
 
+        # In "Table_Ciqual_2020_FR_2020_07_07.xls":
+        # name of ingredient:  column 7 
+        # water (%): column 13
+        # proteins (%): column 14
+        # glucides (%): column 16
+        # lipides (%): column 17 
+        # sucres (%):column 18
+
         final_nut_info.append(nut_info[7]) # name
         final_nut_info.append(nut_info[13]) # water
         final_nut_info.append(nut_info[16]) # glucides
         final_nut_info.append(nut_info[17]) # lipides
-        # final_nut_info.append(nut_info[18]) # sucres
         final_nut_info.append(nut_info[14]) # protéines
 
+    logger.debug("The ingredient {} match in the Ciqual's table with {}".format(ing, final_nut_info))
     return final_nut_info
 
 
-# {"ingredient" : [db_name,water,glucides,lipides,proteins]}
-def getDictNut(dict_ing):
+def get_dict_nut(dict_ing):
     myBook = open_book("data/Table_Ciqual_2020_FR_2020_07_07.xls")
     output = {}
     for ing in dict_ing:
         ingredient = ing.capitalize()  
-        nut_info = getNutInfo(ingredient, myBook)
+        nut_info = get_nut_info(ingredient, myBook)
         if nut_info != []:
             output[ingredient] = nut_info
     return output
 
 
-def getDictNutPond(dict_ing, dict_nut): # a integrer
-    dict_pond = {}
-    for ing in dict_nut:
-        dict_pond[ing] = []
-        dict_pond[ing].append(dict_nut[ing][0])
-
-        qtt = str(dict_ing[ing.lower()])
-        qtt  = format_float(qtt)
-        wat_unpond = format_float(str(dict_nut[ing][1]))
-        gluc_unpond = format_float(str(dict_nut[ing][2]))
-        lip_unpond = format_float(str(dict_nut[ing][3]))
-        suc_unpond = format_float(str(dict_nut[ing][4]))
-
-        wat_pond = round(float(qtt) * float(wat_unpond)/100, 2) 
-        gluc_pond = round(float(qtt) * float(gluc_unpond)/100, 2)
-        lip_pond = round(float(qtt) * float(lip_unpond)/100, 2) 
-        suc_pond = round(float(qtt) * float(suc_unpond)/100, 2) 
-        # unités ????
-        print("ingrédient : " + ing + " og qtté = " + str(qtt) + " water_pond = " + str(wat_pond) + \
-            " gluc_pond = " + str(gluc_pond) + " lip_pond = " + str(lip_pond) + " suc_pond = " + str(suc_pond))
-
-
-def dryMatterDicUpdate(dict_ing, dict_nut):
+def dry_matter_dict_update(dict_ing, dict_nut):
     dry_matter_dict = {}
     unit_list = ["g", "kg", "l", "cl"] #ponderable unit measure
     for ing in dict_ing:
-        # if l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est non
+        # if: l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est non
         # nulle et que la quantite d'eau est non nulle
         if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != '-' \
         and dict_ing[ing][1] is not None:
@@ -138,7 +123,7 @@ def format_float(input_string):
         return input_string.replace("< ", "").replace(",", ".")
 
 
-def nutPrinter(nut_dict):
+def nut_printer(nut_dict):
     print('{:10.20}'.format("Database name"), '{:10.15}'.format("Water (%)"),'{:10.15}'.format("Glucides (%)"), \
         '{:10.15}'.format("Lipides (%)"), '{:10.15}'.format("Proteins (%)"), sep="\t \t")
     for names in nut_dict:
@@ -148,7 +133,7 @@ def nutPrinter(nut_dict):
             print("")
 
 
-def writeTsv(file_name,dico_ing, dico_especes, dry_matter_dico, dico_nut):
+def write_tsv(file_name,dico_ing, dico_especes, dry_matter_dico, dico_nut):
     ing_list = list(dico_ing.keys())
     list_column = ["Ingrédient", "Espèce", "Quantité ", "Matière sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", \
         "Protéines, N x facteur de Jones (%)"]
@@ -187,8 +172,8 @@ if __name__ == "__main__":
     dico = {'boule de pâte à pizza': 1.0, 'olive': 1.0, 'boule de mozzarella': 1.0, 'origan': 1.0, \
         'coulis de tomate': 300.0, 'jambon cru': 4.0, 'champignon de paris': 200.0, 'pâte à pizza': 1.0, \
             'boules de mozzarella': 2.0, 'coulis': 300.0, 'jambon': 4.0}
-    dicnut = getDictNut(dico)
-    drymatterdico = dryMatterDicUpdate(dico,dicnut)
+    dicnut = get_dict_nut(dico)
+    drymatterdico = dry_matter_dict_update(dico,dicnut)
     # print(drymatterdico)
 
     filename = "data/Table_Ciqual_2020_FR_2020_07_07.xls"

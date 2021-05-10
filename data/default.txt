@@ -13,3 +13,5 @@ lardons/1573
 crème fraîche/2224
 oeufs/1909
 emmental/2160
+levure/3130
+sucre/2531
