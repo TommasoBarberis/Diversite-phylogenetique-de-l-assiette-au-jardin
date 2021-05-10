@@ -14,7 +14,7 @@
 
 <h2>Before using, execute the following lines in your clone repo:</h2>
 
-<code>pipenv shell # create a virtual environment using the repository</code>
+<code>pipenv shell # create/activate a virtual environment using the repository</code>
 <br/>
 <code>pipenv install -r requirements.txt # install all dependencies</code>
 <br/><br/>
