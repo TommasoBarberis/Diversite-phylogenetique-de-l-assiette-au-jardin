@@ -5,11 +5,11 @@
     <br/>
     - pip3, you can install it running the following command:
     <br/>
-        `sudo apt-get install python3-pip`
+`sudo apt-get install python3-pip`
     <br/>
     - pipenv, you can install it running the following command:
     <br/>
-        ```sudo apt-get install pipenv```
+```sudo apt-get install pipenv```
     <br/>
 
 
