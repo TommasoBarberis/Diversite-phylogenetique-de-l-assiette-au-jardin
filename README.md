@@ -23,11 +23,11 @@ Run <code>exit</code> to quit the venv.
 
 <h2>To execute the program:</h2>
 
-<code>python3 GUI.py for application with graphic interface</code>
+<code>python3 GUI.py # for application with graphic interface</code>
 <br/>
 or
 <br/>
-<code>python3 main.py in command line</code>
+<code>python3 main.py # for the command line program</code>
 
 
 Work on marmiton.org version of 26/04/2021
