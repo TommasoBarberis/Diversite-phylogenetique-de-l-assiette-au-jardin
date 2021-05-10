@@ -1,11 +1,11 @@
 <h1>Diversité phylogénétique: de l'assiette au jardin</h1>
 
 <h2>Requirements:</h2>
-    - python (please use system's Python and not Python under Anaconda)\
-    - pip3, you can install it running the following command:\
-        ```sudo apt-get install python3-pip```\
-    - pipenv, you can install it running the following command:\
-        ```sudo apt-get install pipenv```
+    - python (please use system's Python and not Python under Anaconda)
+    - pip3, you can install it running the following command:
+        `sudo apt-get install python3-pip`
+    - pipenv, you can install it running the following command:
+        `sudo apt-get install pipenv`
 
 
 <h2>Before using, execute the following lines in your clone repo:</h2>
