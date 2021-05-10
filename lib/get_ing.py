@@ -7,6 +7,14 @@ from urllib.parse import urlparse
 import re
 import sys
 from difflib import SequenceMatcher
+import logging
+
+logger = logging.getLogger("get_ing.py")
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+file_handler = logging.FileHandler("log.txt")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 
 def process(url):
@@ -21,34 +29,56 @@ def process(url):
 def get_title(url):
     req = requests.get(url)
     soup = bs4.BeautifulSoup(req.content, 'html.parser')
-    html_title = soup.findAll("h1", {"class": 'main-title'})
     try:
-        string_title = html_title[0].get_text()
-        string_title = re.sub('\s+',' ',string_title) # se débarasse des \t et \n
+        html_title = soup.find("main").find("h1").get_text()
+        logger.debug(html_title)
     except:
-        string_title = "\tRecipe title not found"
-    return string_title
+        html_title = "\tRecipe title not found"
+    return html_title
 
 
 def get_marmiton(soup):
+    """
+    Parseur des ingredients.
+    """
 
     ingredients = {}
 
-    html_title = soup.findAll("h1",{"class":'main-title'}) 
-    string_title = html_title[0].get_text()
-    string_title = re.sub('\s+',' ',string_title) # se débarasse des \t et \n 
+    html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-sm-3"}) # select html tag with this class in recipe web page
 
-    html_ingredients_list = soup.find("div", {"class": "ingredient-list__ingredient-group"}) # select html tag with this class in recipe web page
-    li_tags = html_ingredients_list.findAll("li") # object with all ingredients and quantities for the recipe
+    for i in html_ingredients_list:
+        
+        first_level = i.find("div")
+        info_div = first_level.findAll("div")[1]
+        qty_unit_span = info_div.find("span")
+        qty_unit_span = qty_unit_span.get_text()
+        
+        if qty_unit_span == '':
+            qty = "-"
+            unit = ["-", "-"]
+        else:
+            c = 0 # counter
+            qty = ""
 
-    for i in range(0,len(li_tags)):
-        ing = [li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular"), li_tags[i].find("div", \
-            {"class": "ingredient-data"}).get("data-plural")]
-        qty = li_tags[i].find("div", {"class": "quantity-data"}).get_text()
-        unit = [li_tags[i].find("div", {"class": "unit-data"}).get("data-singular"), li_tags[i].find("div", \
-            {"class": "unit-data"}).get("data-plural")]
+            while True:
+                if qty_unit_span[c] == " ":
+                    break
+                else:
+                    qty += qty_unit_span[c]
+                    c += 1
+                if c == len(qty_unit_span):
+                    break
+            
+            unit = qty_unit_span[c+1:len(qty_unit_span)]
+            unit = [unit, unit]
+
+        ing_span = first_level.findAll("span")[1]
+        ing_span = ing_span.get_text()
+        ing = [ing_span, ing_span]
+
         val = [ing, qty, unit]
-        ingredients[li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular")] = val
+        ingredients[ing[0]] = val
+
     return ingredients
 
 
