@@ -5,7 +5,7 @@
     <br/>
     - pip3, you can install it running the following command:
     <br/>
-            sudo apt-get install python3-pip
+    <code>sudo apt-get install python3-pip</code>
     <br/>
     - pipenv, you can install it running the following command:
     <br/>
