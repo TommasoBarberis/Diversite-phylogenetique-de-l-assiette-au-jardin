@@ -102,9 +102,18 @@ class MainWindow:
 
     def test_domain(self):
         '''
-        pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenetre pour afficher les resultats,
+        pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenetre pour 
+        demander les informations manquantes ou sinon directement pour afficher les resultats,
         autrement il affiche une fenetre d'erreur.
         '''
+
+        def open_error_window(self):
+            try:
+                logger.info("Open error window for incorrect url")
+                self.error_window()
+            except Exception:
+                logger.exception("Error in 'error' window opening")
+
 
         url = self.url_entry.get()
         logger.info("URL recipe entered by the user: " + url)
@@ -112,9 +121,9 @@ class MainWindow:
         try:
             domain = urlparse(url).netloc
         except Exception:
-            pass
-        if domain == "www.marmiton.org": # or domain == "www.750g.com" or domain == "www.cuisineaz.com":   
-            
+            open_error_window(self)
+
+        if domain == "www.marmiton.org":  
             try:
                 ingredients = get_ing.process(url)
             except Exception:
@@ -141,11 +150,8 @@ class MainWindow:
                     logger.exception("Error in 'result' window opening")
 
         else:
-            try:
-                self.error_window()
-                logger.info("Open error window for incorrect url")
-            except Exception:
-                logger.exception("Error in 'error' window opening")
+            open_error_window(self)
+
 
 
     def error_window(self):
