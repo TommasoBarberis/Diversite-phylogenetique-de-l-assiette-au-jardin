@@ -13,7 +13,7 @@ from lib.ing_to_esp import similar
 # sucres (%):column 18
 
 
-def openBook(file):
+def open_book(file):
     book = xlrd.open_workbook(file)
     return book
 
@@ -75,7 +75,7 @@ def getNutInfo(ing, book):
 
 # {"ingredient" : [db_name,water,glucides,lipides,proteins]}
 def getDictNut(dict_ing):
-    myBook = openBook("data/Table_Ciqual_2020_FR_2020_07_07.xls")
+    myBook = open_book("data/Table_Ciqual_2020_FR_2020_07_07.xls")
     output = {}
     for ing in dict_ing:
         ingredient = ing.capitalize()  
@@ -189,4 +189,8 @@ if __name__ == "__main__":
             'boules de mozzarella': 2.0, 'coulis': 300.0, 'jambon': 4.0}
     dicnut = getDictNut(dico)
     drymatterdico = dryMatterDicUpdate(dico,dicnut)
-    print(drymatterdico)
+    # print(drymatterdico)
+
+    filename = "data/Table_Ciqual_2020_FR_2020_07_07.xls"
+    book = open_book(filename)
+    print(type(book))

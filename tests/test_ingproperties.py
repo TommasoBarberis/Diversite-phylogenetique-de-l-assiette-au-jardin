@@ -4,6 +4,11 @@ import lib.ing_properties as ip
 import lib.get_ing as gi
 import xlrd
 
+def test_openBook():
+    filename = "data/Table_Ciqual_2020_FR_2020_07_07.xls"
+    book = ip.open_book(filename)
+    assert 
+
 
 def test_getNutInfo():
     file_path = "data/Table_Ciqual_2020_FR_2020_07_07.xls"

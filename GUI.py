@@ -217,12 +217,12 @@ class Error:
 
 # Commons functions for the several windows
 
-def updateScrollRegion(canvas, frame):
+def update_scroll_region(canvas, frame):
     canvas.update_idletasks()
     canvas.config(scrollregion = frame.bbox())
 
 
-def createScrollableContainer(canvas, frame, x_scrollbar, y_scrollbar):
+def create_scrollable_container(canvas, frame, x_scrollbar, y_scrollbar):
     canvas.config(xscrollcommand = x_scrollbar.set, highlightthickness = 0)      
     canvas.config(yscrollcommand = y_scrollbar.set, highlightthickness = 0)      
     x_scrollbar.config(orient = HORIZONTAL, command = canvas.xview)
@@ -732,8 +732,8 @@ class Results:
 
         main_frame.pack()
         self.main_canvas.pack()
-        updateScrollRegion(self.main_canvas, main_frame)
-        createScrollableContainer(self.main_canvas, main_frame, x_scrollbar, y_scrollbar)
+        update_scroll_region(self.main_canvas, main_frame)
+        create_scrollable_container(self.main_canvas, main_frame, x_scrollbar, y_scrollbar)
 
     # Mousewheel
         self.results_window.bind('<Button-4>', lambda event: self.main_canvas.yview('scroll', -1, 'units'))
