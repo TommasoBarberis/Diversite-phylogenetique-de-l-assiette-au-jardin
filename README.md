@@ -1,18 +1,25 @@
-requirements:
-    python 
-    anaconda
+<h1>Diversité phylogénétique: de l'assiette au jardin</h1>
 
-Before using, execute the following lines:
+<h2>requirements:</h2>
+    - python (please use system's Python and not Python under Anaconda)
+    - pip3, you can install it running the following command:
+        ```sudo apt-get install python3-pip```
+    - pipenv, you can install it running the following command:
+        ```sudo apt-get install pipenv```
 
-    conda env create -f environment.yml
-    conda activate div-phil-alim
 
-To execute the program : 
+<h2>Before using, execute the following lines in your clone repo:</h2>
 
-    python3 GUI.py for application with graphic interface
-    or
-    python3 main.py in command line
-    
+```pipenv shell # create a virtual environment using the repository```
+```pipenv install -r requirements.txt # install all dependencies```
+
+<h2>To execute the program:</h2>
+
+```python3 GUI.py for application with graphic interface```
+or
+```python3 main.py in command line```
+
+
 Work on marmiton.org version of 26/04/2021
 
 
@@ -21,4 +28,4 @@ Contributors:
     - Deguise Victor
     - Frouté Timothée
 
-(http://pedago-service.univ-lyon1.fr:2325/tfroute/div-phylo-alim)
+(fork by http://pedago-service.univ-lyon1.fr:2325/tfroute/div-phylo-alim)
