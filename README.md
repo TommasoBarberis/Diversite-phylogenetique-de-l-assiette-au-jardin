@@ -5,18 +5,18 @@
     <br/>
     - pip3, you can install it running the following command:
     <br/>
-    <code>sudo apt-get install python3-pip</code>
+        <code>sudo apt-get install python3-pip</code>
     <br/>
     - pipenv, you can install it running the following command:
     <br/>
-    <code>sudo apt-get install pipenv</code>
+        <code>sudo apt-get install pipenv</code>
     <br/>
 
 <h2>Before using, execute the following lines in your clone repo:</h2>
 
 <code>pipenv shell # create a virtual environment using the repository</code>
 <br/>
-<code>pipenv install -r requirements.txt # install all dependencies<code>
+<code>pipenv install -r requirements.txt # install all dependencies</code>
 <br/><br/>
 Run <code>exit</code> to quit the venv.
 
