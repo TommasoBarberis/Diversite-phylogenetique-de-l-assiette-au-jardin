@@ -2,6 +2,7 @@
 
 <h2>Requirements:</h2>
     - python (please use system's Python and not Python under Anaconda)
+    <br/>
     - pip3, you can install it running the following command:
         `sudo apt-get install python3-pip`
     - pipenv, you can install it running the following command:
