@@ -1,34 +1,43 @@
-<h1>Diversité phylogénétique: de l'assiette au jardin</h1>
+# Diversité phylogénétique: de l'assiette au jardin
 
-<h2>Requirements:</h2>
-    - python (please use system's Python and not Python under Anaconda)
-    <br/>
-    - pip3, you can install it running the following command:
-    <br/>
-        <code>sudo apt-get install python3-pip</code>
-    <br/>
-    - pipenv, you can install it running the following command:
-    <br/>
-        <code>sudo apt-get install pipenv</code>
-    <br/>
+## Requirements:
+- python (please use system's Python and not Python under Anaconda)
+- pip3, you can install it running the following command:
+```
+sudo apt-get install python3-pip
+```
+{: .language-bash}
+- pipenv, you can install it running the following command:
+```
+sudo apt-get install pipenv
+```
+{: .language-bash}
 
-<h2>Before using, execute the following lines in your clone repo:</h2>
+## Before using, execute the following lines in your clone repo:
 
-<code>pipenv shell # create/activate a virtual environment using the repository</code>
-<br/>
-<code>pipenv install -r requirements.txt # install all dependencies</code>
-<br/><br/>
-Run <code>exit</code> to quit the venv.
+```
+pipenv shell # create/activate a virtual environment using the repository
+```
+{: .language-bash}
+```
+pipenv install -r requirements.txt # install all dependencies
+```
+{: .language-bash}
+
+Run `exit` to quit the venv.
 
 
-<h2>To execute the program:</h2>
+## To execute the program:
 
-<code>python3 GUI.py # for application with graphic interface</code>
-<br/>
+```
+python3 GUI.py # for application with graphic interface
+```
+{: .language-bash}
 or
-<br/>
-<code>python3 main.py # for the command line program</code>
-
+```
+python3 main.py # for the command line program</code>
+```
+{: .language-bash}
 
 Work on marmiton.org version of 26/04/2021
 
