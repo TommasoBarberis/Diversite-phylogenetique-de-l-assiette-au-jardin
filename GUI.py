@@ -699,7 +699,7 @@ class Results:
 
         # DP
         dp = get_dp.phylogenetic_diversity(tree, species)
-        label6 = tk.Label(main_frame, text = "Diversité phylogénétique (en nb de branches):", \
+        label6 = tk.Label(main_frame, text = "Diversité phylogénétique (MPD, Webb 2002):", \
             font = 'Arial 14 bold', bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
         label6.grid(row = save_row - 2, column = 5, columnspan = 4, sticky = "nsew")
         dp_label = tk.Label(main_frame, text = dp, font = 'Arial 18 bold', bg = '#C8BFC7', \
@@ -708,24 +708,24 @@ class Results:
 
         dict_sp_drym = {}
         bool_var = True
-        for sp in species.keys():
-            if sp in dry_matter_dico.keys():
-                dict_sp_drym[species[sp]] = dry_matter_dico[sp]
+        for ing in species.keys():
+            if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "-":
+                dict_sp_drym[species[ing]] = dry_matter_dico[ing]
             else:
                 bool_var = False
                 break
         
         if bool_var is True:
-            wdp = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
+            wpd = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
         else:
-            wdp = "NA"
+            wpd = "NA"
         
         label7 = tk.Label(main_frame, text = "Diversité phylogénétique pondérée:", font = 'Arial 14 bold', \
             bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
         label7.grid(row = save_row, column = 5, columnspan = 4, sticky = "nsew")
-        wdp_label = tk.Label(main_frame, text = wdp,  font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
+        wpd_label = tk.Label(main_frame, text = wpd,  font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
         justify = "center", relief = "raised", width = 7, height = 3)
-        wdp_label.grid(row = save_row + 1, column = 5, columnspan = 4)
+        wpd_label.grid(row = save_row + 1, column = 5, columnspan = 4)
 
     # grid
         results_window.rowconfigure(0, weight = 1)

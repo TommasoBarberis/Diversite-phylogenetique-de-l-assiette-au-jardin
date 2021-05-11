@@ -1,7 +1,6 @@
 #  -*- coding: utf-8 -*-
 
-from collections import Counter
-from ete3 import Tree, NCBITaxa
+from ete3 import Tree
 import logging
 
 logger = logging.getLogger("get_dp.py")
@@ -17,29 +16,62 @@ def phylogenetic_diversity (tree, species):
     Calcul de la diversite phylogenetique a aprtir de la topologie de l'arbre taxonomique des especes presentes
     dans la recette avec la metrique MDP proposee par Webb en 2002.
     """
-    print(tree)
-    print(species)
-    pd = 0 # phylogenetic diversity
-    
-    tree = Tree(tree, format = 8, quoted_node_names = True)
-    species = list(species.values())
-    tree = tree.get_common_ancestor(species)
 
+    species = list(species.values())
+    tree = Tree(tree, format = 8, quoted_node_names = True)
+    tree = tree.get_common_ancestor(species)
+    
+    pd = 0 # phylogenetic diversity
     for sp in species:
 
         mpd = 0 # mean pairwise distance
-        sum_dist = 0
 
         for leaf in species:
             if sp == leaf:
                 pass
             else:
-                sum_dist += tree.get_distance(sp, leaf)
+                mpd += tree.get_distance(sp, leaf)
         
-        mpd = sum_dist / (len(species) - 1)
+        mpd /= (len(species) - 1)
         pd += mpd
 
+    logger.info("The MPD for this recipe is {}".format(pd))
     return round(pd, 2)
+
+
+def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
+    """
+    Calcul de la diversite phylogenetique ponderee a aprtir de la topologie de l'arbre taxonomique des especes
+     presentes dans la recette avec la metrique MDP proposee par Webb en 2002, en utilisant les quantites de 
+     matiere seche.
+    """
+
+    species = list(species.values())
+    tree = Tree(tree, format = 8, quoted_node_names = True)
+    tree = tree.get_common_ancestor(species)
+    
+    wpd = 0 # weighted phylogenetic diversity
+    weight_sum = 0
+    for sp in species:
+
+        mpd = 0 # mean pairwise distance
+
+        for leaf in species:
+            if sp == leaf:
+                pass
+            else:
+                mpd += tree.get_distance(sp, leaf)
+        
+        weight = dict_sp_drym[sp][0]
+        mpd = (mpd / (len(species) - 1)) * weight
+        weight_sum += weight
+        wpd += mpd
+    
+    wpd /= weight_sum
+
+    logger.info("The weighted MPD for this recipe is {}".format(wpd))
+    return round(wpd, 2)
+
 
 
 

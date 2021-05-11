@@ -53,11 +53,11 @@ def get_marmiton(soup):
             first_level = i.find("div")
             info_div = first_level.findAll("div")[1]
             qty_unit_span = info_div.find("span")
-            qty_unit_span = qty_unit_span.get_text()
+            qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ')
             
             if qty_unit_span == '':
                 qty = "-"
-                unit = ["-", "-"]
+                unit = ["", ""]
             else:
                 c = 0 # counter
                 qty = ""
@@ -68,8 +68,6 @@ def get_marmiton(soup):
                     else:
                         qty += qty_unit_span[c]
                         c += 1
-                    if c == len(qty_unit_span):
-                        break
                 
                 unit = qty_unit_span[c+1:len(qty_unit_span)]
                 unit = [unit, unit]
@@ -80,11 +78,28 @@ def get_marmiton(soup):
 
             val = [ing, qty, unit]
             ingredients[ing[0]] = val
+        
+
+        for ing in ingredients:
+
+            if ingredients[ing][2][1] == "":
+            
+                with open("filtering/default_mass.txt", "r") as f:
+                    lines = f.readlines() # file that allow to get mass for some ingredients
+            
+                    for line in lines:
+                        ing_mass = line.split("/")
+                        
+                        if ing == ing_mass[0]:
+                            ingredients[ing] = [[ing, ing], ing_mass[1].replace("\n", ""), ["g", "g"]]
+                        
 
         logger.debug("Ingredient parsing, DONE")
     
     except Exception:
         logger.exception("Error in ingredient parsing")
+
+    
     
     return ingredients
 

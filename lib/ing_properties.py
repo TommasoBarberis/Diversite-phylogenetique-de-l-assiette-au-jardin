@@ -94,22 +94,37 @@ def get_dict_nut(dict_ing):
 
 def dry_matter_dict_update(dict_ing, dict_nut):
     dry_matter_dict = {}
-    unit_list = ["g", "kg", "l", "cl"] #ponderable unit measure
+    unit_list = ["g", "kg", "l", "cl"] # ponderable unit measure
     for ing in dict_ing:
-        # if: l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est non
-        # nulle et que la quantite d'eau est non nulle
+
+        # if: l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est 
+        # non nulle et que la quantite d'eau est non nulle c'est alors possible de calculer la quantite de 
+        # matiere seche
+
         if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != '-' \
         and dict_ing[ing][1] is not None:
+
             if "<" in dict_nut[ing.capitalize()][1]:
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1][2:])))
             else:
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
+
             qtt = str(dict_ing[ing][1])
             unit = dict_ing[ing][2][1]
+
             if qtt != '' and unit in unit_list:
+                
                 qtt  = float(qtt)
-                dry_matter = round(qtt - qtt * wat/100,2) 
-                dry_matter_dict[ing] = [dry_matter, unit]
+
+                if unit == "g":
+                    pass
+                elif unit == "kg" or unit == "l":
+                    qtt *= 1000
+                elif unit == "cl":
+                    qtt *= 10
+
+                dry_matter = round(qtt - qtt * wat/100,2)
+                dry_matter_dict[ing] = [dry_matter, "g"]
         else: 
             dry_matter_dict[ing] = "-"
 
@@ -117,6 +132,9 @@ def dry_matter_dict_update(dict_ing, dict_nut):
 
 
 def format_float(input_string):
+    """
+    Permet d'extrapoler le pourcentage d'eau d'un ingredient
+    """
     if "-" in input_string or "traces" in input_string:
         return 0
     else:

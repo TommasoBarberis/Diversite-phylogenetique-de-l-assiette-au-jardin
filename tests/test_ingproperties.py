@@ -34,8 +34,9 @@ def test_dryMatterDicUpdate():
     ingredients = gi.process("https://www.marmiton.org/recettes/recette_tartiflette-en-gratin_529817.aspx")
     dict_nut = ip.get_dict_nut(ingredients)
     dry_matter = ip.dry_matter_dict_update(ingredients, dict_nut)
+    assert isinstance(dry_matter, dict)
     for ing in dry_matter:
-        if dry_matter[ing][0] != "-": # if a dry matter quantity is not found, skip the test
+        if dry_matter[ing][0] != "-" and dry_matter[ing][1] == ingredients[ing][2][0]: # if a dry matter quantity is not found, skip the test
             assert (float(dry_matter[ing][0]) < float(ingredients[ing][1]))
 
 
