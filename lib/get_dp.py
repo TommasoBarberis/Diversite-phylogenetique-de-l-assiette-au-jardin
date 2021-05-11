@@ -15,26 +15,19 @@ logger.addHandler(file_handler)
 def phylogenetic_diversity (tree, species):
     """
     Calcul de la diversite phylogenetique a aprtir de la topologie de l'arbre taxonomique des especes presentes
-    dans la recette avec la metrique MDP proposee par .....
+    dans la recette avec la metrique MDP proposee par Webb en 2002.
     """
-    # """
-    # Ensuite à partir de ce dictionnaire on calcule la diversité phylogénétique de la recette en sommant
-    # les longueurs des branches des espèces présentes dans le plat.
-    # """
-    # dico = filter_dico_lengths(tree, species)
-    # pd = 0
-    # for i in dico:
-    #   pd += dico[i]
-
-    pd = "NA" # phylogenetic diversity
-
+    print(tree)
+    print(species)
+    pd = 0 # phylogenetic diversity
+    
     tree = Tree(tree, format = 8, quoted_node_names = True)
     species = list(species.values())
     tree = tree.get_common_ancestor(species)
-    nodes = tree.search_nodes()
 
     for sp in species:
 
+        mpd = 0 # mean pairwise distance
         sum_dist = 0
 
         for leaf in species:
@@ -42,10 +35,11 @@ def phylogenetic_diversity (tree, species):
                 pass
             else:
                 sum_dist += tree.get_distance(sp, leaf)
-    
-        # print(sum_dist/(len(species)-1))
+        
+        mpd = sum_dist / (len(species) - 1)
+        pd += mpd
 
-    return pd
+    return round(pd, 2)
 
 
 

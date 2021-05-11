@@ -132,14 +132,14 @@ class MainWindow:
         if domain == "www.marmiton.org":  
             try:
                 ingredients = get_ing.process(url)
-                self.results_window(ingredients, species)
-                logger.info("Open result window")
+                species = ing_to_esp.recherche_globale(ingredients)
+                dict_nutrition = ing_properties.get_dict_nut(ingredients)
+                dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
+                logger.info("URL processed, getting ingredient, species, nutrition data and dry matter information")
             except Exception:
-                logger.exception("Error in the url")
+                logger.exception("Error in the URL")
+                main_window.destroy()
 
-            species = ing_to_esp.recherche_globale(ingredients)
-            dict_nutrition = ing_properties.get_dict_nut(ingredients)
-            dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
 
 
             if len(ingredients) != len(species) or len(ingredients) != len(dry_matter_dico):
@@ -150,7 +150,7 @@ class MainWindow:
                     logger.exception("Error in 'missing information' window opening")
             else:
                 try:
-                    self.results_window(ingredients, species)
+                    self.results_window(ingredients, species, url, dict_nutrition, dry_matter_dico)
                     logger.info("Open result window")
                 except Exception:
                     logger.exception("Error in 'result' window opening")
@@ -168,14 +168,13 @@ class MainWindow:
         self.error = tk.Toplevel(self.main_window)
         self.app = Error(self.error)
 
-
-    def results_window(self, ingredients, species): 
+    def results_window(self, ingredients, species, dict_nutrition, dry_matter_dico): 
         '''
         Ouvre la fenetre des resultats.
         '''  
 
         self.results = tk.Toplevel(self.main_window)
-        self.app = Results(ingredients, species, self.results, url_recipe = self.url_entry.get())
+        self.app = Results(ingredients, species, self.results, self.url_entry.get(), dict_nutrition, dry_matter_dico)
 
     def missing_info_window(self, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
         '''

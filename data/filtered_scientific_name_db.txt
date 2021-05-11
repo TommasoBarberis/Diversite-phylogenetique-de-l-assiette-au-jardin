@@ -489,6 +489,7 @@ Manilkara zapota	Sapotille
 Matricaria chamomilla	Matricaire Camomille
 Matteuccia struthiopteris	Matteuccie
 Medicago sativa	Luzerne Cultivee
+Meleagris	Escalope de dinde
 Meleagris gallopavo	Dinde
 Meleagris gallopavo	Viande de dinde
 Melicoccus bijugatus	Quenette
@@ -754,6 +755,7 @@ Stachys affinis	Crosne
 Stachys affinis	Crosne du Japon
 Struthio camelus camelus	Autruche
 Struthio camelus camelus	Viande de autruche
+Sus scrofa	Chair à saucisse
 Sus scrofa	Lardons fumés
 Sus scrofa	Rôti de porc
 Sus scrofa	Sanglier
@@ -865,6 +867,7 @@ Vigna umbellata	haricot riz
 Vigna unguiculata	Niébé
 Vigna unguiculata	Pois Manger Cochon
 Vigna unguiculata sesquipedalis	Dolique asperge
+Vitis	Vin blanc sec
 Vitis rotundifolia	Raisin
 Vitis rotundifolia	Vigne à feuilles rondes
 Vitis vinifera	Vigne Sauvage

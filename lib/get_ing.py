@@ -46,39 +46,46 @@ def get_marmiton(soup):
 
     html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-sm-3"}) # select html tag with this class in recipe web page
 
-    for i in html_ingredients_list:
-        
-        first_level = i.find("div")
-        info_div = first_level.findAll("div")[1]
-        qty_unit_span = info_div.find("span")
-        qty_unit_span = qty_unit_span.get_text()
-        
-        if qty_unit_span == '':
-            qty = "-"
-            unit = ["-", "-"]
-        else:
-            c = 0 # counter
-            qty = ""
+    try:
 
-            while True:
-                if qty_unit_span[c] == " ":
-                    break
-                else:
-                    qty += qty_unit_span[c]
-                    c += 1
-                if c == len(qty_unit_span):
-                    break
+        for i in html_ingredients_list:
+        
+            first_level = i.find("div")
+            info_div = first_level.findAll("div")[1]
+            qty_unit_span = info_div.find("span")
+            qty_unit_span = qty_unit_span.get_text()
             
-            unit = qty_unit_span[c+1:len(qty_unit_span)]
-            unit = [unit, unit]
+            if qty_unit_span == '':
+                qty = "-"
+                unit = ["-", "-"]
+            else:
+                c = 0 # counter
+                qty = ""
 
-        ing_span = first_level.findAll("span")[1]
-        ing_span = ing_span.get_text()
-        ing = [ing_span, ing_span]
+                while True:
+                    if qty_unit_span[c] == " ":
+                        break
+                    else:
+                        qty += qty_unit_span[c]
+                        c += 1
+                    if c == len(qty_unit_span):
+                        break
+                
+                unit = qty_unit_span[c+1:len(qty_unit_span)]
+                unit = [unit, unit]
 
-        val = [ing, qty, unit]
-        ingredients[ing[0]] = val
+            ing_span = first_level.findAll("span")[1]
+            ing_span = ing_span.get_text()
+            ing = [ing_span, ing_span]
 
+            val = [ing, qty, unit]
+            ingredients[ing[0]] = val
+
+        logger.debug("Ingredient parsing, DONE")
+    
+    except Exception:
+        logger.exception("Error in ingredient parsing")
+    
     return ingredients
 
 
