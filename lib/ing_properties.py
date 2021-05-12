@@ -172,7 +172,10 @@ def write_tsv(file_name,dico_ing, dico_especes, dry_matter_dico, dico_nut):
             tsvfile.write(str(dico_ing[ing][1] + " " + dico_ing[ing][2][1])) # third column - quantity
             tsvfile.write("\t")
             if ing in dry_matter_dico:
-                tsvfile.write(str(dry_matter_dico[ing][0]) + " " + str(dry_matter_dico[ing][1])) # fourth column - dry matter quantity
+                if dry_matter_dico[ing] != "-":
+                    tsvfile.write(str(dry_matter_dico[ing][0]) + " " + str(dry_matter_dico[ing][1])) # fourth column - dry matter quantity
+                else:
+                    tsvfile.write("-")
             else:
                 tsvfile.write("-")
             tsvfile.write("\t")

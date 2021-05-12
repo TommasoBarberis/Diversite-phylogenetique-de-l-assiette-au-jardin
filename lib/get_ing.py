@@ -29,11 +29,23 @@ def process(url):
 def get_title(url):
     req = requests.get(url)
     soup = bs4.BeautifulSoup(req.content, 'html.parser')
+
+    # First parser
     try:
         html_title = soup.find("main").find("h1").get_text()
         logger.debug(html_title)
     except:
         html_title = "\tRecipe title not found"
+        
+    # Second parser
+    try:
+        html_title = soup.findAll("h1",{"class":'main-title show-more'})
+        html_title = html_title[0].get_text()
+        logger.debug(html_title)
+    except:
+        html_title = "\tRecipe title not found"
+
+
     return html_title
 
 
@@ -44,10 +56,9 @@ def get_marmiton(soup):
 
     ingredients = {}
 
-    html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-sm-3"}) # select html tag with this class in recipe web page
-
+    # First parser
     try:
-
+        html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-sm-3"}) # select html tag with this class in recipe web page
         for i in html_ingredients_list:
         
             first_level = i.find("div")
@@ -93,15 +104,32 @@ def get_marmiton(soup):
                         if ing == ing_mass[0]:
                             ingredients[ing] = [[ing, ing], ing_mass[1].replace("\n", ""), ["g", "g"]]
                         
-
-        logger.debug("Ingredient parsing, DONE")
+        if len(ingredients) != 0:
+            logger.debug("Ingredient parsing, DONE")
+            return ingredients   
+    except Exception:
+        logger.exception("Error in ingredient parsing")
     
+    # Second parser
+    try:
+        html_ingredients_list = soup.find("div", {"class": "ingredient-list__ingredient-group"}) # select html tag with this class in recipe web page
+        li_tags = html_ingredients_list.findAll("li") # object with all ingredients and quantities for the recipe
+
+        for i in range(0,len(li_tags)):
+            ing = [li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular"), li_tags[i].find("div", \
+                {"class": "ingredient-data"}).get("data-plural")]
+            qty = li_tags[i].find("div", {"class": "quantity-data"}).get_text()
+            unit = [li_tags[i].find("div", {"class": "unit-data"}).get("data-singular"), li_tags[i].find("div", \
+                {"class": "unit-data"}).get("data-plural")]
+            val = [ing, qty, unit]
+            ingredients[li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular")] = val
+
+        if len(ingredients) != 0:
+            logger.debug("Ingredient parsing, DONE")
+            return ingredients
     except Exception:
         logger.exception("Error in ingredient parsing")
 
-    
-    
-    return ingredients
 
 
 if __name__ == "__main__":

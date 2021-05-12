@@ -1,5 +1,16 @@
 import GUI as gui 
+import pytest
+# import tkinter
 
+@pytest.fixture
+def app():
+    test_app = gui.MainWindow()
+
+    return test_app
+
+
+def test_label(app):
+    assert app.label_title.cget("text") == "Diversité phylogénétique \nde l’alimentation"
 
 def test_missing_species():
     ingredients = {'lardons': [['lardons', 'lardons'], '1', ['paquet', 'paquets']], 'pomme de terre': [['pomme de terre', 'pommes de terre'], '3', ['', '']], 'brick': [['brick', 'brick'], '8', ['feuille', 'feuilles']], 'raclette': [['raclette', 'raclette'], '1', ['paquet', 'paquets']], 'oignon': [['oignon', 'oignons'], '1', ['', '']]}
