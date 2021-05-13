@@ -47,10 +47,6 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
         label_title = tk.Label(self.main_frame, text = "Diversité phylogénétique \nde l’alimentation", font = ('Montserrat', 35, 'bold'), \
             bg = '#2a9d8f', fg = "#f0efeb")
         label_title.pack(side = "top", fill = "x", expand = 1, anchor = "center")
- 
-
-        def open_site (url):
-            webbrowser.open_new(url)
 
 
         def underline (label):
@@ -534,10 +530,6 @@ class Results:
 
 
     # some functions
-        def open_site (url):
-            webbrowser.open_new(url)
-
-
         def underline (label):
             label.config(font = ("Arial", 18, "underline"))
 
@@ -943,6 +935,7 @@ def table_row(ingredients, especes, dict_nut, dry_matter_dict):
 
         dict_row[ing[0]] = list_row
     return dict_row
+
 
 def main(): 
     root = MainWindow()
