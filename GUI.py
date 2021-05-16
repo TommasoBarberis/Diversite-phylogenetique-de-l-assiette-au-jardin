@@ -187,7 +187,7 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
         '''
 
         self.error = tk.Toplevel(self)
-        self.app = Error(self.error)
+        self.app = ErrorWin(self.error)
 
     def results_window(self, ingredients, species, dict_nutrition, dry_matter_dico): 
         '''
@@ -205,7 +205,7 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
         self.missing = tk.Toplevel(self)
         self.app = MissingPage(ingredients = ingredients, species = species, url_recipe = url_recipe, missing_window = self.missing, dict_nutrition = dict_nutrition, dry_matter_dico = dry_matter_dico)
 
-class Error:
+class ErrorWin:
     '''
     Creation de la fenetre pour le message d'erreur.
     '''
@@ -216,32 +216,32 @@ class Error:
         
     # window setting 
         self.error_window.title("Error")
+        self.error_window.config(background = "#2a9d8f")
         w = 700
         h = 200
         x = (self.error_window.winfo_screenwidth() - w) / 2
         y = (self.error_window.winfo_screenheight() - h) / 2
         self.error_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
         self.error_window.minsize(700,200)
-        self.error_window.config(background = "#ffffff")
 
-        self.main_frame = ctk.CTkFrame(master = self.error_window, bg_color = "#ffffff", fg_color = "#ffffff")
+        main_frame = tk.Frame(self.error_window, bg = "#2a9d8f")
     # label
-        error_message = tk.Label(self.main_frame, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correct et réessayez", \
-            font = ("Open Sans", 15), bg = "#ffffff", fg = '#000000')
-        error_message.pack(side = "top", expand = 1, fill = "both")
+        error_message = tk.Label(main_frame, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correct et réessayez", \
+            bg = "#2a9d8f", fg = "#f0efeb", font = ("Open Sans", 14))
+        error_message.pack(side = "top", expand = 1)
         
-            # close button
+        # close button
         def close():
             logger.info("The user has click to close the error window")
-            self.error_window.destroy()
+            self.error_window.withdraw()
 
-        self.close_button = ctk.CTkButton(master = self.main_frame, text = "Fermer", bg_color = "#ffffff", \
-        fg_color = "#ffffff", text_font = ("Open Sans", 15, "bold"), width = 100, height = 40, \
-        text_color = "#000000", command = close)
+        close_button = ctk.CTkButton(master = main_frame, text = "Fermer",\
+        text_font = ("Open Sans", 15, "bold"), width = 100, height = 40, \
+        command = close, bg_color = "#2a9d8f", fg_color = "#f0efeb", hover_color = "#B7B7A4", \
+        text_color = "#5aa786", corner_radius = 20)
         
-        self.close_button.pack(side = "top", expand = 1, anchor = "center")
-
-        self.main_frame.pack(expand = 1, fill = "both", anchor = "center")
+        close_button.pack(side = "top", expand = 1, anchor = "center", pady = 20)
+        main_frame.pack(side = "top", expand = 1, anchor = "center")
 
 
 # Commons functions for the several windows
