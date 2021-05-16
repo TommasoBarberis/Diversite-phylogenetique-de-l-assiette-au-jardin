@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 import customtkinter as ctk
+from PIL import ImageTk, Image
 from urllib.parse import urlparse
 import webbrowser
 from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
@@ -63,8 +64,8 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
         label_entry.pack(side = "top", fill = "x", expand = 1, anchor = "center") 
         
         self.url_entry = ctk.CTkEntry(master = self.main_frame, font = ("Arial", 20), bg = '#2a9d8f', fg = '#f0efeb', width = 600, height = 50)
-        self. url_entry.pack(side = "top", expand = 1, anchor = "n")
-        self.url_entry.bind("<Return>", lambda x:  test_domain) # currently don't work
+        self.url_entry.pack(side = "top", expand = 1, anchor = "n")
+
 
     # submit
         submit = ctk.CTkButton(master = self.main_frame, text = 'Entrer', bg_color = "#2a9d8f", \
@@ -72,15 +73,13 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
         corner_radius = 20, text_font = ("Open Sans", 20, "bold"), hover_color = "#B7B7A4", \
         text_color = "#5aa786")
         submit.pack(side = "top", expand = 1, anchor = "n") 
-        submit.bind('<Return>', lambda x: test_domain) # currently don't work
-        
+  
 
     #  utility buttons
-        button_frame = ctk.CTkFrame(master = self, bg = "#2a9d8f", fg_color = "#2a9d8f", height = 50, width = 800)
+        bottom_frame = tk.Frame(self, bg = "#2a9d8f")
+        button_frame = ctk.CTkFrame(master = bottom_frame, bg = "#2a9d8f", fg_color = "#2a9d8f", height = 50, width = 800)
 
-
-    
-    # gitlab button     
+        # gitlab button     
         def open_gitlab():
             webbrowser.open("https://gitlab.com/TommasoBarberis/diversite-phylogenetique-de-l-assiette-au-jardin", new = 2)
 
@@ -90,7 +89,7 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
             image = gitlab_icon, hover_color = "#B7B7A4", command = open_gitlab)
         gitlab_button.pack(side = "left", expand = 0, anchor = "sw", padx = 15, pady = 10) 
 
-    # ucbl button
+        # ucbl button
         def open_ucbl():
             webbrowser.open("https://www.univ-lyon1.fr/", new = 2)
 
@@ -100,7 +99,7 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
             image = ucbl_icon, hover_color = "#B7B7A4", command = open_ucbl)
         ucbl_button.pack(side = "left", expand = 0, anchor = "sw", padx = 15, pady = 10)
 
-    # marmitton button
+        # marmitton button
         def open_marmiton():
             webbrowser.open("https://www.marmiton.org/", new = 2)
 
@@ -110,9 +109,16 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
             image = marmiton_icon, hover_color = "#B7B7A4", command = open_marmiton)
         marmiton_button.pack(side = "left", expand = 0, anchor = "sw", padx = 15, pady = 10)
 
+    # logo
+        self.logo = Image.open(r"assets/logo.png")
+        self.logo = self.logo.resize((200, 200), Image.ANTIALIAS)
+        self.logo = ImageTk.PhotoImage(self.logo)
+        self.logo_label = tk.Label(bottom_frame, image = self.logo, bg = "#2a9d8f")
 
         self.main_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
-        button_frame.pack(side = "bottom", fill = "both", expand = 1, anchor = "s")
+        bottom_frame.pack(side = "bottom", fill = "both", expand = 1)
+        button_frame.pack(side = "left", fill = "both", expand = 1, anchor = "s")
+        self.logo_label.pack(side = "right", padx = 20, anchor = "center")
 
 
     def test_domain(self):
@@ -209,33 +215,33 @@ class Error:
         self.error_window = error_window
         
     # window setting 
-        error_window.title("Error")
+        self.error_window.title("Error")
         w = 700
         h = 200
-        x = (error_window.winfo_screenwidth() - w) / 2
-        y = (error_window.winfo_screenheight() - h) / 2
-        error_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
-        error_window.minsize(700,200)
-        error_window.config(background = "#ffffff")
+        x = (self.error_window.winfo_screenwidth() - w) / 2
+        y = (self.error_window.winfo_screenheight() - h) / 2
+        self.error_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
+        self.error_window.minsize(700,200)
+        self.error_window.config(background = "#ffffff")
 
-        main_frame = ctk.CTkFrame(master = error_window, bg_color = "#ffffff", fg_color = "#ffffff")
+        self.main_frame = ctk.CTkFrame(master = self.error_window, bg_color = "#ffffff", fg_color = "#ffffff")
     # label
-        error_message = tk.Label(main_frame, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correct et réessayez", \
+        error_message = tk.Label(self.main_frame, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correct et réessayez", \
             font = ("Open Sans", 15), bg = "#ffffff", fg = '#000000')
         error_message.pack(side = "top", expand = 1, fill = "both")
-
-    # close button
+        
+            # close button
         def close():
-            error_window.destroy()
-        
-        close_button = ctk.CTkButton(master = main_frame, text = "Fermer", bg_color = "#ffffff", \
-        fg_color = "#ffffff", text_font = ("Open Sans", 15, "bold"), width = 100, height = 40, command = close, \
-        text_color = "#000000")
-        
-        logger.info("The user has click to close the error window")
-        close_button.pack(side = "top", expand = 1, anchor = "center")
+            logger.info("The user has click to close the error window")
+            self.error_window.destroy()
 
-        main_frame.pack(expand = 1, fill = "both", anchor = "center")
+        self.close_button = ctk.CTkButton(master = self.main_frame, text = "Fermer", bg_color = "#ffffff", \
+        fg_color = "#ffffff", text_font = ("Open Sans", 15, "bold"), width = 100, height = 40, \
+        text_color = "#000000", command = close)
+        
+        self.close_button.pack(side = "top", expand = 1, anchor = "center")
+
+        self.main_frame.pack(expand = 1, fill = "both", anchor = "center")
 
 
 # Commons functions for the several windows
@@ -382,7 +388,7 @@ class MissingSpeciesPage(tk.Frame):
         height = 40, corner_radius = 20, command = next_button_func)
 
         def finish_button_func():
-            results_window_from_missing_window(self.ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico)
+            results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico)
 
         finish_button = ctk.CTkButton(master = final_buttons_frame, text = "Terminer", text_font = ("Open Sans", 20, "bold"), \
         bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
@@ -755,7 +761,7 @@ class Results:
 
         results_frame = tk.Frame(main_frame, bg = "#C8BFC7")
 
-        # Phylogenetic diversity
+    # Phylogenetic diversity
         pd_frame = tk.Frame(results_frame, bg = "#C8BFC7")
 
         pd = get_dp.phylogenetic_diversity(tree, species)
@@ -768,9 +774,9 @@ class Results:
         fg = "#090302", justify = "center", relief = "raised", width = 7, height = 3)
         dp_label.pack(side = "top")
 
-        pd_frame.pack(side = "left", anchor = "center", padx = 20, pady = 20)
+        pd_frame.grid(row = 0, column = 0, padx = 20, pady = 20)
 
-        # Weighted phylogenetic diversity
+    # Weighted phylogenetic diversity
         wpd_frame = tk.Frame(results_frame, bg = "#C8BFC7")
         
         dict_sp_drym = {}
@@ -795,8 +801,32 @@ class Results:
         justify = "center", relief = "raised", width = 7, height = 3)
         wpd_label.pack(side = "top")
 
-        wpd_frame.pack(side = "right", anchor = "center", padx = 20, pady = 20)
-        results_frame.pack(side = "bottom")
+        wpd_frame.grid(row = 0, column = 1)
+
+    # Shannon's index
+        shannon_frame = tk.Frame(results_frame, bg = "#C8BFC7")
+        shannon = get_dp.shannon(species, dict_sp_drym)
+        shannon_info_label = tk.Label(shannon_frame, text = "Indice de Shannon:", font = 'Arial 14 bold', \
+            bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
+        shannon_info_label.pack(side = "top")
+        shannon_label = tk.Label(shannon_frame, text = shannon, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
+        justify = "center", relief = "raised", width = 7, height = 3)
+        shannon_label.pack(side = "bottom")
+        shannon_frame.grid(row = 1, column = 0, padx = 20, pady = 20)
+
+    # Simpson's index
+        simpson_frame = tk.Frame(results_frame, bg = "#C8BFC7")
+        simpson = get_dp.simpson(species, dict_sp_drym)
+        simpson_info_label = tk.Label(simpson_frame, text = "Indice de Simpson:", font = 'Arial 14 bold', \
+            bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
+        simpson_info_label.pack(side = "top")
+        simpson_label = tk.Label(simpson_frame, text = simpson, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
+        justify = "center", relief = "raised", width = 7, height = 3)
+        simpson_label.pack(side = "bottom")
+        simpson_frame.grid(row = 1, column = 1, padx = 20, pady = 20) 
+
+
+        results_frame.pack(side = "bottom", pady = 20)
 
         main_frame.configure(width = main_canvas.winfo_reqwidth())
         main_frame.pack(side = "right", fill = "both", expand = 1, anchor = "center")
