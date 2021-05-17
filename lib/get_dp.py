@@ -103,7 +103,7 @@ def shannon(species, dict_sp_drym):
             else:
                 denominator *= (val ** val)
             
-    shannon = round(np.log(1 / denominator), 2)
+        shannon = round(np.log(1 / denominator), 2)
     return shannon
 
 

@@ -23,7 +23,7 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
-class MainWindow(tk.Tk): # TODO - add project icon somewhere
+class MainWindow(tk.Tk):
     '''
     fenetre principale.
     lien vers les sites importantes et Entry pour entrer l'url de la recette a sousmettre.
@@ -50,14 +50,6 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
         label_title.pack(side = "top", fill = "x", expand = 1, anchor = "center")
 
 
-        def underline (label):
-            label.config(font = ("Arial", 20, "underline"))
-
-
-        def desunderline (label):
-            label.config(font = ("Arial", 20))
-
-
     # entry
         label_entry = tk.Label(self.main_frame, text = "Entrez l'url d'une recette du site marmiton:", font = ("Open Sans", 20, 'bold'), \
             bg = '#2a9d8f', fg = '#f0efeb')
@@ -68,11 +60,11 @@ class MainWindow(tk.Tk): # TODO - add project icon somewhere
 
 
     # submit
-        submit = ctk.CTkButton(master = self.main_frame, text = 'Entrer', bg_color = "#2a9d8f", \
+        self.submit = ctk.CTkButton(master = self.main_frame, text = 'Entrer', bg_color = "#2a9d8f", \
         fg_color = "#f0efeb", command = self.test_domain, width = 200, height = 40, \
         corner_radius = 20, text_font = ("Open Sans", 20, "bold"), hover_color = "#B7B7A4", \
         text_color = "#5aa786")
-        submit.pack(side = "top", expand = 1, anchor = "n") 
+        self.submit.pack(side = "top", expand = 1, anchor = "n") 
   
 
     #  utility buttons
@@ -534,14 +526,6 @@ class Results:
         y_scrollbar.pack(side = "right", fill = "y", expand = 0)
         main_frame = tk.Frame(main_canvas, bg = "#C8BFC7")
 
-
-    # some functions
-        def underline (label):
-            label.config(font = ("Arial", 18, "underline"))
-
-
-        def desunderline (label):
-            label.config(font = ("Arial", 18))
 
     # structure of the main frame
     # - info frame

@@ -18,3 +18,24 @@ def test_weightedPhylogeneticDiversity():
     wpd = gdp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
     assert type(wpd) is float
     assert wpd != 0 
+
+
+def test_shannon():
+    species = {'Mirabelle': 'Prunus domestica', 'Beurre': 'Bos taurus', 'Oeuf': 'Gallus gallus'}
+    dict_sp_drym = {'Prunus domestica': [164.25, 'g'], 'Bos taurus': [42.3, 'g'], 'Gallus gallus': [13.03, 'g']}
+    ind = gdp.shannon(species, dict_sp_drym)
+    assert isinstance(ind, float)
+
+    species = {}
+    ind = gdp.shannon(species, dict_sp_drym)
+    assert ind == "NA"
+
+def test_simpson():
+    species = {'Mirabelle': 'Prunus domestica', 'Beurre': 'Bos taurus', 'Oeuf': 'Gallus gallus'}
+    dict_sp_drym = {'Prunus domestica': [164.25, 'g'], 'Bos taurus': [42.3, 'g'], 'Gallus gallus': [13.03, 'g']}
+    ind = gdp.simpson(species, dict_sp_drym)
+    assert isinstance(ind, float)
+
+    species = {}
+    ind = gdp.simpson(species, dict_sp_drym)
+    assert ind == "NA"
