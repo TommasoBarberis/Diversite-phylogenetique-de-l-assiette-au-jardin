@@ -287,26 +287,10 @@ class MissingPage:
         logger.info("Switch to {}".format(name.__name__))
 
     
-def results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, *args): 
+def results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico): 
     '''
     Ouvre la fenetre des resultats.
     '''  
-
-    if str(self) == ".!toplevel.!frame.!missingquantitiespage": # it modify ingredients quantities and units only if the function is called by MissingQuantitesPage
-        for ind, arg in enumerate(args):
-            if ind == 0:
-                quantities = arg
-            elif ind == 1:
-                units = arg
-            elif ind == 2:
-                new_ing = arg
-
-        for ind, ing in enumerate(new_ing):
-            if quantities[ind].get() != "" and units[ind].get() != "": # if any quantities or units is given, the original data are conserved
-                ingredients[ing] = [ingredients[ing][0], quantities[ind].get(), [units[ind].get(),units[ind].get()]]        
-                logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(quantities[ind].get() + " " + str(units[ind].get())), ing))
-
-        dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
 
     self.results = tk.Toplevel(self)
     self.app = Results(ingredients, species, self.results, url_recipe, dict_nutrition, dry_matter_dico)
@@ -506,11 +490,23 @@ class MissingQuantitiesPage(tk.Frame):
 
         finish_button = tk.Button(buttons_frame, text = "Terminer", font = 'arial 20 bold', bg = '#8A7E72', fg = '#5A2328', width = 12)
         finish_button.grid(row = 1, column = 3, pady = 10, sticky = "w")
-        finish_button.bind('<Button-1>', lambda x: results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, quantities, units, new_ing))
+        finish_button.bind('<Button-1>', lambda x: test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, quantities, units, new_ing))
         buttons_frame.grid_columnconfigure(4, weight = 1)
 
 
         buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+
+        def test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, quantities, units, new_ing):
+
+            for ind, ing in enumerate(new_ing):
+                if quantities[ind].get() != "" and units[ind].get() != "": # if any quantities or units is given, the original data are conserved
+                    if quantities[ind].get().isnumeric():
+                        ingredients[ing] = [ingredients[ing][0], quantities[ind].get(), [units[ind].get(),units[ind].get()]]        
+                        logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(quantities[ind].get() + " " + str(units[ind].get())), ing))
+                    else:
+                        pass
+            dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
+
 
 
 class Results:
