@@ -1,22 +1,14 @@
-import tkinter
-tkinter.use('Agg')
-
 import GUI as gui 
+import tkinter as tk
 import pytest
 
-@pytest.fixture
-def app():
-    test_app = gui.MainWindow()
-    return test_app
+# @pytest.fixture
+# def app():
+#     test_app = gui.MainWindow()
+#     return test_app
 
 
-def test_urlEntrynSubmitButton(app):
 
-# when the Entry is empty 
-    app.test_domain()
-#     root_children = app.winfo_children()
-#     title = root_children[2].title()
-#     assert title == "Error"
 
 # # when the Entry has a incorrect url
 #     incorrect_url = "https://www.univ-lyon1.fr/"
@@ -36,6 +28,15 @@ def test_urlEntrynSubmitButton(app):
 #     root_children = app.winfo_children()
 #     title = root_children[4].title()
 #     assert title == "Informations manquantes"
+
+class testSubmitButton:
+    def test_urlEntrynSubmitButton(app):
+
+    # when the Entry is empty 
+        app.test_domain()
+        root_children = app.winfo_children()
+        title = root_children[2].title()
+        assert title == "Error"
 
 
 def test_missing_species():
