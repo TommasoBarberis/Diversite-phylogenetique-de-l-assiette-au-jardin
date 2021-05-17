@@ -336,7 +336,8 @@ class MissingSpeciesPage(tk.Frame):
         entries = []
         for ing in ingredients:
             if ing not in species:
-                ing_cell = tk.Label(entry_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', fg = "#f0efeb")
+                ing_cell = tk.Label(entry_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', \
+                fg = "#f0efeb")
                 ing_cell.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
 
                 sp_entry = ctk.CTkEntry(entry_frame, font = ("Arial", 10), width = 500, corner_radius = 10)
@@ -386,10 +387,10 @@ class MissingSpeciesPage(tk.Frame):
         bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
         height = 40, corner_radius = 20, command = finish_button_func)
 
-        decisional_bool = FALSE
+        decisional_bool = False
         for qty in dry_matter_dico.values():
             if qty == "-":
-                decisional_bool = TRUE
+                decisional_bool = True
 
         if decisional_bool:
             next_button.pack(side = "bottom", anchor = "se", padx = 10, pady = 10)
@@ -455,7 +456,9 @@ class MissingQuantitiesPage(tk.Frame):
         self.config(bg = "#2a9d8f")
 
         instruction_frame = tk.Frame(self, bg = "#2a9d8f")
-        instruction_label = tk.Label(instruction_frame, text = "Si c'est possible, renseigner les quantités \npour les ingrédients suivants ainsi que leurs unités de mesure:", font = 'Arial 18 bold', bg = '#2a9d8f', fg = "#8A7E72")
+
+        instruction_label = tk.Label(instruction_frame, text = "Si c'est possible, renseigner les quantités \npour les ingrédients suivants ainsi que leurs unités de mesure:", \
+            font = ("Open Sans", 18), bg = '#2a9d8f', fg = "#f0efeb")
         instruction_label.pack(side = "top", fill = "both", expand = 1, anchor = "center")
         instruction_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
 
@@ -469,13 +472,12 @@ class MissingQuantitiesPage(tk.Frame):
         new_ing = []
 
         for ing in ingredients:
-            print(ing)
             if ing not in dry_matter_dico or ing[2][0] != "g":
-                print(ing)
-                ing_label = tk.Label(data_frame, text = ing, font = 'Arial 18 bold', bg = '#2a9d8f', fg = "#000000")
+                ing_label = tk.Label(data_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', fg = "#f0efeb")
                 ing_label.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
 
-                quantity_entry = tk.Entry(data_frame, font = "arial 11", width = 40)
+
+                quantity_entry = ctk.CTkEntry(data_frame, font = ("Arial", 10), width = 400, corner_radius = 10)
                 quantity_entry.grid(row = counter_line, column = 3, sticky = "w")
                 quantities.append(quantity_entry)
 

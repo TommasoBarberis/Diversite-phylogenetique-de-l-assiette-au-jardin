@@ -1,9 +1,8 @@
-import matplotlib
-matplotlib.use('Agg')
+import tkinter
+tkinter.use('Agg')
 
 import GUI as gui 
 import pytest
-import tkinter
 
 @pytest.fixture
 def app():
