@@ -464,7 +464,9 @@ class MissingQuantitiesPage(tk.Frame):
         new_ing = []
 
         for ing in ingredients:
-            if ing not in dry_matter_dico:
+            print(ing)
+            if ing not in dry_matter_dico or ing[2][0] != "g":
+                print(ing)
                 ing_label = tk.Label(data_frame, text = ing, font = 'Arial 18 bold', bg = '#2a9d8f', fg = "#000000")
                 ing_label.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
 
@@ -774,8 +776,12 @@ class Results:
         
         if bool_var is True:
             wpd = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
+            shannon = get_dp.shannon(species, dict_sp_drym)
+            simpson = get_dp.simpson(species, dict_sp_drym)
         else:
             wpd = "NA"
+            shannon = "NA"
+            simpson = "NA"
         
         wpd_info_label = tk.Label(wpd_frame, text = "Diversité phylogénétique pondérée:", font = 'Arial 14 bold', \
             bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
@@ -789,7 +795,6 @@ class Results:
 
     # Shannon's index
         shannon_frame = tk.Frame(results_frame, bg = "#C8BFC7")
-        shannon = get_dp.shannon(species, dict_sp_drym)
         shannon_info_label = tk.Label(shannon_frame, text = "Indice de Shannon:", font = 'Arial 14 bold', \
             bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
         shannon_info_label.pack(side = "top")
@@ -800,7 +805,6 @@ class Results:
 
     # Simpson's index
         simpson_frame = tk.Frame(results_frame, bg = "#C8BFC7")
-        simpson = get_dp.simpson(species, dict_sp_drym)
         simpson_info_label = tk.Label(simpson_frame, text = "Indice de Simpson:", font = 'Arial 14 bold', \
             bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
         simpson_info_label.pack(side = "top")

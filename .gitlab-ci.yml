@@ -12,7 +12,7 @@ pytest:
   stage: Test
   script:
   - pip3 install -r requirements.txt
-  - export MPLBACKEND="agg"
+  - echo DISPLAY=$DISPLAY
   - export PYTHONPATH="$PYTHONPATH:."
   - python -c "import sys;print(sys.path)"
   - coverage run -m pytest

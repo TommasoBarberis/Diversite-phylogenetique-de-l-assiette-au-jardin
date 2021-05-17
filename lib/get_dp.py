@@ -96,6 +96,7 @@ def shannon(species, dict_sp_drym):
         shannon = "NA"
     else:
         denominator = 0
+        print(dict_sp_drym)
         for c, sp in enumerate(species.values()):
             val = dict_sp_drym[sp][0] / 1000
             if c == 0:
