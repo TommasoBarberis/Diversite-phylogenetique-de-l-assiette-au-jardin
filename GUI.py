@@ -386,7 +386,12 @@ class MissingSpeciesPage(tk.Frame):
         bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
         height = 40, corner_radius = 20, command = finish_button_func)
 
-        if len(ingredients) != len(dry_matter_dico):
+        decisional_bool = FALSE
+        for qty in dry_matter_dico.values():
+            if qty == "-":
+                decisional_bool = TRUE
+
+        if decisional_bool:
             next_button.pack(side = "bottom", anchor = "se", padx = 10, pady = 10)
         else:
             finish_button.pack(side = "bottom", anchor = "se", padx = 10, pady = 10)

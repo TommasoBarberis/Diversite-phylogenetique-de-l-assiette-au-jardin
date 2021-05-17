@@ -13,7 +13,6 @@ pytest:
   script:
   - pip3 install -r requirements.txt
   - export DISPLAY=0.0
-  - xhost +
   - export PYTHONPATH="$PYTHONPATH:."
   - python -c "import sys;print(sys.path)"
   - coverage run -m pytest
