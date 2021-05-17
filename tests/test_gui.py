@@ -2,6 +2,12 @@ import GUI as gui
 import pytest
 
 
+@pytest.fixture
+def app():
+    test_app = gui.MainWindow()
+    return test_app
+
+    
 class testSubmitButton:
     def test_urlEntrynSubmitButton(app):
 
