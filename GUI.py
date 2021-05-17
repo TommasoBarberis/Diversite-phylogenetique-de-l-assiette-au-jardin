@@ -9,9 +9,9 @@ import webbrowser
 from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
 import pyperclip
 from ete3 import NCBITaxa
-import os
+import os, sys
 import logging
-import sys
+
 
 ctk.set_appearance_mode("System")
 
@@ -70,16 +70,33 @@ class MainWindow(tk.Tk):
     #  utility buttons
         bottom_frame = tk.Frame(self, bg = "#2a9d8f")
         button_frame = ctk.CTkFrame(master = bottom_frame, bg = "#2a9d8f", fg_color = "#2a9d8f", height = 50, width = 800)
+        info_label = tk.Label(button_frame, text = "", bg = "#e4e4dd", fg = "#000000")
 
         # gitlab button     
         def open_gitlab():
             webbrowser.open("https://gitlab.com/TommasoBarberis/diversite-phylogenetique-de-l-assiette-au-jardin", new = 2)
+
+        def info_label_enter(evt, text):
+            def after_func():
+                info_label.configure(text = text)
+                info_label.place_configure(x = evt.x + 15, y = evt.y + bottom_frame.winfo_reqheight() - 25)
+                info_label.lift()
+        
+            info_label.after(500, func = after_func)
+
+        def info_label_leave(evt):
+            def after_func():
+                info_label.place_forget()
+
+            info_label.after(500, func = after_func)
 
         gitlab_icon = tk.PhotoImage(file = r"assets/gitlab.png").subsample(5, 5)
         gitlab_button = ctk.CTkButton(master =button_frame, bg_color = "#2a9d8f", fg_color = "#f0efeb", \
             text= "", width = 50, height = 50, corner_radius = 5, \
             image = gitlab_icon, hover_color = "#B7B7A4", command = open_gitlab)
         gitlab_button.pack(side = "left", expand = 0, anchor = "sw", padx = 15, pady = 10) 
+        gitlab_button.bind("<Enter>", lambda x: info_label_enter(x, "Gitlab - Diversité phylogénétique: de l'assiette au jardin"))
+        gitlab_button.bind("<Leave>", info_label_leave)
 
         # ucbl button
         def open_ucbl():
@@ -90,6 +107,9 @@ class MainWindow(tk.Tk):
             text= "", width = 50, height = 50, corner_radius = 5, \
             image = ucbl_icon, hover_color = "#B7B7A4", command = open_ucbl)
         ucbl_button.pack(side = "left", expand = 0, anchor = "sw", padx = 15, pady = 10)
+        ucbl_button.bind("<Enter>", lambda x: info_label_enter(x, "Université Claude Bernard Lyon 1"))
+        ucbl_button.bind("<Leave>", info_label_leave)
+
 
         # marmitton button
         def open_marmiton():
@@ -100,6 +120,8 @@ class MainWindow(tk.Tk):
             text= "", width = 50, height = 50, corner_radius = 5, \
             image = marmiton_icon, hover_color = "#B7B7A4", command = open_marmiton)
         marmiton_button.pack(side = "left", expand = 0, anchor = "sw", padx = 15, pady = 10)
+        marmiton_button.bind("<Enter>", lambda x: info_label_enter(x, "Marmiton - site de cuisine"))
+        marmiton_button.bind("<Leave>", info_label_leave)
 
     # logo
         self.logo = Image.open(r"assets/logo.png")
