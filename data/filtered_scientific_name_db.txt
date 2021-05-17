@@ -375,6 +375,7 @@ Fortunella japonica	Kumquat
 Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
+Gallus gallus	jaune d'oeuf
 Gallus gallus	Aiguillette de poulet
 Gallus gallus	Aiguillettes de poulet
 Gallus gallus	Aileron de poulet
@@ -404,6 +405,7 @@ Gallus gallus	Viande de coq
 Gallus gallus	Viande de poule
 Gallus gallus	Viande de poulet
 Gallus gallus	coq
+Gallus gallus	jaune d'oeuf
 Garcinia mangostana	Mangoustan
 Garcinia mangostana	mangoustanier
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
@@ -696,6 +698,7 @@ Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	sucre
+Saccharum	sucre semoule
 Saccharum	sucre vanillé
 Saccharum officinarum	Canne à sucre
 Saccharum officinarum	Cassonade
