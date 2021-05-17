@@ -451,9 +451,7 @@ class MissingQuantitiesPage(tk.Frame):
         data_frame.grid_rowconfigure(0, weight = 1)
         counter_line = 3
         
-        quantities = []
-        units = []
-        new_ing = []
+        entries = []
 
         for ing in ingredients:
             if ing not in dry_matter_dico or ing[2][0] != "g":
@@ -463,14 +461,15 @@ class MissingQuantitiesPage(tk.Frame):
 
                 quantity_entry = ctk.CTkEntry(data_frame, font = ("Arial", 10), width = 400, corner_radius = 10)
                 quantity_entry.grid(row = counter_line, column = 3, sticky = "w")
-                quantities.append(quantity_entry)
 
                 unit_choice = ttk.Combobox(data_frame, width = 10)
                 unit_choice['values'] = ('g', 'kg', 'cl', 'dl', 'l')
                 unit_choice.grid(row = counter_line, column = 5, sticky = "e", padx = 20)
-                units.append(unit_choice)
 
-                new_ing.append(ing)
+                err_label = tk.Label(data_frame, font = ("Open Sans", 10, "bold"), bg = '#2a9d8f', fg = "#f0efeb", width = 30)
+                err_label.grid(row = counter_line, column = 7, sticky = "nsew")
+
+                entries.append(ing, quantity_entry, unit_choice, err_label)
                 counter_line += 1
         
         data_frame.grid_columnconfigure(6, weight = 1)
@@ -490,21 +489,22 @@ class MissingQuantitiesPage(tk.Frame):
 
         finish_button = tk.Button(buttons_frame, text = "Terminer", font = 'arial 20 bold', bg = '#8A7E72', fg = '#5A2328', width = 12)
         finish_button.grid(row = 1, column = 3, pady = 10, sticky = "w")
-        finish_button.bind('<Button-1>', lambda x: test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, quantities, units, new_ing))
+        finish_button.bind('<Button-1>', lambda x: test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries))
         buttons_frame.grid_columnconfigure(4, weight = 1)
 
 
         buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "center")
 
-        def test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, quantities, units, new_ing):
+        def test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries):
 
-            for ind, ing in enumerate(new_ing):
-                if quantities[ind].get() != "" and units[ind].get() != "": # if any quantities or units is given, the original data are conserved
-                    if quantities[ind].get().isnumeric():
-                        ingredients[ing] = [ingredients[ing][0], quantities[ind].get(), [units[ind].get(),units[ind].get()]]        
-                        logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(quantities[ind].get() + " " + str(units[ind].get())), ing))
+            for entry in entries:
+                if entry[1].get() != "" and entry[2].get() != "": # if any quantities or units is given, the original data are conserved
+                    if entry[1].get().isnumeric():
+                        ingredients[entry[0]] = [ingredients[entry[0]][0], entry[1].get(), [entry[2].get(), entry[2].get()]]        
+                        logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(entry[1].get() + " " + str(entry[2].get())), entry[0]))
                     else:
-                        pass
+                        entry[3].config(text = "Nom taxonomique non valide")
+
             dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
 
 

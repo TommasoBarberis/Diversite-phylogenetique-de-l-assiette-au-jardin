@@ -2,13 +2,13 @@ import GUI as gui
 import pytest
 
 
-@pytest.fixture
-def app():
-    test_app = gui.MainWindow()
-    return test_app
-
-    
 class testSubmitButton:
+    @pytest.fixture
+    def app():
+        test_app = gui.MainWindow()
+        return test_app
+
+
     def test_urlEntrynSubmitButton(app):
 
     # when the Entry is empty 
