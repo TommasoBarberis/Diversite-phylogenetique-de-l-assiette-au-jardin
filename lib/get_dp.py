@@ -70,9 +70,7 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
             mpd = 0 # mean pairwise distance
 
             for leaf in species:
-                if sp == leaf:
-                    pass
-                else:
+                if sp != leaf:
                     mpd += tree.get_distance(sp, leaf)
             
             weight = dict_sp_drym[sp][0]

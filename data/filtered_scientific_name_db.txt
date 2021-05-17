@@ -375,7 +375,6 @@ Fortunella japonica	Kumquat
 Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
-Gallus gallus	jaune d'oeuf
 Gallus gallus	Aiguillette de poulet
 Gallus gallus	Aiguillettes de poulet
 Gallus gallus	Aileron de poulet
@@ -405,7 +404,6 @@ Gallus gallus	Viande de coq
 Gallus gallus	Viande de poule
 Gallus gallus	Viande de poulet
 Gallus gallus	coq
-Gallus gallus	jaune d'oeuf
 Garcinia mangostana	Mangoustan
 Garcinia mangostana	mangoustanier
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
@@ -455,6 +453,7 @@ Lathyrus sativus	Gesse
 Lathyrus sativus	Lentille d'Espagne
 Laurus nobilis	Laurier
 Laurus nobilis	Laurier-sauce
+Laurus nobilis	feuille de laurier
 Lavandula angustifolia	Lavande
 Lens culinaris	Lentille
 Lentinus edodes	Shi take
@@ -538,6 +537,7 @@ Oenothera biennis	Œnothère
 Olea europaea	Olive
 Olea europaea	huile
 Olea europaea	huile d'olive
+Olea europaea	olives noires
 Opuntia ficus-indica	Figue de barbarie
 Origanum majorana	Marjolaine
 Origanum majorana	Origan des jardins
@@ -739,6 +739,7 @@ Solanum betaceum	Tamarillo
 Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Tomate
 Solanum lycopersicum	Tomates cerises
+Solanum lycopersicum	coulis de tomate
 Solanum melongena	Aubergine
 Solanum melongena	Marignan
 Solanum muricatum	Pepino
@@ -871,6 +872,7 @@ Vigna unguiculata	Niébé
 Vigna unguiculata	Pois Manger Cochon
 Vigna unguiculata sesquipedalis	Dolique asperge
 Vitis	Vin blanc sec
+Vitis	vin rouge
 Vitis rotundifolia	Raisin
 Vitis rotundifolia	Vigne à feuilles rondes
 Vitis vinifera	Vigne Sauvage

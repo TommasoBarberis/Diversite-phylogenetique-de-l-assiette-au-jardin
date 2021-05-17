@@ -426,6 +426,7 @@ class MissingSpeciesPage(tk.Frame):
         test_button_frame.pack(side = "top", fill = "x", expand = 1, anchor = "n")
         final_buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "se")
 
+        self.update_idletasks()
         w = 1000
         h = instruction_frame.winfo_reqheight() + entry_frame.winfo_reqheight() + test_button_frame.winfo_reqheight() + final_buttons_frame.winfo_reqheight()
         x = (window.winfo_screenwidth() - w) / 2
@@ -444,7 +445,6 @@ class MissingQuantitiesPage(tk.Frame):
         instruction_label = tk.Label(instruction_frame, text = "Si c'est possible, renseigner les quantités \npour les ingrédients suivants ainsi que leurs unités de mesure:", \
             font = ("Open Sans", 18), bg = '#2a9d8f', fg = "#f0efeb")
         instruction_label.pack(side = "top", fill = "both", expand = 1, anchor = "center")
-        instruction_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
 
         data_frame = tk.Frame(self, bg = "#2a9d8f")
         data_frame.grid_columnconfigure(0, weight = 1)
@@ -466,47 +466,79 @@ class MissingQuantitiesPage(tk.Frame):
                 unit_choice['values'] = ('g', 'kg', 'cl', 'dl', 'l')
                 unit_choice.grid(row = counter_line, column = 5, sticky = "e", padx = 20)
 
-                err_label = tk.Label(data_frame, font = ("Open Sans", 10, "bold"), bg = '#2a9d8f', fg = "#f0efeb", width = 30)
-                err_label.grid(row = counter_line, column = 7, sticky = "nsew")
+                err_label = tk.Label(data_frame, font = ("Open Sans", 10, "bold"), bg = '#2a9d8f', fg = "#f0efeb", \
+                width = 20)
+                err_label.grid(row = counter_line, column = 7, sticky = "w")
 
-                entries.append(ing, quantity_entry, unit_choice, err_label)
+                entries.append((ing, quantity_entry, unit_choice, err_label))
                 counter_line += 1
         
         data_frame.grid_columnconfigure(6, weight = 1)
-        data_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
 
         buttons_frame = tk.Frame(self, bg = "#2a9d8f")
-        buttons_frame.grid_rowconfigure(0, weight = 1)
-        buttons_frame.grid_columnconfigure(0, weight = 1)
 
-        prev_button = tk.Button(buttons_frame, text = "Avant", font = 'arial 20 bold', bg = '#8A7E72', fg = '#5A2328', width = 12)
-        buttons_frame.grid_columnconfigure(2, weight = 1)
+        def prev_button_func():
+            controller.show_frame(MissingSpeciesPage)
+
+        prev_button = ctk.CTkButton(master = buttons_frame, text = "Avant", text_font = ("Open Sans", 20 ,"bold"), \
+            bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
+            height = 40, corner_radius = 20, command = prev_button_func)
         
         if len(ingredients) != len(species):
-            prev_button.grid(row = 1, column = 1, pady = 10, sticky = "w")
+            prev_button.pack(side = "left", anchor = "sw", padx = 10, pady = 10)
 
-        prev_button.bind('<Button-1>', lambda x: controller.show_frame(MissingSpeciesPage))
+        def end_button_func():
+            test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries)
 
-        finish_button = tk.Button(buttons_frame, text = "Terminer", font = 'arial 20 bold', bg = '#8A7E72', fg = '#5A2328', width = 12)
-        finish_button.grid(row = 1, column = 3, pady = 10, sticky = "w")
-        finish_button.bind('<Button-1>', lambda x: test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries))
-        buttons_frame.grid_columnconfigure(4, weight = 1)
+        finish_button = ctk.CTkButton(master = buttons_frame, text = "Terminer", text_font = ("Open Sans", 20 ,"bold"), \
+            bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
+            height = 40, corner_radius = 20, command = end_button_func)
+        finish_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
 
-
-        buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "center")
 
         def test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries):
 
+            var = False            
             for entry in entries:
-                if entry[1].get() != "" and entry[2].get() != "": # if any quantities or units is given, the original data are conserved
-                    if entry[1].get().isnumeric():
-                        ingredients[entry[0]] = [ingredients[entry[0]][0], entry[1].get(), [entry[2].get(), entry[2].get()]]        
-                        logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(entry[1].get() + " " + str(entry[2].get())), entry[0]))
-                    else:
-                        entry[3].config(text = "Nom taxonomique non valide")
+                ing = entry[0]
+                new_qty = entry[1].get()
+                new_unit = entry[2].get()
+                err_label = entry[3]
 
-            dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
+                if new_qty != "" and new_unit != "": # if any quantities or units is given, the original data are conserved
+                    var = False
 
+                    if new_qty.isnumeric() and new_unit in ("g", "kg", "l", "dl", "cl"):
+                        var = True
+                        ingredients[ing] = [ingredients[ing][0], new_qty, [new_unit, new_unit]]        
+                        err_label.config(text = "")
+                        logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(new_qty + " " + str(new_unit)), ing))
+                    elif new_qty.isnumeric() is False:
+                        err_label.config(text = "Erreur dans la quantité")
+                    elif new_unit not in ("g", "kg", "l", "dl", "cl"):
+                        err_label.config(text = "Erreur dans l'unité")   
+                elif new_qty == "" and new_unit != "":
+                        err_label.config(text = "Quantité manquante")
+                elif new_unit == "" and new_qty != "":
+                        err_label.config(text = "Unité manquante")
+                else:
+                    var = True
+
+            if var:
+                dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
+                results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico)
+
+
+        instruction_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
+        data_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
+        buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "se")
+
+        w = 1000
+        self.update_idletasks()
+        h = instruction_frame.winfo_reqheight() + data_frame.winfo_reqheight() + buttons_frame.winfo_reqheight()
+        x = (window.winfo_screenwidth() - w) / 2
+        y = (window.winfo_screenheight() - h) / 2 - 150
+        window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 
 
 class Results:

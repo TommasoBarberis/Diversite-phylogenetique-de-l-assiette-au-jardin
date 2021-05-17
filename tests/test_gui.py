@@ -1,41 +1,4 @@
 import GUI as gui 
-import pytest
-
-
-class testSubmitButton:
-    @pytest.fixture
-    def app():
-        test_app = gui.MainWindow()
-        return test_app
-
-
-    def test_urlEntrynSubmitButton(app):
-
-    # when the Entry is empty 
-        app.test_domain()
-        root_children = app.winfo_children()
-        title = root_children[2].title()
-        assert title == "Error"
-    
-    # when the Entry has a incorrect url
-        incorrect_url = "https://www.univ-lyon1.fr/"
-        entry = app.url_entry
-        entry.insert(0, incorrect_url)
-        app.test_domain()
-        root_children = app.winfo_children()
-        title = root_children[2].title()
-        assert title == "Error"
-
-    # when the Entry has a correct url
-        correct_url = "https://www.marmiton.org/recettes/recette_moka-au-cafe-avec-petits-beurres_28186.aspx"
-        entry.delete(0, len(incorrect_url))
-        entry.insert(0, correct_url)
-        # tx = entry.get()
-        app.test_domain()
-        root_children = app.winfo_children()
-        title = root_children[4].title()
-        assert title == "Informations manquantes"
-
 
 def test_missing_species():
     ingredients = {'lardons': [['lardons', 'lardons'], '1', ['paquet', 'paquets']], 'pomme de terre': [['pomme de terre', 'pommes de terre'], '3', ['', '']], 'brick': [['brick', 'brick'], '8', ['feuille', 'feuilles']], 'raclette': [['raclette', 'raclette'], '1', ['paquet', 'paquets']], 'oignon': [['oignon', 'oignons'], '1', ['', '']]}
@@ -61,4 +24,3 @@ def test_table_row():
     dry_matter_dict = {}
     dict_row = gui.table_row(ingredients, species, dict_nut, dry_matter_dict)
     assert len(ingredients) == len(dict_row)
-
