@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import GUI as gui 
 import pytest
 import tkinter
