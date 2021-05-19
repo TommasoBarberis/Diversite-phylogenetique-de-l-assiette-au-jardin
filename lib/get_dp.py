@@ -20,7 +20,11 @@ def phylogenetic_diversity (tree, species):
 
     species = list(species.values())
     tree = Tree(tree, format = 8, quoted_node_names = True)
-    tree = tree.get_common_ancestor(species)
+    try:
+        tree = tree.get_common_ancestor(species)
+    except Exception:
+        logger.exception("Some species are not found")
+        return "NA"
     
     pd = 0 # phylogenetic diversity
 
@@ -55,7 +59,12 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
 
     species = list(species.values())
     tree = Tree(tree, format = 8, quoted_node_names = True)
-    tree = tree.get_common_ancestor(species)
+    try:
+        tree = tree.get_common_ancestor(species)
+    except Exception:
+        logger.exception("Some species are not found")
+        return "NA"
+        
     wpd = 0 # weighted phylogenetic diversity
 
     if len(species) == 0:
@@ -126,13 +135,3 @@ def simpson(species, dict_sp_drym):
 if "__main__" == __name__:
     tree = "(((((((((((((((Piper nigrum)Piper)Piperaceae)Piperales)Magnoliidae,(((((((Allium sativum,Allium cepa)Allium)Allieae)Allioideae)Amaryllidaceae)Asparagales)Petrosaviidae)Liliopsida,(((((((((((((Daucus carota)Daucus sect. Daucus)Daucus)Daucinae)Scandiceae)Apioideae)Apiaceae)Apiineae)Apiales)campanulids)asterids)Pentapetalae)Gunneridae)eudicotyledons)Mesangiospermae)Magnoliopsida)Spermatophyta)Euphyllophyta)Tracheophyta)Embryophyta)Streptophytina)Streptophyta)Viridiplantae)Eukaryota);"
     ncbi = NCBITaxa()
-    tree = ncbi.get_topology(([4679, 4682, 4039, 13216]), intermediate_nodes = True)
-    tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-    tree = Tree(tree, format = 8, quoted_node_names = True)
-    nodes = tree.search_nodes()
-    print(tree, "\n", nodes, "\n", len(nodes))
-    ancestor = tree.get_common_ancestor("Piper nigrum", "Allium sativum", "Allium cepa", "Daucus carota")
-    nodes = ancestor.search_nodes()
-    # print(tree.get_common_ancestor())
-    print(ancestor, "\n", nodes, "\n",len(nodes))
-    # print(common_ancestor(tree))

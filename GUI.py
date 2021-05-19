@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog
 import customtkinter as ctk
 from PIL import ImageTk, Image
 from urllib.parse import urlparse
@@ -9,7 +10,7 @@ import webbrowser
 from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
 import pyperclip
 from ete3 import NCBITaxa
-import os, sys
+import os, sys, inspect
 import logging
 
 
@@ -39,7 +40,7 @@ class MainWindow(tk.Tk):
         x = (self.winfo_screenwidth() - w) / 2
         y = (self.winfo_screenheight() - h) / 2
         self.geometry("%dx%d+%d+%d" % (w, h, x, y))
-        self.minsize(800,400)
+        self.minsize(800,470)
         self.config(background = "#2a9d8f")
 
         self.main_frame = ctk.CTkFrame(master = self, bg = "#2a9d8f", fg_color = "#2a9d8f") 
@@ -59,18 +60,55 @@ class MainWindow(tk.Tk):
         self.url_entry.pack(side = "top", expand = 1, anchor = "n")
 
 
-    # submit
-        self.submit = ctk.CTkButton(master = self.main_frame, text = 'Entrer', bg_color = "#2a9d8f", \
-        fg_color = "#f0efeb", command = self.test_domain, width = 200, height = 40, \
+    # submit buttons
+        submit_buttons_frame = tk.Frame(self.main_frame, bg = "#2a9d8f", height = 50)
+        
+    # mono-recipe
+        def mono_recipe_func():
+            recipes_dict = {}
+
+            url = self.url_entry.get()
+            recipes_dict[url] = []
+            self.url_process(recipes_dict)
+
+            
+        submit = ctk.CTkButton(master = submit_buttons_frame, text = 'Entrer', bg_color = "#2a9d8f", \
+        fg_color = "#f0efeb", command = mono_recipe_func, width = 200, height = 44, \
         corner_radius = 20, text_font = ("Open Sans", 20, "bold"), hover_color = "#B7B7A4", \
         text_color = "#5aa786")
-        self.submit.pack(side = "top", expand = 1, anchor = "n") 
-  
+        submit.pack(side = "left", expand = 1, anchor = "center", padx = 10) 
+
+    # multi-recipe
+        def multi_recipe_func():
+            filename = filedialog.askopenfilename(parent = self, title = "multi-recette")
+            recipes_dict = {}
+            
+            if filename != ():
+                with open(filename, "r") as f:
+                    list_url = f.readlines()
+                    for url in list_url:
+                        recipes_dict[url.replace("\n", "")] = []
+            
+            self.url_process(recipes_dict)
+
+
+        multirecipe_button = ctk.CTkButton(master = submit_buttons_frame, text = "+", bg_color = "#2a9d8f", \
+        fg_color = "#f0efeb", command = multi_recipe_func, width = 44, height = 44, \
+        corner_radius = 25, text_font = ("Open Sans", 20, "bold"), hover_color = "#B7B7A4", \
+        text_color = "#5aa786")
+        multirecipe_button.pack(side = "left", expand = 1, anchor = "e", padx = 10)
+
+        multi_label = tk.Label(submit_buttons_frame, text = "multi-recette", font = ("Open Sans", 14, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
+        multi_label.pack(side = "right", anchor = "w")
+        
+        submit_buttons_frame.pack(side = "top", anchor = "center")
+
 
     #  utility buttons
         bottom_frame = tk.Frame(self, bg = "#2a9d8f")
         button_frame = ctk.CTkFrame(master = bottom_frame, bg = "#2a9d8f", fg_color = "#2a9d8f", height = 50, width = 800)
         info_label = tk.Label(button_frame, text = "", bg = "#e4e4dd", fg = "#000000")
+
 
         # gitlab button     
         def open_gitlab():
@@ -84,11 +122,13 @@ class MainWindow(tk.Tk):
         
             info_label.after(500, func = after_func)
 
+
         def info_label_leave(evt):
             def after_func():
                 info_label.place_forget()
 
             info_label.after(500, func = after_func)
+
 
         gitlab_icon = tk.PhotoImage(file = r"assets/gitlab.png").subsample(5, 5)
         gitlab_button = ctk.CTkButton(master =button_frame, bg_color = "#2a9d8f", fg_color = "#f0efeb", \
@@ -135,35 +175,36 @@ class MainWindow(tk.Tk):
         self.logo_label.pack(side = "right", padx = 20, anchor = "center")
 
 
-    def test_domain(self):
+    def url_process(self, recipes_dict):
         '''
-        pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenetre pour 
-        demander les informations manquantes ou sinon directement pour afficher les resultats,
-        autrement il affiche une fenetre d'erreur.
+        pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenêtre pour 
+        demander les informations manquantes ou sinon directement pour afficher les résultats,
+        autrement il affiche une fenêtre d'erreur.
         '''
+        
+        curframe = inspect.currentframe()
+        calframe = inspect.getouterframes(curframe, 2)
+        
+        counter = 1
+        for url in recipes_dict:
 
-        def open_error_window(self):
-            try:
-                logger.info("Open error window for incorrect url")
-                self.error_window()
-            except Exception:
-                logger.exception("Error in 'error' window opening")
-
-
-        url = self.url_entry.get()
-        logger.info("URL recipe entered by the user: " + url)
-        domain = ""
-
-        try:
-            domain = urlparse(url).netloc
-        except Exception:
-            open_error_window(self)
-            logger.info("The {} URL is invalid".format(url))
-
-        if domain == "www.marmiton.org":  
-            
             try:
                 ingredients = get_ing.process(url)
+           
+            except Exception:
+                logger.exception("{} url is wrong".format(url))
+
+                if calframe[1][3] == "mono_recipe_func":
+                    self.error_window("L'URL saisi est incorrect.")
+                elif calframe[1][3] == "multi_recipe_func":
+                    self.error_window("L'URL à la ligne numéro {} est incorrect.".format(counter))
+                    break
+            
+            counter += 1
+            logger.info("Processing: " + url)
+
+            
+            try:
                 assert ingredients is not None
             except AssertionError as err:
                 logger.exception(err)
@@ -174,34 +215,52 @@ class MainWindow(tk.Tk):
             species = ing_to_esp.recherche_globale(ingredients)
             dict_nutrition = ing_properties.get_dict_nut(ingredients)
             dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
+            recipes_dict[url] = [ingredients, species, dict_nutrition, dry_matter_dico]
             logger.info("URL processed, getting ingredient, species, nutrition data and dry matter information")
 
+        var = True  # to check if there are some missing info
+        for recipe in recipes_dict:
+            ing = recipes_dict[recipe][0]
+            sp = recipes_dict[recipe][1]
+            nut = recipes_dict[recipe][2]
+            drym = recipes_dict[recipe][3]
+            
+            if len(ing) != len(sp):
+                var = False
+                sp = [sp, False]
+            if len(ing) != len(drym):
+                var = False
+                drym = [drym, False]
 
-            if len(ingredients) != len(species) or len(ingredients) != len(dry_matter_dico):
-                try:
-                    self.missing_info_window(ingredients, species, url, dict_nutrition, dry_matter_dico)
-                    logger.info("Open missing information window")
-                except:
-                    logger.exception("Error in 'missing information' window opening")
-            else:
-                try:
-                    self.results_window(ingredients, species, url, dict_nutrition, dry_matter_dico)
-                    logger.info("Open result window")
-                except Exception:
-                    logger.exception("Error in 'result' window opening")
+            recipes_dict[recipe] = [ing, sp, nut, drym]
 
+
+        if var:
+            try:
+                self.results_window(ingredients, species, url, dict_nutrition, dry_matter_dico)
+                logger.info("Open result window")
+            except Exception:
+                logger.exception("Error in 'result' window opening")
+        
         else:
-            open_error_window(self)
+            try:
+                self.missing_info_window(recipes_dict)
+                logger.info("Open missing information window")
+            except:
+                logger.exception("Error in 'missing information' window opening")
+            
 
 
-
-    def error_window(self):
+    def error_window(self, label_text):
         '''
         Ouvre la fenetre d'erreur.
         '''
-
-        self.error = tk.Toplevel(self)
-        self.app = ErrorWin(self.error)
+        try:
+            logger.info("Open error window for incorrect url")
+            self.error = tk.Toplevel(self)
+            self.app = ErrorWin(self.error, label_text)
+        except Exception:
+            logger.exception("Error in 'error' window opening")
 
     def results_window(self, ingredients, species, dict_nutrition, dry_matter_dico): 
         '''
@@ -211,13 +270,15 @@ class MainWindow(tk.Tk):
         self.results = tk.Toplevel(self)
         self.app = Results(ingredients, species, self.results, self.url_entry.get(), dict_nutrition, dry_matter_dico)
 
-    def missing_info_window(self, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
+    def missing_info_window(self, recipes_dict):
         '''
         Ouvre la fenetre pour rajouter les informations manquantes
         '''
 
         self.missing = tk.Toplevel(self)
-        self.app = MissingPage(ingredients = ingredients, species = species, url_recipe = url_recipe, missing_window = self.missing, dict_nutrition = dict_nutrition, dry_matter_dico = dry_matter_dico)
+        self.app = MissingPage(self.missing, recipes_dict)
+
+
 
 class ErrorWin:
     '''
@@ -225,7 +286,7 @@ class ErrorWin:
     '''
 
 
-    def __init__(self, error_window):
+    def __init__(self, error_window, label_text):
         self.error_window = error_window
         
     # window setting 
@@ -240,7 +301,7 @@ class ErrorWin:
 
         main_frame = tk.Frame(self.error_window, bg = "#2a9d8f")
     # label
-        error_message = tk.Label(main_frame, text = "L’URL du site web que vous avez indiquée n’est pas valide. \nVeuillez saisir une URL correct et réessayez", \
+        error_message = tk.Label(main_frame, text = label_text, \
             bg = "#2a9d8f", fg = "#f0efeb", font = ("Open Sans", 14))
         error_message.pack(side = "top", expand = 1)
         
@@ -258,22 +319,13 @@ class ErrorWin:
         main_frame.pack(side = "top", expand = 1, anchor = "center")
 
 
-# Commons functions for the several windows
-
-def enter_button(label, text):
-    label.config(text = text)
-
-            
-def leave_button(label):
-    label.config(text = "")
-
 class MissingPage:
     '''
     Creation de la fenetre pour recuperer les informations manquantes
     '''
 
-    def __init__(self, ingredients, species, url_recipe, missing_window, dict_nutrition, dry_matter_dico):
-        self.missing_window = missing_window
+    def __init__(self, missing_window, recipes_dict):
+        # self.missing_window = missing_window
 
     # window setting 
         missing_window.title("Informations manquantes")
@@ -285,81 +337,136 @@ class MissingPage:
         missing_window.minsize(800,400)
         missing_window.config(background = "#2a9d8f")
 
-
-        container = tk.Frame(self.missing_window, bg = "#2a9d8f")
-        container.pack(side = "top", fill = "both", expand = 1)
-        container.grid_rowconfigure(0, weight = 1)
-        container.grid_columnconfigure(0, weight = 1)
+        list_recipe = [] # list of recipes that miss some info
+        for recipe in recipes_dict:
+            if isinstance(recipes_dict[recipe][1], list) or isinstance(recipes_dict[recipe][3], list):
+                list_recipe.append(recipe)
         
+        for counter, recipe in enumerate(list_recipe):
+            var = "central"
+            if counter == 0:
+                var = "left" # in order to not show previous button in the first frame
+            elif counter == (len(list_recipe) - 1):
+                var = "right" # in order to not show continue button in the last frame
+            list_recipe[counter] = [recipe, var]
+        if len(list_recipe) == 1:
+            list_recipe = [[list_recipe[0][0], "single"]]
+
+        main_frame = tk.Frame(missing_window, bg = "#2a9d8f")
+        main_frame.pack(fill = "both", expand = 1, anchor = "center")
         self.frames = {}
 
-        for F in (MissingSpeciesPage, MissingQuantitiesPage):
-            frame = F(container, self, missing_window, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico)
-            self.frames[F] = frame
+        main_frame.grid_rowconfigure(0, weight = 1)
+        main_frame.grid_columnconfigure(0, weight = 1)
+
+        for recipe in list_recipe:
+            frame = containerFrame(main_frame, self, missing_window, recipe, recipes_dict, list_recipe)
+            self.frames[recipe[0]] = frame
             frame.grid(row = 0, column = 0, sticky = "nsew")
 
-        if len(ingredients) == len(species):
-            self.show_frame(MissingQuantitiesPage)
-        else:
-            self.show_frame(MissingSpeciesPage)
+        self.show_deeper_frames(list_recipe[0][0])
     
-    def show_frame(self, name):
-        frame = self.frames[name]
-        frame.tkraise()
-        logger.info("Switch to {}".format(name.__name__))
+    def show_deeper_frames(self, frame_name):
+        self.frames[frame_name].tkraise()
+        logger.info("Show {} frame".format(frame_name))
 
-    
-def results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico): 
+   
+def results_window_from_missing_window(self, window, recipes_dict): 
     '''
     Ouvre la fenetre des resultats.
     '''  
 
     self.results = tk.Toplevel(self)
-    self.app = Results(ingredients, species, self.results, url_recipe, dict_nutrition, dry_matter_dico)
+    self.app = Results(self.results, recipes_dict)
     window.withdraw()
 
 
+class containerFrame(tk.Frame):
+    def __init__(self, parent, controller, window, recipe, recipes_dict, list_recipe):
+        tk.Frame.__init__(self, parent)
+        self.list_recipe = list_recipe
+        self.controller = controller
+
+        main_frame = tk.Frame(self, bg = "#2a9d8f")
+        main_frame.pack(fill = "both", expand = 1, anchor = "center")
+        
+        main_frame.grid_rowconfigure(0, weight = 1)
+        main_frame.grid_columnconfigure(0, weight = 1)
+        self.frames = {}
+
+        for F in (MissingSpeciesPage, MissingQuantitiesPage): 
+            frame = F(main_frame, self, window, recipe, recipes_dict)
+            self.frames[F] = frame
+            frame.grid(row = 0, column = 0, sticky = "nsew")
+
+        sp = recipes_dict[recipe[0]][1] 
+        if isinstance(sp, list): # if some species are missed
+            self.show_frame(MissingSpeciesPage)
+        else:
+            self.show_frame(MissingQuantitiesPage)
+
+
+    def change_container(self, recipe, caller):
+        if caller == "next_button":
+            index = self.list_recipe.index(recipe) + 1
+        elif caller == "prev_button":
+            index = self.list_recipe.index(recipe) - 1
+            
+        self.controller.show_deeper_frames(self.list_recipe[index][0])
+
+    def show_frame(self, frame_name):
+        self.frames[frame_name].tkraise()
+        logger.info("Show {} frame".format(frame_name))
+    
+
 class MissingSpeciesPage(tk.Frame):
 
-    def __init__(self, parent, controller, window, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
+    def __init__(self, parent, controller, window, recipe, recipes_dict):
         tk.Frame.__init__(self, parent)
-
         self.config(bg = "#2a9d8f")
-        instruction_frame = tk.Frame(self, bg = "#2a9d8f")
-        instruction_frame.grid_columnconfigure(0, weight = 1)
-        instruction_frame.grid_rowconfigure(0, weight = 1)
-        instruction_label = tk.Label(instruction_frame, \
-            text = "Si c'est possible, renseigner les \nespèces pour les ingrédients suivants:", \
-                font = ("Open Sans", 18), bg = '#2a9d8f', fg = "#f0efeb")
-        instruction_label.grid(row = 1, column = 1, sticky = "w")
-        instruction_frame.grid_columnconfigure(2, weight = 1)
 
-        entry_frame = tk.Frame(self, bg = "#2a9d8f")
-        entry_frame.grid_columnconfigure(0, weight = 1)
-        entry_frame.grid_rowconfigure(0, weight = 1)
+    # frame for title and instruction     
+        top_frame = tk.Frame(self, bg = "#2a9d8f")
+        title_label = tk.Label(top_frame, text = get_ing.get_title(recipe[0]), font = ("Open Sans", 20, "bold"), \
+            bg = '#2a9d8f', fg = "#f0efeb")
+        title_label.pack(expand = 1, anchor = "center", pady = 15)
+        
+        instruction_label = tk.Label(top_frame, \
+            text = "Si c'est possible, renseigner les \nespèces pour les ingrédients suivants:", \
+            font = ("Open Sans", 18), bg = '#2a9d8f', fg = "#f0efeb")
+        instruction_label.pack(expand = 1, anchor = "center")
+
+
+    # frame for data insertion
+        data_frame = tk.Frame(self, bg = "#2a9d8f")
+        data_frame.grid_columnconfigure(0, weight = 1)
+        data_frame.grid_rowconfigure(0, weight = 1)
         counter_line = 3
         
         entries = []
+        ingredients = recipes_dict[recipe[0]][0]
+        species = recipes_dict[recipe[0]][1][0]
+
         for ing in ingredients:
             if ing not in species:
-                ing_cell = tk.Label(entry_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', \
+                ing_cell = tk.Label(data_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', \
                 fg = "#f0efeb")
                 ing_cell.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
 
-                sp_entry = ctk.CTkEntry(entry_frame, font = ("Arial", 10), width = 500, corner_radius = 10)
+                sp_entry = ctk.CTkEntry(data_frame, font = ("Arial", 10), width = 500, corner_radius = 10)
                 sp_entry.grid(row = counter_line, column = 3, sticky = "w")
 
-                not_valid_label = tk.Label(entry_frame, text = "", font = ("Open Sans", 10, "bold"), bg = '#2a9d8f', fg = "#f0efeb", width = 30)
+                not_valid_label = tk.Label(data_frame, text = "", font = ("Open Sans", 10, "bold"), bg = '#2a9d8f', fg = "#f0efeb", width = 30)
                 not_valid_label.grid(row = counter_line, column = 5, sticky = "nsew")
 
                 entries.append((ing, sp_entry, not_valid_label))
 
                 counter_line += 1
 
+        data_frame.grid_rowconfigure(counter_line + 1, weight = 1)
 
-        entry_frame.grid_rowconfigure(counter_line + 1, weight = 1)
 
-
+    # frame for the test button
         test_button_frame = ctk.CTkFrame(master = self, bg = "#2a9d8f", fg_color = "#2a9d8f")
 
         def test_button_func():
@@ -370,56 +477,27 @@ class MissingSpeciesPage(tk.Frame):
         height = 40, corner_radius = 20, command = test_button_func)    
         test_button.pack(side = "top", anchor = "n")
  
-        
-        # TODO - label that explain the button function
-        # label_info = tk.Label(buttons_frame, text = "", bg = '#2a9d8f', fg = "#8A7E72", width = 50)
-        # label_info.grid(row = 1, column = 3, sticky = "nsew")
-        # test_button.bind('<Enter>', lambda x: enter_button(label_info, 'Permet de tester si les espèces rentrées \nsont des noms taxonomiques valides'))
-        # test_button.bind('<Leave>', lambda x: leave_button(label_info))
-
-        final_buttons_frame = ctk.CTkFrame(master = self, bg = "#2a9d8f", fg_color = "#2a9d8f")
-
-        def next_button_func():
-            controller.show_frame(MissingQuantitiesPage)
-
-        next_button = ctk.CTkButton(master = final_buttons_frame, text = "Suivant", text_font = ("Open Sans", 20, "bold"), \
-        bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
-        height = 40, corner_radius = 20, command = next_button_func)
-
-        def finish_button_func():
-            results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico)
-
-        finish_button = ctk.CTkButton(master = final_buttons_frame, text = "Terminer", text_font = ("Open Sans", 20, "bold"), \
-        bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
-        height = 40, corner_radius = 20, command = finish_button_func)
-
-        decisional_bool = False
-        for qty in dry_matter_dico.values():
-            if qty == "-":
-                decisional_bool = True
-
-        if decisional_bool:
-            next_button.pack(side = "bottom", anchor = "se", padx = 10, pady = 10)
-        else:
-            finish_button.pack(side = "bottom", anchor = "se", padx = 10, pady = 10)
-
 
         def test_species(entries):
             '''
             Permet de tester si les espèces rentrées par l'utilisateur sont des noms taxonomiques valides
             '''
-            
+
             for entry in entries:
+                ing = entry[0]
+                new_specie = entry[1].get()
+                err_label = entry[2]
                 if entry != "":
-                    logger.debug("The user has enter '{}' for the ingredient '{}'".format(entry[1].get(), entry[0]))
-                sp = get_lifeMap_subTree.get_taxid({entry: entry[1].get()})
+                    logger.debug("The user has enter '{}' for the ingredient '{}'".format(new_specie, ing))
+                sp = get_lifeMap_subTree.get_taxid({entry: new_specie})
 
                 if sp != []:
-                    species[entry[0]] = entry[1].get()
-                    entry[2].config(text = "")
+                    species[ing] = new_specie
+                    err_label.config(text = "")
+                    recipes_dict[recipe[0]] = [recipes_dict[recipe[0]][0], species, recipes_dict[recipe[0]][2], recipes_dict[recipe[0]][3]]
 
                     with open("data/filtered_scientific_name_db.txt", "a") as name_db:
-                        new_line = str(entry[1].get()) + "\t" + str(entry[0] + "\n")
+                        new_line = str(new_specie) + "\t" + str(ing + "\n")
                         name_db.write(new_line)
 
                     with open("data/filtered_scientific_name_db.txt", "r") as name_db:
@@ -440,46 +518,102 @@ class MissingSpeciesPage(tk.Frame):
                             name_db.write(line)
 
                 else:
-                    entry[2].config(text = "Nom taxonomique non valide")
+                    err_label.config(text = "Nom taxonomique non valide")
+        
+        # TODO - label that explain the button function
+        # label_info = tk.Label(buttons_frame, text = "", bg = '#2a9d8f', fg = "#8A7E72", width = 50)
+        # label_info.grid(row = 1, column = 3, sticky = "nsew")
+        # test_button.bind('<Enter>', lambda x: enter_button(label_info, 'Permet de tester si les espèces rentrées \nsont des noms taxonomiques valides'))
+        # test_button.bind('<Leave>', lambda x: leave_button(label_info))
 
 
-        instruction_frame.pack(side = "top", fill = "x", expand = 1,  anchor = "center")
-        entry_frame.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+    # frame for button in the bottom of page
+        final_buttons_frame = ctk.CTkFrame(master = self, bg = "#2a9d8f", fg_color = "#2a9d8f")
+
+
+        def prev_button_func():
+            controller.change_container(recipe, "prev_button")
+
+        prev_button = ctk.CTkButton(master = final_buttons_frame, text = "Avant", text_font = ("Open Sans", 20 ,"bold"), \
+            bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
+            height = 40, corner_radius = 20, command = prev_button_func)
+
+
+        def next_button_func():
+            pass
+            controller.show_frame(MissingQuantitiesPage)
+
+        next_button = ctk.CTkButton(master = final_buttons_frame, text = "Suivant", text_font = ("Open Sans", 20, "bold"), \
+        bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
+        height = 40, corner_radius = 20, command = next_button_func)
+
+        def finish_button_func():
+            results_window_from_missing_window(self, window, recipes_dict)
+
+        finish_button = ctk.CTkButton(master = final_buttons_frame, text = "Terminer", text_font = ("Open Sans", 20, "bold"), \
+        bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
+        height = 40, corner_radius = 20, command = finish_button_func)
+
+        dry_matter_dico = recipes_dict[recipe[0]][3]
+        var = recipe[1]
+
+        if var == "single" or var == "right":
+            if isinstance(dry_matter_dico, list): # it allow or not to open the "window" to modify quantities
+                next_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+            else:
+                finish_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+        elif var == "left":
+            next_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+        elif var == "central":
+            prev_button.pack(side = "left", anchor = "sw", padx = 10, pady = 10)
+            next_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+        elif var == "right":
+            prev_button.pack(side = "left", anchor = "sw", padx = 10, pady = 10)
+
+        top_frame.pack(side = "top", fill = "x", expand = 1,  anchor = "center")
+        data_frame.pack(side = "top", fill = "x", expand = 1, anchor = "center")
         test_button_frame.pack(side = "top", fill = "x", expand = 1, anchor = "n")
         final_buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "se")
 
-        self.update_idletasks()
         w = 1000
-        h = instruction_frame.winfo_reqheight() + entry_frame.winfo_reqheight() + test_button_frame.winfo_reqheight() + final_buttons_frame.winfo_reqheight()
+        h = 350 + (counter_line * 20)
         x = (window.winfo_screenwidth() - w) / 2
-        y = (window.winfo_screenheight() - h) / 2 - 150
+        y = (window.winfo_screenheight() - h) / 2 - 100
         window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 
 
 class MissingQuantitiesPage(tk.Frame):
 
-    def __init__(self, parent, controller, window, ingredients, species, url_recipe, dict_nutrition, dry_matter_dico):
+    def __init__(self, parent, controller, window, recipe, recipes_dict):
         tk.Frame.__init__(self, parent)
         self.config(bg = "#2a9d8f")
 
-        instruction_frame = tk.Frame(self, bg = "#2a9d8f")
-
-        instruction_label = tk.Label(instruction_frame, text = "Si c'est possible, renseigner les quantités \npour les ingrédients suivants ainsi que leurs unités de mesure:", \
+    # frame for title and instruction     
+        top_frame = tk.Frame(self, bg = "#2a9d8f")
+        title_label = tk.Label(top_frame, text = get_ing.get_title(recipe[0]), font = ("Open Sans", 20, "bold"), \
+            bg = '#2a9d8f', fg = "#f0efeb")
+        title_label.pack(expand = 1, anchor = "center", pady = 15)
+        
+        instruction_label = tk.Label(top_frame, \
+            text = "Si c'est possible, renseigner les quantités \npour les ingrédients suivants ainsi que leurs unités de mesure:", \
             font = ("Open Sans", 18), bg = '#2a9d8f', fg = "#f0efeb")
-        instruction_label.pack(side = "top", fill = "both", expand = 1, anchor = "center")
+        instruction_label.pack(expand = 1, anchor = "center")
 
+
+    # frame to insert new data
         data_frame = tk.Frame(self, bg = "#2a9d8f")
         data_frame.grid_columnconfigure(0, weight = 1)
         data_frame.grid_rowconfigure(0, weight = 1)
         counter_line = 3
         
         entries = []
+        ingredients = recipes_dict[recipe[0]][0]
+        dry_matter_dico = recipes_dict[recipe[0]][3][0]
 
         for ing in ingredients:
             if ing not in dry_matter_dico or ing[2][0] != "g":
                 ing_label = tk.Label(data_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', fg = "#f0efeb")
                 ing_label.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
-
 
                 quantity_entry = ctk.CTkEntry(data_frame, font = ("Arial", 10), width = 400, corner_radius = 10)
                 quantity_entry.grid(row = counter_line, column = 3, sticky = "w")
@@ -497,7 +631,9 @@ class MissingQuantitiesPage(tk.Frame):
         
         data_frame.grid_columnconfigure(6, weight = 1)
 
+    # frame to place buttons
         buttons_frame = tk.Frame(self, bg = "#2a9d8f")
+
 
         def prev_button_func():
             controller.show_frame(MissingSpeciesPage)
@@ -506,60 +642,82 @@ class MissingQuantitiesPage(tk.Frame):
             bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
             height = 40, corner_radius = 20, command = prev_button_func)
         
-        if len(ingredients) != len(species):
-            prev_button.pack(side = "left", anchor = "sw", padx = 10, pady = 10)
+
+        def next_button_func():
+            test_qty(self, window, recipe, recipes_dict, entries, "next_button")
+
+        next_button = ctk.CTkButton(master = buttons_frame, text = "Suivant", text_font = ("Open Sans", 20, "bold"), \
+        bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
+        height = 40, corner_radius = 20, command = next_button_func)
+
 
         def end_button_func():
-            test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries)
+            test_qty(self, window, recipe, recipes_dict, entries, "end_button")
 
         finish_button = ctk.CTkButton(master = buttons_frame, text = "Terminer", text_font = ("Open Sans", 20 ,"bold"), \
             bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
             height = 40, corner_radius = 20, command = end_button_func)
-        finish_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+
+        species = recipes_dict[recipe[0]][1][0]
+        var = recipe[1]
+
+        if var == "single" or var == "right":
+            finish_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+        elif var == "left" or var == "central":
+            next_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+
+        if len(ingredients) != len(species):
+            prev_button.pack(side = "left", anchor = "sw", padx = 10, pady = 10)
 
 
-        def test_qty(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico, entries):
 
-            var = False            
+        def test_qty(self, window, recipe, recipes_dict, entries, caller):
+            
+            var = True            
             for entry in entries:
                 ing = entry[0]
                 new_qty = entry[1].get()
                 new_unit = entry[2].get()
                 err_label = entry[3]
 
-                if new_qty != "" and new_unit != "": # if any quantities or units is given, the original data are conserved
-                    var = False
-
+                if new_qty != "" or new_unit != "": # if any quantities or units is given, the original data are conserved
                     if new_qty.isnumeric() and new_unit in ("g", "kg", "l", "dl", "cl"):
-                        var = True
-                        ingredients[ing] = [ingredients[ing][0], new_qty, [new_unit, new_unit]]        
+                        ingredients[ing] = [ingredients[ing][0], new_qty, [new_unit, new_unit]]
+                        recipes_dict[recipe[0]] = [ingredients, recipes_dict[recipe[0]][1],  recipes_dict[recipe[0]][2], recipes_dict[recipe[0]][3]]        
                         err_label.config(text = "")
                         logger.debug("The user add {} quantity and unit for the ingredient {}".format(str(new_qty + " " + str(new_unit)), ing))
                     elif new_qty.isnumeric() is False:
                         err_label.config(text = "Erreur dans la quantité")
+                        var = False
                     elif new_unit not in ("g", "kg", "l", "dl", "cl"):
-                        err_label.config(text = "Erreur dans l'unité")   
+                        err_label.config(text = "Erreur dans l'unité")
+                        var = False
                 elif new_qty == "" and new_unit != "":
                         err_label.config(text = "Quantité manquante")
                 elif new_unit == "" and new_qty != "":
                         err_label.config(text = "Unité manquante")
                 else:
-                    var = True
+                    err_label.config(text = "")
 
+            dict_nutrition = recipes_dict[recipe[0]][2]
+ 
             if var:
-                dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
-                results_window_from_missing_window(self, ingredients, species, url_recipe, window, dict_nutrition, dry_matter_dico)
+                if caller == "next_button":
+                    controller.change_container(recipe, "next_button")
+                elif caller == "end_button":
+                    dry_matter_dico = ing_properties.dry_matter_dict_update(ingredients, dict_nutrition)
+                    recipes_dict[recipe[0]] = [recipes_dict[recipe[0]][0], recipes_dict[recipe[0]][1],  recipes_dict[recipe[0]][2], dry_matter_dico]        
+                    results_window_from_missing_window(self, window, recipes_dict)
 
 
-        instruction_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
+        top_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
         data_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
         buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "se")
 
         w = 1000
-        self.update_idletasks()
-        h = instruction_frame.winfo_reqheight() + data_frame.winfo_reqheight() + buttons_frame.winfo_reqheight()
+        h = 400 + (counter_line * 20)
         x = (window.winfo_screenwidth() - w) / 2
-        y = (window.winfo_screenheight() - h) / 2 - 150
+        y = (window.winfo_screenheight() - h) / 2 - 100
         window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 
 
@@ -568,325 +726,351 @@ class Results:
     Creation de la fenetre pour les résultats.
     '''
 
-    def __init__(self, ingredients, species, results_window, url_recipe, dict_nutrition, dry_matter_dico):
+    def __init__(self, results_window, recipes_dict):
 
     # window setting 
         results_window.title("Résultats")
         results_window.geometry("1800x800")
         results_window.minsize(1080, 720)
-        results_window.config(background = "#C8BFC7")
 
     # Main canvas
         top_frame = tk.Frame(results_window)
         top_frame.pack(fill = "both", expand = 1, anchor = "center")
-        main_canvas = tk.Canvas(top_frame, bg = "#C8BFC7")
+        main_canvas = tk.Canvas(top_frame)
         main_canvas.pack(side = "left", fill = "both", expand = 1)
         y_scrollbar = ttk.Scrollbar(top_frame, orient = "vertical", command = main_canvas.yview)
         y_scrollbar.pack(side = "right", fill = "y", expand = 0)
-        main_frame = tk.Frame(main_canvas, bg = "#C8BFC7")
+        global_frame = tk.Frame(main_canvas)
 
+        for recipe in recipes_dict:
+            main_frame = tk.Frame(global_frame)
 
-    # structure of the main frame
-    # - info frame
-    # - table frame
-    # - buttons frame
-    # - results frame
-
-        info_frame = tk.Frame(main_frame, bg = "#C8BFC7")
-
-    # recipe's name 
-        name_recipe = get_ing.get_title(url_recipe)
-
-        recipe = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 22, "bold"), bg = '#C8BFC7', fg = "#000000", justify = "center")
-        recipe.pack(side = "top", expand = 1, anchor = "center", pady = 20)
-
-
-    # missing species
-        missing_species_lb_frame = tk.Frame(info_frame, bg = "#C8BFC7")
-        
-        found_species = tk.Label(missing_species_lb_frame, text = str(len(species)), font = ("Open Sans", 18, "bold"), bg = "#C8BFC7", fg = "#000000")
-        found_species.grid(row = 0, column = 0, padx = 2)
-        missing_species_lb_frame.grid_columnconfigure(1, weight = 1)
-        
-        string1_lb = tk.Label(missing_species_lb_frame, text = "espèces ont été trouvé pour les", font = ("Open Sans", 18), bg = "#C8BFC7", fg = "#8A7E72")
-        string1_lb.grid(row = 0, column = 2)
-        missing_species_lb_frame.grid_columnconfigure(3, weight = 1)
-
-        nb_ing_lb = tk.Label(missing_species_lb_frame, text = str(len(ingredients)), font = ("Open Sans", 18, "bold"), bg = "#C8BFC7", fg = "#000000")
-        nb_ing_lb.grid(row = 0, column = 4, padx = 2)
-        missing_species_lb_frame.grid_columnconfigure(5, weight = 1)
-
-        string2_lb = tk.Label(missing_species_lb_frame, text = "ingrédients.",  font = ("Open Sans", 18), bg = "#C8BFC7", fg = "#8A7E72")
-        string2_lb.grid(row = 0, column = 6)
-
-        missing_species_lb_frame.pack(side = "top", expand = 1, anchor = "center", pady = 10)
-        # string1="{} espèces ont été trouvé pour les {} ingrédients.".format(len(species), len(ingredients))
-        # missing_species_label = tk.Label(info_frame, text = string1, font = ("Open Sans", 18), bg = '#C8BFC7', fg = "#8A7E72")
-        # missing_species_label.pack(side = "top", fill = "x", expand = 1, anchor = "center")
-
-        missing_sp_list = missing_species(ingredients, species)
-        if not missing_sp_list[1]:
-            missing_species2 = tk.Label(info_frame, text = "Les ingrédients pour lesquels l’espèce manque:", \
-                font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
-            missing_species2.pack(side = "top", fill = "x", expand = 1, anchor = "center")
-
-            for add, sp in enumerate(missing_sp_list[0]):
-                # save_row += add
-                missing = tk.Label(info_frame, text = "\t"+sp, font = 'Arial 18', bg = '#C8BFC7', fg = "#000000")
-                missing.pack(side = "top", fill = "x", expand = 1, anchor = "center")
-        else:
-            not_missing = tk.Label(info_frame, text = "Aucune espèce manque", font = 'Arial 18', bg = '#C8BFC7', \
-            fg = "#000000").pack(side = "top", fill = "x", expand = 1, anchor = "center")
-
-    # missing ingredients in nutritional db
-        missing_ing_list = missing_nutrition(ingredients, dict_nutrition)
-        string2="{}/{} ingrédients ont été trouvé dans la table Ciqual (base de données).".format(str(len(ingredients) \
-            - len(missing_ing_list[0])),len(ingredients))
-        missing_ing1 = tk.Label(info_frame, text = string2, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
-        missing_ing1.pack(side = "top", fill = "x", expand = 1, anchor = "center")
-
-        if not missing_ing_list[1]: 
-            missing_ing2 = tk.Label(info_frame, text = "Ingrédients pour lesquels aucune information a été trouvé:", \
-                font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
-            missing_ing2.pack(side = "top", fill = "x", expand = 1, anchor = "center")
-
-            for add1, ing in enumerate(missing_ing_list[0]):
-                missing1 = tk.Label(info_frame, text = "\t"+ing, font = 'Arial 18', bg = '#C8BFC7', fg = "#000000")
-                missing1.pack(side = "top", fill = "x", expand = 1, anchor = "center")
-
-        info_frame.pack(side = "top", fill = "x")
-
-        table_frame = tk.Frame(main_frame)
-    # table
-        dict_row = table_row(ingredients, species, dict_nutrition, dry_matter_dico)
-        list_column = ["Ingrédient", "Espèce", "Quantité", "Qté de matière\n sèche (g)", "Eau (%)", \
-            "Glucides (%)", "Lipides (%)", "Protéines (%)"]
-
-        table_frame.grid_columnconfigure(0, weight = 1)
-        save_row = 1
-
-        for i in range(len(list_column)):
-            if i == 2:
-                table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
-                fg = "#090302", justify = "center", relief = "groove", width = 14, height = 3)
-            elif i == 3:
-                table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
-                fg = "#090302", justify = "center", relief = "groove", width = 16, height = 3)
-            elif i == 4:
-                table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
-                fg = "#090302", justify = "center", relief = "groove", width = 14, height = 3)
-            elif i == 5:
-                table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
-                fg = "#090302", justify = "center", relief = "groove", width = 14, height = 3)
-            elif i == 6:
-                table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
-                fg = "#090302", justify = "center", relief = "groove", width = 13, height = 3)
+            url_recipe = recipe
+            ingredients = recipes_dict[recipe][0]
+            
+            if isinstance(recipes_dict[recipe][1], list):
+                species = recipes_dict[recipe][1][0]
             else:
-                table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
-                fg = "#090302", justify = "center", relief = "groove", width = 18, height = 3) 
+                species = recipes_dict[recipe][1]
+            
+            dict_nutrition = recipes_dict[recipe][2]
+            
+            if isinstance(recipes_dict[recipe][3], list):
+                dry_matter_dico = recipes_dict[recipe][3][0]
+            else:
+                dry_matter_dico = recipes_dict[recipe][3]
 
-            table_header.grid(row = save_row, column = 1+i, sticky = "nsew")
+        # structure of the main frame
+        # - info frame
+        # - table frame
+        # - buttons frame
+        # - results frame
 
-        for j in dict_row.keys():
-            line = dict_row[j]
-            save_row += 1
-            for ind, k in enumerate(line):
-                if ind == 2:
-                    table_cell = tk.Label(table_frame, text = k[1]+" "+k[2][1], font = "Arial 14", bg = '#C8BFC7', \
-                    fg = "#000000", justify = "center", relief = "groove", width = 14, wraplength = 300, height = 2)
-                elif ind == 3:
-                    table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
-                    justify = "center", relief = "groove", width = 16, wraplength = 300, height = 2)
-                elif ind == 4:
-                    table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
-                    justify = "center", relief = "groove", width = 14, wraplength = 300, height = 2)
-                elif ind == 5:
-                    table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
-                    justify = "center", relief = "groove", width = 14, wraplength = 300, height = 2)
-                elif ind == 6:
-                    table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
-                    justify = "center", relief = "groove", width = 13, wraplength = 300, height = 2)
+            info_frame = tk.Frame(main_frame)
+
+        # recipe's name 
+            name_recipe = get_ing.get_title(url_recipe)
+
+            recipe = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 22, "bold"), bg = '#C8BFC7', fg = "#000000", justify = "center")
+            recipe.pack(side = "top", expand = 1, anchor = "center", pady = 20)
+
+
+        # missing species
+            missing_species_lb_frame = tk.Frame(info_frame, bg = "#C8BFC7")
+            
+            found_species = tk.Label(missing_species_lb_frame, text = str(len(species)), font = ("Open Sans", 18, "bold"), bg = "#C8BFC7", fg = "#000000")
+            found_species.grid(row = 0, column = 0, padx = 2)
+            missing_species_lb_frame.grid_columnconfigure(1, weight = 1)
+            
+            string1_lb = tk.Label(missing_species_lb_frame, text = "espèces ont été trouvé pour les", font = ("Open Sans", 18), bg = "#C8BFC7", fg = "#8A7E72")
+            string1_lb.grid(row = 0, column = 2)
+            missing_species_lb_frame.grid_columnconfigure(3, weight = 1)
+
+            nb_ing_lb = tk.Label(missing_species_lb_frame, text = str(len(ingredients)), font = ("Open Sans", 18, "bold"), bg = "#C8BFC7", fg = "#000000")
+            nb_ing_lb.grid(row = 0, column = 4, padx = 2)
+            missing_species_lb_frame.grid_columnconfigure(5, weight = 1)
+
+            string2_lb = tk.Label(missing_species_lb_frame, text = "ingrédients.",  font = ("Open Sans", 18), bg = "#C8BFC7", fg = "#8A7E72")
+            string2_lb.grid(row = 0, column = 6)
+
+            missing_species_lb_frame.pack(side = "top", expand = 1, anchor = "center", pady = 10)
+
+            missing_sp_list = missing_species(ingredients, species)
+            if not missing_sp_list[1]:
+                missing_species2 = tk.Label(info_frame, text = "Les ingrédients pour lesquels l’espèce manque:", \
+                    font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
+                missing_species2.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+
+                for add, sp in enumerate(missing_sp_list[0]):
+                    missing = tk.Label(info_frame, text = "\t"+sp, font = 'Arial 18', bg = '#C8BFC7', fg = "#000000")
+                    missing.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+            else:
+                not_missing = tk.Label(info_frame, text = "Aucune espèce manque", font = 'Arial 18', bg = '#C8BFC7', \
+                fg = "#000000").pack(side = "top", fill = "x", expand = 1, anchor = "center")
+
+        # missing ingredients in nutritional db
+            missing_ing_list = missing_nutrition(ingredients, dict_nutrition)
+            string2="{}/{} ingrédients ont été trouvé dans la table Ciqual (base de données).".format(str(len(ingredients) \
+                - len(missing_ing_list[0])),len(ingredients))
+            missing_ing1 = tk.Label(info_frame, text = string2, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
+            missing_ing1.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+
+            if not missing_ing_list[1]: 
+                missing_ing2 = tk.Label(info_frame, text = "Ingrédients pour lesquels aucune information a été trouvé:", \
+                    font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#8A7E72")
+                missing_ing2.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+
+                for add1, ing in enumerate(missing_ing_list[0]):
+                    missing1 = tk.Label(info_frame, text = "\t"+ing, font = 'Arial 18', bg = '#C8BFC7', fg = "#000000")
+                    missing1.pack(side = "top", fill = "x", expand = 1, anchor = "center")
+
+            info_frame.pack(side = "top", fill = "x")
+
+            table_frame = tk.Frame(main_frame)
+        # table
+            dict_row = table_row(ingredients, species, dict_nutrition, dry_matter_dico)
+            list_column = ["Ingrédient", "Espèce", "Quantité", "Qté de matière\n sèche (g)", "Eau (%)", \
+                "Glucides (%)", "Lipides (%)", "Protéines (%)"]
+
+            table_frame.grid_columnconfigure(0, weight = 1)
+            save_row = 1
+
+            for i in range(len(list_column)):
+                if i == 2:
+                    table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
+                    fg = "#090302", justify = "center", relief = "groove", width = 14, height = 3)
+                elif i == 3:
+                    table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
+                    fg = "#090302", justify = "center", relief = "groove", width = 16, height = 3)
+                elif i == 4:
+                    table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
+                    fg = "#090302", justify = "center", relief = "groove", width = 14, height = 3)
+                elif i == 5:
+                    table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
+                    fg = "#090302", justify = "center", relief = "groove", width = 14, height = 3)
+                elif i == 6:
+                    table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
+                    fg = "#090302", justify = "center", relief = "groove", width = 13, height = 3)
                 else:
-                    table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
-                    justify = "center", relief = "groove", width = 18, wraplength = 300, height = 2)
-                table_cell.grid(row = save_row, column = 1 + ind, sticky = "nsew")
+                    table_header = tk.Label(table_frame, text = list_column[i], font = "Arial 14", bg = '#C8BFC7', \
+                    fg = "#090302", justify = "center", relief = "groove", width = 18, height = 3) 
 
-        save_row += 2
-        table_frame.grid_columnconfigure(ind + 2, weight = 1)
+                table_header.grid(row = save_row, column = 1+i, sticky = "nsew")
 
+            for j in dict_row.keys():
+                line = dict_row[j]
+                save_row += 1
+                for ind, k in enumerate(line):
+                    if ind == 2:
+                        table_cell = tk.Label(table_frame, text = k[1]+" "+k[2][1], font = "Arial 14", bg = '#C8BFC7', \
+                        fg = "#000000", justify = "center", relief = "groove", width = 14, wraplength = 300, height = 2)
+                    elif ind == 3:
+                        table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
+                        justify = "center", relief = "groove", width = 16, wraplength = 300, height = 2)
+                    elif ind == 4:
+                        table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
+                        justify = "center", relief = "groove", width = 14, wraplength = 300, height = 2)
+                    elif ind == 5:
+                        table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
+                        justify = "center", relief = "groove", width = 14, wraplength = 300, height = 2)
+                    elif ind == 6:
+                        table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
+                        justify = "center", relief = "groove", width = 13, wraplength = 300, height = 2)
+                    else:
+                        table_cell = tk.Label(table_frame, text = k, font = "Arial 14", bg = '#C8BFC7', fg = "#000000", \
+                        justify = "center", relief = "groove", width = 18, wraplength = 300, height = 2)
+                    table_cell.grid(row = save_row, column = 1 + ind, sticky = "nsew")
 
-        table_frame.pack(side = "top", fill = "both", anchor = "center", padx = 30)
-
-    # buttons
-        buttons_frame = tk.Frame(main_frame, bg = "#C8BFC7")
-
-        def enter_download(label_photo_info):
-            label_photo_info.config(text = 'Télécharger le tableau au format tsv')
-        
-        
-        def leave_download(label_photo_info):
-            label_photo_info.config(text = "")
-
-
-        photo = tk.PhotoImage(file = r"assets/download_arrow.png")
-        sub_photo = photo.subsample(7, 7)
-        download = tk.Button(buttons_frame, image = sub_photo,  bg = '#8A7E72', width = 40, height = 40)# \
-        # command = self.download_button)
-        download.bind("<Button-1>", lambda x: download_button(self, results_window, ingredients, species, dry_matter_dico, dict_nutrition))
-        download.image = sub_photo
-        label_photo_info = tk.Label(buttons_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72")
-        label_photo_info.pack(side = "left")
-        download.pack(side = "left")
-        download.bind('<Enter>', lambda x: enter_download(label_photo_info))
-        download.bind('<Leave>', lambda x: leave_download(label_photo_info))
-
-
-        def get_lifemap (species):
-            get_lifeMap_subTree.get_subTree(species)
-            logger.info("Opening LifeMap page")
-        lifemap = tk.Button(buttons_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
-        fg = "#5A2328", width = 12)
-        lifemap.pack(side = "left")
-        lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
-        
-        list_ID = get_lifeMap_subTree.get_taxid(species)
-        ncbi = NCBITaxa()
-        tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
-        tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-
-        
-        tree_file = ncbi.get_topology((list_ID), intermediate_nodes = False)
-        tree_file = tree_file.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-
-        try:
-            os.remove("Tree.txt")
-        except Exception:
-            pass
-        with open("Tree.txt","w") as Tree:
-            Tree.write(tree_file)
-            logger.info("Writing Tree.txt")
+            save_row += 2
+            table_frame.grid_columnconfigure(ind + 2, weight = 1)
 
 
-        def get_ete(tree):
+            table_frame.pack(side = "top", fill = "both", anchor = "center", padx = 30)
+
+        # buttons
+            buttons_frame = tk.Frame(main_frame, bg = "#C8BFC7")
+
+            def enter_download(label_photo_info):
+                label_photo_info.config(text = 'Télécharger le tableau au format tsv')
+            
+            
+            def leave_download(label_photo_info):
+                label_photo_info.config(text = "")
+
+
+            photo = tk.PhotoImage(file = r"assets/download_arrow.png")
+            sub_photo = photo.subsample(7, 7)
+            download = tk.Button(buttons_frame, image = sub_photo,  bg = '#8A7E72', width = 40, height = 40)# \
+            # command = self.download_button)
+            download.bind("<Button-1>", lambda x: download_button(self, results_window, ingredients, species, dry_matter_dico, dict_nutrition))
+            download.image = sub_photo
+            label_photo_info = tk.Label(buttons_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72")
+            label_photo_info.pack(side = "left")
+            download.pack(side = "left")
+            download.bind('<Enter>', lambda x: enter_download(label_photo_info))
+            download.bind('<Leave>', lambda x: leave_download(label_photo_info))
+
+
+            def get_lifemap (species):
+                get_lifeMap_subTree.get_subTree(species)
+                logger.info("Opening LifeMap page")
+            lifemap = tk.Button(buttons_frame, text = "LifeMap Tree", font = "arial 20 bold", bg = '#8A7E72', \
+            fg = "#5A2328", width = 12)
+            lifemap.pack(side = "left")
+            lifemap.bind('<Button-1>', lambda x: get_lifemap(species))
+            
+            list_ID = get_lifeMap_subTree.get_taxid(species)
+            ncbi = NCBITaxa()
+            tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
+            tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+
+            
+            tree_file = ncbi.get_topology((list_ID), intermediate_nodes = False)
+            tree_file = tree_file.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+
             try:
-                get_lifeMap_subTree.subtree_from_newick(tree)
-                logger.info("The user has click the ete's button")
+                os.remove("Tree.txt")
             except Exception:
-                logger.exception("Ete browser doesn't work")
+                pass
+            with open("Tree.txt","w") as Tree:
+                Tree.write(tree_file)
+                logger.info("Writing Tree.txt")
 
 
-        ete = tk.Button(buttons_frame, text = "Ete Sub-tree", font = "arial 20 bold", bg = '#8A7E72', \
-        fg = "#5A2328", width = 12)
-        ete.pack(side = "left")
-        ete.bind('<Button-1>', lambda x: get_ete(tree_file))
+            def get_ete(tree):
+                try:
+                    get_lifeMap_subTree.subtree_from_newick(tree)
+                    logger.info("The user has click the ete's button")
+                except Exception:
+                    logger.exception("Ete browser doesn't work")
 
 
-        def get_newick(tree):
-            pyperclip.copy(tree)
-            logger.info("The user has click the newick's button")
-
-        newick = tk.Button(buttons_frame, text = "Newick Tree", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
-        newick.pack(side = "left")
-        newick.bind('<Button-1>', lambda x: get_newick(tree_file))
+            ete = tk.Button(buttons_frame, text = "Ete Sub-tree", font = "arial 20 bold", bg = '#8A7E72', \
+            fg = "#5A2328", width = 12)
+            ete.pack(side = "left")
+            ete.bind('<Button-1>', lambda x: get_ete(tree_file))
 
 
-        label_info = tk.Label(buttons_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 40)
-        label_info.pack(side = "left")
-        newick_info = tk.Button(buttons_frame, text = "?", font = "arial 20 bold", bg = '#8A7E72', \
-        fg = "#5A2328", width = 2)
-        newick_info.pack(side = "left")
-        newick_info.bind('<Enter>', lambda x: enter_button(label_info, 'Le bouton "Newick Tree" \npermet de recopier le sous-arbre \nde newick dans le clipboard'))
-        newick_info.bind('<Leave>', lambda x: leave_button(label_info))
+            def get_newick(tree):
+                pyperclip.copy(tree)
+                logger.info("The user has click the newick's button")
 
-        buttons_frame.pack(side = "top", fill = "both", anchor = "center")
+            newick = tk.Button(buttons_frame, text = "Newick Tree", font = "arial 20 bold", bg = '#8A7E72', fg = "#5A2328", width = 12)
+            newick.pack(side = "left")
+            newick.bind('<Button-1>', lambda x: get_newick(tree_file))
 
-    # Results
 
-        results_frame = tk.Frame(main_frame, bg = "#C8BFC7")
+            label_info = tk.Label(buttons_frame, text = "", bg = '#C8BFC7', fg = "#8A7E72", width = 40)
+            label_info.pack(side = "left")
+            newick_info = tk.Button(buttons_frame, text = "?", font = "arial 20 bold", bg = '#8A7E72', \
+            fg = "#5A2328", width = 2)
+            newick_info.pack(side = "left")
+            newick_info.bind('<Enter>', lambda x: enter_button(label_info, 'Le bouton "Newick Tree" \npermet de recopier le sous-arbre \nde newick dans le clipboard'))
+            newick_info.bind('<Leave>', lambda x: leave_button(label_info))
 
-    # Phylogenetic diversity
-        pd_frame = tk.Frame(results_frame, bg = "#C8BFC7")
+            buttons_frame.pack(side = "top", fill = "both", anchor = "center")
 
-        pd = get_dp.phylogenetic_diversity(tree, species)
+        # Results
 
-        pd_info_label = tk.Label(pd_frame, text = "Diversité phylogénétique (MPD, Webb 2002):", \
-            font = 'Arial 14 bold', bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
-        pd_info_label.pack(side = "top")
+            results_frame = tk.Frame(main_frame, bg = "#C8BFC7")
 
-        dp_label = tk.Label(pd_frame, text = pd, font = 'Arial 18 bold', bg = '#C8BFC7', \
-        fg = "#090302", justify = "center", relief = "raised", width = 7, height = 3)
-        dp_label.pack(side = "top")
+        # Phylogenetic diversity
+            pd_frame = tk.Frame(results_frame, bg = "#C8BFC7")
 
-        pd_frame.grid(row = 0, column = 0, padx = 20, pady = 20)
+            pd = get_dp.phylogenetic_diversity(tree, species)
 
-    # Weighted phylogenetic diversity
-        wpd_frame = tk.Frame(results_frame, bg = "#C8BFC7")
-        
-        dict_sp_drym = {}
-        bool_var = True
-        for ing in species.keys():
-            if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "-":
-                dict_sp_drym[species[ing]] = dry_matter_dico[ing]
+            pd_info_label = tk.Label(pd_frame, text = "Diversité phylogénétique (MPD, Webb 2002):", \
+                font = 'Arial 14 bold', bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
+            pd_info_label.pack(side = "top")
+
+            dp_label = tk.Label(pd_frame, text = pd, font = 'Arial 18 bold', bg = '#C8BFC7', \
+            fg = "#090302", justify = "center", relief = "raised", width = 7, height = 3)
+            dp_label.pack(side = "top")
+
+            pd_frame.grid(row = 0, column = 0, padx = 20, pady = 20)
+
+        # Weighted phylogenetic diversity
+            wpd_frame = tk.Frame(results_frame, bg = "#C8BFC7")
+            
+            dict_sp_drym = {}
+            bool_var = True
+            for ing in species.keys():
+                if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "-":
+                    dict_sp_drym[species[ing]] = dry_matter_dico[ing]
+                else:
+                    bool_var = False
+                    break
+            
+            if bool_var is True:
+                wpd = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
+                shannon = get_dp.shannon(species, dict_sp_drym)
+                simpson = get_dp.simpson(species, dict_sp_drym)
             else:
-                bool_var = False
-                break
-        
-        if bool_var is True:
-            wpd = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
-            shannon = get_dp.shannon(species, dict_sp_drym)
-            simpson = get_dp.simpson(species, dict_sp_drym)
-        else:
-            wpd = "NA"
-            shannon = "NA"
-            simpson = "NA"
-        
-        wpd_info_label = tk.Label(wpd_frame, text = "Diversité phylogénétique pondérée:", font = 'Arial 14 bold', \
-            bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
-        wpd_info_label.pack(side = "top")
+                wpd = "NA"
+                shannon = "NA"
+                simpson = "NA"
+            
+            wpd_info_label = tk.Label(wpd_frame, text = "Diversité phylogénétique pondérée:", font = 'Arial 14 bold', \
+                bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
+            wpd_info_label.pack(side = "top")
 
-        wpd_label = tk.Label(wpd_frame, text = wpd,  font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
-        justify = "center", relief = "raised", width = 7, height = 3)
-        wpd_label.pack(side = "top")
+            wpd_label = tk.Label(wpd_frame, text = wpd,  font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
+            justify = "center", relief = "raised", width = 7, height = 3)
+            wpd_label.pack(side = "top")
 
-        wpd_frame.grid(row = 0, column = 1)
+            wpd_frame.grid(row = 0, column = 1)
 
-    # Shannon's index
-        shannon_frame = tk.Frame(results_frame, bg = "#C8BFC7")
-        shannon_info_label = tk.Label(shannon_frame, text = "Indice de Shannon:", font = 'Arial 14 bold', \
-            bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
-        shannon_info_label.pack(side = "top")
-        shannon_label = tk.Label(shannon_frame, text = shannon, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
-        justify = "center", relief = "raised", width = 7, height = 3)
-        shannon_label.pack(side = "bottom")
-        shannon_frame.grid(row = 1, column = 0, padx = 20, pady = 20)
+        # Shannon's index
+            shannon_frame = tk.Frame(results_frame, bg = "#C8BFC7")
+            shannon_info_label = tk.Label(shannon_frame, text = "Indice de Shannon:", font = 'Arial 14 bold', \
+                bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
+            shannon_info_label.pack(side = "top")
+            shannon_label = tk.Label(shannon_frame, text = shannon, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
+            justify = "center", relief = "raised", width = 7, height = 3)
+            shannon_label.pack(side = "bottom")
+            shannon_frame.grid(row = 1, column = 0, padx = 20, pady = 20)
 
-    # Simpson's index
-        simpson_frame = tk.Frame(results_frame, bg = "#C8BFC7")
-        simpson_info_label = tk.Label(simpson_frame, text = "Indice de Simpson:", font = 'Arial 14 bold', \
-            bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
-        simpson_info_label.pack(side = "top")
-        simpson_label = tk.Label(simpson_frame, text = simpson, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
-        justify = "center", relief = "raised", width = 7, height = 3)
-        simpson_label.pack(side = "bottom")
-        simpson_frame.grid(row = 1, column = 1, padx = 20, pady = 20) 
+        # Simpson's index
+            simpson_frame = tk.Frame(results_frame, bg = "#C8BFC7")
+            simpson_info_label = tk.Label(simpson_frame, text = "Indice de Simpson:", font = 'Arial 14 bold', \
+                bg = '#C8BFC7', fg = "#8A7E72", justify = "center")
+            simpson_info_label.pack(side = "top")
+            simpson_label = tk.Label(simpson_frame, text = simpson, font = 'Arial 18 bold', bg = '#C8BFC7', fg = "#090302", \
+            justify = "center", relief = "raised", width = 7, height = 3)
+            simpson_label.pack(side = "bottom")
+            simpson_frame.grid(row = 1, column = 1, padx = 20, pady = 20) 
 
 
-        results_frame.pack(side = "bottom", pady = 20)
+            results_frame.pack(side = "bottom", pady = 20)
+            main_frame.pack()
 
-        main_frame.configure(width = main_canvas.winfo_reqwidth())
-        main_frame.pack(side = "right", fill = "both", expand = 1, anchor = "center")
+        global_frame.configure(width = main_canvas.winfo_reqwidth())
+        global_frame.pack(side = "right", fill = "both", expand = 1, anchor = "center")
         main_canvas.update_idletasks()       
         main_canvas.configure(yscrollcommand = y_scrollbar.set, highlightthickness = 0)
 
+    # set background
+        width = main_canvas.winfo_width()
+        height = main_canvas.winfo_height()
+
+        bg_img = Image.new("RGBA", (width, height))
+
+        for i in range(width):
+            for j in range(height):
+                bg_img.putpixel((i,j), (0, 128, 0, 255))
+
+        bg_img = ImageTk.PhotoImage(bg_img)
+        # bg_canvas.create_image(0, 0, image = bg_img, anchor = "nw")
+
     # Mousewheel
-        main_frame.bind('<Configure>', lambda event: main_canvas.configure(scrollregion = main_canvas.bbox("all")))
-        main_frame.bind_all('<Button-4>', lambda event: main_canvas.yview('scroll', -1, 'units'))
-        main_frame.bind_all('<Button-5>', lambda event: main_canvas.yview('scroll', 1, 'units'))
-        main_frame.bind_all('<MouseWheel>', lambda event: main_canvas.yview('scroll', 1, 'units'))
-        main_frame.bind_all('<MouseWheel>', lambda event: main_canvas.yview('scroll', -1, 'units'))
+        global_frame.bind('<Configure>', lambda event: main_canvas.configure(scrollregion = main_canvas.bbox("all")))
+        global_frame.bind_all('<Button-4>', lambda event: main_canvas.yview('scroll', -1, 'units'))
+        global_frame.bind_all('<Button-5>', lambda event: main_canvas.yview('scroll', 1, 'units'))
+        global_frame.bind_all('<MouseWheel>', lambda event: main_canvas.yview('scroll', 1, 'units'))
+        global_frame.bind_all('<MouseWheel>', lambda event: main_canvas.yview('scroll', -1, 'units'))
 
     # create window
-        main_canvas.create_window((main_canvas.winfo_reqwidth()/2, 0), window = main_frame, anchor = "nw")
+        main_canvas.create_window((main_canvas.winfo_reqwidth()/2, 0), window = global_frame, anchor = "nw")
         
 
 

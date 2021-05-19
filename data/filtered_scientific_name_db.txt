@@ -357,7 +357,7 @@ Equus ferus caballus	Steak de cheval
 Equus ferus caballus	Viande de cheval
 Eriobotrya japonica	Nèfle du Japon
 Eriobotrya japonica	Néflier du Japon
-Eruca sativa	Roquette
+Eruca	roquette
 Ervum lens	Lentille alimentaire
 Esox lucius	Brochet
 Eugenia jambolana	Jamelonier

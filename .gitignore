@@ -9,3 +9,4 @@ tests/__pycache__/*
 .pytest_cache/
 Pipfile
 Pipfile.lock
+multi_prova
