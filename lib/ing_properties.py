@@ -125,6 +125,8 @@ def dry_matter_dict_update(dict_ing, dict_nut):
 
                 dry_matter = round(qtt - qtt * wat/100,2)
                 dry_matter_dict[ing] = [dry_matter, "g"]
+            else:
+                dry_matter_dict[ing] = "-"     
         else: 
             dry_matter_dict[ing] = "-"
 
