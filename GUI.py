@@ -753,7 +753,7 @@ class Results:
 
     # Deep level
         main_canvas = tk.Canvas(results_window, bg = "#2a9d8f")
-        main_canvas.pack(side = "left", fill = "both", expand = 1, anchor = "center")
+        main_canvas.pack(side = "left", fill = "both", expand = 1, anchor = "e")
    
     # scrollbar
         y_scrollbar = ttk.Scrollbar(results_window, orient = "vertical", command = main_canvas.yview)
@@ -983,10 +983,10 @@ class Results:
 
             results_frame.pack(expand = 1, fill = "both", side = "right", anchor = "nw")
 
-            bottom_frame.pack(side = "top", expand = 1, fill = "both", anchor = "n")
+            bottom_frame.pack(side = "top", expand = 1, fill = "both", anchor = "center")
             main_frame.pack(expand = 1, fill = "both", anchor = "center")
 
-        main_canvas.update_idletasks()       
+        global_frame.update_idletasks()       
         global_frame.configure(width = main_canvas.winfo_reqwidth())
         global_frame.pack(fill = "both", expand = 1, anchor = "center")
         main_canvas.configure(yscrollcommand = y_scrollbar.set, highlightthickness = 0)
@@ -1119,9 +1119,9 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
     ingredients = list(ingredients.keys())
 
     table = go.Figure(data = [go.Table(header = dict(values = ["Ingrédient", "Espèce", "Quantité", \
-        "Qté de matière\n sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18), \
+        "Qté de matière\n sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18, height = 60), \
         cells = dict(values = [ingredients, species, quantities, drym_quantities, water, sugars, lipides, proteins], \
-        font_size = 16, height = 50))], layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((80 * len(ingredients) + 50)), width = 1200)) # 
+        font_size = 16, height = 50))], layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((60 * len(ingredients)) + 60), width = 1200, margin = dict(b = 0, t = 0, l = 0, r = 0))) # 
 
 
     table.write_image("assets/figures/" + recipe_title + ".png")

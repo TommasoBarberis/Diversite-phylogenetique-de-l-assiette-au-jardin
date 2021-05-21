@@ -34,6 +34,7 @@ def get_title(url):
     try:
         html_title = soup.find("main").find("h1").get_text()
         logger.debug(html_title)
+        return html_title
     except:
         html_title = "\tRecipe title not found"
         
@@ -42,11 +43,21 @@ def get_title(url):
         html_title = soup.findAll("h1",{"class":'main-title show-more'})
         html_title = html_title[0].get_text()
         logger.debug(html_title)
+        return html_title
     except:
         html_title = "\tRecipe title not found"
 
+    # Third parser
+    try:
+        html_title = soup.find("title")
+        html_title = html_title.split(":")[0]
+        return html_title
+    except:
+        html_title = "\tRecipe title not found"
 
     return html_title
+
+
 
 
 def search_in_default_mass(ingredients):
@@ -166,7 +177,7 @@ def get_marmiton(soup):
         ingredients = search_in_default_mass(ingredients)
 
         if len(ingredients) != 0:
-            logger.debug("Ingredient parsing, parser 2, DONE")
+            logger.debug("Ingredient parsing, parser 3, DONE")
             return ingredients
 
     except Exception:
