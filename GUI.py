@@ -818,7 +818,7 @@ class Results:
 
             missing_species_lb_frame.pack(side = "top", expand = 1, anchor = "center", pady = 10)
 
-            info_frame.pack(side = "top", fill = "x")
+            info_frame.pack(side = "top", fill = "x", pady = 15)
 
         # table
             table_frame = tk.Frame(main_frame, bg = "#2a9d8f")
@@ -829,9 +829,9 @@ class Results:
             self.tables[recipe] = ImageTk.PhotoImage(img)
 
             table_label = tk.Label(table_frame, image = self.tables[recipe],  bg = "#2a9d8f", height = img_height)
-            table_label.pack(expand = 1, fill = "both", anchor = "center")
+            table_label.pack(expand = 1, fill = "both", anchor = "n")
 
-            table_frame.pack(side = "top", fill = "both", anchor = "center", padx = 30)
+            table_frame.pack(side = "top", fill = "both", anchor = "n", padx = 30)
 
         # bottom frame
             bottom_frame = tk.Frame(main_frame, bg = "#2a9d8f", width = 1200)
