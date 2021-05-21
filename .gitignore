@@ -10,3 +10,4 @@ tests/__pycache__/*
 Pipfile
 Pipfile.lock
 multi_prova
+assets/figures/*

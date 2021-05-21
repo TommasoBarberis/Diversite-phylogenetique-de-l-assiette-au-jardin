@@ -418,7 +418,7 @@ class containerFrame(tk.Frame):
 
     def show_frame(self, frame_name):
         self.frames[frame_name].tkraise()
-        logger.info("Show {} frame".format(frame_name))
+        logger.info("Show {} frame".format(frame_name.__name__))
     
 
 class MissingSpeciesPage(tk.Frame):
@@ -1120,48 +1120,11 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
 
     table = go.Figure(data = [go.Table(header = dict(values = ["Ingrédient", "Espèce", "Quantité", \
         "Qté de matière\n sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18), \
-        cells = dict(values = [ingredients, species, quantities, drym_quantities, water, sugars, lipides, proteins], font_size = 16, height = 50))], \
-        layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((80 * len(ingredients) + 50)), width = 1200)) 
+        cells = dict(values = [ingredients, species, quantities, drym_quantities, water, sugars, lipides, proteins], \
+        font_size = 16, height = 50))], layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((80 * len(ingredients) + 50)), width = 1200)) # 
 
 
     table.write_image("assets/figures/" + recipe_title + ".png")
-
-
-
-def table_row(ingredients, especes, dict_nut, dry_matter_dict):
-    dict_row = {}
-    for key in ingredients.keys():
-        ing = ingredients[key][0]
-        list_row = [ing[0]]
-
-        if ing[0] in especes.keys():
-            list_row.append(especes[ing[0]])
-        elif ing[0] in especes.keys():
-            list_row.append(especes[ing[0]]) 
-        else:
-            list_row.append("-")
-
-        list_row.append(ingredients[key])
-
-        if ing[0] in dry_matter_dict.keys():
-            list_row.append(dry_matter_dict[ing[0]])
-        elif ing[1]in dry_matter_dict.keys():
-            list_row.append(dry_matter_dict[ing[1]])
-        else:
-            list_row.append("-")
-
-        if str(key).capitalize() in dict_nut.keys():
-            for i, val in enumerate(dict_nut[str(key).capitalize()]):
-                if i == 0:
-                    pass
-                else:
-                    list_row.append(val)
-        else:
-            for k in range(4):
-                list_row.append("-")
-
-        dict_row[ing[0]] = list_row
-    return dict_row
 
 
 def main(): 

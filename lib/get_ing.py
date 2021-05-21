@@ -49,6 +49,23 @@ def get_title(url):
     return html_title
 
 
+def search_in_default_mass(ingredients):
+    for ing in ingredients:
+
+        if ingredients[ing][2][1] == "":
+        
+            with open("filtering/default_mass.txt", "r") as f:
+                lines = f.readlines() # file that allow to get mass for some ingredients
+        
+                for line in lines:
+                    ing_mass = line.split("/")
+                    
+                    if ing == ing_mass[0]:
+                        ingredients[ing] = [[ing, ing], ing_mass[1].replace("\n", ""), ["g", "g"]]
+
+    return ingredients
+
+
 def get_marmiton(soup):
     """
     Parseur des ingredients.
@@ -89,23 +106,11 @@ def get_marmiton(soup):
 
             val = [ing, qty, unit]
             ingredients[ing[0]] = val
-        
 
-        for ing in ingredients:
-
-            if ingredients[ing][2][1] == "":
-            
-                with open("filtering/default_mass.txt", "r") as f:
-                    lines = f.readlines() # file that allow to get mass for some ingredients
-            
-                    for line in lines:
-                        ing_mass = line.split("/")
-                        
-                        if ing == ing_mass[0]:
-                            ingredients[ing] = [[ing, ing], ing_mass[1].replace("\n", ""), ["g", "g"]]
-                        
+        ingredients = search_in_default_mass(ingredients)
+                   
         if len(ingredients) != 0:
-            logger.debug("Ingredient parsing, DONE")
+            logger.debug("Ingredient parsing, parser 1, DONE")
             return ingredients   
     except Exception:
         logger.exception("Error in ingredient parsing")
@@ -124,12 +129,48 @@ def get_marmiton(soup):
             val = [ing, qty, unit]
             ingredients[li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular")] = val
 
+        ingredients = search_in_default_mass(ingredients)
+
         if len(ingredients) != 0:
-            logger.debug("Ingredient parsing, DONE")
+            logger.debug("Ingredient parsing, parser 2, DONE")
             return ingredients
     except Exception:
         logger.exception("Error in ingredient parsing")
 
+    # Third parser
+    try:
+        html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-3"}) # select html tag with this class in recipe web page
+
+        for i in html_ingredients_list:
+            first_level = i.find("div")
+            info_div = first_level.findAll("div")[1]
+
+            qty_unit_span = info_div.find("span")
+            qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ')
+
+            if qty_unit_span == '':
+                qty = "-"
+                unit = ["", ""]
+            else:
+                qty_unit_span.split(" ")
+                qty = qty_unit_span[0]
+                unit = [qty_unit_span[1], qty_unit_span[1]]
+
+            ing_span = first_level.findAll("span")[1]
+            ing_span = ing_span.get_text()
+            ing = [ing_span, ing_span]
+
+            val = [ing, qty, unit]
+            ingredients[ing[0]] = val
+
+        ingredients = search_in_default_mass(ingredients)
+
+        if len(ingredients) != 0:
+            logger.debug("Ingredient parsing, parser 2, DONE")
+            return ingredients
+
+    except Exception:
+        logger.exception("Error in ingredient parsing")
 
 
 if __name__ == "__main__":
