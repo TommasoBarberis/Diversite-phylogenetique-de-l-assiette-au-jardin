@@ -763,6 +763,8 @@ class Results:
         global_frame = tk.Frame(main_canvas, bg = "#2a9d8f")
 
         self.tables = {} # container for results tables in order to avoid the garbage collector
+        ncbi = NCBITaxa() # ncbi taxonomy to build phylogenetic trees
+        titles = {} # for the listbox, in order to chose the recipe to activate buttons
 
         for recipe in recipes_dict:
             main_frame = tk.Frame(global_frame, bg = "#2a9d8f")
@@ -792,10 +794,11 @@ class Results:
 
         # recipe's name 
             name_recipe = get_ing.get_title(url_recipe)
+            titles[name_recipe] = url_recipe
 
-            recipe = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 22, "bold"), \
+            recipe_label = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 22, "bold"), \
                 bg = "#2a9d8f", fg = "#f0efeb", justify = "center")
-            recipe.pack(side = "top", expand = 1, anchor = "center", pady = 20)
+            recipe_label.pack(side = "top", expand = 1, anchor = "center", pady = 20)
 
 
         # missing species
@@ -833,91 +836,16 @@ class Results:
 
             table_frame.pack(side = "top", fill = "both", anchor = "n", padx = 30)
 
-        # bottom frame
-            bottom_frame = tk.Frame(main_frame, bg = "#2a9d8f", width = 1200)
-            
-            buttons_frame = tk.Frame(bottom_frame , bg = "#2a9d8f")
-
-            def download_button():
-                '''
-                Ouvre la fenetre pour nommer le fichier qui aura le tableau au format tsv.
-                '''
-                try:
-                    self.download = tk.Toplevel(results_window)
-                    self.app = Download(self.download, ingredients, species, dry_matter_dico, dict_nutrition)
-                    logger.info("The user has click the download button for the tsv table")
-                except Exception:
-                    logger.exception("Error in opening download window")
-
-
-            arrow_img = tk.PhotoImage(file = r"assets/download_arrow.png")
-            arrow_img = arrow_img.subsample(7, 7)
-            download = ctk.CTkButton(master = buttons_frame, image = arrow_img,  bg_color = '#2a9d8f', \
-            fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
-            text_color = "#5aa786", command = download_button)
-            download.image = arrow_img
-            download.pack(anchor = "center", pady = 10)
-
-
-            def get_lifemap ():
-                get_lifeMap_subTree.get_subTree(species)
-                logger.info("Opening LifeMap page")
-
-            lifemap = ctk.CTkButton(master = buttons_frame, text = "LifeMap Tree", text_font =  ("Open Sans", 20, "bold"), \
-                bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
-                hover_color = "#B7B7A4", text_color = "#2c4160", command = get_lifemap)
-            lifemap.pack(anchor = "center", pady = 10)
-            
-            list_ID = get_lifeMap_subTree.get_taxid(species)
-            ncbi = NCBITaxa()
-            tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
-            tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-
-            
-            tree_file = ncbi.get_topology((list_ID), intermediate_nodes = False)
-            tree_file = tree_file.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-
-            try:
-                os.remove("Tree.txt")
-            except Exception:
-                pass
-            with open("Tree.txt","w") as Tree:
-                Tree.write(tree_file)
-                logger.info("Writing Tree.txt")
-
-
-            def get_ete():
-                try:
-                    get_lifeMap_subTree.subtree_from_newick(tree)
-                    logger.info("The user has click the ete's button")
-                except Exception:
-                    logger.exception("Ete browser doesn't work")
-
-
-            ete = ctk.CTkButton(master = buttons_frame, text = "Ete Sub-tree", text_font =  ("Open Sans", 20, "bold"), \
-                bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
-                hover_color = "#B7B7A4", text_color = "#2c4160", command = get_ete)
-            ete.pack(anchor = "center", pady = 10)
-
-
-            def get_newick():
-                pyperclip.copy(tree)
-                logger.info("The user has click the newick's button")
-
-            newick = ctk.CTkButton(master = buttons_frame, text = "Newick Tree", text_font =  ("Open Sans", 20, "bold"), \
-                bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
-                hover_color = "#B7B7A4", text_color = "#2c4160", command = get_newick)
-            newick.pack(anchor = "center", pady = 10)
-
-            buttons_frame.pack(expand = 1, fill = "both", side = "left", anchor= "ne", ipady  = 30)
 
         # Results
+            bottom_frame = tk.Frame(main_frame, bg = "#2a9d8f")
 
             results_frame = tk.Frame(bottom_frame, bg = "#2a9d8f")
-
+            results_frame.grid_columnconfigure(0, weight = 1)
         # Phylogenetic diversity
             pd_frame = tk.Frame(results_frame, bg = "#2a9d8f")
 
+            tree = self.build_tree(species, ncbi)
             pd = get_dp.phylogenetic_diversity(tree, species)
 
             pd_info_label = tk.Label(pd_frame, text = "Diversité phylogénétique (MPD, Webb 2002):", \
@@ -928,7 +856,7 @@ class Results:
             bg_color = "#2a9d8f", justify = "center", width = 90, height = 90, corner_radius = 5, text_color = "#2c4160")
             dp_label.pack(side = "top")
 
-            pd_frame.grid(row = 0, column = 0, pady = 10, padx = 10)
+            pd_frame.grid(row = 0, column = 1, pady = 10, padx = 10)
 
         # Weighted phylogenetic diversity
             wpd_frame = tk.Frame(results_frame, bg = "#2a9d8f")
@@ -959,7 +887,7 @@ class Results:
             bg_color = "#2a9d8f", justify = "center", width = 90, height = 90, corner_radius = 5, text_color = "#2c4160")
             wpd_label.pack(side = "top")
 
-            wpd_frame.grid(row = 0, column = 1, pady = 10, padx = 10)
+            wpd_frame.grid(row = 0, column = 2, pady = 10, padx = 10)
 
         # Shannon's index
             shannon_frame = tk.Frame(results_frame, bg = "#2a9d8f")
@@ -969,7 +897,7 @@ class Results:
             shannon_label = ctk.CTkLabel(master = shannon_frame, text = shannon, text_font = 'Arial 18 bold', fg_color = "#ebf0f8", \
             bg_color = "#2a9d8f", justify = "center", width = 90, height = 90, corner_radius = 5, text_color = "#2c4160")
             shannon_label.pack(side = "bottom")
-            shannon_frame.grid(row = 1, column = 0, pady = 10, padx = 10)
+            shannon_frame.grid(row = 1, column = 1, pady = 10, padx = 10)
 
         # Simpson's index
             simpson_frame = tk.Frame(results_frame, bg = "#2a9d8f")
@@ -979,12 +907,78 @@ class Results:
             simpson_label = ctk.CTkLabel(master = simpson_frame, text = simpson, text_font = 'Arial 18 bold', fg_color = "#ebf0f8", \
             bg_color = "#2a9d8f", justify = "center", width = 90, height = 90, corner_radius = 5, text_color = "#2c4160")
             simpson_label.pack(side = "bottom")
-            simpson_frame.grid(row = 1, column = 1, pady = 10, padx = 10) 
+            simpson_frame.grid(row = 1, column = 2, pady = 10, padx = 10) 
 
-            results_frame.pack(expand = 1, fill = "both", side = "right", anchor = "nw")
-
+            results_frame.grid_columnconfigure(3, weight = 1)
+            if len(recipes_dict) > 1:
+                results_frame.pack(expand = 1, fill = "both", anchor = "n")
             bottom_frame.pack(side = "top", expand = 1, fill = "both", anchor = "center")
             main_frame.pack(expand = 1, fill = "both", anchor = "center")
+
+
+    # buttons frame   
+        var = tk.StringVar(bottom_frame)
+        var.set("Selectionner ...")
+
+        if len(recipes_dict) == 1:
+            buttons_frame = tk.Frame(bottom_frame, bg = "#2a9d8f")
+            buttons_frame.pack(expand = 1, fill = "both", side = "left", anchor= "ne", ipady  = 30)
+            results_frame.pack(expand = 1, fill = "both", side = "right", anchor = "nw")
+            var.set(name_recipe)
+        else:
+            multi_bottom_frame = tk.Frame(global_frame, bg = "#2a9d8f")
+            buttons_frame = tk.Frame(multi_bottom_frame, bg = "#2a9d8f")
+            buttons_frame.pack(expand = 1, fill = "both", side = "left", anchor= "e", ipady  = 40)
+
+            choose_frame = tk.Frame(multi_bottom_frame, bg = "#2a9d8f")
+            choose_label = tk.Label(choose_frame, text = "Choisir une recette: ", font = ("Open Sans", 20, 'bold'), \
+                bg = '#2a9d8f', fg = '#f0efeb')
+            choose_label.pack(side = "top", fill = "x")
+
+            options = list(titles.keys())
+            choose_optionmenu = tk.OptionMenu(choose_frame, var, *options)
+            choose_optionmenu.pack(side = "top")
+
+            choose_frame.pack(side = "right", fill = "both", expand = 1, anchor = "w", ipady = 40)
+            multi_bottom_frame.pack(side = "bottom", fill = "both", expand = 1, anchor = "center", pady = 20)
+
+
+
+
+        arrow_img = tk.PhotoImage(file = r"assets/download_arrow.png")
+        arrow_img = arrow_img.subsample(7, 7)
+        download = ctk.CTkButton(master = buttons_frame, image = arrow_img,  bg_color = '#2a9d8f', \
+        fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
+        text_color = "#5aa786", command = lambda: self.download_button(results_window, var, recipes_dict, titles))
+        download.image = arrow_img
+        download.pack(anchor = "center", pady = 10)
+
+        lifemap = ctk.CTkButton(master = buttons_frame, text = "LifeMap Tree", text_font =  ("Open Sans", 20, "bold"), \
+            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
+            hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.get_lifemap(var, recipes_dict, titles))
+        lifemap.pack(anchor = "center", pady = 10)
+        
+
+        # TODO: newick label + 2 buttons: clipboard and download tree
+
+        # try:
+        #     os.remove("Tree.txt")
+        # except Exception:
+        #     pass
+        # with open("Tree.txt","w") as Tree:
+        #     Tree.write(tree_file)
+        #     logger.info("Writing Tree.txt")
+
+        ete = ctk.CTkButton(master = buttons_frame, text = "Ete Sub-tree", text_font =  ("Open Sans", 20, "bold"), \
+            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
+            hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.get_ete(var, recipes_dict, titles, ncbi))
+        ete.pack(anchor = "center", pady = 10)
+
+
+        newick = ctk.CTkButton(master = buttons_frame, text = "Newick Tree", text_font =  ("Open Sans", 20, "bold"), \
+            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
+            hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.copy_newick(var, recipes_dict, titles, ncbi))
+        newick.pack(anchor = "center", pady = 10)
 
         global_frame.update_idletasks()       
         global_frame.configure(width = main_canvas.winfo_reqwidth())
@@ -1000,6 +994,96 @@ class Results:
 
     # create window
         main_canvas.create_window((main_canvas.winfo_reqwidth()/2, 0), window = global_frame, anchor = "nw")
+
+
+    def download_button(self, window, var, recipes_dict, titles):
+        '''
+        Ouvre la fenetre pour nommer le fichier qui aura le tableau au format tsv.
+        '''
+        try:
+            self.download = tk.Toplevel(window)
+
+            recipe = titles[var.get()]
+            
+            ingredients = recipes_dict[recipe][0]
+            
+            if isinstance(recipes_dict[recipe][1], list):
+                species = recipes_dict[recipe][1][0]
+            else:
+                species = recipes_dict[recipe][1]
+            
+            dict_nutrition = recipes_dict[recipe][2]
+            
+            if isinstance(recipes_dict[recipe][3], list):
+                dry_matter_dico = recipes_dict[recipe][3][0]
+            else:
+                dry_matter_dico = recipes_dict[recipe][3]
+
+            self.app = Download(self.download, ingredients, species, dry_matter_dico, dict_nutrition)
+            logger.info("The user has click the download button for the tsv table")
+        except Exception:
+            logger.exception("Error in opening download window")
+
+
+    def get_lifemap(self, var, recipes_dict, titles):
+        try:
+            data = recipes_dict[titles[var.get()]][1]
+            if len(data) == 2:
+                species = data[0]
+            else:
+                species = data
+
+            get_lifeMap_subTree.get_subTree(species)
+            logger.info("Opening LifeMap page")
+
+        except:
+            logger.debug("get_lifemap, recipe don't found or not yet selected")
+            pass
+
+
+    def get_ete(self, var, recipes_dict, titles, ncbi):
+        try:
+            data = recipes_dict[titles[var.get()]][1]
+            if len(data) == 2:
+                species = data[0]
+            else:
+                species = data
+
+            list_ID = get_lifeMap_subTree.get_taxid(species)
+            tree = ncbi.get_topology((list_ID), intermediate_nodes = False)
+            tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+            get_lifeMap_subTree.subtree_from_newick(tree)
+            logger.info("The user has click the ete's button")
+        except Exception:
+            logger.exception("Ete browser doesn't work")
+
+
+    def copy_newick(self, var, recipes_dict, titles, ncbi):
+        try:
+            data = recipes_dict[titles[var.get()]][1]
+            if len(data) == 2:
+                species = data[0]
+            else:
+                species = data
+
+            list_ID = get_lifeMap_subTree.get_taxid(species)
+            tree = ncbi.get_topology((list_ID), intermediate_nodes = False)
+            tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+
+            pyperclip.copy(tree)
+            logger.info("The user has click the newick's button")
+        except:
+            logger.debug("Impossible to copy Newick tree")
+
+
+    
+    def build_tree(self, species, ncbi):
+        list_ID = get_lifeMap_subTree.get_taxid(species)
+        tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
+        tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+        return tree
+
+
 
 
 class Download:
