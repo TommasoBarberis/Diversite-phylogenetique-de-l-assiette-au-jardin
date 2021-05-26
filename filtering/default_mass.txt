@@ -1,3 +1,66 @@
+Aïl tête/50
+Aïl gousse/5
+Artichaut/350
 Carotte/125
+Céleri-rave/1000
+Chou-fleur/1500
+Chou Vert/2000
+Concombre/200
 Courgette/350
-Oignon/100
+Cresson/200
+Échalote/25
+Laitue/250
+Oignon/140
+Poireau/150
+Pomme de terre/130
+Tomate/100
+Abricot/55
+Ananas/2000
+Banane/150
+Citron/100
+Clémentine/70
+Melon/800
+Orange/200
+Pamplemousse/400
+Poire/200
+Pomme/150
+Canard vidé/1500
+Canard/1500
+Lapin vidé/1300
+Lapin/1300
+Poulet/1400
+Cervelle de bœuf/500
+Cervelle de boeuf/500
+Cervelle de veau/300
+Cervelle de mouton/100
+Cervelle de porc/110
+Cœur de bœuf/2750
+Coeur de boeuf/2750
+Cœur de veau/900
+Coeur de veau/900
+Cœur de mouton/230
+Coeur de mouton/230
+Cœur de porc/750
+Foie de bœuf/8500
+Foie de boeuf/8500
+Foie de veau/3500
+Foie de porc/750
+Langue de bœuf/4000
+Langue de boeuf/4000
+Langue de veau/1200
+Ris de veau/750
+Rognon de bœuf/1000
+Rognon de boeuf/1000
+Rognon de veau/350
+Rognon de porc/170
+pied de veau/1000
+Jambon/8600
+Longe/11500
+Poitrine/3700
+Filet/4200
+Faux-filet/8000
+Train de côtes milieu/8500
+entrecôtes/6000
+Noix/3100
+Sous-noix/6200
+Noix pâtissière/2650
