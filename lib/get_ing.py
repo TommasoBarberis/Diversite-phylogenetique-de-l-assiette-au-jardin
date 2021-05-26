@@ -64,15 +64,14 @@ def search_in_default_mass(ingredients):
     for ing in ingredients:
 
         if ingredients[ing][2][1] == "":
-        
+            print(ingredients[ing])
             with open("filtering/default_mass.txt", "r") as f:
                 lines = f.readlines() # file that allow to get mass for some ingredients
         
                 for line in lines:
                     ing_mass = line.split("/")
                     
-                    if ing.capitalize() == ing_mass[0]:
-                        print(ing)
+                    if ingredients[ing][0][0].capitalize() == ing_mass[0]:
                         number = ingredients[ing][1]
                         qty = int(number) * int(ing_mass[1].replace("\n", ""))
                         ingredients[ing] = [[ing, ing], str(qty), ["g", "g"]]

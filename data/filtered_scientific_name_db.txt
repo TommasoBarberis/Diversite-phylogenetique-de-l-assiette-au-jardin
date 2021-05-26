@@ -14,6 +14,7 @@ Allium ampeloprasum	Poireau perpétuel
 Allium ascalonicum	Échalote
 Allium cepa	Oignon	rouge
 Allium cepa	Oignon
+Allium cepa	oignon rouge
 Allium chinense	Oignon de Chine
 Allium fistulosum	Ciboule
 Allium porrum	Poireau
@@ -372,6 +373,7 @@ Ficus carica	Figuier de Carie
 Flammulina velutipes	Collybie à pied velouté
 Foeniculum vulgare	Fenouil
 Fortunella japonica	Kumquat
+Fragaria	Fraises
 Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
@@ -418,6 +420,7 @@ Helianthus strumosus	Hélianti
 Helianthus tuberosus	Patate de Virginie
 Helianthus tuberosus	Topinambour
 Helichrysum stoechas	Helichrysum
+Hibiscus	Fleur d'hibiscus
 Hibiscus sabdariffa	oseille de Guinée
 Hippoglossus hippoglossus	Flétan
 Hippophae rhamnoides	Saule épineux
@@ -532,6 +535,7 @@ Nelumbo nucifera	fève d'Egypte
 Nephelium lappaceum	Ramboutan
 Ocimum basilicum	Basilic
 Ocimum basilicum	Basilic aux sauces
+Ocimum basilicum	basilic frais
 Oenothera biennis	Oenothera
 Oenothera biennis	Œnothère
 Olea europaea	Olive
@@ -832,6 +836,7 @@ Trapa natans	Mâcre nageante
 Trichosanthes cucumerina	Serpent végétal
 Trigonella foenum-graecum	Fenugrec
 Trigonella foenum-graecum	Trigonelle Fenugrec
+Triticum	farine de blé
 Triticum aestivum	Farine
 Triticum durum	Boulgour
 Triticum vulgare	Froment
@@ -858,6 +863,7 @@ Valerianella locusta	Raiponce
 Vangueria madagascariensis	Tamarin des Indes
 Vanilla planifolia	Vanille
 Verbena officinalis	Veine de Vénus
+Verbena officinalis	Verveine
 Vicia faba	Feve De Calabar
 Vicia faba	Fève
 Vigna aconitifolia	haricot mat

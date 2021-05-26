@@ -96,10 +96,6 @@ def dry_matter_dict_update(dict_ing, dict_nut):
     dry_matter_dict = {}
     unit_list = ["g", "kg", "l", "cl"] # ponderable unit measure
 
-    for ing in dict_ing:
-        if dict_ing[ing][2][0] not in unit_list:
-            if dict_ing[ing][2][0] != "":
-                print(dict_ing[ing])
 
     for ing in dict_ing:
 
@@ -116,7 +112,7 @@ def dry_matter_dict_update(dict_ing, dict_nut):
                 wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
 
             qtt = str(dict_ing[ing][1])
-            unit = dict_ing[ing][2][1]
+            unit = dict_ing[ing][2][0]
 
             if qtt != '' and unit in unit_list:
                 
@@ -132,7 +128,16 @@ def dry_matter_dict_update(dict_ing, dict_nut):
                 dry_matter = round(qtt - qtt * wat/100,2)
                 dry_matter_dict[ing] = [dry_matter, "g"]
             else:
-                dry_matter_dict[ing] = "-"     
+                with open("filtering/unit_mass.txt", "r") as f:
+                    lines = f.readlines() # file that allow to get mass for some unit
+        
+                    for line in lines:
+                        line = line.split("/")
+                        if unit == line[0]:
+                            dry_matter = str(float(line[1]) * float(qtt))
+                            dry_matter_dict[ing] = [dry_matter, "g"]
+                        else:
+                            dry_matter_dict[ing] = "-"     
         else: 
             dry_matter_dict[ing] = "-"
 

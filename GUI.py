@@ -618,8 +618,9 @@ class MissingQuantitiesPage(tk.Frame):
         ingredients = recipes_dict[recipe[0]][0]
         dry_matter_dico = recipes_dict[recipe[0]][3][0]
 
-        for ing in ingredients:
-            if ing not in dry_matter_dico or ing[2][0] != "g":
+        print(ingredients)
+        for ing in dry_matter_dico:
+            if dry_matter_dico[ing] == "-":
                 ing_label = tk.Label(data_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', fg = "#f0efeb")
                 ing_label.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
 

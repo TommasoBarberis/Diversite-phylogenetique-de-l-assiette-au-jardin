@@ -11,6 +11,7 @@ Cresson/200
 Échalote/25
 Laitue/250
 Oignon/140
+Oignon rouge/140
 Poireau/150
 Pomme de terre/130
 Tomate/100
@@ -64,3 +65,5 @@ entrecôtes/6000
 Noix/3100
 Sous-noix/6200
 Noix pâtissière/2650
+Olives noires/4
+Oeuf/60
