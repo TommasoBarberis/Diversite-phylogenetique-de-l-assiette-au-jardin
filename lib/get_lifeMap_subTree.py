@@ -37,28 +37,6 @@ def get_taxid(liste_espece):
     return liste_nettoyée
 
 
-def get_subTree(especes):
-    '''
-     fonction qui permet d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
-    '''
-    # Création de la liste ID à partir de la liste espèce donnée
-    liste_ID = get_taxid(especes)
-    liste_ID = str(liste_ID).strip('[]')
-
-    # Ouverture du navigateur sur le site suivant
-    driver = get_driver()
-    driver.get("http://lifemap-ncbi.univ-lyon1.fr/")
-    logger.info("Opening http://lifemap-ncbi.univ-lyon1.fr/")
-    # Ajout des éléments dans la zone de texte
-    inputElement = driver.find_element_by_id("textarea")
-    inputElement.send_keys(str(liste_ID))
-
-    # Détéction du bouton View et click effectué
-    driver.find_element_by_id("viewMulti").click()
-    driver.maximize_window()
-    return driver
-
-
 def get_driver():
     ''' fonction qui permait de charger le bon driver web pour lancer soit firefox, soit chrome, soit Edge. '''
 
@@ -109,39 +87,26 @@ def get_driver():
         logger.error("No driver found")
 
 
-def get_newick(especes):
-    ''' 
-    Fonction qui permet de télécharger l'arbre phylogénétique sous format newick. 
-    Le fichier newick sera téléchargé dans le repertoire où se trouve le script qui s'exécute.
+def get_subTree(especes):
     '''
-    try:
-        os.remove("Tree.txt")
-    except:
-        pass
-    driver = get_driver()
+     fonction qui permet d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
+    '''
+    # Création de la liste ID à partir de la liste espèce donnée
     liste_ID = get_taxid(especes)
     liste_ID = str(liste_ID).strip('[]')
 
     # Ouverture du navigateur sur le site suivant
-    driver.get("http://lifemap-ncbi.univ-lyon1.fr/#")
-
+    driver = get_driver()
+    driver.get("http://lifemap-ncbi.univ-lyon1.fr/")
+    logger.info("Opening http://lifemap-ncbi.univ-lyon1.fr/")
     # Ajout des éléments dans la zone de texte
-    driver.find_element_by_id("textarea").send_keys(str(liste_ID))
-    driver.find_element_by_id("getSubtree").click()
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, \
-        "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][2]/div[@class='radio'][2]/label/input"\
-            ))).click()
-    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, \
-        "/html/body[@class='modal-open']/div[@id='ModalTreeFormat']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-body row whitish']/div[@class='col-sm-4'][3]/div[@class='radio'][2]/label/input"\
-            ))).click()
-            
-    # time.sleep(5)
-    # driver.minimize_window()
-    with open("Tree.txt","w") as tree:
-        tree.write(str(driver.find_element_by_xpath('//*[@id="TreeTextarea"]').get_attribute("value")))
-    driver.find_element_by_xpath('//*[@id="ModalTreeFormat"]/div/div/div[4]/div/div[2]/button').click()
-    # driver.close()
+    inputElement = driver.find_element_by_id("textarea")
+    inputElement.send_keys(str(liste_ID))
 
+    # Détéction du bouton View et click effectué
+    driver.find_element_by_id("viewMulti").click()
+    driver.maximize_window()
+    
 
 def subtree_from_newick(tree):
     tree = ete.Tree(tree, quoted_node_names = True, format = 1)    #'Tree.txt'
