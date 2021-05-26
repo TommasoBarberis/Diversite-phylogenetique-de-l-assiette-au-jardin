@@ -264,6 +264,7 @@ class MainWindow(tk.Tk):
         except Exception:
             logger.exception("Error in 'error' window opening")
 
+
     def results_window(self, ingredients, species, dict_nutrition, dry_matter_dico): 
         '''
         Ouvre la fenetre des resultats.
