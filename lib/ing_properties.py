@@ -95,6 +95,12 @@ def get_dict_nut(dict_ing):
 def dry_matter_dict_update(dict_ing, dict_nut):
     dry_matter_dict = {}
     unit_list = ["g", "kg", "l", "cl"] # ponderable unit measure
+
+    for ing in dict_ing:
+        if dict_ing[ing][2][0] not in unit_list:
+            if dict_ing[ing][2][0] != "":
+                print(dict_ing[ing])
+
     for ing in dict_ing:
 
         # if: l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est 

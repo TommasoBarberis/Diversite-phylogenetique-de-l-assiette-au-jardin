@@ -71,8 +71,11 @@ def search_in_default_mass(ingredients):
                 for line in lines:
                     ing_mass = line.split("/")
                     
-                    if ing == ing_mass[0]:
-                        ingredients[ing] = [[ing, ing], ing_mass[1].replace("\n", ""), ["g", "g"]]
+                    if ing.capitalize() == ing_mass[0]:
+                        print(ing)
+                        number = ingredients[ing][1]
+                        qty = int(number) * int(ing_mass[1].replace("\n", ""))
+                        ingredients[ing] = [[ing, ing], str(qty), ["g", "g"]]
 
     return ingredients
 

@@ -56,6 +56,7 @@ def get_driver():
 
             driver = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
             logger.info("Opening Firefox")
+            print(type(driver))
             return driver
         
         except Exception():
@@ -85,6 +86,7 @@ def get_driver():
             logger.exception("Edge driver doesn't work")
     except:
         logger.error("No driver found")
+        return None
 
 
 def get_subTree(especes):
