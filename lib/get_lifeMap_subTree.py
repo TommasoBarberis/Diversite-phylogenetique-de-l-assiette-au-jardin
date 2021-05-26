@@ -28,7 +28,7 @@ ncbi = ete.NCBITaxa()
 def get_taxid(liste_espece):
     liste_espece = liste_espece.values()
     if not isinstance(liste_espece, list):
-        liste_espece=list(liste_espece)
+        liste_espece = list(liste_espece)
         
     # Obtention des valeurs du dictionnaire
     Liste = [(ncbi.get_name_translator(liste_espece).values())]
@@ -41,7 +41,6 @@ def get_subTree(especes):
     '''
      fonction qui permet d'afficher le sous arbre sur le site web lifemap-ncbi.univ-lyon1.fr.
     '''
-
     # Création de la liste ID à partir de la liste espèce donnée
     liste_ID = get_taxid(especes)
     liste_ID = str(liste_ID).strip('[]')
@@ -57,6 +56,7 @@ def get_subTree(especes):
     # Détéction du bouton View et click effectué
     driver.find_element_by_id("viewMulti").click()
     driver.maximize_window()
+    return driver
 
 
 def get_driver():
