@@ -380,6 +380,7 @@ Gadus morhua	Morue
 Gallus gallus	Aiguillette de poulet
 Gallus gallus	Aiguillettes de poulet
 Gallus gallus	Aileron de poulet
+Gallus gallus	Blanc d'oeuf
 Gallus gallus	Blancs de poulet
 Gallus gallus	Chapon
 Gallus gallus	Coquelet
@@ -701,6 +702,7 @@ Saccharina latissima	Kombu
 Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
+Saccharum	Sucre
 Saccharum	sucre
 Saccharum	sucre semoule
 Saccharum	sucre vanillé

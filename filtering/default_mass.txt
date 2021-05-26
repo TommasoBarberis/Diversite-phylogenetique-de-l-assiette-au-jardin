@@ -67,3 +67,5 @@ Sous-noix/6200
 Noix pâtissière/2650
 Olives noires/4
 Oeuf/60
+Fraises/10
+Blanc d'oeuf/35

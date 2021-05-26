@@ -64,13 +64,11 @@ def search_in_default_mass(ingredients):
     for ing in ingredients:
 
         if ingredients[ing][2][1] == "":
-            print(ingredients[ing])
             with open("filtering/default_mass.txt", "r") as f:
                 lines = f.readlines() # file that allow to get mass for some ingredients
         
                 for line in lines:
                     ing_mass = line.split("/")
-                    
                     if ingredients[ing][0][0].capitalize() == ing_mass[0]:
                         number = ingredients[ing][1]
                         qty = int(number) * int(ing_mass[1].replace("\n", ""))
@@ -159,13 +157,13 @@ def get_marmiton(soup):
             info_div = first_level.findAll("div")[1]
 
             qty_unit_span = info_div.find("span")
-            qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ')
+            qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ').replace(' ', '*')
 
             if qty_unit_span == '':
                 qty = "-"
                 unit = ["", ""]
             else:
-                qty_unit_span.split(" ")
+                qty_unit_span = qty_unit_span.split("*")
                 qty = qty_unit_span[0]
                 unit = [qty_unit_span[1], qty_unit_span[1]]
 

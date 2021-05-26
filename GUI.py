@@ -432,7 +432,7 @@ class MissingSpeciesPage(tk.Frame):
     # frame for title and instruction     
         top_frame = tk.Frame(self, bg = "#2a9d8f")
         title_label = tk.Label(top_frame, text = get_ing.get_title(recipe[0]), font = ("Open Sans", 20, "bold"), \
-            bg = '#2a9d8f', fg = "#f0efeb")
+            bg = '#2a9d8f', fg = "#f0efeb", wraplength = 900)
         title_label.pack(expand = 1, anchor = "center", pady = 15)
         
         instruction_label = tk.Label(top_frame, \
@@ -618,7 +618,6 @@ class MissingQuantitiesPage(tk.Frame):
         ingredients = recipes_dict[recipe[0]][0]
         dry_matter_dico = recipes_dict[recipe[0]][3][0]
 
-        print(ingredients)
         for ing in dry_matter_dico:
             if dry_matter_dico[ing] == "-":
                 ing_label = tk.Label(data_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', fg = "#f0efeb")

@@ -134,7 +134,8 @@ def dry_matter_dict_update(dict_ing, dict_nut):
                     for line in lines:
                         line = line.split("/")
                         if unit == line[0]:
-                            dry_matter = str(float(line[1]) * float(qtt))
+                            qtt = float(line[1]) * float(qtt)
+                            dry_matter = round(qtt - qtt * wat/100,2)
                             dry_matter_dict[ing] = [dry_matter, "g"]
                         else:
                             dry_matter_dict[ing] = "-"     
