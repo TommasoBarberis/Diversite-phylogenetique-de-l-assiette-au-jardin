@@ -14,3 +14,9 @@ def test_buildTable():
     assert os.path.exists(img_path)
     os.remove(img_path)
 
+
+def test_urlProcess():
+    mainwin = gui.MainWindow()
+    recipes_dict = {'https://www.marmiton.org/recettes/recette_camembert-roti-au-miel_45038.aspx': []}
+    var = mainwin.url_process(recipes_dict)
+    assert var is None

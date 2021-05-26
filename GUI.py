@@ -249,7 +249,8 @@ class MainWindow(tk.Tk):
                 logger.info("Open missing information window")
             except:
                 logger.exception("Error in 'missing information' window opening")
-            
+
+        return None   
 
 
     def error_window(self, label_text):
