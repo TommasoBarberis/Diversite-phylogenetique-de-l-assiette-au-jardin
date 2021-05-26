@@ -1128,40 +1128,7 @@ class Download:
         download_window.grid_columnconfigure(2, weight = 1)
 
 
-def missing_species(ingredients, species):
-    """
-    Permet de trouver les ingredients pour lesquels on a pas une espece.
-    """
-
-    species_not_found = []
-    if len(ingredients) != len(species) :
-        complete_spec = False
-        for key in ingredients:
-            if key not in species and key[:-1] not in species.keys():
-                species_not_found.append(key)
-    else:
-        complete_spec = True
-    return (species_not_found, complete_spec)
-
-
-def missing_nutrition (ingredients, dict_nut):
-    """
-    Permet de trouver les ingredients qui ne sont pas trouve dans la table Ciqual.
-    """
-    nbnut = len(dict_nut)
-    nut_not_found = []
-    if len(ingredients) != nbnut :
-        complete_nut = False
-        for key in ingredients:
-            if key.capitalize() not in dict_nut:
-                nut_not_found.append(key.capitalize())
-    else:
-        complete_nut = True
-    return (nut_not_found, complete_nut)
-
-
 def build_table(ingredients, species, dict_nut, drym, recipe_title):
-    
     sp = []
     quantities = []
     drym_quantities = []
@@ -1209,6 +1176,7 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
 
 
     table.write_image("assets/figures/" + recipe_title + ".png")
+    return None
 
 
 def main(): 
