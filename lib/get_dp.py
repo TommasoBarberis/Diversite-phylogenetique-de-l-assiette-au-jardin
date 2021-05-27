@@ -18,7 +18,7 @@ def phylogenetic_diversity (tree, species):
     dans la recette avec la metrique MDP proposee par Webb en 2002.
     """
 
-    species = list(species.values())
+    species = list(filter(("-").__ne__, species.values()))
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
         tree = tree.get_common_ancestor(species)
@@ -57,7 +57,7 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
      matiere seche.
     """
 
-    species = list(species.values())
+    species = list(filter(("-").__ne__, species.values()))
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
         tree = tree.get_common_ancestor(species)
@@ -97,13 +97,13 @@ def shannon(species, dict_sp_drym):
     """
     Shannon's index with abundance in kg.
     """
-
+    species = list(filter(("-").__ne__, species.values()))
     shannon = 0
     if len(species) == 0:
         shannon = "NA"
     else:
         denominator = 0
-        for c, sp in enumerate(species.values()):
+        for c, sp in enumerate(species):
             val = dict_sp_drym[sp][0] / 1000
             if c == 0:
                 denominator = (val ** val)
@@ -118,12 +118,12 @@ def simpson(species, dict_sp_drym):
     """
     Simpson's index with abundance in kg.
     """
-    
+    species = list(filter(("-").__ne__, species.values()))
     simpson = 0
     if len(species) == 0:
         simpson = "NA"
     else:
-        for sp in species.values():
+        for sp in species:
             simpson += (dict_sp_drym[sp][0] / 1000) ** 2
 
         simpson = round(simpson, 2)

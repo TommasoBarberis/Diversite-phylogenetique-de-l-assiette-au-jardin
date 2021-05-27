@@ -378,6 +378,21 @@ def results_window_from_missing_window(self, window, recipes_dict):
     '''
     Ouvre la fenetre des resultats.
     '''  
+    for recipe in recipes_dict:
+        ingredients = recipes_dict[recipe][0]
+
+        species = recipes_dict[recipe][1]
+        if len(species) == 2:
+            species = species[0]
+        drym = recipes_dict[recipe][3]
+        if len(drym) == 2:
+            drym = drym[0]
+
+        for ing in ingredients:
+            if ing not in species.keys():
+                species[ing] = "-"
+
+        recipes_dict[recipe] = [recipes_dict[recipe][0], species, recipes_dict[recipe][2], drym]
 
     self.results = tk.Toplevel(self)
     self.app = Results(self.results, recipes_dict)
@@ -497,11 +512,11 @@ class MissingSpeciesPage(tk.Frame):
                 if entry != "":
                     logger.debug("The user has enter '{}' for the ingredient '{}'".format(new_specie, ing))
                 sp = get_lifeMap_subTree.get_taxid({entry: new_specie})
+                print(sp)
 
                 if sp != []:
                     species[ing] = new_specie
                     err_label.config(text = "")
-                    recipes_dict[recipe[0]] = [recipes_dict[recipe[0]][0], species, recipes_dict[recipe[0]][2], recipes_dict[recipe[0]][3]]
 
                     with open("data/filtered_scientific_name_db.txt", "a") as name_db:
                         new_line = str(new_specie) + "\t" + str(ing + "\n")
@@ -526,6 +541,9 @@ class MissingSpeciesPage(tk.Frame):
 
                 else:
                     err_label.config(text = "Nom taxonomique non valide")
+
+                recipes_dict[recipe[0]] = [recipes_dict[recipe[0]][0], species, recipes_dict[recipe[0]][2], recipes_dict[recipe[0]][3]]
+
         
         # TODO - label that explain the button function
         # label_info = tk.Label(buttons_frame, text = "", bg = '#2a9d8f', fg = "#8A7E72", width = 50)
@@ -547,7 +565,6 @@ class MissingSpeciesPage(tk.Frame):
 
 
         def next_button_func():
-            pass
             controller.show_frame(MissingQuantitiesPage)
 
         next_button = ctk.CTkButton(master = final_buttons_frame, text = "Suivant", text_font = ("Open Sans", 20, "bold"), \
@@ -773,18 +790,9 @@ class Results:
 
             url_recipe = recipe
             ingredients = recipes_dict[recipe][0]
-            
-            if isinstance(recipes_dict[recipe][1], list):
-                species = recipes_dict[recipe][1][0]
-            else:
-                species = recipes_dict[recipe][1]
-            
+            species = recipes_dict[recipe][1]
             dict_nutrition = recipes_dict[recipe][2]
-            
-            if isinstance(recipes_dict[recipe][3], list):
-                dry_matter_dico = recipes_dict[recipe][3][0]
-            else:
-                dry_matter_dico = recipes_dict[recipe][3]
+            dry_matter_dico = recipes_dict[recipe][3]
 
         # structure of the main frame
         # - info frame (recipe title and missing species)
@@ -917,13 +925,17 @@ class Results:
             bottom_frame.pack(side = "top", expand = 1, fill = "both", anchor = "center")
             main_frame.pack(expand = 1, fill = "both", anchor = "center")
 
+            temp = recipes_dict[recipe]
+            temp.append([pd, wpd, shannon, simpson])
+            temp.append(name_recipe)
+            recipes_dict[recipe] = temp
+
 
     # buttons frame   
         var = tk.StringVar(bottom_frame)
         var.set("Selectionner ...")
         arrow_img = tk.PhotoImage(file = r"assets/download_arrow.png")
         arrow_img = arrow_img.subsample(7, 7)
-
 
         if len(recipes_dict) == 1:
             buttons_frame = tk.Frame(bottom_frame, bg = "#2a9d8f")
@@ -1085,6 +1097,7 @@ class Download:
     Creation de la fenetre qui permet de rentrer le nom du fichier dans lequel on souhaite telecharger le tableau au format csv ou tsv.
     '''
     def __init__(self, download_window, recipes_dict):
+        self.download_window = download_window
         
     # window setting 
         download_window.title("Enregistrement")
@@ -1095,7 +1108,6 @@ class Download:
         download_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
         download_window.minsize(800, 250)
         download_window.config(background = "#2a9d8f")
-        download_window.grid_rowconfigure(0, weight = 1)
 
     # introducing label
         intro_label = tk.Label(download_window, text = "Le fichier sera enregistré dans le répertoire contenant le programme au format tsv.\nChoississez le nom du fichier:", \
@@ -1109,7 +1121,7 @@ class Download:
 
     # confirm button
         confirm_button = ctk.CTkButton(master = download_window, text = "Enregistrer", text_font = ("Open Sans", 15, "bold"), \
-            width = 150, height = 40, command = lambda: self.action(file_name, recipes_dict), bg_color = "#2a9d8f", fg_color = "#f0efeb", \
+            width = 150, height = 40, command = lambda: self.action(file_name, recipes_dict, ), bg_color = "#2a9d8f", fg_color = "#f0efeb", \
             hover_color = "#B7B7A4", text_color = "#5aa786", corner_radius = 20)
         confirm_button.pack(pady = 20)
 
@@ -1118,8 +1130,8 @@ class Download:
         if not file_name.endswith(".tsv"):
             file_name += ".tsv"
         logger.info("TSV table saved with the filename: " + file_name)
-        # ing_properties.write_tsv(file_name, ingredients, species, dry_matter_dico, dict_nutrition)
-        download_window.destroy()
+        ing_properties.write_tsv(file_name, recipes_dict)
+        self.download_window.withdraw()
 
 
 

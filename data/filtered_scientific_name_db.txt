@@ -232,6 +232,7 @@ Capra hircus	Cabri
 Capra hircus	Chèvre
 Capra hircus	Haut de côte de chevreau
 Capra hircus	Viande de chèvre
+Capra hircus	chèvre frais
 Capreolus capreolus	Chevreuil
 Capreolus capreolus	Filet de chevreuil
 Capreolus capreolus	Viande de Chevreuil
@@ -715,6 +716,7 @@ Saccharum	sucre semoule
 Saccharum	sucre vanillé
 Saccharum officinarum	Canne à sucre
 Saccharum officinarum	Cassonade
+Saccharum officinarum	Rhum
 Saccharum officinarum	Sucre roux
 Saccharum officinarum	rhum
 Salacca zalacca	Salak

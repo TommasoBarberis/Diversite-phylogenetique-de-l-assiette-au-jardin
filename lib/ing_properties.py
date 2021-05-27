@@ -89,6 +89,8 @@ def get_dict_nut(dict_ing):
         nut_info = get_nut_info(ingredient, myBook)
         if nut_info != []:
             output[ingredient] = nut_info
+        else:
+            output[ingredient] = ["-", "-", "-", "-", "-"]
     return output
 
 
@@ -165,41 +167,49 @@ def nut_printer(nut_dict):
             print("")
 
 
-def write_tsv(file_name,dico_ing, dico_especes, dry_matter_dico, dico_nut):
-    ing_list = list(dico_ing.keys())
-    list_column = ["Ingrédient", "Espèce", "Quantité ", "Matière sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", \
-        "Protéines, N x facteur de Jones (%)"]
+def write_tsv(file_name, recipes_dict):
+    list_column = ["Recette", "Ingrédient", "Espèce", "Quantité ", "Matière sèche (g)", "Eau (%)", "Glucides (%)", \
+        "Lipides (%)", "Protéines (%)", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
+        "Indice de Shannon", "Indice de Simpson", "URL de la recette"]
+
     with open(file_name, 'w', newline='') as tsvfile:
+        # Header
         for element in list_column:
             tsvfile.write(element)
             tsvfile.write("\t")
         tsvfile.write("\n")
-        for ing in ing_list:
-            tsvfile.write(ing) # first column - ingredient
-            tsvfile.write("\t")
-            ing_cap = ing.capitalize() 
-            if ing in dico_especes:
-                tsvfile.write(dico_especes[ing]) # second column -specie
-            else:
-                tsvfile.write("-") # second column - specie
-            tsvfile.write("\t")
-            tsvfile.write(str(dico_ing[ing][1] + " " + dico_ing[ing][2][1])) # third column - quantity
-            tsvfile.write("\t")
-            if ing in dry_matter_dico:
-                if dry_matter_dico[ing] != "-":
-                    tsvfile.write(str(dry_matter_dico[ing][0]) + " " + str(dry_matter_dico[ing][1])) # fourth column - dry matter quantity
-                else:
-                    tsvfile.write("-")
-            else:
-                tsvfile.write("-")
-            tsvfile.write("\t")
-            if ing_cap in dico_nut:
-                for i in range(1, len(dico_nut[ing_cap])):
-                    tsvfile.write(dico_nut[ing_cap][i])
-                    tsvfile.write("\t")
-            else:
-                tsvfile.write("-\t-\t-\t-")
-            tsvfile.write("\n")
+
+        # Recipe scope
+        for recipe in recipes_dict:
+            name_recipe = recipes_dict[recipe][5]
+            pd = recipes_dict[recipe][4][0]
+            wpd = recipes_dict[recipe][4][1]
+            shannon = recipes_dict[recipe][4][2]
+            simpson = recipes_dict[recipe][4][3]
+            url = recipe
+
+            # Ingredients scope
+            ingredients = recipes_dict[recipe][0]
+            species = recipes_dict[recipe][1]
+            dict_nut = recipes_dict[recipe][2]
+            drym = recipes_dict[recipe][3]
+
+            for ing in ingredients:
+                sp = species[ing]
+                qty = ingredients[ing][1] + " " + ingredients[ing][2][1]
+                dry_qty = drym[ing]
+                if isinstance(dry_qty, list):
+                    dry_qty = str(dry_qty[0]) + " " + dry_qty[1]
+                water = dict_nut[ing.capitalize()][1]
+                sugars = dict_nut[ing.capitalize()][2]
+                lipides =dict_nut[ing.capitalize()][3]
+                proteins = dict_nut[ing.capitalize()][4]
+
+                line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(water) \
+                    + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(pd) + "\t" \
+                    + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
+
+                tsvfile.write(line + "\n")
 
 
 if __name__ == "__main__":
