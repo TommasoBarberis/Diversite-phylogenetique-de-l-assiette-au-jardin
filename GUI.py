@@ -921,16 +921,27 @@ class Results:
     # buttons frame   
         var = tk.StringVar(bottom_frame)
         var.set("Selectionner ...")
+        arrow_img = tk.PhotoImage(file = r"assets/download_arrow.png")
+        arrow_img = arrow_img.subsample(7, 7)
+
 
         if len(recipes_dict) == 1:
             buttons_frame = tk.Frame(bottom_frame, bg = "#2a9d8f")
             buttons_frame.pack(expand = 1, fill = "both", side = "left", anchor= "ne", ipady  = 30)
             results_frame.pack(expand = 1, fill = "both", side = "right", anchor = "nw")
             var.set(name_recipe)
+
+            download = ctk.CTkButton(master = buttons_frame, image = arrow_img,  bg_color = '#2a9d8f', \
+            fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
+            text_color = "#5aa786", command = lambda: self.download_button(results_window, var, recipes_dict, titles))
+            download.pack(anchor = "center", pady = 10)
+
         else:
             multi_bottom_frame = tk.Frame(global_frame, bg = "#2a9d8f")
+            download_frame = tk.Frame(multi_bottom_frame, bg = "#2a9d8f")
+            download_frame.pack(side = "top", expand = 1, fill = "both")
             buttons_frame = tk.Frame(multi_bottom_frame, bg = "#2a9d8f")
-            buttons_frame.pack(expand = 1, fill = "both", side = "left", anchor= "e", ipady  = 40)
+            buttons_frame.pack(expand = 1, side = "left", anchor= "e", ipady  = 40, padx = 20)
 
             choose_frame = tk.Frame(multi_bottom_frame, bg = "#2a9d8f")
             choose_label = tk.Label(choose_frame, text = "Choisir une recette: ", font = ("Open Sans", 20, 'bold'), \
@@ -939,21 +950,19 @@ class Results:
 
             options = list(titles.keys())
             choose_optionmenu = tk.OptionMenu(choose_frame, var, *options)
+            choose_optionmenu.config(bg = "white", fg = "grey", highlightcolor = "black")
+            choose_optionmenu["menu"].config(bg = "white")
             choose_optionmenu.pack(side = "top")
 
-            choose_frame.pack(side = "right", fill = "both", expand = 1, anchor = "w", ipady = 40)
+            choose_frame.pack(side = "right", expand = 1, anchor = "w", ipady = 40, padx = 20)
             multi_bottom_frame.pack(side = "bottom", fill = "both", expand = 1, anchor = "center", pady = 20)
 
+            download = ctk.CTkButton(master = download_frame, image = arrow_img,  bg_color = '#2a9d8f', \
+            fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
+            text_color = "#5aa786", command = lambda: self.download_button(results_window, var, recipes_dict, titles))
+            download.pack(anchor = "center", pady = 30)
 
-
-
-        arrow_img = tk.PhotoImage(file = r"assets/download_arrow.png")
-        arrow_img = arrow_img.subsample(7, 7)
-        download = ctk.CTkButton(master = buttons_frame, image = arrow_img,  bg_color = '#2a9d8f', \
-        fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
-        text_color = "#5aa786", command = lambda: self.download_button(results_window, var, recipes_dict, titles))
         download.image = arrow_img
-        download.pack(anchor = "center", pady = 10)
 
         lifemap = ctk.CTkButton(master = buttons_frame, text = "LifeMap Tree", text_font =  ("Open Sans", 20, "bold"), \
             bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \

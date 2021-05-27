@@ -7,6 +7,7 @@ Actinidia arguta	Kiwaï
 Actinidia chinensis	Kiwi
 Adansonia digitata	Pain de singe
 Agaricus bisporus	Champignon de Paris
+Agaricus bisporus	champignon de Paris
 Agaricus bisporus	champignon de paris
 Allium ampeloprasum	Ail Faux-Poireau
 Allium ampeloprasum	Ail d'Orient
@@ -412,6 +413,7 @@ Garcinia mangostana	mangoustanier
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
 Ginkgo biloba	noyer du Japon
 Glycine max	Soja
+Glycine max	sauce soja
 Grifola frondosa	Polypore en touffes
 Gundelia tournefortii	Gundelia
 Helianthus annuus	tournesol
@@ -540,6 +542,7 @@ Ocimum basilicum	basilic frais
 Oenothera biennis	Oenothera
 Oenothera biennis	Œnothère
 Olea europaea	Olive
+Olea europaea	Olive verte
 Olea europaea	huile
 Olea europaea	huile d'olive
 Olea europaea	olives noires
@@ -663,6 +666,7 @@ Prunus domestica	Reine-claude
 Prunus domestica	prunier de l'Islet
 Prunus dulcis	Amande
 Prunus dulcis	Amandier amer
+Prunus dulcis	amandes
 Prunus persica	Brugnon
 Prunus persica	Nectarine
 Prunus persica	Pavie
