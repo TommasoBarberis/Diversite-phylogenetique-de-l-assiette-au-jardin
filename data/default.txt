@@ -15,3 +15,27 @@ oeufs/1909
 emmental/2160
 levure/3130
 sucre/2531
+coulis de tomate/543
+basilic frais/3078
+champignon de paris/365
+céleri/350
+concentré de tomates/497
+crème de coco/2433
+citron vert/772
+petit piment/404
+salade/460
+toastinette/2174
+pain pour hamburger/1050
+mayonnaise/2940
+marrons/934
+tomates concassées/360
+riz rond/957
+poivre de cayenne/3069
+haricots verts/369
+bouillon/3029
+maïs/495
+olives/3024
+crème liquide/2223
+betterave/383
+vinaigre de xérès/3022
+brick/1133

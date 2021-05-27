@@ -2,6 +2,7 @@
 
 from ete3 import Tree
 import numpy as np
+import lib.get_lifeMap_subTree as lm
 import logging
 
 logger = logging.getLogger("get_dp.py")
@@ -19,6 +20,11 @@ def phylogenetic_diversity (tree, species):
     """
 
     species = list(filter(("-").__ne__, species.values()))
+    for sp in species:
+        sp_id = lm.get_taxid({"key": sp})
+        if sp_id == []:
+            species.remove(sp)
+
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
         tree = tree.get_common_ancestor(species)
@@ -58,11 +64,17 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
     """
 
     species = list(filter(("-").__ne__, species.values()))
+    for sp in species:
+        sp_id = lm.get_taxid({"key": sp})
+        if sp_id == []:
+            species.remove(sp)
+
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
         tree = tree.get_common_ancestor(species)
     except Exception:
         logger.exception("Some species are not found")
+        print("return in except")
         return "NA"
         
     wpd = 0 # weighted phylogenetic diversity
@@ -95,7 +107,7 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
 
 def shannon(species, dict_sp_drym):
     """
-    Shannon's index with abundance in kg.
+    Shannon's index with abundance in hg.
     """
     species = list(filter(("-").__ne__, species.values()))
     shannon = 0
@@ -104,7 +116,7 @@ def shannon(species, dict_sp_drym):
     else:
         denominator = 0
         for c, sp in enumerate(species):
-            val = dict_sp_drym[sp][0] / 1000
+            val = dict_sp_drym[sp][0] / 100
             if c == 0:
                 denominator = (val ** val)
             else:
@@ -116,7 +128,7 @@ def shannon(species, dict_sp_drym):
 
 def simpson(species, dict_sp_drym):
     """
-    Simpson's index with abundance in kg.
+    Simpson's index with abundance in hg.
     """
     species = list(filter(("-").__ne__, species.values()))
     simpson = 0
@@ -124,7 +136,7 @@ def simpson(species, dict_sp_drym):
         simpson = "NA"
     else:
         for sp in species:
-            simpson += (dict_sp_drym[sp][0] / 1000) ** 2
+            simpson += (dict_sp_drym[sp][0] / 100) ** 2
 
         simpson = round(simpson, 2)
     return simpson

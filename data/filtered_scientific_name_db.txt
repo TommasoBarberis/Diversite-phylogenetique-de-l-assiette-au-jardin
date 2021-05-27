@@ -11,15 +11,15 @@ Agaricus bisporus	champignon de Paris
 Agaricus bisporus	champignon de paris
 Allium ampeloprasum	Ail Faux-Poireau
 Allium ampeloprasum	Ail d'Orient
+Allium ampeloprasum	Poireau
 Allium ampeloprasum	Poireau perpétuel
+Allium ampeloprasum	Poireaux
 Allium ascalonicum	Échalote
 Allium cepa	Oignon	rouge
 Allium cepa	Oignon
 Allium cepa	oignon rouge
 Allium chinense	Oignon de Chine
 Allium fistulosum	Ciboule
-Allium porrum	Poireau
-Allium porrum	Poireaux
 Allium sativum	Ail
 Allium schoenoprasum	Ciboulette
 Allium schoenoprasum	Civette
@@ -236,12 +236,15 @@ Capra hircus	chèvre frais
 Capreolus capreolus	Chevreuil
 Capreolus capreolus	Filet de chevreuil
 Capreolus capreolus	Viande de Chevreuil
+Capsicum	petit piment
 Capsicum annuum	Chili
 Capsicum annuum	Paprika
 Capsicum annuum	Piment
 Capsicum annuum	Piment ornemental
 Capsicum annuum	Poivron
 Capsicum annuum	poivre de Cayenne
+Capsicum annuum	poivron rouge
+Capsicum annuum	poivron vert
 Capsicum frutescens	Piment enragé
 Carica papaya	Papaye
 Carica papaya	Papayer
@@ -251,6 +254,7 @@ Carum carvi	Anis des Vosges
 Carum carvi	Carvi
 Carum carvi	Cumin des prés
 Cassia fistula	Cassia
+Castanea	marrons
 Castanea crenata	châtaignier du Japon
 Castanea sativa	Châtaigne
 Castanea sativa	Châtaignier commun
@@ -277,9 +281,9 @@ Cichorium intybus	Radicchio
 Cinnamomum verum	Cannelle
 Citrullus lanatus	Pastèque
 Citrus	jus de citron
-Citrus aurantifolia	Citron vert
-Citrus aurantifolia	Lime
-Citrus aurantifolia	Limetier
+Citrus aurantiifolia	Citron vert
+Citrus aurantiifolia	Lime
+Citrus aurantiifolia	Limetier
 Citrus aurantium	Bigarade
 Citrus aurantium	Orange amère
 Citrus bergamia	Bergamote
@@ -299,6 +303,7 @@ Claytonia perfoliata	Claytone de Cuba
 Cocos nucifera	Coco
 Cocos nucifera	Lait de coco
 Cocos nucifera	Noix de coco
+Cocos nucifera	crème de coco
 Coffea arabica	Café
 Coffea canephora	caféier robuste
 Colocasia esculenta	Taro
@@ -323,6 +328,7 @@ Cucumis melo	Melon
 Cucumis metulifer	Kiwano
 Cucumis sativus	Concombre
 Cucumis sativus	Cornichon
+Cucumis sativus	Cornichons
 Cucurbita ficifolia	Courge de Siam
 Cucurbita maxima	Citrouille
 Cucurbita maxima	Courge
@@ -345,6 +351,7 @@ Cyperus esculentus	Souchet
 Cyprinus carpio	Carpe Koï
 Dactylopius coccus	Carmin
 Daucus carota	Carotte
+Dikarya	champignon
 Dimocarpus longan	Longane
 Dioscorea alata	Igname
 Diospyros kaki	Kaki
@@ -465,6 +472,7 @@ Laurus nobilis	Laurier-sauce
 Laurus nobilis	feuille de laurier
 Lavandula angustifolia	Lavande
 Lens culinaris	Lentille
+Lens culinaris	lentilles vertes
 Lentinus edodes	Shi take
 Lepidium sativum	Cresson alénois
 Lepidium sativum	Passerage cultivée
@@ -548,6 +556,7 @@ Olea europaea	Olive
 Olea europaea	Olive verte
 Olea europaea	huile
 Olea europaea	huile d'olive
+Olea europaea	olives
 Olea europaea	olives noires
 Opuntia ficus-indica	Figue de barbarie
 Origanum majorana	Marjolaine
@@ -569,6 +578,7 @@ Oryctolagus cuniculus	Saucisse de lapin
 Oryctolagus cuniculus	Viande de lapin
 Oryctolagus cuniculus	Émincé de lapin
 Oryza sativa	Riz
+Oryza sativa	riz rond
 Ovis aries	Agneau
 Ovis aries	Brochettes d'agneau
 Ovis aries	Carré d'agneau
@@ -621,6 +631,10 @@ Phaseolus lunatus	Pois De Sept Ans
 Phaseolus multiflorus	Haricot écarlate
 Phaseolus vulgaris	Haricot
 Phaseolus vulgaris	Haricots de Bourbon
+Phaseolus vulgaris	haricot vert
+Phaseolus vulgaris	haricots vert
+Phaseolus vulgaris	haricot verts
+Phaseolus vulgaris	haricots verts
 Phasianus colchicus	Faisan
 Phasianus colchicus	Poitrine de poule faisane
 Phasianus colchicus	Poule faisane
@@ -647,6 +661,7 @@ Pistacia vera	Pistachier
 Pisum sativum	Petit Pois Sucres
 Pisum sativum	Petit pois
 Pisum sativum	Pois
+Pisum sativum	petits pois
 Pithecellobium dulce	Tamarin d'inde
 Pleuronectes platessa	Carrelet
 Pleuronectes platessa	Plie
@@ -755,7 +770,9 @@ Solanum betaceum	Tamarillo
 Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Tomate
 Solanum lycopersicum	Tomates cerises
+Solanum lycopersicum	concentré de tomates
 Solanum lycopersicum	coulis de tomate
+Solanum lycopersicum	tomates concassées
 Solanum melongena	Aubergine
 Solanum melongena	Marignan
 Solanum muricatum	Pepino
@@ -769,6 +786,7 @@ Sparus aurata	Daurade royale
 Sparus aurata	Dorade
 Sparus aurata	Dorade royale
 Spinacia oleracea	épinard
+Spinacia oleracea	épinards
 Spondias dulcis	Prune de Cythère
 Spondias mombin	Mombin
 Stachys affinis	Crosne

@@ -512,7 +512,6 @@ class MissingSpeciesPage(tk.Frame):
                 if entry != "":
                     logger.debug("The user has enter '{}' for the ingredient '{}'".format(new_specie, ing))
                 sp = get_lifeMap_subTree.get_taxid({entry: new_specie})
-                print(sp)
 
                 if sp != []:
                     species[ing] = new_specie
@@ -813,8 +812,11 @@ class Results:
 
         # missing species
             missing_species_lb_frame = tk.Frame(info_frame, bg = "#2a9d8f")
-            
-            found_species = tk.Label(missing_species_lb_frame, text = str(len(species)), font = ("Open Sans", 18, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
+            found = 0
+            for sp in species.values():
+                if sp != "-":
+                    found += 1
+            found_species = tk.Label(missing_species_lb_frame, text = str(found), font = ("Open Sans", 18, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
             found_species.grid(row = 0, column = 0, padx = 2)
             missing_species_lb_frame.grid_columnconfigure(1, weight = 1)
             
@@ -874,11 +876,12 @@ class Results:
             dict_sp_drym = {}
             bool_var = True
             for ing in species.keys():
-                if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "-":
-                    dict_sp_drym[species[ing]] = dry_matter_dico[ing]
-                else:
-                    bool_var = False
-                    break
+                if species[ing] != "-":
+                    if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "-":
+                        dict_sp_drym[species[ing]] = dry_matter_dico[ing]
+                    else:
+                        bool_var = False
+                        break
             
             if bool_var is True:
                 wpd = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
