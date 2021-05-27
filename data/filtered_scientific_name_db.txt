@@ -182,6 +182,7 @@ Bos taurus	Veau
 Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
+Bos taurus	lait demi-écrémé
 Bos taurus	yaourt
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
@@ -378,6 +379,7 @@ Fragaria	Fraises
 Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
+Gallus Gallus	jaune d'oeuf
 Gallus gallus	Aiguillette de poulet
 Gallus gallus	Aiguillettes de poulet
 Gallus gallus	Aileron de poulet
@@ -667,6 +669,7 @@ Prunus domestica	prunier de l'Islet
 Prunus dulcis	Amande
 Prunus dulcis	Amandier amer
 Prunus dulcis	amandes
+Prunus dulcis	poudre d'amandes
 Prunus persica	Brugnon
 Prunus persica	Nectarine
 Prunus persica	Pavie
@@ -713,6 +716,7 @@ Saccharum	sucre vanillé
 Saccharum officinarum	Canne à sucre
 Saccharum officinarum	Cassonade
 Saccharum officinarum	Sucre roux
+Saccharum officinarum	rhum
 Salacca zalacca	Salak
 Salicornia europaea	Salicorne
 Salmo salar	Saumon
@@ -769,6 +773,7 @@ Stachys affinis	Crosne
 Stachys affinis	Crosne du Japon
 Struthio camelus camelus	Autruche
 Struthio camelus camelus	Viande de autruche
+Sus scrofa	Bacon
 Sus scrofa	Chair à saucisse
 Sus scrofa	Lardons fumés
 Sus scrofa	Rôti de porc
@@ -890,6 +895,7 @@ Vitis rotundifolia	Vigne à feuilles rondes
 Vitis vinifera	Vigne Sauvage
 Vitis vinifera	Vin
 Vitis vinifera	Vinaigre
+Vitis vinifera	raisins secs
 Wasabia japonica	Raifort Japonais
 Zea mays	Maïs
 Zea mays	blé d’Inde

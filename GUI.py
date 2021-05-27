@@ -933,7 +933,7 @@ class Results:
 
             download = ctk.CTkButton(master = buttons_frame, image = arrow_img,  bg_color = '#2a9d8f', \
             fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
-            text_color = "#5aa786", command = lambda: self.download_button(results_window, var, recipes_dict, titles))
+            text_color = "#5aa786", command = lambda: self.download_button(results_window, recipes_dict))
             download.pack(anchor = "center", pady = 10)
 
         else:
@@ -959,7 +959,7 @@ class Results:
 
             download = ctk.CTkButton(master = download_frame, image = arrow_img,  bg_color = '#2a9d8f', \
             fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 15, hover_color = "#B7B7A4", \
-            text_color = "#5aa786", command = lambda: self.download_button(results_window, var, recipes_dict, titles))
+            text_color = "#5aa786", command = lambda: self.download_button(results_window, recipes_dict))
             download.pack(anchor = "center", pady = 30)
 
         download.image = arrow_img
@@ -1007,30 +1007,13 @@ class Results:
         main_canvas.create_window((main_canvas.winfo_reqwidth()/2, 0), window = global_frame, anchor = "nw")
 
 
-    def download_button(self, window, var, recipes_dict, titles):
+    def download_button(self, window, recipes_dict):
         '''
         Ouvre la fenetre pour nommer le fichier qui aura le tableau au format tsv.
         '''
         try:
             self.download = tk.Toplevel(window)
-
-            recipe = titles[var.get()]
-            
-            ingredients = recipes_dict[recipe][0]
-            
-            if isinstance(recipes_dict[recipe][1], list):
-                species = recipes_dict[recipe][1][0]
-            else:
-                species = recipes_dict[recipe][1]
-            
-            dict_nutrition = recipes_dict[recipe][2]
-            
-            if isinstance(recipes_dict[recipe][3], list):
-                dry_matter_dico = recipes_dict[recipe][3][0]
-            else:
-                dry_matter_dico = recipes_dict[recipe][3]
-
-            self.app = Download(self.download, ingredients, species, dry_matter_dico, dict_nutrition)
+            self.app = Download(self.download, recipes_dict)
             logger.info("The user has click the download button for the tsv table")
         except Exception:
             logger.exception("Error in opening download window")
@@ -1101,42 +1084,43 @@ class Download:
     '''
     Creation de la fenetre qui permet de rentrer le nom du fichier dans lequel on souhaite telecharger le tableau au format csv ou tsv.
     '''
-    def __init__(self, download_window, ingredients, species, dry_matter_dico, dict_nutrition):
-        self.download_window = download_window
+    def __init__(self, download_window, recipes_dict):
         
     # window setting 
         download_window.title("Enregistrement")
-        download_window.geometry("700x200")
-        download_window.minsize(800, 200)
-        download_window.config(background = "#C8BFC7")
+        w = 700
+        h = 250
+        x = (download_window.winfo_screenwidth() - w) / 2
+        y = (download_window.winfo_screenheight() - h) / 2
+        download_window.geometry("%dx%d+%d+%d" % (w, h, x, y))
+        download_window.minsize(800, 250)
+        download_window.config(background = "#2a9d8f")
         download_window.grid_rowconfigure(0, weight = 1)
 
     # introducing label
-        intro_label = tk.Label(self.download_window, text = "Le fichier sera enregistré dans le répertoire contenant le programme au format tsv.\nChoississez le nom du fichier:", \
-                font = "arial 11",foreground = "black", bg = "#C8BFC7", justify = "center")
-        intro_label.grid(row = 1, column = 1)
+        intro_label = tk.Label(download_window, text = "Le fichier sera enregistré dans le répertoire contenant le programme au format tsv.\nChoississez le nom du fichier:", \
+                justify = "center", bg = "#2a9d8f", fg = "#f0efeb", font = ("Open Sans", 14))
+        intro_label.pack(pady = 20)
+   
     # file name entry
-        file_name = tk.Entry(self.download_window, font = "arial 11", width = 40)
-        file_name.grid(row = 2, column = 1)
+        file_name = ctk.CTkEntry(master = download_window, font = ("Open Sans", 12), width = 400, corner_radius = 10)
+        file_name.pack(pady = 20)
 
-        download_window.grid_rowconfigure(3, weight = 1)
 
     # confirm button
+        confirm_button = ctk.CTkButton(master = download_window, text = "Enregistrer", text_font = ("Open Sans", 15, "bold"), \
+            width = 150, height = 40, command = lambda: self.action(file_name, recipes_dict), bg_color = "#2a9d8f", fg_color = "#f0efeb", \
+            hover_color = "#B7B7A4", text_color = "#5aa786", corner_radius = 20)
+        confirm_button.pack(pady = 20)
 
-        def action (file_name, ingredients, species, dry_matter_dico, dict_nutrition):
-            file_name = file_name.get()
-            if not file_name.endswith(".tsv"):
-                file_name += ".tsv"
-            logger.info("TSV table saved with the filename: " + file_name)
-            ing_properties.write_tsv(file_name, ingredients, species, dry_matter_dico, dict_nutrition)
-            self.download_window.destroy()
-        confirm_button = tk.Button(self.download_window, text = "Enregistrer", font  = "arial 11", width = 10)
-        confirm_button.grid(row = 4, column = 1)
-        confirm_button.bind("<Button-1>", lambda x: action(file_name, ingredients, species, dry_matter_dico, dict_nutrition))
+    def action(self, file_name, recipes_dict):
+        file_name = file_name.get()
+        if not file_name.endswith(".tsv"):
+            file_name += ".tsv"
+        logger.info("TSV table saved with the filename: " + file_name)
+        # ing_properties.write_tsv(file_name, ingredients, species, dry_matter_dico, dict_nutrition)
+        download_window.destroy()
 
-        download_window.grid_rowconfigure(5, weight = 1)
-        download_window.grid_columnconfigure(0, weight = 1)
-        download_window.grid_columnconfigure(2, weight = 1)
 
 
 def build_table(ingredients, species, dict_nut, drym, recipe_title):
