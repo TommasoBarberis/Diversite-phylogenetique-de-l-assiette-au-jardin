@@ -1013,10 +1013,18 @@ class Results:
 
     # Mousewheel
         global_frame.bind('<Configure>', lambda event: main_canvas.configure(scrollregion = main_canvas.bbox("all")))
+        # LinuxOS
         global_frame.bind_all('<Button-4>', lambda event: main_canvas.yview('scroll', -1, 'units'))
         global_frame.bind_all('<Button-5>', lambda event: main_canvas.yview('scroll', 1, 'units'))
-        global_frame.bind_all('<MouseWheel>', lambda event: main_canvas.yview('scroll', 1, 'units'))
-        global_frame.bind_all('<MouseWheel>', lambda event: main_canvas.yview('scroll', -1, 'units'))
+
+        # Windows
+        def mouse_wheel(evt):
+            if evt.delta == 120:
+                main_canvas.yview('scroll', -1, 'units')
+            elif evt.delta == -120:
+                main_canvas.yview('scroll', 1, 'units')
+
+        global_frame.bind_all('<MouseWheel>', mouse_wheel)
 
     # create window
         main_canvas.create_window((main_canvas.winfo_reqwidth()/2, 0), window = global_frame, anchor = "nw")

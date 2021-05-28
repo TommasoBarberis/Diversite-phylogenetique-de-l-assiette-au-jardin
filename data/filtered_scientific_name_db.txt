@@ -632,8 +632,8 @@ Phaseolus multiflorus	Haricot écarlate
 Phaseolus vulgaris	Haricot
 Phaseolus vulgaris	Haricots de Bourbon
 Phaseolus vulgaris	haricot vert
-Phaseolus vulgaris	haricots vert
 Phaseolus vulgaris	haricot verts
+Phaseolus vulgaris	haricots vert
 Phaseolus vulgaris	haricots verts
 Phasianus colchicus	Faisan
 Phasianus colchicus	Poitrine de poule faisane
@@ -772,6 +772,7 @@ Solanum lycopersicum	Tomate
 Solanum lycopersicum	Tomates cerises
 Solanum lycopersicum	concentré de tomates
 Solanum lycopersicum	coulis de tomate
+Solanum lycopersicum	sauce tomate
 Solanum lycopersicum	tomates concassées
 Solanum melongena	Aubergine
 Solanum melongena	Marignan

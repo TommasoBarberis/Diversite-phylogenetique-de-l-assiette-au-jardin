@@ -11,3 +11,4 @@ Pipfile
 Pipfile.lock
 multi_prova
 assets/figures/*
+taxdump.tar.gz
