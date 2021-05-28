@@ -240,6 +240,7 @@ class MainWindow(tk.Tk):
             try:
                 self.results_window(ingredients, species, url, dict_nutrition, dry_matter_dico)
                 logger.info("Open result window")
+                self.iconify()
             except Exception:
                 logger.exception("Error in 'result' window opening")
         
@@ -247,6 +248,7 @@ class MainWindow(tk.Tk):
             try:
                 self.missing_info_window(recipes_dict)
                 logger.info("Open missing information window")
+                self.iconify()
             except:
                 logger.exception("Error in 'missing information' window opening")
 
@@ -768,6 +770,7 @@ class Results:
 
         results_window.minsize(1080, 720)
         results_window.config(background = "#2a9d8f")
+        results_window.lift()
 
     # Deep level
         main_canvas = tk.Canvas(results_window, bg = "#2a9d8f")
@@ -980,7 +983,7 @@ class Results:
         download.image = arrow_img
 
         lifemap = ctk.CTkButton(master = buttons_frame, text = "LifeMap Tree", text_font =  ("Open Sans", 20, "bold"), \
-            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
+            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 50, corner_radius = 12, \
             hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.get_lifemap(var, recipes_dict, titles))
         lifemap.pack(anchor = "center", pady = 10)
         
@@ -996,13 +999,13 @@ class Results:
         #     logger.info("Writing Tree.txt")
 
         ete = ctk.CTkButton(master = buttons_frame, text = "Ete Sub-tree", text_font =  ("Open Sans", 20, "bold"), \
-            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
+            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 50, corner_radius = 12, \
             hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.get_ete(var, recipes_dict, titles, ncbi))
         ete.pack(anchor = "center", pady = 10)
 
 
         newick = ctk.CTkButton(master = buttons_frame, text = "Newick Tree", text_font =  ("Open Sans", 20, "bold"), \
-            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 40, corner_radius = 12, \
+            bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, height = 50, corner_radius = 12, \
             hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.copy_newick(var, recipes_dict, titles, ncbi))
         newick.pack(anchor = "center", pady = 10)
 
