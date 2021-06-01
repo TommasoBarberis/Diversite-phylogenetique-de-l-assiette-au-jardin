@@ -62,18 +62,16 @@ def get_title(url):
 
 def search_in_default_mass(ingredients):
     for ing in ingredients:
-
-        if ingredients[ing][2][1] == "":
+        if ingredients[ing][2][1] == "" and ingredients[ing][1] != '':
             with open("filtering/default_mass.txt", "r") as f:
                 lines = f.readlines() # file that allow to get mass for some ingredients
         
                 for line in lines:
                     ing_mass = line.split("/")
-                    if ingredients[ing][0][0].capitalize() == ing_mass[0]:
+                    if ing.capitalize() == ing_mass[0]:
                         number = ingredients[ing][1]
                         qty = int(number) * int(ing_mass[1].replace("\n", ""))
                         ingredients[ing] = [[ing, ing], str(qty), ["g", "g"]]
-
     return ingredients
 
 
@@ -124,13 +122,13 @@ def get_marmiton(soup):
             logger.debug("Ingredient parsing, parser 1, DONE")
             return ingredients   
     except Exception:
-        logger.exception("Error in ingredient parsing")
+        logger.exception("Error in ingredient parsing, parser 1 failed")
     
     # Second parser
     try:
         html_ingredients_list = soup.find("div", {"class": "ingredient-list__ingredient-group"}) # select html tag with this class in recipe web page
         li_tags = html_ingredients_list.findAll("li") # object with all ingredients and quantities for the recipe
-
+        
         for i in range(0,len(li_tags)):
             ing = [li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular"), li_tags[i].find("div", \
                 {"class": "ingredient-data"}).get("data-plural")]
@@ -146,7 +144,7 @@ def get_marmiton(soup):
             logger.debug("Ingredient parsing, parser 2, DONE")
             return ingredients
     except Exception:
-        logger.exception("Error in ingredient parsing")
+        logger.exception("Error in ingredient parsing, parser 2 failed")
 
     # Third parser
     try:
@@ -180,8 +178,9 @@ def get_marmiton(soup):
             logger.debug("Ingredient parsing, parser 3, DONE")
             return ingredients
 
+
     except Exception:
-        logger.exception("Error in ingredient parsing")
+        logger.exception("Error in ingredient parsing, parser 3 failed")
 
 
 if __name__ == "__main__":
