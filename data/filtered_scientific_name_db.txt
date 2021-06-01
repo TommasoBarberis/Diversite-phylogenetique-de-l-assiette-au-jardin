@@ -17,6 +17,8 @@ Allium ampeloprasum	Poireaux
 Allium ascalonicum	Échalote
 Allium cepa	Oignon	rouge
 Allium cepa	Oignon
+Allium cepa	Oignon jaune
+Allium cepa	oignon jaune
 Allium cepa	oignon rouge
 Allium chinense	Oignon de Chine
 Allium fistulosum	Ciboule
@@ -122,6 +124,7 @@ Blitum bonus-henricus	Chénopode bon-Henri
 Borago officinalis	Bourrache
 Bos taurus	Bavette de boeuf
 Bos taurus	Beurre
+Bos taurus	Blanquette de veau
 Bos taurus	Boeuf
 Bos taurus	Bœuf
 Bos taurus	Collier de veau
@@ -182,6 +185,7 @@ Bos taurus	Veau
 Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
+Bos taurus	blanquette de veau
 Bos taurus	lait demi-écrémé
 Bos taurus	yaourt
 Brassica campestris	Navette d'été
@@ -351,6 +355,7 @@ Cyperus esculentus	Souchet
 Cyprinus carpio	Carpe Koï
 Dactylopius coccus	Carmin
 Daucus carota	Carotte
+Dikarya	Champignon
 Dikarya	champignon
 Dimocarpus longan	Longane
 Dioscorea alata	Igname
@@ -387,7 +392,6 @@ Fragaria	Fraises
 Fragaria ×ananassa	Fraise
 Gadus morhua	Cabillaud
 Gadus morhua	Morue
-Gallus Gallus	jaune d'oeuf
 Gallus gallus	Aiguillette de poulet
 Gallus gallus	Aiguillettes de poulet
 Gallus gallus	Aileron de poulet
@@ -403,6 +407,7 @@ Gallus gallus	Filet de poulet
 Gallus gallus	Filet mignon de poulet
 Gallus gallus	Foie de poularde
 Gallus gallus	Haute de cuisse de poulet
+Gallus gallus	Jaune d'oeuf
 Gallus gallus	Manchon de poulet
 Gallus gallus	Oeuf
 Gallus gallus	Osso Bucco de poulet
@@ -418,6 +423,7 @@ Gallus gallus	Viande de coq
 Gallus gallus	Viande de poule
 Gallus gallus	Viande de poulet
 Gallus gallus	coq
+Gallus gallus	jaune d'oeuf
 Garcinia mangostana	Mangoustan
 Garcinia mangostana	mangoustanier
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
@@ -909,6 +915,7 @@ Vigna umbellata	haricot riz
 Vigna unguiculata	Niébé
 Vigna unguiculata	Pois Manger Cochon
 Vigna unguiculata sesquipedalis	Dolique asperge
+Vitis	Vin blanc
 Vitis	Vin blanc sec
 Vitis	vin rouge
 Vitis rotundifolia	Raisin

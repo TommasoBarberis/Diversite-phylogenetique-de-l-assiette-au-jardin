@@ -28,8 +28,8 @@ def phylogenetic_diversity (tree, species):
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
         tree = tree.get_common_ancestor(species)
-    except Exception:
-        logger.exception("Some species are not found")
+    except Exception as ex:
+        logger.exception("Some species are not found" + ex)
         return "NA"
     
     pd = 0 # phylogenetic diversity
