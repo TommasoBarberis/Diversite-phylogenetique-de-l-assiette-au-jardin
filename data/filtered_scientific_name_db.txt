@@ -131,6 +131,7 @@ Bos taurus	Collier de veau
 Bos taurus	Crème
 Bos taurus	Crème fraiche
 Bos taurus	Crème fraîche
+Bos taurus	Cr譥 frae 鰡isse
 Bos taurus	Côte de boeuf
 Bos taurus	Côte découverte de veau
 Bos taurus	Côte première de veau
@@ -187,7 +188,6 @@ Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
 Bos taurus	blanquette de veau
 Bos taurus	boeuf haché
-Bos taurus	fromage râpé
 Bos taurus	lait demi-écrémé
 Bos taurus	yaourt
 Brassica campestris	Navette d'été
@@ -745,7 +745,7 @@ Saccharum officinarum	rhum
 Salacca zalacca	Salak
 Salicornia europaea	Salicorne
 Salmo salar	Saumon
-Salmo trutta	Truite
+Salmo salar	Saumon fum鍊Salmo salar	saumon fum鍊Salmo trutta	Truite
 Salvelinus alpinus	Omble chevalier
 Salvia hispanica	Chia
 Salvia officinalis	Sauge Officinale
@@ -810,6 +810,7 @@ Sus scrofa	Rôti de porc
 Sus scrofa	Sanglier
 Sus scrofa	Saucisse de morteau
 Sus scrofa	Viande de sanglier
+Sus scrofa	filet mignon
 Sus scrofa domesticus	Andouille
 Sus scrofa domesticus	Andouillette
 Sus scrofa domesticus	Boudin noir
@@ -934,3 +935,9 @@ Zea mays	maïzena
 Zeus faber	Saint-Pierre
 Zingiber officinale	Gingembre
 Ziziphus zizyphus	Jujube
+Salmo salar	Saumon fumé
+Bos taurus	Sauté de veau
+Solanum lycopersicum	Pulpe de tomate
+Solanum tuberosum	Purée
+Bos taurus	Viande hachée
+Bos taurus	Fromage râpé

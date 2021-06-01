@@ -14,7 +14,7 @@ def db_to_dicto (path):
     Pour créer un dictionnaire à partir du fichier ayant les noms scientifiques des espèces (filtered_scientific_name_db.txt).
     Les clefs sont les noms vernaculaires et les valeurs les noms scientifiques.
     """
-    f = open(path,"r", encoding='utf-8')
+    f = open(path, "r", encoding="utf-8")
     line = f.readline()
     dicto = {}
     while line:
@@ -82,8 +82,6 @@ def recherche_globale(dicto_ing):
         if k not in dicto_esp and k[:len(k)-1] not in dicto_esp:
             caller = inspect.stack()[1].filename  # in order to distinguish the caller between main.py and GUI.py
             specie = last_try(k, correspondences, 0.5, caller)
-            # if specie is None:
-            #     dicto_esp[k] = '/'
     return dicto_esp
 
 

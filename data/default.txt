@@ -43,6 +43,7 @@ vin blanc/2485
 bouillon de poule/31
 cube de bouillon/44
 crème fraîche/2226
+crème fraîche épaisse/2224
 jaune d'oeuf/1902
 muscade/3055
 purée de tomate/543
@@ -50,3 +51,10 @@ lasagnes/973
 boeuf haché/1611
 feuille de laurier/3058
 fromage râpé/2162
+filet mignon/1323
+jambon blanc/1449
+gruyère râpé/2159
+sauté de veau/73
+pulpe de tomate/525
+levure chimique/3133
+viande hachée/1611

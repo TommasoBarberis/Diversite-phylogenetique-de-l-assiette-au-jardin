@@ -85,7 +85,7 @@ class MainWindow(tk.Tk):
             recipes_dict = {}
             
             if filename != ():
-                with open(filename, "r") as f:
+                with open(filename, "r", encoding="utf-8") as f:
                     list_url = f.readlines()
                     for url in list_url:
                         recipes_dict[url.replace("\n", "")] = []
@@ -185,8 +185,9 @@ class MainWindow(tk.Tk):
         
         curframe = inspect.currentframe()
         calframe = inspect.getouterframes(curframe, 2)
-        
+        ingredients = None
         counter = 1
+
         for url in recipes_dict:
 
             try:
@@ -519,14 +520,14 @@ class MissingSpeciesPage(tk.Frame):
                     species[ing] = new_specie
                     err_label.config(text = "")
 
-                    with open("data/filtered_scientific_name_db.txt", "a") as name_db:
+                    with open("data/filtered_scientific_name_db.txt", "a", encoding="utf-8") as name_db:
                         new_line = str(new_specie) + "\t" + str(ing + "\n")
                         name_db.write(new_line)
 
-                    with open("data/filtered_scientific_name_db.txt", "r") as name_db:
+                    with open("data/filtered_scientific_name_db.txt", "r", encoding="utf-8") as name_db:
                         lines = name_db.readlines()
 
-                    with open("data/filtered_scientific_name_db.txt", "w") as name_db:
+                    with open("data/filtered_scientific_name_db.txt", "w", encoding="utf-8") as name_db:
 
                         # conserving unique lines
                         for line in lines:
@@ -1214,13 +1215,13 @@ if __name__ == '__main__':
 
 # keep only last 1000 lines of the log file
 try:
-    with open("log.txt", "r") as log:
+    with open("log.txt", "r", encoding="utf-8") as log:
         lines = log.readlines()
         log_length = len(lines)
         if log_length > 1000:
             lines = lines[(log_length-1001):-1]
 
-    with open("log.txt", "w") as log:
+    with open("log.txt", "w", encoding="utf-8") as log:
         for line in lines:
             log.write(line)
 except Exception:
