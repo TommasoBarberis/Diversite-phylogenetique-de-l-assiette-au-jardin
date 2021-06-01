@@ -186,6 +186,8 @@ Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
 Bos taurus	blanquette de veau
+Bos taurus	boeuf haché
+Bos taurus	fromage râpé
 Bos taurus	lait demi-écrémé
 Bos taurus	yaourt
 Brassica campestris	Navette d'été
@@ -778,6 +780,7 @@ Solanum lycopersicum	Tomate
 Solanum lycopersicum	Tomates cerises
 Solanum lycopersicum	concentré de tomates
 Solanum lycopersicum	coulis de tomate
+Solanum lycopersicum	purée de tomate
 Solanum lycopersicum	sauce tomate
 Solanum lycopersicum	tomates concassées
 Solanum melongena	Aubergine

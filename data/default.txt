@@ -6,11 +6,11 @@ poireaux/356
 poivrons/357
 huile/2903/(huile de tournesole)
 beurre/2862
-farine/1104/(farine de blé T55)
+farine/1104/(farine de blÃ© T55)
 huile d'olive/2897
 ail/3072
 lardons/1573
-crème fraîche/2224
+crÃ¨me fraÃ®che/2224
 oeufs/1909
 emmental/2160
 levure/3130
@@ -18,9 +18,9 @@ sucre/2531
 coulis de tomate/543
 basilic frais/3078
 champignon de paris/365
-céleri/350
-concentré de tomates/497
-crème de coco/2433
+cÃ©leri/350
+concentrÃ© de tomates/497
+crÃ¨me de coco/2433
 citron vert/772
 petit piment/404
 salade/460
@@ -28,19 +28,25 @@ toastinette/2174
 pain pour hamburger/1050
 mayonnaise/2940
 marrons/934
-tomates concassées/360
+tomates concassÃ©es/360
 riz rond/957
 poivre de cayenne/3069
 haricots verts/369
 bouillon/3029
-maïs/495
+maÃ¯s/495
 olives/3024
-crème liquide/2223
+crÃ¨me liquide/2223
 betterave/383
-vinaigre de xérès/3022
+vinaigre de xÃ©rÃ¨s/3022
 brick/1133
 vin blanc/2485
 bouillon de poule/31
 cube de bouillon/44
-crème fraîche/2226
+crÃ¨me fraÃ®che/2226
 jaune d'oeuf/1902
+muscade/3055
+purÃ©e de tomate/543
+lasagnes/973
+boeuf hachÃ©/1611
+feuille de laurier/3058
+fromage rÃ¢pÃ©/2162

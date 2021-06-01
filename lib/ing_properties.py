@@ -22,7 +22,7 @@ def get_default_line_number(ingredient):
     """
     Permet de trouver plus facilement certains ingrédients dans la table Ciqual. 
     """
-    f = open("data/default.txt", "r")
+    f = open("data/default.txt", "r", encoding = "utf-8")
     default_list = f.read().splitlines()
     for line in default_list:
         if ingredient in line: 
