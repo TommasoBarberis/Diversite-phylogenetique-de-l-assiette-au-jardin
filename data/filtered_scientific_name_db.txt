@@ -126,6 +126,7 @@ Bos taurus	Bavette de boeuf
 Bos taurus	Beurre
 Bos taurus	Blanquette de veau
 Bos taurus	Boeuf
+Bos taurus	Boeuf haché
 Bos taurus	Bœuf
 Bos taurus	Collier de veau
 Bos taurus	Crème
@@ -148,6 +149,7 @@ Bos taurus	Filet de boeuf
 Bos taurus	Filet de veau
 Bos taurus	Filet mignon de boeuf
 Bos taurus	Flanchet de veau
+Bos taurus	Fromage râpé
 Bos taurus	Gîte de boeuf
 Bos taurus	Gîte de veau
 Bos taurus	Hampe
@@ -174,6 +176,7 @@ Bos taurus	Rognons
 Bos taurus	Rosbeef
 Bos taurus	Rumsteck de boeuf
 Bos taurus	Rôti de boeuf
+Bos taurus	Sauté de veau
 Bos taurus	Steak de boeuf
 Bos taurus	Steak haché de boeuf
 Bos taurus	Tende de tranche
@@ -186,6 +189,7 @@ Bos taurus	Veau
 Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
+Bos taurus	Viande hachée
 Bos taurus	blanquette de veau
 Bos taurus	boeuf haché
 Bos taurus	lait demi-écrémé
@@ -358,6 +362,7 @@ Cyprinus carpio	Carpe Koï
 Dactylopius coccus	Carmin
 Daucus carota	Carotte
 Dikarya	Champignon
+Dikarya	Champignon de paris
 Dikarya	champignon
 Dimocarpus longan	Longane
 Dioscorea alata	Igname
@@ -475,6 +480,7 @@ Lactuca virosa	Laitue
 Lagenaria leucantha	Gourde
 Lathyrus sativus	Gesse
 Lathyrus sativus	Lentille d'Espagne
+Laurus nobilis	Feuille de laurier
 Laurus nobilis	Laurier
 Laurus nobilis	Laurier-sauce
 Laurus nobilis	feuille de laurier
@@ -560,6 +566,7 @@ Ocimum basilicum	Basilic aux sauces
 Ocimum basilicum	basilic frais
 Oenothera biennis	Oenothera
 Oenothera biennis	Œnothère
+Olea europaea	Huile d'olive
 Olea europaea	Olive
 Olea europaea	Olive verte
 Olea europaea	huile
@@ -745,6 +752,8 @@ Saccharum officinarum	rhum
 Salacca zalacca	Salak
 Salicornia europaea	Salicorne
 Salmo salar	Saumon
+Salmo salar	Saumon frais
+Salmo salar	Saumon fumé
 Salmo salar	Saumon fum鍊Salmo salar	saumon fum鍊Salmo trutta	Truite
 Salvelinus alpinus	Omble chevalier
 Salvia hispanica	Chia
@@ -776,7 +785,10 @@ Smyrnium olusatrum	Maceron
 Soja max	Soja
 Solanum betaceum	Tamarillo
 Solanum lycopersicum	Pomme d'amour
+Solanum lycopersicum	Pulpe de tomate
+Solanum lycopersicum	Purée de tomate
 Solanum lycopersicum	Tomate
+Solanum lycopersicum	Tomates cerise
 Solanum lycopersicum	Tomates cerises
 Solanum lycopersicum	concentré de tomates
 Solanum lycopersicum	coulis de tomate
@@ -789,6 +801,7 @@ Solanum muricatum	Pepino
 Solanum tuberosum	Fécule
 Solanum tuberosum	Pomme de terre
 Solanum tuberosum	Pommes de terre
+Solanum tuberosum	Purée
 Solea solea	Sole
 Sorbus aucuparia	Sorbier sauvage
 Sorghum bicolor	Sorgho
@@ -921,6 +934,7 @@ Vigna unguiculata	Pois Manger Cochon
 Vigna unguiculata sesquipedalis	Dolique asperge
 Vitis	Vin blanc
 Vitis	Vin blanc sec
+Vitis	Vin rouge
 Vitis	vin rouge
 Vitis rotundifolia	Raisin
 Vitis rotundifolia	Vigne à feuilles rondes
@@ -935,9 +949,3 @@ Zea mays	maïzena
 Zeus faber	Saint-Pierre
 Zingiber officinale	Gingembre
 Ziziphus zizyphus	Jujube
-Salmo salar	Saumon fumé
-Bos taurus	Sauté de veau
-Solanum lycopersicum	Pulpe de tomate
-Solanum tuberosum	Purée
-Bos taurus	Viande hachée
-Bos taurus	Fromage râpé
