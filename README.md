@@ -1,5 +1,8 @@
 # Diversité phylogénétique: de l'assiette au jardin
 
+![ALT](assets/logo_md.png)
+This project provide a tool to explore phylogenetic diversity of recipes by the french cooking website [marmiton.org](https://www.marmiton.org/){:target="_blank"}. In this proposal we have develop a gui-based version and a cli-based version.
+
 ## Requirements:
 - python (please use system's Python and not Python under Anaconda)
 - pip3, you can install it running the following command:
