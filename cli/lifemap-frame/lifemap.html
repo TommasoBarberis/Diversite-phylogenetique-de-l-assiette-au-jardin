@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+ 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
+ 		<meta http-equiv="Content-Security-Policy">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Lifemap-query</title>
+		<!-- leaflet -->
+		<link rel="stylesheet" href="js/leaflet/leaflet.css" />
+		<!-- lifemap functions --> 
+ 		<script type="text/javascript" src="js/lifemap/action.js"></script>
+ 		<!-- lifemap style -->
+ 		<link rel="stylesheet" href="css/lifemap.css">
+		<!-- jQuery v. 1.12.1 -->
+		<script src="js/jquery/jquery.js"></script>
+		<!-- jquery for searchbar -->
+		<link rel="stylesheet" href="js/searchbar/jquery-ui.css">
+		<script src="js/searchbar/jquery-ui.js"></script>
+	</head>
+
+
+	<body onload="onLoad()" style="background:black;">
+		<!-- SEARCHBAR -->
+		<div id="searchbar"></div>
+		<!--MAP-->
+		<div id="map" style="height:100%; z-index:0;"></div>
+		<!--LOGO-->
+		<div class="bottomleft">
+			<img src="img/LMtext1.png" height="20px">
+		</div>
+		<!--MODAL DIV THAT WILL CONTAIN THE DESCRIPTION OF THE SPECIES + PICTURES-->
+		<div id="myModal" class="modal" role="dialog"></div>
+
+		<!-- SCRIPTS -->
+		<!-- Include leaflet -->
+		<script src="js/leaflet/leaflet.js"></script>
+		<!-- Lifemap scripts -->
+		<script src="js/lifemap/mapcontrol.js"></script>
+		<!-- Lifemap scripts for tree stuff-->
+		<script src="js/lifemap/treefunctions.js"></script>
+		<!-- Lifemap scripts for page stuff-->
+		<script src="js/lifemap/pagefunctions.js"></script>
+
+	</body>
+</html>

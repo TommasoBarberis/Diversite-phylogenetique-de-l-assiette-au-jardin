@@ -1,0 +1,11 @@
+
+Author: Tommaso Barberis
+Program: divAlim (Tools to compute phylogenetic diversity of recipes from Marmiton.org)
+Version: 1.0
+
+Usage:   divAlim [options] entry
+
+Option:
+    -f          take a file of URL of recipes from "Marmiton.org" as entry. One URL for each line. Don't use empty lines.
+    -u          take directly a URL as entry.
+    --help      dislpay this documentation.

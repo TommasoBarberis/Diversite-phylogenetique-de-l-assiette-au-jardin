@@ -5,7 +5,6 @@ from tkinter import ttk
 from tkinter import filedialog
 import customtkinter as ctk
 from PIL import ImageTk, Image
-import plotly.graph_objects as go
 from urllib.parse import urlparse
 import webbrowser
 from lib import get_lifeMap_subTree, get_ing, ing_to_esp, get_dp, ing_properties
@@ -845,7 +844,7 @@ class Results:
         # table
             table_frame = tk.Frame(main_frame, bg = "#2a9d8f")
 
-            build_table(ingredients, species, dict_nutrition, dry_matter_dico, name_recipe)
+            ing_properties.build_table(ingredients, species, dict_nutrition, dry_matter_dico, name_recipe)
             img = Image.open("assets/figures/" + name_recipe + ".png")
             img_width, img_height = img.size
             self.tables[recipe] = ImageTk.PhotoImage(img)
@@ -864,7 +863,7 @@ class Results:
         # Phylogenetic diversity
             pd_frame = tk.Frame(results_frame, bg = "#2a9d8f")
 
-            tree = self.build_tree(species, ncbi)
+            tree = get_lifeMap_subTree.build_tree(species)
             pd = get_dp.phylogenetic_diversity(tree, species)
 
             pd_info_label = tk.Label(pd_frame, text = "Diversité phylogénétique (MPD, Webb 2002):", \
@@ -1100,16 +1099,6 @@ class Results:
             logger.debug("Impossible to copy Newick tree")
 
 
-    
-    def build_tree(self, species, ncbi):
-        list_ID = get_lifeMap_subTree.get_taxid(species)
-        tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
-        tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-        return tree
-
-
-
-
 class Download:
     '''
     Creation de la fenetre qui permet de rentrer le nom du fichier dans lequel on souhaite telecharger le tableau au format csv ou tsv.
@@ -1150,58 +1139,6 @@ class Download:
         logger.info("TSV table saved with the filename: " + file_name)
         ing_properties.write_tsv(file_name, recipes_dict)
         self.download_window.withdraw()
-
-
-
-def build_table(ingredients, species, dict_nut, drym, recipe_title):
-    sp = []
-    quantities = []
-    drym_quantities = []
-    water = []
-    sugars = []
-    lipides = []
-    proteins = []
-
-    for ing in ingredients:
-        if ing in species.keys():
-            sp.append(species[ing])
-        else:
-            sp.append("-")
-
-        qty = ingredients[ing][1] + " " + ingredients[ing][2][0]
-        if qty == " ":
-            quantities.append("-")
-        else:
-            quantities.append(qty)
-
-        if ing in drym.keys():
-            if drym[ing] == "-":
-                drym_quantities.append(drym[ing])
-            else:
-                drym_quantities.append(str(drym[ing][0]) + " " + drym[ing][1])
-
-        if ing.capitalize() in dict_nut.keys():
-            water.append(dict_nut[ing.capitalize()][1])
-            sugars.append(dict_nut[ing.capitalize()][2])
-            lipides.append(dict_nut[ing.capitalize()][3])
-            proteins.append(dict_nut[ing.capitalize()][4])
-        else:
-            water.append("-")
-            sugars.append("-")
-            lipides.append("-")
-            proteins.append("-")
-            
-    species = sp
-    ingredients = list(ingredients.keys())
-
-    table = go.Figure(data = [go.Table(header = dict(values = ["Ingrédient", "Espèce", "Quantité", \
-        "Qté de matière\n sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18, height = 60), \
-        cells = dict(values = [ingredients, species, quantities, drym_quantities, water, sugars, lipides, proteins], \
-        font_size = 16, height = 50))], layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((60 * len(ingredients)) + 60), width = 1200, margin = dict(b = 0, t = 0, l = 0, r = 0))) # 
-
-
-    table.write_image("assets/figures/" + recipe_title + ".png")
-    return None
 
 
 def main(): 

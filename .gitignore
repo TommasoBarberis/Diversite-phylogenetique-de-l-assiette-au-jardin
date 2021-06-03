@@ -9,7 +9,6 @@ tests/__pycache__/*
 .pytest_cache/
 Pipfile
 Pipfile.lock
-multi_prova
 assets/figures/*
 taxdump.tar.gz
 data/.~lock.Table_Ciqual_2020_FR_2020_07_07.xls#

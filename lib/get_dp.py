@@ -62,16 +62,16 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
      presentes dans la recette avec la metrique MDP proposee par Webb en 2002, en utilisant les quantites de 
      matiere seche.
     """
-
-    species = list(filter(("-").__ne__, species.values()))
-    for sp in species:
-        sp_id = lm.get_taxid({"key": sp})
+    for ing in species:
+        sp_id = lm.get_taxid({"ing": species[ing]})
         if sp_id == []:
-            species.remove(sp)
+            del species[sp]
+
+    species_list = list(filter(("-").__ne__, species.values()))    
 
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
-        tree = tree.get_common_ancestor(species)
+        tree = tree.get_common_ancestor(species_list)
     except Exception:
         logger.exception("Some species are not found")
         print("return in except")
@@ -86,15 +86,19 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
             wpd = dict_sp_drym[sp][0]
     else:        
         weight_sum = 0
-        for sp in species:
+        for ing in species:
 
             mpd = 0 # mean pairwise distance
 
-            for leaf in species:
-                if sp != leaf:
-                    mpd += tree.get_distance(sp, leaf)
+            for leaf in species_list:
+                if species[ing] != leaf:
+                    mpd += tree.get_distance(species[ing], leaf)
             
-            weight = dict_sp_drym[sp][0]
+            try:
+                weight = float(dict_sp_drym[ing][0])
+            except:
+                logger.info("The ingredients '{}' has not a valid quantity of dry matter".format(ing))
+                return "NA"
             mpd = (mpd / (len(species) - 1)) * weight
             weight_sum += weight
             wpd += mpd
@@ -116,7 +120,11 @@ def shannon(species, dict_sp_drym):
     else:
         denominator = 0
         for c, sp in enumerate(species):
-            val = dict_sp_drym[sp][0] / 100
+            try:
+                val = dict_sp_drym[sp][0] / 100
+            except:
+                logger.info("Impossible compute Shannon's index because the ingredient '{}' has not a dry matter quantity".format(sp))
+                return "NA"
             if c == 0:
                 denominator = (val ** val)
             else:
@@ -136,7 +144,12 @@ def simpson(species, dict_sp_drym):
         simpson = "NA"
     else:
         for sp in species:
-            simpson += (dict_sp_drym[sp][0] / 100) ** 2
+            try:
+                simpson += (dict_sp_drym[sp][0] / 100) ** 2
+            except:
+                logger.info("Impossible compute Simpson's index because the ingredient '{}' has not a dry matter quantity".format(sp))
+                return "NA"
+
 
         simpson = round(simpson, 2)
     return simpson

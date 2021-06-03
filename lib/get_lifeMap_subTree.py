@@ -120,6 +120,13 @@ def subtree_from_newick(tree):
     tree.show(tree_style = ts)
 
 
+def build_tree(species):
+        list_ID = get_taxid(species)
+        tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
+        tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+        return tree
+
+
 if  __name__ == "__main__":
     species = {"boeuf": "Bos taurus", "poulet":"Gallus gallus", "poivre": "Piper nigrum"}
     # print(species)

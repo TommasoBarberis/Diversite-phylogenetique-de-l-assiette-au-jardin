@@ -3,6 +3,7 @@
 import xlrd
 import csv
 from lib.ing_to_esp import similar
+import plotly.graph_objects as go
 import logging
 
 logger = logging.getLogger("ing_properties.py")
@@ -208,6 +209,58 @@ def write_tsv(file_name, recipes_dict):
                     + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
 
                 tsvfile.write(line + "\n")
+
+
+def build_table(ingredients, species, dict_nut, drym, recipe_title):
+    sp = []
+    quantities = []
+    drym_quantities = []
+    water = []
+    sugars = []
+    lipides = []
+    proteins = []
+
+    for ing in ingredients:
+        if ing in species.keys():
+            sp.append(species[ing])
+        else:
+            sp.append("-")
+
+        qty = ingredients[ing][1] + " " + ingredients[ing][2][0]
+        if qty == " ":
+            quantities.append("-")
+        else:
+            quantities.append(qty)
+
+        if ing in drym.keys():
+            if drym[ing] == "-":
+                drym_quantities.append(drym[ing])
+            else:
+                drym_quantities.append(str(drym[ing][0]) + " " + drym[ing][1])
+
+        if ing.capitalize() in dict_nut.keys():
+            water.append(dict_nut[ing.capitalize()][1])
+            sugars.append(dict_nut[ing.capitalize()][2])
+            lipides.append(dict_nut[ing.capitalize()][3])
+            proteins.append(dict_nut[ing.capitalize()][4])
+        else:
+            water.append("-")
+            sugars.append("-")
+            lipides.append("-")
+            proteins.append("-")
+            
+    species = sp
+    ingredients = list(ingredients.keys())
+
+    table = go.Figure(data = [go.Table(header = dict(values = ["Ingrédient", "Espèce", "Quantité", \
+        "Qté de matière\n sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18, height = 60), \
+        cells = dict(values = [ingredients, species, quantities, drym_quantities, water, sugars, lipides, proteins], \
+        font_size = 16, height = 50))], layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((60 * len(ingredients)) + 60), width = 1200, margin = dict(b = 0, t = 0, l = 0, r = 0))) # 
+
+
+    table.write_image("assets/figures/" + recipe_title + ".png")
+    return None
+
 
 
 if __name__ == "__main__":
