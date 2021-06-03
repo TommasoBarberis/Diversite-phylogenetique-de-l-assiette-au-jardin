@@ -9,6 +9,14 @@ if [ $# == 0 ];then
 else
     if [ $1 == "-f" ] || [ $1 == "-u" ]; then
         echo -e "## check pipenv installation"
+        if which pipenv >/dev/null; then
+            :
+        else
+            echo -e "## installing pipenv"
+            sudo apt-get install -y pipenv
+        fi
+
+        echo -e "## check venv installation"
 
         if [ -d $HOME/.local/share/virtualenvs/diversite-phylogenetique-de-l-assiette-au--QHx-bX7s ]; then
             echo -e "## virtual environment already exist"
