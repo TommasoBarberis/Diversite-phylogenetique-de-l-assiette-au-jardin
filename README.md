@@ -1,6 +1,7 @@
 # Diversité phylogénétique: de l'assiette au jardin
 
-<p align="center"><img src="assets/logo_md.png"></p>
+{:.center}
+![logo](assets/logo_md.png)
 
 This project provide a tool to explore phylogenetic diversity of recipes by the french cooking website [marmiton.org](https://www.marmiton.org/). In this proposal we have develop a gui-based version and a cli-based version.
 
