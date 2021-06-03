@@ -59,3 +59,18 @@ pulpe de tomate/525
 levure chimique/3133
 viande hachée/1611
 saumon frais/1695
+sucre semoule/2531
+sucre en poudre/2531
+sucre fin/2531
+yaourt nature/1963
+chocolat pâtissier/2546
+chocolat noir/2546
+cacao amer/2468
+vanille/3071
+beurre tendre/2866
+beurre doux/2866
+cassonade/2532
+poudre d'amandes/935
+levure/3131
+pâte brisée/1122
+biscuits à la cuillère/2678

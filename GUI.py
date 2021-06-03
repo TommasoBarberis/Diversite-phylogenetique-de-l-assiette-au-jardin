@@ -635,7 +635,10 @@ class MissingQuantitiesPage(tk.Frame):
         
         entries = []
         ingredients = recipes_dict[recipe[0]][0]
-        dry_matter_dico = recipes_dict[recipe[0]][3][0]
+        try:
+            dry_matter_dico = recipes_dict[recipe[0]][3][0]
+        except:
+            dry_matter_dico = recipes_dict[recipe[0]][3]
 
         for ing in dry_matter_dico:
             if dry_matter_dico[ing] == "-":

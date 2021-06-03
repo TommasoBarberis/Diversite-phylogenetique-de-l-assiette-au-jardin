@@ -18,6 +18,7 @@ Allium ascalonicum	Échalote
 Allium cepa	Oignon	rouge
 Allium cepa	Oignon
 Allium cepa	Oignon jaune
+Allium cepa	Oignons
 Allium cepa	oignon jaune
 Allium cepa	oignon rouge
 Allium chinense	Oignon de Chine
@@ -124,6 +125,7 @@ Blitum bonus-henricus	Chénopode bon-Henri
 Borago officinalis	Bourrache
 Bos taurus	Bavette de boeuf
 Bos taurus	Beurre
+Bos taurus	Beurre doux
 Bos taurus	Blanquette de veau
 Bos taurus	Boeuf
 Bos taurus	Boeuf haché
@@ -190,6 +192,8 @@ Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
 Bos taurus	Viande hachée
+Bos taurus	beurre doux
+Bos taurus	beurre tendre
 Bos taurus	blanquette de veau
 Bos taurus	boeuf haché
 Bos taurus	lait demi-écrémé
@@ -200,6 +204,7 @@ Brassica juncea	Moutarde
 Brassica juncea	Moutarde de Sarepta
 Brassica napus	Chou-navet
 Brassica napus	Colza
+Brassica napus	Huile de colza
 Brassica napus	Rutabaga
 Brassica napus napus	Navette
 Brassica oleracea	Brocoli
@@ -252,6 +257,7 @@ Capsicum annuum	Paprika
 Capsicum annuum	Piment
 Capsicum annuum	Piment ornemental
 Capsicum annuum	Poivron
+Capsicum annuum	Poivrons
 Capsicum annuum	poivre de Cayenne
 Capsicum annuum	poivron rouge
 Capsicum annuum	poivron vert
@@ -346,6 +352,7 @@ Cucurbita maxima	Potimarron
 Cucurbita maxima	Potiron
 Cucurbita moschata	Coruge musquée
 Cucurbita pepo	Courgette
+Cucurbita pepo	Courgettes
 Cucurbita pepo	Pâtisson
 Cuminum cyminum	Cumin
 Cuminum cyminum	Cumin noir
@@ -417,6 +424,7 @@ Gallus gallus	Haute de cuisse de poulet
 Gallus gallus	Jaune d'oeuf
 Gallus gallus	Manchon de poulet
 Gallus gallus	Oeuf
+Gallus gallus	Oeufs
 Gallus gallus	Osso Bucco de poulet
 Gallus gallus	Pilon de poulet
 Gallus gallus	Pilons de poulet
@@ -509,6 +517,7 @@ Majorana hortensis	Origan des jardins
 Malpighia emarginata	Acérola
 Malpighia emarginata	cerise des Antilles
 Malus domestica	Pomme
+Malus domestica	Pommes
 Malus domestica	Pommier cultivé
 Malus pumila	Pommier Paradis
 Malva sylvestris	Malva
@@ -669,6 +678,7 @@ Pimenta dioica	Grand piment
 Pimpinella anisum	Anis vert
 Pimpinella anisum	Boucage anis
 Pinus pinea	Pignons de pin
+Piper nigrum	
 Piper nigrum	Poivre
 Piper nigrum	Poivre noir
 Pistacia vera	Pistache
@@ -741,7 +751,11 @@ Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	Sucre
+Saccharum	Sucre semoule
+Saccharum	Sucre vanillé
 Saccharum	sucre
+Saccharum	sucre en poudre
+Saccharum	sucre fin
 Saccharum	sucre semoule
 Saccharum	sucre vanillé
 Saccharum officinarum	Canne à sucre
@@ -788,6 +802,7 @@ Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Pulpe de tomate
 Solanum lycopersicum	Purée de tomate
 Solanum lycopersicum	Tomate
+Solanum lycopersicum	Tomates
 Solanum lycopersicum	Tomates cerise
 Solanum lycopersicum	Tomates cerises
 Solanum lycopersicum	concentré de tomates
@@ -796,6 +811,7 @@ Solanum lycopersicum	purée de tomate
 Solanum lycopersicum	sauce tomate
 Solanum lycopersicum	tomates concassées
 Solanum melongena	Aubergine
+Solanum melongena	Aubergines
 Solanum melongena	Marignan
 Solanum muricatum	Pepino
 Solanum tuberosum	Fécule
@@ -876,6 +892,7 @@ Taraxacum officinale	Taraxacum section Ruderalia
 Tetragonia tetragonioides	Tétragone cornue
 Tetragonia tetragonioides	Épinard de (la) Nouvelle-Zélande
 Theobroma cacao	Cacao
+Theobroma cacao	Cacao amer
 Theobroma cacao	Chocolat
 Theobroma cacao	Fève de cacao
 Theobroma cacao	cacaoyer
@@ -894,6 +911,7 @@ Trigonella foenum-graecum	Trigonelle Fenugrec
 Triticum	farine de blé
 Triticum aestivum	Farine
 Triticum durum	Boulgour
+Triticum turgidum	Farine de blé
 Triticum vulgare	Froment
 Tropaeolum tuberosum	Capucine tubéreuse
 Tuber aestivum	Truffe
