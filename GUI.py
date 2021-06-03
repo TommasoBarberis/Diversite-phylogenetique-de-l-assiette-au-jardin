@@ -13,6 +13,7 @@ from ete3 import NCBITaxa
 import os, sys, inspect
 import logging
 
+# TODO: function that allow to save input data (in missing quantities and species pages)
 
 ctk.set_appearance_mode("System")
 

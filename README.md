@@ -60,12 +60,16 @@ python GUI.py
 Here below some screenshot from the gui version:
 
 ![gui_mainwindow](assets/gui_mainwindow.png)
+
 How you can see, it is possible to enter a <b>URL</b> trough the entry widget as the `-u` option of the cli version and it is also possible process several recipes at the same time with the multi-recipe feature (like as the `-f` option). So, with <b>multi-recipe</b> button allow to browser your files in order to select a text file which have one URL for each line (no empty line, no special symbols).
 
 ![gui_missing_species](assets/gui_missingspecies.png)
 ![gui_missing_qunatities](assets/gui_missingquantities.png)
+
 Here, we can see all the potential of the gui version, it allows you to complete data, more specifically about species scientific name and quantity, considering that data are obtained using a html parser. Below, an example of results on gui version.
+
 ![gui_results](assets/gui_results.png)
+
 Actually, gui version allows to browser phylogenetic tree of species with python's library <em>ete3</em>, copy in the clipboard the <b>Newick</b> tree and download the table at the `.tsv` format.
 
 Both version allow you to display the phylogenetic tree in the <b>LifeMap Tree</b> (you can learn more about the LifeMap project [here](http://lifemap.univ-lyon1.fr/)).
