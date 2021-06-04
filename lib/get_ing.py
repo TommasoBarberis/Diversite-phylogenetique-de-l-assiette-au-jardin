@@ -61,6 +61,7 @@ def get_title(url):
 
 
 def search_in_default_mass(ingredients):
+    print(ingredients)
     for ing in ingredients:
         if ingredients[ing][2][1] == "" and (ingredients[ing][1] != '' and ingredients[ing][1] != "NA"):
             with open("filtering/default_mass.txt", "r") as f:
