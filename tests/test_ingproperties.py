@@ -41,7 +41,7 @@ def test_dryMatterDicUpdate():
 
 
 def test_formatFloat():
-    string1 ="ing1-ing2"
+    string1 ="ing1 NA ing2"
     resultat = ip.format_float(string1)
     assert resultat == 0
 
