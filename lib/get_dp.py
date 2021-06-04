@@ -19,7 +19,7 @@ def phylogenetic_diversity (tree, species):
     dans la recette avec la metrique MDP proposee par Webb en 2002.
     """
 
-    species = list(filter(("-").__ne__, species.values()))
+    species = list(filter(("NA").__ne__, species.values()))
     for sp in species:
         sp_id = lm.get_taxid({"key": sp})
         if sp_id == []:
@@ -29,7 +29,7 @@ def phylogenetic_diversity (tree, species):
     try:
         tree = tree.get_common_ancestor(species)
     except Exception as ex:
-        logger.exception("Some species are not found" + ex)
+        logger.exception(ex)
         return "NA"
     
     pd = 0 # phylogenetic diversity
@@ -70,14 +70,13 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
     for ing in del_sp:
         del species[ing]
 
-    species_list = list(filter(("-").__ne__, species.values()))    
+    species_list = list(filter(("NA").__ne__, species.values()))    
 
     tree = Tree(tree, format = 8, quoted_node_names = True)
     try:
         tree = tree.get_common_ancestor(species_list)
     except Exception:
         logger.exception("Some species are not found")
-        print("return in except")
         return "NA"
     
 
@@ -117,7 +116,7 @@ def shannon(species, dict_sp_drym):
     """
     Shannon's index with abundance in hg.
     """
-    species = list(filter(("-").__ne__, species.values()))
+    species = list(filter(("NA").__ne__, species.values()))
     shannon = 0
     if len(species) == 0:
         shannon = "NA"
@@ -142,7 +141,7 @@ def simpson(species, dict_sp_drym):
     """
     Simpson's index with abundance in hg.
     """
-    species = list(filter(("-").__ne__, species.values()))
+    species = list(filter(("NA").__ne__, species.values()))
     simpson = 0
     if len(species) == 0:
         simpson = "NA"

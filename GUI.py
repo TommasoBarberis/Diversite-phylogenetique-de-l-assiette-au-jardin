@@ -237,7 +237,7 @@ class MainWindow(tk.Tk):
             if len(ing) != len(sp):
                 var = False
                 sp = [sp, False]
-            if "-" in drym.values():
+            if "NA" in drym.values():
                 var = False
                 drym = [drym, False]
 
@@ -399,7 +399,7 @@ def results_window_from_missing_window(self, window, recipes_dict, filename):
 
         for ing in ingredients:
             if ing not in species.keys():
-                species[ing] = "-"
+                species[ing] = "NA"
 
 
 
@@ -672,7 +672,7 @@ class MissingQuantitiesPage(tk.Frame):
             dry_matter_dico = recipes_dict[recipe[0]][3]
 
         for ing in dry_matter_dico:
-            if dry_matter_dico[ing] == "-":
+            if dry_matter_dico[ing] == "NA":
                 ing_label = tk.Label(data_frame, text = ing, font = ("Open Sans", 16, "bold"), bg = '#2a9d8f', fg = "#f0efeb")
                 ing_label.grid(row = counter_line, column = 1, sticky = "e", padx = 20)
 
@@ -852,7 +852,7 @@ class Results:
             missing_species_lb_frame = tk.Frame(info_frame, bg = "#2a9d8f")
             found = 0
             for sp in species.values():
-                if sp != "-":
+                if sp != "NA":
                     found += 1
             found_species = tk.Label(missing_species_lb_frame, text = str(found), font = ("Open Sans", 18, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
             found_species.grid(row = 0, column = 0, padx = 2)
@@ -914,8 +914,8 @@ class Results:
             dict_sp_drym = {}
             bool_var = True
             for ing in species.keys():
-                if species[ing] != "-":
-                    if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "-":
+                if species[ing] != "NA":
+                    if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "NA":
                         dict_sp_drym[species[ing]] = dry_matter_dico[ing]
                     else:
                         bool_var = False

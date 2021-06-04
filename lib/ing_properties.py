@@ -73,10 +73,10 @@ def get_nut_info(ing, book):
         # sucres (%):column 18
 
         final_nut_info.append(nut_info[7]) # name
-        final_nut_info.append(nut_info[13]) # water
-        final_nut_info.append(nut_info[16]) # glucides
-        final_nut_info.append(nut_info[17]) # lipides
-        final_nut_info.append(nut_info[14]) # protéines
+        final_nut_info.append("NA" if (nut_info[13] == "-" or nut_info[13] == "traces") else nut_info[13].replace("<", "")) # water
+        final_nut_info.append("NA" if (nut_info[16] == "-" or nut_info[16] == "traces") else nut_info[16].replace("<", "")) # glucides
+        final_nut_info.append("NA" if (nut_info[17] == "-" or nut_info[17] == "traces") else nut_info[17].replace("<", "")) # lipides
+        final_nut_info.append("NA" if (nut_info[14] == "-" or nut_info[14] == "traces") else nut_info[14].replace("<", "")) # protéines
 
     logger.debug("The ingredient {} match in the Ciqual's table with {}".format(ing, final_nut_info))
     return final_nut_info
@@ -91,7 +91,7 @@ def get_dict_nut(dict_ing):
         if nut_info != []:
             output[ingredient] = nut_info
         else:
-            output[ingredient] = ["-", "-", "-", "-", "-"]
+            output[ingredient] = ["NA", "NA", "NA", "NA", "NA"]
     return output
 
 
@@ -104,7 +104,7 @@ def dry_matter_dict_update(dict_ing, dict_nut):
         # non nulle et que la quantite d'eau est non nulle c'est alors possible de calculer la quantite de 
         # matiere seche
 
-        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != '-' \
+        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != 'NA' \
         and dict_ing[ing][1] is not None:
 
             if "<" in dict_nut[ing.capitalize()][1]:
@@ -139,9 +139,9 @@ def dry_matter_dict_update(dict_ing, dict_nut):
                             dry_matter = round(qtt - qtt * wat/100,2)
                             dry_matter_dict[ing] = [dry_matter, "g"]
                         else:
-                            dry_matter_dict[ing] = "-"     
+                            dry_matter_dict[ing] = "NA"     
         else: 
-            dry_matter_dict[ing] = "-"
+            dry_matter_dict[ing] = "NA"
 
     return dry_matter_dict
 
@@ -150,7 +150,7 @@ def format_float(input_string):
     """
     Permet d'extrapoler le pourcentage d'eau d'un ingredient
     """
-    if "-" in input_string or "traces" in input_string:
+    if "NA" in input_string or "traces" in input_string:
         return 0
     else:
         return input_string.replace("< ", "").replace(",", ".")
@@ -167,16 +167,19 @@ def nut_printer(nut_dict):
 
 
 def write_tsv(file_name, recipes_dict):
-    list_column = ["Recette", "Ingrédient", "Espèce", "Quantité ", "Matière sèche (g)", "Eau (%)", "Glucides (%)", \
-        "Lipides (%)", "Protéines (%)", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
+    list_column = ["Recette", "Ingrédient", "Espèce", "Quantité ", "Matière_sèche", "Eau", "Glucides", \
+        "Lipides", "Protéines", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
         "Indice de Shannon", "Indice de Simpson", "URL de la recette"]
 
     with open(file_name, 'w', newline='') as tsvfile:
         # Header
+        header_line = ""
         for element in list_column:
-            tsvfile.write(element)
-            tsvfile.write("\t")
-        tsvfile.write("\n")
+            header_line += element + "\t"
+        if header_line.endswith("\t"):
+            header_line = header_line[:-1]
+        tsvfile.write(header_line + "\n")
+
 
         # Recipe scope
         for recipe in recipes_dict:
@@ -209,6 +212,7 @@ def write_tsv(file_name, recipes_dict):
                     + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
 
                 tsvfile.write(line + "\n")
+        tsvfile.write("\n")
 
 
 def build_table(ingredients, species, dict_nut, drym, recipe_title):
@@ -224,16 +228,16 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
         if ing in species.keys():
             sp.append(species[ing])
         else:
-            sp.append("-")
+            sp.append("NA")
 
         qty = ingredients[ing][1] + " " + ingredients[ing][2][0]
         if qty == " ":
-            quantities.append("-")
+            quantities.append("NA")
         else:
             quantities.append(qty)
 
         if ing in drym.keys():
-            if drym[ing] == "-":
+            if drym[ing] == "NA":
                 drym_quantities.append(drym[ing])
             else:
                 drym_quantities.append(str(drym[ing][0]) + " " + drym[ing][1])
@@ -244,10 +248,10 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
             lipides.append(dict_nut[ing.capitalize()][3])
             proteins.append(dict_nut[ing.capitalize()][4])
         else:
-            water.append("-")
-            sugars.append("-")
-            lipides.append("-")
-            proteins.append("-")
+            water.append("NA")
+            sugars.append("NA")
+            lipides.append("NA")
+            proteins.append("NA")
             
     species = sp
     ingredients = list(ingredients.keys())

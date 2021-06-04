@@ -62,7 +62,7 @@ def get_title(url):
 
 def search_in_default_mass(ingredients):
     for ing in ingredients:
-        if ingredients[ing][2][1] == "" and (ingredients[ing][1] != '' and ingredients[ing][1] != "-"):
+        if ingredients[ing][2][1] == "" and (ingredients[ing][1] != '' and ingredients[ing][1] != "NA"):
             with open("filtering/default_mass.txt", "r") as f:
                 lines = f.readlines() # file that allow to get mass for some ingredients
         
@@ -94,7 +94,7 @@ def get_marmiton(soup):
             qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ')
             
             if qty_unit_span == '':
-                qty = "-"
+                qty = "NA"
                 unit = ["", ""]
             else:
                 c = 0 # counter
@@ -159,7 +159,7 @@ def get_marmiton(soup):
             qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ').replace(' ', '*')
 
             if qty_unit_span == '':
-                qty = "-"
+                qty = "NA"
                 unit = ["", ""]
             else:
                 qty_unit_span = qty_unit_span.split("*")
