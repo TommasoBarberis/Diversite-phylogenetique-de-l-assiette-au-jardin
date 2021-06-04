@@ -197,21 +197,22 @@ def write_tsv(file_name, recipes_dict):
             drym = recipes_dict[recipe][3]
 
             for ing in ingredients:
-                sp = species[ing]
-                qty = ingredients[ing][1] + " " + ingredients[ing][2][1]
-                dry_qty = drym[ing]
-                if isinstance(dry_qty, list):
-                    dry_qty = str(dry_qty[0]) + " " + dry_qty[1]
-                water = dict_nut[ing.capitalize()][1]
-                sugars = dict_nut[ing.capitalize()][2]
-                lipides =dict_nut[ing.capitalize()][3]
-                proteins = dict_nut[ing.capitalize()][4]
+                if ing != "":
+                    sp = species[ing]
+                    qty = ingredients[ing][1] + " " + ingredients[ing][2][1]
+                    dry_qty = drym[ing]
+                    if isinstance(dry_qty, list):
+                        dry_qty = str(dry_qty[0]) + " " + dry_qty[1]
+                    water = dict_nut[ing.capitalize()][1]
+                    sugars = dict_nut[ing.capitalize()][2]
+                    lipides =dict_nut[ing.capitalize()][3]
+                    proteins = dict_nut[ing.capitalize()][4]
 
-                line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(water) \
-                    + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(pd) + "\t" \
-                    + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
+                    line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(water) \
+                        + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(pd) + "\t" \
+                        + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
 
-                tsvfile.write(line + "\n")
+                    tsvfile.write(line + "\n")
         tsvfile.write("\n")
 
 

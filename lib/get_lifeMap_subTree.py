@@ -45,50 +45,49 @@ def get_driver():
     directory_chrome = repr(os.path.dirname(os.path.realpath(sys.argv[0])))
 
     # test pour connaitre quel navigateur est sur la machine
-    
     try:
-        firefox_options = webdriver.FirefoxProfile()
-        firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
-                            "text/plain, text/html, text/css, text/javascript")
-        firefox_options.set_preference("browser.download.manager.showWhenStarting", False)
-        firefox_options.set_preference("browser.download.dir", directory_firefox)
-        firefox_options.set_preference("browser.download.folderList", 2)
+        try:
+            firefox_options = webdriver.FirefoxProfile()
+            firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk",
+                                "text/plain, text/html, text/css, text/javascript")
+            firefox_options.set_preference("browser.download.manager.showWhenStarting", False)
+            firefox_options.set_preference("browser.download.dir", directory_firefox)
+            firefox_options.set_preference("browser.download.folderList", 2)
 
-        driver = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
-        logger.info("Opening Firefox")
-        return driver
-    
-    except Exception:
-        logger.exception("Firefox driver doesn't work")
-        pass
+            driver = webdriver.Firefox(firefox_profile=firefox_options, executable_path=GeckoDriverManager().install())
+            logger.info("Opening Firefox")
+            return driver
+        
+        except Exception:
+            logger.exception("Firefox driver doesn't work")
+            pass
 
-    try:
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_experimental_option("prefs", {
-        "download.default_directory": directory_chrome, 
-        "download.prompt_for_download": False,
-        "download.directory_upgrade": True,
-        "safebrowsing.enabled": True
-        })
+        try:
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_experimental_option("prefs", {
+            "download.default_directory": directory_chrome, 
+            "download.prompt_for_download": False,
+            "download.directory_upgrade": True,
+            "safebrowsing.enabled": True
+            })
 
-        driver = webdriver.Chrome(executable_path = ChromeDriverManager().install(), chrome_options=chrome_options)
-        logger.info("Opening Chrome")
-        return driver
-    
-    except Exception:
-        logger.exception("Chrome driver doesn't work")
-        pass
+            driver = webdriver.Chrome(executable_path = ChromeDriverManager().install(), chrome_options=chrome_options)
+            logger.info("Opening Chrome")
+            return driver
+        
+        except Exception:
+            logger.exception("Chrome driver doesn't work")
+            pass
 
-    try:
-        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
-        logger.info("Opening Edge")
-        return driver
-    except Exception:
-        logger.exception("Edge driver doesn't work")
-        pass
-    # except:
-    #     logger.error("No driver found")
-    #     return None
+        try:
+            driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+            logger.info("Opening Edge")
+            return driver
+        except Exception:
+            logger.exception("Edge driver doesn't work")
+    except:
+        logger.error("No driver found")
+        return None
 
 
 def get_subTree(especes):
@@ -121,10 +120,10 @@ def subtree_from_newick(tree):
 
 
 def build_tree(species):
-        list_ID = get_taxid(species)
-        tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
-        tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
-        return tree
+    list_ID = get_taxid(species)
+    tree = ncbi.get_topology((list_ID), intermediate_nodes = True)
+    tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+    return tree
 
 
 if  __name__ == "__main__":

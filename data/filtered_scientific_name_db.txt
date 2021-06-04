@@ -21,6 +21,7 @@ Allium cepa	Oignon jaune
 Allium cepa	Oignons
 Allium cepa	oignon jaune
 Allium cepa	oignon rouge
+Allium cepa	Échalotes
 Allium chinense	Oignon de Chine
 Allium fistulosum	Ciboule
 Allium sativum	Ail
@@ -134,7 +135,6 @@ Bos taurus	Collier de veau
 Bos taurus	Crème
 Bos taurus	Crème fraiche
 Bos taurus	Crème fraîche
-Bos taurus	Cr譥 frae 鰡isse
 Bos taurus	Côte de boeuf
 Bos taurus	Côte découverte de veau
 Bos taurus	Côte première de veau
@@ -243,6 +243,7 @@ Canna indica	Canna
 Cantharellus cibarius	Girolle
 Capparis rupestris	Câprier des rochers
 Capparis spinosa	Câpre
+Capparis spinosa	câpres
 Capra hircus	Cabri
 Capra hircus	Chèvre
 Capra hircus	Haut de côte de chevreau
@@ -270,6 +271,7 @@ Carum carvi	Anis des Vosges
 Carum carvi	Carvi
 Carum carvi	Cumin des prés
 Cassia fistula	Cassia
+Castanea	Marrons
 Castanea	marrons
 Castanea crenata	châtaignier du Japon
 Castanea sativa	Châtaigne
@@ -368,8 +370,10 @@ Cyperus esculentus	Souchet
 Cyprinus carpio	Carpe Koï
 Dactylopius coccus	Carmin
 Daucus carota	Carotte
+Daucus carota	Carottes
 Dikarya	Champignon
 Dikarya	Champignon de paris
+Dikarya	Champignons
 Dikarya	champignon
 Dimocarpus longan	Longane
 Dioscorea alata	Igname
@@ -483,6 +487,7 @@ Katsuwonus pelamis	Thon
 Lablab purpureus	Pois de Senteur
 Lactuca sativa	Salade
 Lactuca sativa	Salade des jardins
+Lactuca sativa	Salades
 Lactuca sativa longifolia	Laitue romaine
 Lactuca virosa	Laitue
 Lagenaria leucantha	Gourde
@@ -750,6 +755,7 @@ Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	Sucre
+Saccharum	Sucre en poudre
 Saccharum	Sucre semoule
 Saccharum	Sucre vanillé
 Saccharum	sucre
@@ -797,6 +803,7 @@ Smallanthus sonchifolius	Yacón
 Smyrnium olusatrum	Maceron
 Soja max	Soja
 Solanum betaceum	Tamarillo
+Solanum lycopersicum	Coulis de tomate
 Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Pulpe de tomate
 Solanum lycopersicum	Purée de tomate
@@ -823,6 +830,7 @@ Sorghum bicolor	Sorgho
 Sparus aurata	Daurade royale
 Sparus aurata	Dorade
 Sparus aurata	Dorade royale
+Spinacia oleracea	Épinards
 Spinacia oleracea	épinard
 Spinacia oleracea	épinards
 Spondias dulcis	Prune de Cythère
@@ -952,6 +960,7 @@ Vigna unguiculata sesquipedalis	Dolique asperge
 Vitis	Vin blanc
 Vitis	Vin blanc sec
 Vitis	Vin rouge
+Vitis	Vinaigre balsamique
 Vitis	vin rouge
 Vitis rotundifolia	Raisin
 Vitis rotundifolia	Vigne à feuilles rondes

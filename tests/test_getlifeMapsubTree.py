@@ -9,3 +9,10 @@ def test_getTaxid():
     for sp in species:
         assert isinstance(sp, int)
         assert len(str(sp)) == 5
+
+
+def test_buildTree():
+    species = {'mâche': 'Valerianella locusta', 'genièvre': 'Juniperus communis'}
+    tree = lm.build_tree(species)
+    assert isinstance(tree, str)
+    assert ";" in tree
