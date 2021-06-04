@@ -70,7 +70,10 @@ class MainWindow(tk.Tk):
 
             url = self.url_entry.get()
             recipes_dict[url] = []
-            self.url_process(recipes_dict)
+            name_recipe = get_ing.get_title(url)
+            filename = "_" + name_recipe + ".tsv"
+            filename =filename.replace(" ", "_")
+            self.url_process(recipes_dict, filename)
 
             
         submit = ctk.CTkButton(master = submit_buttons_frame, text = 'Entrer', bg_color = "#2a9d8f", \
@@ -81,16 +84,19 @@ class MainWindow(tk.Tk):
 
     # multi-recipe
         def multi_recipe_func():
-            filename = filedialog.askopenfilename(parent = self, title = "multi-recette")
+            file_name = filedialog.askopenfilename(parent = self, title = "multi-recette")
             recipes_dict = {}
             
-            if filename != ():
-                with open(filename, "r", encoding="utf-8") as f:
+            if file_name != ():
+                with open(file_name, "r", encoding="utf-8") as f:
                     list_url = f.readlines()
                     for url in list_url:
                         recipes_dict[url.replace("\n", "")] = []
             
-            self.url_process(recipes_dict)
+            filename = file_name.split("/")
+            filename = "_" + filename[-1] + ".tsv"
+            filename = filename.replace(" ", "_")
+            self.url_process(recipes_dict, filename)
 
 
         multirecipe_button = ctk.CTkButton(master = submit_buttons_frame, text = "+", bg_color = "#2a9d8f", \
@@ -176,7 +182,7 @@ class MainWindow(tk.Tk):
         self.logo_label.pack(side = "right", padx = 20, anchor = "center")
 
 
-    def url_process(self, recipes_dict):
+    def url_process(self, recipes_dict, filename):
         '''
         pour tester si l'url est valide, si c'est le cas il ouvre une nouvelle fenêtre pour 
         demander les informations manquantes ou sinon directement pour afficher les résultats,
@@ -247,7 +253,7 @@ class MainWindow(tk.Tk):
         
         else:
             try:
-                self.missing_info_window(recipes_dict)
+                self.missing_info_window(recipes_dict, filename)
                 logger.info("Open missing information window")
                 self.iconify()
             except:
@@ -276,13 +282,13 @@ class MainWindow(tk.Tk):
         self.results = tk.Toplevel(self)
         self.app = Results(ingredients, species, self.results, self.url_entry.get(), dict_nutrition, dry_matter_dico)
 
-    def missing_info_window(self, recipes_dict):
+    def missing_info_window(self, recipes_dict, filename):
         '''
         Ouvre la fenetre pour rajouter les informations manquantes
         '''
 
         self.missing = tk.Toplevel(self)
-        self.app = MissingPage(self.missing, recipes_dict)
+        self.app = MissingPage(self.missing, recipes_dict, filename)
 
 
 
@@ -330,7 +336,7 @@ class MissingPage:
     Creation de la fenetre pour recuperer les informations manquantes
     '''
 
-    def __init__(self, missing_window, recipes_dict):
+    def __init__(self, missing_window, recipes_dict, filename):
         # self.missing_window = missing_window
 
     # window setting 
@@ -366,7 +372,7 @@ class MissingPage:
         main_frame.grid_columnconfigure(0, weight = 1)
 
         for recipe in list_recipe:
-            frame = containerFrame(main_frame, self, missing_window, recipe, recipes_dict, list_recipe)
+            frame = containerFrame(main_frame, self, missing_window, recipe, recipes_dict, list_recipe, filename)
             self.frames[recipe[0]] = frame
             frame.grid(row = 0, column = 0, sticky = "nsew")
 
@@ -377,7 +383,7 @@ class MissingPage:
         logger.info("Show {} frame".format(frame_name))
 
    
-def results_window_from_missing_window(self, window, recipes_dict): 
+def results_window_from_missing_window(self, window, recipes_dict, filename): 
     '''
     Ouvre la fenetre des resultats.
     '''  
@@ -395,7 +401,32 @@ def results_window_from_missing_window(self, window, recipes_dict):
             if ing not in species.keys():
                 species[ing] = "-"
 
+
+
         recipes_dict[recipe] = [recipes_dict[recipe][0], species, recipes_dict[recipe][2], drym]
+        
+    header = ["recipe_name", "ingredients", "quantity", "unit", "url"]
+    with open(filename, "w") as bkp:
+        header_line = ""
+        for column in header:
+            header_line += column + "\t"
+        if header_line.endswith("\t"):
+            header_line = header_line[:-1]
+        bkp.write(header_line + "\n")
+
+        for recipe in recipes_dict:
+            recipe_name = get_ing.get_title(recipe)
+            ingredients = recipes_dict[recipe][0]
+            for ing in ingredients:
+                qty = ingredients[ing][1]
+                unit = ingredients[ing][2][0]
+                line = recipe_name + "\t" + ing + "\t" + qty + "\t" + unit + "\t" + recipe
+                bkp.write(line + "\n")
+
+        
+
+    # for recipe in recipes_dict:
+
 
     self.results = tk.Toplevel(self)
     self.app = Results(self.results, recipes_dict)
@@ -403,7 +434,7 @@ def results_window_from_missing_window(self, window, recipes_dict):
 
 
 class containerFrame(tk.Frame):
-    def __init__(self, parent, controller, window, recipe, recipes_dict, list_recipe):
+    def __init__(self, parent, controller, window, recipe, recipes_dict, list_recipe, filename):
         tk.Frame.__init__(self, parent)
         self.list_recipe = list_recipe
         self.controller = controller
@@ -416,7 +447,7 @@ class containerFrame(tk.Frame):
         self.frames = {}
 
         for F in (MissingSpeciesPage, MissingQuantitiesPage): 
-            frame = F(main_frame, self, window, recipe, recipes_dict)
+            frame = F(main_frame, self, window, recipe, recipes_dict, filename)
             self.frames[F] = frame
             frame.grid(row = 0, column = 0, sticky = "nsew")
 
@@ -443,7 +474,7 @@ class containerFrame(tk.Frame):
 
 class MissingSpeciesPage(tk.Frame):
 
-    def __init__(self, parent, controller, window, recipe, recipes_dict):
+    def __init__(self, parent, controller, window, recipe, recipes_dict, filename):
         tk.Frame.__init__(self, parent)
         self.config(bg = "#2a9d8f")
 
@@ -574,7 +605,7 @@ class MissingSpeciesPage(tk.Frame):
         height = 40, corner_radius = 20, command = next_button_func)
 
         def finish_button_func():
-            results_window_from_missing_window(self, window, recipes_dict)
+            results_window_from_missing_window(self, window, recipes_dict, filename)
 
         finish_button = ctk.CTkButton(master = final_buttons_frame, text = "Terminer", text_font = ("Open Sans", 20, "bold"), \
         bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
@@ -611,7 +642,7 @@ class MissingSpeciesPage(tk.Frame):
 
 class MissingQuantitiesPage(tk.Frame):
 
-    def __init__(self, parent, controller, window, recipe, recipes_dict):
+    def __init__(self, parent, controller, window, recipe, recipes_dict, filename):
         tk.Frame.__init__(self, parent)
         self.config(bg = "#2a9d8f")
 
@@ -743,7 +774,7 @@ class MissingQuantitiesPage(tk.Frame):
                 if caller == "next_button":
                     controller.change_container(recipe, "next_button")
                 elif caller == "end_button":
-                    results_window_from_missing_window(self, window, recipes_dict)
+                    results_window_from_missing_window(self, window, recipes_dict, filename)
 
 
         top_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")

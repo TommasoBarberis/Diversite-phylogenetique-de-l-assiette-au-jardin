@@ -678,7 +678,6 @@ Pimenta dioica	Grand piment
 Pimpinella anisum	Anis vert
 Pimpinella anisum	Boucage anis
 Pinus pinea	Pignons de pin
-Piper nigrum	
 Piper nigrum	Poivre
 Piper nigrum	Poivre noir
 Pistacia vera	Pistache

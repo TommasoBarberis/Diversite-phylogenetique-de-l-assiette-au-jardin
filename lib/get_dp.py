@@ -62,10 +62,13 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
      presentes dans la recette avec la metrique MDP proposee par Webb en 2002, en utilisant les quantites de 
      matiere seche.
     """
+    del_sp = [] # it allows to delete species whose taxaid isn't found
     for ing in species:
         sp_id = lm.get_taxid({"ing": species[ing]})
         if sp_id == []:
-            del species[sp]
+            del_sp.append(ing)
+    for ing in del_sp:
+        del species[ing]
 
     species_list = list(filter(("-").__ne__, species.values()))    
 
@@ -76,14 +79,15 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
         logger.exception("Some species are not found")
         print("return in except")
         return "NA"
-        
+    
+
     wpd = 0 # weighted phylogenetic diversity
 
     if len(species) == 0:
         wpd = "NA"
     elif len(species) == 1:
         for sp in species:
-            wpd = dict_sp_drym[sp][0]
+            wpd = dict_sp_drym[species[ing]][0]
     else:        
         weight_sum = 0
         for ing in species:
@@ -95,9 +99,9 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
                     mpd += tree.get_distance(species[ing], leaf)
             
             try:
-                weight = float(dict_sp_drym[ing][0])
-            except:
-                logger.info("The ingredients '{}' has not a valid quantity of dry matter".format(ing))
+                weight = float(dict_sp_drym[species[ing]][0])
+            except Exception:
+                logger.exception("The ingredients '{}' has not a valid quantity of dry matter".format(ing))
                 return "NA"
             mpd = (mpd / (len(species) - 1)) * weight
             weight_sum += weight

@@ -13,7 +13,7 @@ def test_phylogeneticDiversity():
 def test_weightedPhylogeneticDiversity():
     tree = "((((((((((((((((((((((((((((Bos taurus)Bos)Bovinae)Bovidae)Pecora)Ruminantia)Artiodactyla)Laurasiatheria)Boreoeutheria)Eutheria)Theria)Mammalia,(((((((((((((((Gallus gallus)Gallus)Phasianinae)Phasianidae)Galliformes)Galloanserae)Neognathae)Aves)Coelurosauria)Theropoda)Saurischia)Dinosauria)Archosauria)Archelosauria)Sauria)Sauropsida)Amniota)Tetrapoda)Dipnotetrapodomorpha)Sarcopterygii)Euteleostomi)Teleostomi)Gnathostomata)Vertebrata)Craniata)Chordata)Deuterostomia)Bilateria)Eumetazoa)Metazoa)Opisthokonta,(((((((((((((((((((Prunus domestica)Prunus)Amygdaleae)Amygdaloideae)Rosaceae)Rosales)fabids)rosids)Pentapetalae)Gunneridae)eudicotyledons)Mesangiospermae)Magnoliopsida)Spermatophyta)Euphyllophyta)Tracheophyta)Embryophyta)Streptophytina)Streptophyta)Viridiplantae)Eukaryota);"
     species = {'Mirabelle': 'Prunus domestica', 'Beurre': 'Bos taurus', 'Oeuf': 'Gallus gallus'}
-    dict_sp_drym = {'Mirabelle': [164.25, 'g'], 'Beurre': [42.3, 'g'], 'Oeuf': [13.03, 'g']}
+    dict_sp_drym = {'Prunus domestica': [164.25, 'g'], 'Bos taurus': [42.3, 'g'], 'Gallus gallus': [13.03, 'g']}
 
     wpd = gdp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
     assert type(wpd) is float
