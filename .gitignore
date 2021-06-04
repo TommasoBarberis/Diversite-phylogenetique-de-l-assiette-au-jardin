@@ -12,3 +12,4 @@ Pipfile.lock
 assets/figures/*
 taxdump.tar.gz
 data/.~lock.Table_Ciqual_2020_FR_2020_07_07.xls#
+.Rproj.user

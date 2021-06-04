@@ -5,7 +5,7 @@ cd $script_dir
 
 if [ $# == 0 ];then
     # display program help
-    cat help
+    cat $script_dir/cli/help
 else
     if [ $1 == "-f" ] || [ $1 == "-u" ]; then
         echo -e "## check pipenv installation"
@@ -53,7 +53,7 @@ else
         fi
     
     elif [ $1 == "--help" ]; then
-        cat help
+        cat $script_dir/cli/help
     else
         echo -e "err: unrecognized command \'$1\'"
     fi
