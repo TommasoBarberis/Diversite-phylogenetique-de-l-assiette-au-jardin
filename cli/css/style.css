@@ -37,5 +37,6 @@ html, body {
 
 .recipe-info {
     font-size: 16pt;
-    padding: 0%;
+    padding: 20px;
+    padding-bottom: 40px;
 }

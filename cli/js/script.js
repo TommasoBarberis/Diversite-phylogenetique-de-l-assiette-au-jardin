@@ -1,6 +1,5 @@
 function onLoad() {
     let gitlabButton = document.getElementById("gitlab_button")
-    console.log(gitlabButton)
     gitlabButton.onclick = function() {
         window.open("https://gitlab.com/TommasoBarberis/diversite-phylogenetique-de-l-assiette-au-jardin");
     }

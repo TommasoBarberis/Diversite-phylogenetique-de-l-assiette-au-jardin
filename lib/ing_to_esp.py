@@ -36,7 +36,7 @@ def search_in_dict(correspondences, dicto_esp, liste_ing):
         elif k.endswith("s"):
             k = k[0:-1]
             if k in correspondences.keys():
-                dicto_esp[k] = correspondences[k]
+                dicto_esp[k+"s"] = correspondences[k]
     return dicto_esp
 
 

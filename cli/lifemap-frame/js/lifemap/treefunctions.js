@@ -5,10 +5,13 @@
 
 /*
 	this DisplayTaxids() function is the main one. It will display the taxids required.
-	zoom=true => zoom to the taxids;
-	marks=true => add markers;
-	tree=true => draw the tree;
-	clickableMarkers=[true]false => if true, markers become clickable and they open a modal box with information.
+	zoom=[true]false => zoom to the taxids;
+	marks=[true]false => add markers;
+	tree=[true]false => draw the tree;
+	clickableMarkers=[true]false => if true, markers become clickable and they open a modal box with information;
+	colorLine=[orange] => color of tree line, you can insert a valid color name (ex. red, green, etc) or an hex color code but without the "#" character
+	opacityLine=[0.6] => float between 0 and 1 that define opacity of the tree line;
+	weightLine=[6] => int that the define the weight of the tree line;
 */
 
 function onlyUnique(value, index, self) { 
@@ -16,7 +19,7 @@ function onlyUnique(value, index, self) {
 	return self.indexOf(value) === index;
 }
 
-var DisplayTaxids = function(taxids, zoom=false, marks=false, tree=false, clickableMarkers) {
+var DisplayTaxids = function(pin1, taxids, zoom=false, marks=false, tree=false, clickableMarkers, colorLine, opacityLine, weightLine) {
 	taxids = taxids.filter( onlyUnique );
 	taxid = "(" + taxids.map(el => el.trim()).join(" ") + ")";
 
@@ -52,14 +55,15 @@ var DisplayTaxids = function(taxids, zoom=false, marks=false, tree=false, clicka
 				map.addLayer(markers)
 			}
 			if (tree) {
-				allRoutes(taxid).then(function(resu, lang) {
+
+				allRoutes(taxid, colorLine, opacityLine, weightLine).then(function(resu) {
 						var RESUFINAL = [];
 						var RESUROUTES = [];
 						for (i=0;i<resu.length; i++) {
 							RESUFINAL[i] = resu[i].taxid[0]
 							RESUROUTES[i] = resu[i].taxid.concat(resu[i].ascend)
 						}
-						getmultiRoute(RESUROUTES, lang);
+						getmultiRoute(RESUROUTES, colorLine, opacityLine, weightLine);
 				})
 			}
 			if (clickableMarkers) {
@@ -89,7 +93,7 @@ function allRoutes(multiTaxid) {
 }
 
 
-function getmultiRoute(multiA, lang) {
+function getmultiRoute(multiA, colorLine, opacityLine, weightLine) {
 	var alreadymet=[];
 	var NEW=[];
 	for (i=0;i<multiA.length;i++) {
@@ -105,7 +109,7 @@ function getmultiRoute(multiA, lang) {
 		}
 	}
 	//this lists all required taxid, each once only. From those we will get lat/lon coordinates
-	var URL_PREFIX_FINAL = lang=="fr" ? "http://lifemap-fr.univ-lyon1.fr/solr/taxo/select?q=taxid:(" : "http://lifemap.univ-lyon1.fr/solr/taxo/select?q=taxid:(";
+	var URL_PREFIX_FINAL = "http://"+ServerAddress+"/solr/taxo/select?q=taxid:(";
 
 	var URL_SUFFIX = ")&wt=json&rows=10000";
 	var URL = URL_PREFIX_FINAL + alreadymet.join(' ') + URL_SUFFIX;
@@ -130,7 +134,7 @@ function getmultiRoute(multiA, lang) {
 					else { NEWLL[i][j]=DictoLL[NEW[i][j]]; }
 				}
 			}
-			multipolyline = L.polyline(NEWLL, {color: 'orange', opacity:0.6, weight:6, clickable:false}).addTo(map);
+			multipolyline = L.polyline(NEWLL, {color: colorLine, opacity: opacityLine, weight: weightLine}).addTo(map);
 		},
 		dataType : 'jsonp',
 		jsonp : 'json.wrf'

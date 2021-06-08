@@ -61,7 +61,6 @@ def get_title(url):
 
 
 def search_in_default_mass(ingredients):
-    print(ingredients)
     for ing in ingredients:
         if ingredients[ing][2][1] == "" and (ingredients[ing][1] != '' and ingredients[ing][1] != "NA"):
             with open("filtering/default_mass.txt", "r") as f:
@@ -72,8 +71,11 @@ def search_in_default_mass(ingredients):
                     if ing.capitalize() == ing_mass[0]:
 
                         number = ingredients[ing][1]
-                        qty = int(number) * int(ing_mass[1].replace("\n", ""))
-                        ingredients[ing] = [[ing, ing], str(qty), ["g", "g"]]
+                        try:
+                            qty = int(number) * int(ing_mass[1].replace("\n", ""))
+                            ingredients[ing] = [[ing, ing], str(qty), ["g", "g"]]
+                        except:
+                            pass
     return ingredients
 
 
@@ -122,7 +124,7 @@ def get_marmiton(soup):
                    
         if len(ingredients) != 0:
             logger.debug("Ingredient parsing, parser 1, DONE")
-            return ingredients   
+            return ing_complete(soup, ingredients)
     except Exception:
         logger.exception("Error in ingredient parsing, parser 1 failed")
     
@@ -144,7 +146,7 @@ def get_marmiton(soup):
 
         if len(ingredients) != 0:
             logger.debug("Ingredient parsing, parser 2, DONE")
-            return ingredients
+            return ing_complete(soup, ingredients)
     except Exception:
         logger.exception("Error in ingredient parsing, parser 2 failed")
 
@@ -178,11 +180,29 @@ def get_marmiton(soup):
 
         if len(ingredients) != 0:
             logger.debug("Ingredient parsing, parser 3, DONE")
-            return ingredients
+            return ing_complete(soup, ingredients)
 
 
     except Exception:
         logger.exception("Error in ingredient parsing, parser 3 failed")
+
+def ing_complete(soup, ingredients):
+    new_dict = {}
+    for ing in ingredients:
+        if ing != "":
+            new_dict[ing] = ingredients[ing]
+    ingredients = new_dict
+
+    try:
+        og_description = soup.findAll("meta", {"property": "og:description"})
+        ing_list = og_description[0]["content"].split(", ")
+        for ing in ing_list:
+            if ing not in ingredients.keys():
+                ingredients[ing] = [[ing, ing], "NA", ["", ""]]
+    except:
+        pass
+    return ingredients
+
 
 
 if __name__ == "__main__":
