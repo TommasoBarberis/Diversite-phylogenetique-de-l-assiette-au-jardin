@@ -13,8 +13,6 @@ from ete3 import NCBITaxa
 import os, sys, inspect
 import logging
 
-# TODO: function that allow to save input data (in missing quantities and species pages)
-
 ctk.set_appearance_mode("System")
 
 logger = logging.getLogger("GUI.py")
@@ -88,15 +86,15 @@ class MainWindow(tk.Tk):
             recipes_dict = {}
             
             if file_name != ():
+                # parse list of URLs
                 with open(file_name, "r", encoding="utf-8") as f:
                     list_url = f.readlines()
                     for url in list_url:
                         recipes_dict[url.replace("\n", "")] = []
             
-            filename = file_name.split("/")
-            filename = "_" + filename[-1] + ".tsv"
-            filename = filename.replace(" ", "_")
-            self.url_process(recipes_dict, filename)
+                filename = file_name.replace("/", "_").replace(" ", "_")
+                filename = "_" + filename[-1] + ".tsv"
+                self.url_process(recipes_dict, filename)
 
 
         multirecipe_button = ctk.CTkButton(master = submit_buttons_frame, text = "+", bg_color = "#2a9d8f", \
@@ -105,11 +103,64 @@ class MainWindow(tk.Tk):
         text_color = "#5aa786")
         multirecipe_button.pack(side = "left", expand = 1, anchor = "e", padx = 10)
 
-        multi_label = tk.Label(submit_buttons_frame, text = "multi-recette", font = ("Open Sans", 14, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
+        multi_label = tk.Label(submit_buttons_frame, text = "multi-recette", font = ("Open Sans", 14, "bold"), \
+            bg = "#2a9d8f", fg = "#f0efeb")
         multi_label.pack(side = "right", anchor = "w")
         
-        submit_buttons_frame.pack(side = "top", anchor = "center")
+        submit_buttons_frame.pack(side = "top", anchor = "center", pady = 20)
 
+
+        def open_tsv():
+            file_name = filedialog.askopenfilename(parent = self, title = "open tsv file")
+            recipes_dict = {}
+            
+            if file_name != ():
+                # parse the TSV file; TODO: control point
+                with open(file_name, "r", encoding="utf-8") as f:
+                    lines = f.readlines()[1:] # skip the header
+                    n_fields = len(lines[0].split("\t"))
+                    if n_fields == 5:
+                        prev_key = lines[0].split("\t")[4].replace("\n", "")
+                    elif n_fields == 4:
+                        prev_key = lines[0].split("\t")[0]
+
+                    ingredients = {}
+                    for line in lines:
+                        fields = line.split("\t")
+                        name_recipe = fields[0]
+                        ing = fields[1]
+                        qty = fields[2]
+                        unit = fields[3]
+                        url = fields[4].replace("\n", "")
+                        val =[[ing, ing], qty, [unit, unit]]
+
+                        if n_fields == 5:
+                            key = url
+                        elif n_fields == 4:
+                            key = name_recipe
+
+                        if key != prev_key:
+                            recipes_dict[prev_key] = [ingredients]
+                            ingredients = {}
+                        else:
+                            ingredients[ing] = val
+                        prev_key = key
+
+                    recipes_dict[prev_key] = ingredients
+
+                filename = file_name.replace("/", "_").replace(" ", "_")
+                filename = "_" + filename + ".tsv"
+                self.url_process(recipes_dict, filename)
+
+        tsv_frame = tk.Frame(self.main_frame, bg = "#2a9d8f", height = 50)
+        tsv_button = ctk.CTkButton(master = tsv_frame, text = "tsv", bg_color = "#2a9d8f", \
+        fg_color = "#f0efeb", command = open_tsv, width = 80, height = 44, \
+        corner_radius = 25, text_font = ("Open Sans", 20, "bold"), hover_color = "#B7B7A4", \
+        text_color = "#5aa786")
+        tsv_label = tk.Label(tsv_frame, text = "Entrer une recette au format .tsv", font = ("Open Sans", 14, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
+        tsv_button.pack(side = "left", expand = 1, anchor = "e", padx = 10)
+        tsv_label.pack(side = "right", expand = 1, anchor = "e", padx = 10)
+        tsv_frame.pack(side = "bottom", anchor = "center", pady = 10)
 
     #  utility buttons
         bottom_frame = tk.Frame(self, bg = "#2a9d8f")
@@ -172,14 +223,14 @@ class MainWindow(tk.Tk):
 
     # logo
         self.logo = Image.open(r"assets/logo.png")
-        self.logo = self.logo.resize((200, 200), Image.ANTIALIAS)
+        self.logo = self.logo.resize((170, 170), Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(self.logo)
         self.logo_label = tk.Label(bottom_frame, image = self.logo, bg = "#2a9d8f")
 
         self.main_frame.pack(side = "top", fill = "both", expand = 1, anchor = "center")
         bottom_frame.pack(side = "bottom", fill = "both", expand = 1)
         button_frame.pack(side = "left", fill = "both", expand = 1, anchor = "s")
-        self.logo_label.pack(side = "right", padx = 20, anchor = "center")
+        self.logo_label.pack(side = "right", padx = 20, anchor = "n")
 
 
     def url_process(self, recipes_dict, filename):
@@ -195,30 +246,37 @@ class MainWindow(tk.Tk):
         counter = 1
 
         for url in recipes_dict:
-
-            try:
-                ingredients = get_ing.process(url)
-           
-            except Exception:
-                logger.exception("{} url is wrong".format(url))
-
-                if calframe[1][3] == "mono_recipe_func":
-                    self.error_window("L'URL saisi est incorrect.")
-                elif calframe[1][3] == "multi_recipe_func":
-                    self.error_window("L'URL à la ligne numéro {} est incorrect.".format(counter))
-                    break
+            if recipes_dict[url] != []:
+                try:
+                    ingredients = recipes_dict[url][0]
+                except:
+                    pass
+                # print(ingredients)
+                recipes_dict[url] = []
+            else:
+                try:
+                    ingredients = get_ing.process(url)
             
-            counter += 1
-            logger.info("Processing: " + url)
+                except Exception:
+                    logger.exception("{} url is wrong".format(url))
 
-            
-            try:
-                assert ingredients is not None
-            except AssertionError as err:
-                logger.exception(err)
-                logger.error("Parse error")
-                sys.exit()
-                self.destroy()
+                    if calframe[1][3] == "mono_recipe_func":
+                        self.error_window("L'URL saisi est incorrect.")
+                    elif calframe[1][3] == "multi_recipe_func":
+                        self.error_window("L'URL à la ligne numéro {} est incorrect.".format(counter))
+                        break
+                
+                counter += 1
+                logger.info("Processing: " + url)
+
+                
+                try:
+                    assert ingredients is not None
+                except AssertionError as err:
+                    logger.exception(err)
+                    logger.error("Parse error")
+                    sys.exit()
+                    self.destroy()
 
             species = ing_to_esp.recherche_globale(ingredients)
             dict_nutrition = ing_properties.get_dict_nut(ingredients)
