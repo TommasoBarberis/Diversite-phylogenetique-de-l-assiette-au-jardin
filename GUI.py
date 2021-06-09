@@ -65,12 +65,12 @@ class MainWindow(tk.Tk):
         submit_buttons_frame = tk.Frame(self.main_frame, bg = "#2a9d8f", height = 50)
         
     # mono-recipe
+        recipes_dict = {}
         def mono_recipe_func():
             recipes_dict = {}
-
             url = self.url_entry.get()
             recipes_dict[url] = []
-            name_recipe = get_ing.get_title(url)
+            name_recipe = get_ing.get_title(url).replace("/", "")
             filename = "_" + name_recipe + ".tsv"
             filename =filename.replace(" ", "_")
             self.url_process(recipes_dict, filename)
@@ -840,7 +840,7 @@ class Results:
             info_frame = tk.Frame(main_frame, bg = "#2a9d8f")
 
         # recipe's name 
-            name_recipe = get_ing.get_title(url_recipe)
+            name_recipe = get_ing.get_title(url_recipe).replace("/", "")
             titles[name_recipe] = url_recipe
 
             recipe_label = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 22, "bold"), \

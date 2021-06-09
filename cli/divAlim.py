@@ -43,58 +43,56 @@ html_name = sys.argv[3] + "/" + file_name.replace(" ", "_") + ".html"
 
 for url in recipes_dict:
     # Test if the recipe come from Marmiton
-    domain = urlparse(url).netloc
-    if domain != "www.marmiton.org":
-        print("err: invalid domain, please take a recipe from marmiton.org")
-        logger.error("{} has invalid domain".format(url))
+    # domain = urlparse(url).netloc
+    # print(domain)
+    # if domain != "www.marmiton.org":
 
-    else:
-        try:
-            logger.info("Parsing {}".format(url))
-            ingredients = get_ing.process(url)
-        except Exception:
-            if sys.argv[1] == "-u":
-                print("err: incorrect url: {}".format(url))
-            if sys.argv[1] == "-f":
-              print("err: incorrect url at the line: {}".format(counter))
-            logger.exception("Invalid url")
-            sys.exit()
-        
-        counter += 1
+    try:
+        logger.info("Parsing {}".format(url))
+        ingredients = get_ing.process(url)
+    except Exception:
+        if sys.argv[1] == "-u":
+            print("err: incorrect url: {}".format(url))
+        if sys.argv[1] == "-f":
+            print("err: incorrect url at the line: {}".format(counter))
+        logger.exception("Invalid url")
+        sys.exit()
+    
+    counter += 1
 
-        try:
-            assert ingredients is not None
-        except Exception as err:
-            print("err: impossible to parse {}".format(url))
-            logger.exception(err)
-            logger.error("Parse error")
-            sys.exit()
+    try:
+        assert ingredients is not None
+    except Exception as err:
+        print("err: impossible to parse {}".format(url))
+        logger.exception(err)
+        logger.error("Parse error")
+        sys.exit()
+    
+    #generate data
+    species = ing_to_esp.recherche_globale(ingredients)
+    
+    dict_nut = ing_properties.get_dict_nut(ingredients)
+    drym = ing_properties.dry_matter_dict_update(ingredients, dict_nut)
 
-        #generate data
-        species = ing_to_esp.recherche_globale(ingredients)
-        
-        dict_nut = ing_properties.get_dict_nut(ingredients)
-        drym = ing_properties.dry_matter_dict_update(ingredients, dict_nut)
+    name_recipe = get_ing.get_title(url)
+    ing_properties.build_table(ingredients, species, dict_nut, drym, name_recipe.replace(" ", "_")) 
+    
+    tree = get_lifeMap_subTree.build_tree(species)
+    pd = get_dp.phylogenetic_diversity(tree, species)           
+    wpd = get_dp.weighted_phylogenetic_diversity(tree, species, drym)
+    shannon = get_dp.shannon(species, drym)
+    simpson = get_dp.simpson(species, drym)
 
-        name_recipe = get_ing.get_title(url)
-        ing_properties.build_table(ingredients, species, dict_nut, drym, name_recipe.replace(" ", "_")) 
-        
-        tree = get_lifeMap_subTree.build_tree(species)
-        pd = get_dp.phylogenetic_diversity(tree, species)           
-        wpd = get_dp.weighted_phylogenetic_diversity(tree, species, drym)
-        shannon = get_dp.shannon(species, drym)
-        simpson = get_dp.simpson(species, drym)
+    taxids = ""
+    # for ing in species:
+    id_list = get_lifeMap_subTree.get_taxid(species)
+    for taxa_id in id_list:
+        taxids += str(taxa_id) + ","
+    if taxids.endswith(","):
+        taxids = taxids[:-1]
 
-        taxids = ""
-        # for ing in species:
-        id_list = get_lifeMap_subTree.get_taxid(species)
-        for taxa_id in id_list:
-            taxids += str(taxa_id) + ","
-        if taxids.endswith(","):
-            taxids = taxids[:-1]
-
-        recipes_dict[url] = [name_recipe, ingredients, species, dict_nut, drym, pd, wpd, shannon, simpson, taxids]
-        logger.info("URL processed, getting ingredient, species, nutrition data and dry matter information")
+    recipes_dict[url] = [name_recipe, ingredients, species, dict_nut, drym, pd, wpd, shannon, simpson, taxids]
+    logger.info("URL processed, getting ingredient, species, nutrition data and dry matter information")
 
 
 # create a html page to display results
