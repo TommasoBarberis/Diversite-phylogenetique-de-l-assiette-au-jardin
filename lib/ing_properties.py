@@ -97,7 +97,7 @@ def get_dict_nut(dict_ing):
 
 def dry_matter_dict_update(dict_ing, dict_nut):
     dry_matter_dict = {}
-    unit_list = ["g", "kg", "l", "cl"] # ponderable unit measure
+    unit_list = ["g", "kg", "l", "dl", "cl"] # ponderable unit measure
     for ing in dict_ing:
 
         # if: l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est 
@@ -125,6 +125,8 @@ def dry_matter_dict_update(dict_ing, dict_nut):
                     qtt *= 1000
                 elif unit == "cl":
                     qtt *= 10
+                elif unit == "dl":
+                    qtt += 100
 
                 dry_matter = round(qtt - qtt * wat/100,2)
                 dry_matter_dict[ing] = [dry_matter, "g"]

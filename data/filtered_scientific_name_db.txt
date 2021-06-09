@@ -255,9 +255,12 @@ Capreolus capreolus	Viande de Chevreuil
 Capsicum	petit piment
 Capsicum annuum	Chili
 Capsicum annuum	Paprika
+Capsicum annuum	Petit piment
 Capsicum annuum	Piment
 Capsicum annuum	Piment ornemental
 Capsicum annuum	Poivron
+Capsicum annuum	Poivron rouge
+Capsicum annuum	Poivron vert
 Capsicum annuum	Poivrons
 Capsicum annuum	poivre de Cayenne
 Capsicum annuum	poivron rouge
@@ -319,6 +322,7 @@ Citrus ×paradisi	Pamplemousse
 Citrus ×paradisi	Pomélo
 Claytonia perfoliata	Claytone de Cuba
 Cocos nucifera	Coco
+Cocos nucifera	Crème de coco
 Cocos nucifera	Lait de coco
 Cocos nucifera	Noix de coco
 Cocos nucifera	crème de coco
@@ -447,6 +451,7 @@ Garcinia mangostana	Mangoustan
 Garcinia mangostana	mangoustanier
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
 Ginkgo biloba	noyer du Japon
+Glycine max	Sauce soja
 Glycine max	Soja
 Glycine max	sauce soja
 Grifola frondosa	Polypore en touffes
@@ -499,6 +504,7 @@ Laurus nobilis	Laurier-sauce
 Laurus nobilis	feuille de laurier
 Lavandula angustifolia	Lavande
 Lens culinaris	Lentille
+Lens culinaris	Lentilles vertes
 Lens culinaris	lentilles vertes
 Lentinus edodes	Shi take
 Lepidium sativum	Cresson alénois
@@ -577,6 +583,7 @@ Nelumbo nucifera	fève d'Egypte
 Nephelium lappaceum	Ramboutan
 Ocimum basilicum	Basilic
 Ocimum basilicum	Basilic aux sauces
+Ocimum basilicum	Basilic frais
 Ocimum basilicum	basilic frais
 Oenothera biennis	Oenothera
 Oenothera biennis	Œnothère
@@ -606,6 +613,7 @@ Oryctolagus cuniculus	Râble de lapin
 Oryctolagus cuniculus	Saucisse de lapin
 Oryctolagus cuniculus	Viande de lapin
 Oryctolagus cuniculus	Émincé de lapin
+Oryza	Riz rond
 Oryza sativa	Riz
 Oryza sativa	riz rond
 Ovis aries	Agneau
@@ -660,6 +668,7 @@ Phaseolus lunatus	Pois De Sept Ans
 Phaseolus multiflorus	Haricot écarlate
 Phaseolus vulgaris	Haricot
 Phaseolus vulgaris	Haricots de Bourbon
+Phaseolus vulgaris	Haricots verts
 Phaseolus vulgaris	haricot vert
 Phaseolus vulgaris	haricot verts
 Phaseolus vulgaris	haricots vert
@@ -684,6 +693,7 @@ Pimpinella anisum	Anis vert
 Pimpinella anisum	Boucage anis
 Pinus pinea	Pignons de pin
 Piper nigrum	Poivre
+Piper nigrum	Poivre de cayenne
 Piper nigrum	Poivre noir
 Pistacia vera	Pistache
 Pistacia vera	Pistachier
@@ -811,6 +821,7 @@ Solanum lycopersicum	Tomate
 Solanum lycopersicum	Tomates
 Solanum lycopersicum	Tomates cerise
 Solanum lycopersicum	Tomates cerises
+Solanum lycopersicum	Tomates concassées
 Solanum lycopersicum	concentré de tomates
 Solanum lycopersicum	coulis de tomate
 Solanum lycopersicum	purée de tomate

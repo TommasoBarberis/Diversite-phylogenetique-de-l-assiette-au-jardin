@@ -423,11 +423,6 @@ def results_window_from_missing_window(self, window, recipes_dict, filename):
                 line = recipe_name + "\t" + ing + "\t" + qty + "\t" + unit + "\t" + recipe
                 bkp.write(line + "\n")
 
-        
-
-    # for recipe in recipes_dict:
-
-
     self.results = tk.Toplevel(self)
     self.app = Results(self.results, recipes_dict)
     window.withdraw()
@@ -459,13 +454,38 @@ class containerFrame(tk.Frame):
             self.show_frame(MissingQuantitiesPage)
 
 
-    def change_container(self, recipe, caller):
+    def change_container(self, recipe, caller, recipes_dict, window):
+        counter = 0
         if caller == "next_button":
-            index = self.list_recipe.index(recipe) + 1
+            index = self.list_recipe.index(recipe) + 1 # swtich to the following recipe
+
+            url = self.list_recipe[index][0]
+            ing_temp = recipes_dict[url][0]
+            try:
+                species_temp = recipes_dict[url][1][0]
+            except:
+                species_temp = recipes_dict[url][1]
+            counter = len(ing_temp) - len(species_temp)
+
         elif caller == "prev_button":
-            index = self.list_recipe.index(recipe) - 1
-            
+            index = self.list_recipe.index(recipe) - 1 # swtich to the previous recipe
+
+            url = self.list_recipe[index][0]
+            try:
+                drym_temp = recipes_dict[url][3][0]
+            except:
+                drym_temp = recipes_dict[url][3]
+            for ing in drym_temp:
+                if drym_temp[ing] == "NA":
+                    counter += 1
+
+        w = 1000
+        h = 400 + (counter * 30)
+        x = (window.winfo_screenwidth() - w) / 2
+        y = (window.winfo_screenheight() - h) / 2 - 100
+        window.geometry("%dx%d+%d+%d" % (w, h, x, y))
         self.controller.show_deeper_frames(self.list_recipe[index][0])
+
 
     def show_frame(self, frame_name):
         self.frames[frame_name].tkraise()
@@ -498,6 +518,7 @@ class MissingSpeciesPage(tk.Frame):
         
         entries = []
         ingredients = recipes_dict[recipe[0]][0]
+
         try:
             species = recipes_dict[recipe[0]][1][0]
         except:
@@ -590,7 +611,7 @@ class MissingSpeciesPage(tk.Frame):
 
 
         def prev_button_func():
-            controller.change_container(recipe, "prev_button")
+            controller.change_container(recipe, "prev_button", recipes_dict, window)
 
         prev_button = ctk.CTkButton(master = final_buttons_frame, text = "Avant", text_font = ("Open Sans", 20 ,"bold"), \
             bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
@@ -599,6 +620,21 @@ class MissingSpeciesPage(tk.Frame):
 
         def next_button_func():
             controller.show_frame(MissingQuantitiesPage)
+            counter = 0
+            try:
+                drym_temp = recipes_dict[recipe[0]][3][0]
+            except:
+                drym_temp = recipes_dict[recipe[0]][3]
+            counter = 0
+            for ing in drym_temp:
+                if drym_temp[ing] == "NA":
+                    counter += 1
+
+            w = 1000
+            h = 400 + (counter * 30)
+            x = (window.winfo_screenwidth() - w) / 2
+            y = (window.winfo_screenheight() - h) / 2 - 100
+            window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 
         next_button = ctk.CTkButton(master = final_buttons_frame, text = "Suivant", text_font = ("Open Sans", 20, "bold"), \
         bg_color = '#2a9d8f', fg_color = "#f0efeb", width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
@@ -626,18 +662,15 @@ class MissingSpeciesPage(tk.Frame):
             next_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
         elif var == "right":
             prev_button.pack(side = "left", anchor = "sw", padx = 10, pady = 10)
-            finish_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+            if isinstance(dry_matter_dico, list):
+                next_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
+            else:
+                finish_button.pack(side = "right", anchor = "se", padx = 10, pady = 10)
 
         top_frame.pack(side = "top", fill = "x", expand = 1,  anchor = "center")
         data_frame.pack(side = "top", fill = "x", expand = 1, anchor = "center")
         test_button_frame.pack(side = "top", fill = "x", expand = 1, anchor = "n")
         final_buttons_frame.pack(side = "top", fill = "x", expand = 1, anchor = "se")
-
-        w = 1000
-        h = 350 + (counter_line * 20)
-        x = (window.winfo_screenwidth() - w) / 2
-        y = (window.winfo_screenheight() - h) / 2 - 100
-        window.geometry("%dx%d+%d+%d" % (w, h, x, y))
 
 
 class MissingQuantitiesPage(tk.Frame):
@@ -697,7 +730,20 @@ class MissingQuantitiesPage(tk.Frame):
 
 
         def prev_button_func():
+            counter = 0 
             controller.show_frame(MissingSpeciesPage)
+            try:
+                spec_temp = recipes_dict[recipe[0]][1][0]
+            except:
+                spec_temp = recipes_dict[recipe[0]][1]
+            counter = len(recipes_dict[recipe[0]][0]) - len(spec_temp)
+
+            w = 1000
+            h = 400 + (counter * 30)
+            x = (window.winfo_screenwidth() - w) / 2
+            y = (window.winfo_screenheight() - h) / 2 - 100
+            window.geometry("%dx%d+%d+%d" % (w, h, x, y))
+
 
         prev_button = ctk.CTkButton(master = buttons_frame, text = "Avant", text_font = ("Open Sans", 20 ,"bold"), \
             bg_color = '#2a9d8f', fg_color = '#f0efeb', width = 200, hover_color = "#B7B7A4", text_color = "#5aa786", \
@@ -772,7 +818,7 @@ class MissingQuantitiesPage(tk.Frame):
 
             if var:
                 if caller == "next_button":
-                    controller.change_container(recipe, "next_button")
+                    controller.change_container(recipe, "next_button", recipes_dict, window)
                 elif caller == "end_button":
                     results_window_from_missing_window(self, window, recipes_dict, filename)
 
@@ -843,7 +889,7 @@ class Results:
             name_recipe = get_ing.get_title(url_recipe).replace("/", "")
             titles[name_recipe] = url_recipe
 
-            recipe_label = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 22, "bold"), \
+            recipe_label = tk.Label(info_frame, text = name_recipe, font = ("Open Sans", 25, "bold"), \
                 bg = "#2a9d8f", fg = "#f0efeb", justify = "center")
             recipe_label.pack(side = "top", expand = 1, anchor = "center", pady = 20)
 
@@ -963,7 +1009,7 @@ class Results:
             results_frame.grid_columnconfigure(3, weight = 1)
             if len(recipes_dict) > 1:
                 results_frame.pack(expand = 1, fill = "both", anchor = "n")
-            bottom_frame.pack(side = "top", expand = 1, fill = "both", anchor = "center")
+            bottom_frame.pack(side = "top", expand = 1, fill = "both", anchor = "center", pady = 20)
             main_frame.pack(expand = 1, fill = "both", anchor = "center")
 
             temp = recipes_dict[recipe]
