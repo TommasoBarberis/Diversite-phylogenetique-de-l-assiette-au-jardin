@@ -7,5 +7,9 @@ Usage:   divAlim [options] entry
 
 Option:
     -f          take a file of URL of recipes from "Marmiton.org" as entry. One URL for each line. Don't use empty lines.
+    
     -u          take directly a URL as entry.
+    
+    -t          take a tsv file as entry wtih the following fields: recipe's name, ingredient, quantity of the ingredient, unit of the quantity, URL of recipe (optional). It must have the header.
+    
     --help      dislpay this documentation.

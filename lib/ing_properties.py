@@ -200,15 +200,19 @@ def write_tsv(file_name, recipes_dict):
 
             for ing in ingredients:
                 if ing != "":
-                    sp = species[ing]
+                    try:
+                        sp = species[ing]
+                    except:
+                        sp = "NA"
+
                     qty = ingredients[ing][1] + " " + ingredients[ing][2][1]
                     dry_qty = drym[ing]
                     if isinstance(dry_qty, list):
                         dry_qty = str(dry_qty[0]) + " " + dry_qty[1]
-                    water = dict_nut[ing.capitalize()][1]
-                    sugars = dict_nut[ing.capitalize()][2]
-                    lipides =dict_nut[ing.capitalize()][3]
-                    proteins = dict_nut[ing.capitalize()][4]
+                    water = dict_nut[ing.capitalize()][1].replace(",", ".")
+                    sugars = dict_nut[ing.capitalize()][2].replace(",", ".")
+                    lipides =dict_nut[ing.capitalize()][3].replace(",", ".")
+                    proteins = dict_nut[ing.capitalize()][4].replace(",", ".")
 
                     line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(water) \
                         + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(pd) + "\t" \

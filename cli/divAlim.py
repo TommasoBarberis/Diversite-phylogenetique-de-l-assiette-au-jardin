@@ -21,44 +21,100 @@ logger.addHandler(file_handler)
 # weighted phylogenetic diversity, shannon, simpson, list of taxaid
 recipes_dict = {} 
 
-if sys.argv[1]=="-f":
+if sys.argv[1] == "-f":
     file_name = sys.argv[2]
-    if "." in file_name:
-        file_name = file_name[:file_name.rfind(".")]
 
     with open(sys.argv[2], "r", encoding="utf-8") as f:
         list_url = f.readlines()
         for url in list_url:
             recipes_dict[url.replace("\n", "")] = []
+    
+    if "." in file_name:
+        file_name = file_name[:file_name.rfind(".")]
+    if "/" in file_name:
+        file_name = file_name[file_name.rfind("/"):]
 
-elif sys.argv[1]=="-u":
+
+elif sys.argv[1] == "-u":
     url = sys.argv[2]
     file_name = get_ing.get_title(url)
     recipes_dict[url] = []
 
+elif sys.argv[1] == "-t":
+    file_name = sys.argv[2]
+
+    with open(sys.argv[2], "r", encoding="utf-8") as f:
+        lines = f.readlines()[1:] # skip the header
+        n_fields = len(lines[0].split("\t"))
+        if n_fields == 5:
+            prev_key = lines[0].split("\t")[4].replace("\n", "")
+        elif n_fields == 4:
+            prev_key = lines[0].split("\t")[0]
+
+        ingredients = {}
+        for line in lines:
+            fields = line.split("\t")
+            name_recipe = fields[0]
+            ing = fields[1]
+            qty = fields[2]
+            unit = fields[3]
+            url = fields[4].replace("\n", "")
+            val =[[ing, ing], qty, [unit, unit]]
+
+            if n_fields == 5:
+                key = url
+            elif n_fields == 4:
+                key = name_recipe
+
+            if key != prev_key:
+                recipes_dict[prev_key] = [ingredients]
+                ingredients = {}
+            else:
+                ingredients[ing] = val
+            prev_key = key
+
+        recipes_dict[prev_key] = ingredients
+
+    if "." in file_name:
+        file_name = file_name[:file_name.rfind(".")]
+    if "/" in file_name:
+        file_name = file_name[file_name.rfind("/"):]
+
+
 ingredients = None
 counter = 1
-html_name = sys.argv[3] + "/" + file_name.replace(" ", "_") + ".html"
+file_name = file_name.replace(" ", "_")
+try:
+    os.makedirs(sys.argv[3] + "/" + file_name)
+except:
+    print("err: a report for this file/URL already exists")
+    sys.exit()
+os.makedirs(sys.argv[3] + "/" + file_name + "/assets")
+
+html_name = sys.argv[3] + "/" + file_name + "/" + file_name + ".html"
 
 
 for url in recipes_dict:
-    # Test if the recipe come from Marmiton
-    # domain = urlparse(url).netloc
-    # print(domain)
-    # if domain != "www.marmiton.org":
+    if recipes_dict[url] != []:
+        try:
+            ingredients = recipes_dict[url]
+        except:
+            pass
 
-    try:
-        logger.info("Parsing {}".format(url))
-        ingredients = get_ing.process(url)
-    except Exception:
-        if sys.argv[1] == "-u":
-            print("err: incorrect url: {}".format(url))
-        if sys.argv[1] == "-f":
-            print("err: incorrect url at the line: {}".format(counter))
-        logger.exception("Invalid url")
-        sys.exit()
-    
-    counter += 1
+        recipes_dict[url] = []
+    else:
+        try:
+            logger.info("Parsing {}".format(url))
+            ingredients = get_ing.process(url)
+        except Exception:
+            if sys.argv[1] == "-u":
+                print("err: incorrect url: {}".format(url))
+            if sys.argv[1] == "-f":
+                print("err: incorrect url at the line: {}".format(counter))
+            logger.exception("Invalid url")
+            sys.exit()
+        
+        counter += 1
 
     try:
         assert ingredients is not None
@@ -75,13 +131,30 @@ for url in recipes_dict:
     drym = ing_properties.dry_matter_dict_update(ingredients, dict_nut)
 
     name_recipe = get_ing.get_title(url)
+    if name_recipe == "\tRecipe title not found":
+        name_recipe = url
     ing_properties.build_table(ingredients, species, dict_nut, drym, name_recipe.replace(" ", "_")) 
-    
+
     tree = get_lifeMap_subTree.build_tree(species)
-    pd = get_dp.phylogenetic_diversity(tree, species)           
-    wpd = get_dp.weighted_phylogenetic_diversity(tree, species, drym)
-    shannon = get_dp.shannon(species, drym)
-    simpson = get_dp.simpson(species, drym)
+    pd = get_dp.phylogenetic_diversity(tree, species)     
+    dict_sp_drym = {}
+    bool_var = True
+    for ing in species.keys():
+        if species[ing] != "NA":
+            if ing in drym.keys() and drym[ing] != "NA":
+                dict_sp_drym[species[ing]] = drym[ing]
+            else:
+                bool_var = False
+                break
+    
+    if bool_var:
+        wpd = get_dp.weighted_phylogenetic_diversity(tree, species, dict_sp_drym)
+        shannon = get_dp.shannon(species, dict_sp_drym)
+        simpson = get_dp.simpson(species, dict_sp_drym)
+    else:
+        wpd = "NA"
+        shannon = "NA"
+        simpson = "NA"
 
     taxids = ""
     # for ing in species:
@@ -138,6 +211,11 @@ with open(html_name, "w") as html_page:
         if species_not_found == "":
             species_not_found = "-"
 
+        name_recipe = get_ing.get_title(url)
+        if name_recipe == "\tRecipe title not found":   
+            name_recipe = url
+        os.rename(script_dir + "/assets/figures/"+ name_recipe.replace(" ", "_") + ".png", sys.argv[3] + "/" + file_name + "/assets/" + name_recipe.replace(" ", "_") + ".png")
+
         html_page.write(f"""
             <div id={recipes_dict[url][0].replace(" ", "-")} class="recipe-info">
                 <p><b>Name of the recipe: </b>{recipes_dict[url][0]}</p>
@@ -145,7 +223,7 @@ with open(html_name, "w") as html_page:
                 <p><b>Number of ingredients: </b>{len(recipes_dict[url][1])}</p>
                 <p><b>Number of specie found for the ingredients: </b>{len(recipes_dict[url][2])}</p>
                 <p><b>Ingredients that haven't match with a species: </b>{species_not_found}</p>
-                <img src="{script_dir + "/assets/figures/"+ recipes_dict[url][0].replace(" ", "_") + ".png"}">
+                <img src="{"assets/" + name_recipe.replace(" ", "_") + ".png"}">
                 <p><b>Phylogenetic diversity: </b>{recipes_dict[url][5]}</p>
                 <p><b>Weighted phylogenetic diversity: </b>{recipes_dict[url][6]}</p>
                 <p><b>Shannon's index: </b>{recipes_dict[url][7]}</p>

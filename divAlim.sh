@@ -7,7 +7,7 @@ if [ $# == 0 ];then
     # display program help
     cat $script_dir/cli/help
 else
-    if [ $1 == "-f" ] || [ $1 == "-u" ]; then
+    if [ $1 == "-f" ] || [ $1 == "-u" ] || [ $1 == "-t" ]; then
         echo -e "## check pipenv installation"
         if which pipenv >/dev/null; then
             :
@@ -30,7 +30,6 @@ else
 
             if [ $1 == "-f" ]; then
                 # take as entry a txt file
-
                 cd $launch_dir
                 if [ -e $(realpath $2) ]; then
                     # test if the file exist
@@ -43,10 +42,25 @@ else
                 pipenv run python cli/divAlim.py -f $2 $launch_dir $script_dir
 
             cd $script_dir
+
             elif [ $1 == "-u" ]; then
                 # take as entry a URL
                 echo -e "## Launching subshell in virtual environment..."
                 pipenv run python cli/divAlim.py -u $2 $launch_dir $script_dir
+
+            elif [ $1 == "-t" ]; then
+                # take as entry a tsv table
+                cd $launch_dir
+                if [ -e $(realpath $2) ]; then
+                    # test if the file exist
+                    cd $script_dir
+                else
+                    echo "err: $2 doesn't exist or it is an invalid file"
+                fi
+
+                echo -e "## Launching subshell in virtual environment..."
+                pipenv run python cli/divAlim.py -t $2 $launch_dir $script_dir
+
             fi
         else
             echo -e "err: invalid file or URL"

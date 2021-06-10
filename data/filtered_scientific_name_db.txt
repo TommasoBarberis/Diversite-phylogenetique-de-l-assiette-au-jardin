@@ -127,6 +127,7 @@ Borago officinalis	Bourrache
 Bos taurus	Bavette de boeuf
 Bos taurus	Beurre
 Bos taurus	Beurre doux
+Bos taurus	Beurre tendre
 Bos taurus	Blanquette de veau
 Bos taurus	Boeuf
 Bos taurus	Boeuf haché
@@ -149,6 +150,7 @@ Bos taurus	Escalopes de veau
 Bos taurus	Faux-filet de boeuf
 Bos taurus	Filet de boeuf
 Bos taurus	Filet de veau
+Bos taurus	Filet mignon
 Bos taurus	Filet mignon de boeuf
 Bos taurus	Flanchet de veau
 Bos taurus	Fromage râpé
@@ -723,6 +725,7 @@ Prunus domestica	Reine-claude
 Prunus domestica	prunier de l'Islet
 Prunus dulcis	Amande
 Prunus dulcis	Amandier amer
+Prunus dulcis	Poudre d'amandes
 Prunus dulcis	amandes
 Prunus dulcis	poudre d'amandes
 Prunus persica	Brugnon
@@ -766,6 +769,7 @@ Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	Sucre
 Saccharum	Sucre en poudre
+Saccharum	Sucre fin
 Saccharum	Sucre semoule
 Saccharum	Sucre vanillé
 Saccharum	sucre
@@ -813,6 +817,7 @@ Smallanthus sonchifolius	Yacón
 Smyrnium olusatrum	Maceron
 Soja max	Soja
 Solanum betaceum	Tamarillo
+Solanum lycopersicum	Concentré de tomates
 Solanum lycopersicum	Coulis de tomate
 Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Pulpe de tomate

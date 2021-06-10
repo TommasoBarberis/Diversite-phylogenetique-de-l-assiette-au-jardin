@@ -92,8 +92,12 @@ class MainWindow(tk.Tk):
                     for url in list_url:
                         recipes_dict[url.replace("\n", "")] = []
             
+                if "." in file_name:
+                    file_name = file_name[:file_name.rfind(".")]
+                if "/" in file_name:
+                    file_name = file_name[file_name.rfind("/"):]
                 filename = file_name.replace("/", "_").replace(" ", "_")
-                filename = "_" + filename[-1] + ".tsv"
+                filename = "_" + filename + ".tsv"
                 self.url_process(recipes_dict, filename)
 
 
@@ -148,6 +152,10 @@ class MainWindow(tk.Tk):
 
                     recipes_dict[prev_key] = ingredients
 
+                if "." in file_name:
+                    file_name = file_name[:file_name.rfind(".")]
+                if "/" in file_name:
+                    file_name = file_name[file_name.rfind("/"):]
                 filename = file_name.replace("/", "_").replace(" ", "_")
                 filename = "_" + filename + ".tsv"
                 self.url_process(recipes_dict, filename)
@@ -251,7 +259,7 @@ class MainWindow(tk.Tk):
                     ingredients = recipes_dict[url][0]
                 except:
                     pass
-                # print(ingredients)
+
                 recipes_dict[url] = []
             else:
                 try:
@@ -399,7 +407,7 @@ class MissingPage:
 
     # window setting 
         missing_window.title("Informations manquantes")
-        w = 1000
+        w = 1200
         h = 740
         x = (missing_window.winfo_screenwidth() - w) / 2
         y = (missing_window.winfo_screenheight() - h) / 2
@@ -449,10 +457,11 @@ def results_window_from_missing_window(self, window, recipes_dict, filename):
         ingredients = recipes_dict[recipe][0]
 
         species = recipes_dict[recipe][1]
-        if len(species) == 2:
+        if isinstance(species, list):
             species = species[0]
+
         drym = recipes_dict[recipe][3]
-        if len(drym) == 2:
+        if isinstance(drym, list):
             drym = drym[0]
 
         for ing in ingredients:
@@ -1264,7 +1273,7 @@ class Download:
 
     # confirm button
         confirm_button = ctk.CTkButton(master = download_window, text = "Enregistrer", text_font = ("Open Sans", 15, "bold"), \
-            width = 150, height = 40, command = lambda: self.action(file_name, recipes_dict, ), bg_color = "#2a9d8f", fg_color = "#f0efeb", \
+            width = 150, height = 40, command = lambda: self.action(file_name, recipes_dict), bg_color = "#2a9d8f", fg_color = "#f0efeb", \
             hover_color = "#B7B7A4", text_color = "#5aa786", corner_radius = 20)
         confirm_button.pack(pady = 20)
 
