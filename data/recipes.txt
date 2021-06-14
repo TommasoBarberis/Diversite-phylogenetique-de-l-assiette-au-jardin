@@ -73,6 +73,26 @@ Le crumble aux pommes du Chat qui Tousse;https://www.marmiton.org/recettes/recet
 Tarte aux pommes;https://www.marmiton.org/recettes/recette_tarte-aux-pommes_18588.aspx
 Galette des rois à la frangipane;https://www.marmiton.org/recettes/recette_galette-des-rois-a-la-frangipane_20147.aspx
 Véritable moelleux au chocolat;https://www.marmiton.org/recettes/recette_veritable-moelleux-au-chocolat_12825.aspx
+Ramequins fondants au chocolat;https://www.marmiton.org/recettes/recette_ramequins-fondants-au-chocolat_15816.aspx
+Meringue pour les nuls;https://www.marmiton.org/recettes/recette_meringue-pour-les-nuls_36610.aspx
+Pain d'épices;https://www.marmiton.org/recettes/recette_pain-d-epices_11087.aspx
+Pancakes faciles et rapides;https://www.marmiton.org/recettes/recette_pancakes-faciles-et-rapides_81518.aspx
+Pâte à crêpes (des plus raffinées);https://www.marmiton.org/recettes/recette_pate-a-crepes-des-plus-raffinees_49665.aspx
+Panna cotta;https://www.marmiton.org/recettes/recette_panna-cotta_17991.aspx
+Chouquettes;https://www.marmiton.org/recettes/recette_chouquettes_30622.aspx
+Crème de citron (Lemon curd);https://www.marmiton.org/recettes/recette_creme-de-citron-lemon-curd_11210.aspx
+Madeleines au miel;https://www.marmiton.org/recettes/recette_madeleines-au-miel_19756.aspx
+Financier minute (pour utiliser des blancs d'oeuf);https://www.marmiton.org/recettes/recette_financier-minute-pour-utiliser-des-blancs-d-oeuf_17526.aspx
+Tiramisu aux framboises;https://www.marmiton.org/recettes/recette_tiramisu-aux-framboises_28919.aspx
+Baba au rhum express;https://www.marmiton.org/recettes/recette_baba-au-rhum-express_13608.aspx
+Crumble simple;https://www.marmiton.org/recettes/recette_crumble-simple_12173.aspx
+Crème pâtissière;https://www.marmiton.org/recettes/recette_creme-patissiere_35195.aspx
+Cheese cake (gâteau au fromage blanc) inratable;https://www.marmiton.org/recettes/recette_cheese-cake-gateau-au-fromage-blanc-inratable_20518.aspx
+Bavarois aux fraises sur génoise;https://www.marmiton.org/recettes/recette_bavarois-aux-fraises-sur-genoise_58126.aspx
+Tarte amandine aux poires;https://www.marmiton.org/recettes/recette_tarte-amandine-aux-poires_14195.aspx
+Tarte à la rhubarbe rapide;https://www.marmiton.org/recettes/recette_tarte-a-la-rhubarbe-rapide_22715.aspx
+Charlotte aux fruits d'été;https://www.marmiton.org/recettes/recette_charlotte-aux-fruits-d-ete_20546.aspx
+Clafoutis aux cerises express;https://www.marmiton.org/recettes/recette_clafoutis-aux-cerises-express_17365.aspx
 
 ## Autres:
 ratatouille;https://www.marmiton.org/recettes/recette_ratatouille_23223.aspx
