@@ -1,7 +1,6 @@
 ---
 title: "New recipes analysis"
-output:
-  keep_md: TRUE
+output: md_document
 ---
 
 ```{r setup, include=FALSE}
