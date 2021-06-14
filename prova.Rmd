@@ -4,14 +4,14 @@ output: html_notebook
 ---
 
 # Import libraries
-```{r include=TRUE}
+```{r}
 library(naniar)
 library(tidyr)
 library(dplyr)
 ```
 
 # Collect data
-```{r include=TRUE}
+```{r echo=FALSE}
 dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_vege)
 
