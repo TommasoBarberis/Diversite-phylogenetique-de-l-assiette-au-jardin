@@ -4,11 +4,6 @@ Author: "Tommaso"
 output: 
   keep_md: true
 ---
-```{r, echo=FALSE}
-knitr::opts_chunk$set(
-  fig.path = "README_figs/README-"
-)
-```
 
 # Import libraries
 ```{r}
@@ -21,6 +16,49 @@ library(dplyr)
 ```{r results='markup'}
 dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_vege)
+```
+                                                           Recette            Ingrédient 
+ Tourte de Noël végétarienne de Coralie                        : 17   Poivre       : 21  
+ Burger végétarien aux lentilles                               : 15   Oignon       : 19  
+ Ragoût végétarien aux légumes                                 : 15   Sel          : 19  
+ Tarte provençale fine, light, végétarienne, économique, rapide: 15   Huile d'olive: 13  
+ Couscous végétarien facile                                    : 14   Oeuf         : 13  
+ Paëlla végétarienne                                           : 14   Ail          : 12  
+ (Other)                                                       :244   (Other)      :237  
+                  Espèce       Quantité   Matière_sèche      Eau           Glucides    
+ Piper nigrum        : 27   1 g    : 43   0.91 g : 21   Min.   : 0.00   Min.   : 0.00  
+ Allium cepa         : 20   30 g   : 27   1.0 g  : 19   1st Qu.: 9.00   1st Qu.: 2.25  
+ Bos taurus          : 19   200 g  : 19   12.48 g: 11   Median :67.80   Median : 6.25  
+ Gallus gallus       : 17   5 g    : 19   18.96 g:  7   Mean   :53.34   Mean   :15.64  
+ Solanum lycopersicum: 17   120 g  : 18   29.97 g:  7   3rd Qu.:88.20   3rd Qu.:21.40  
+ (Other)             :192   80 g   : 17   (Other):258   Max.   :98.00   Max.   :99.80  
+ NA's                : 42   (Other):191   NA's   : 11   NA's   :10      NA's   :21     
+    Lipides         Protéines      Diversité.phylogénétique Diversité.phylogénétique.pondérée
+ Min.   :  0.00   Min.   : 0.000   Min.   : 72.0            Min.   :13.87                    
+ 1st Qu.:  0.36   1st Qu.: 1.060   1st Qu.:165.0            1st Qu.:17.85                    
+ Median :  0.62   Median : 2.820   Median :202.8            Median :24.71                    
+ Mean   : 13.37   Mean   : 5.368   Mean   :205.1            Mean   :24.61                    
+ 3rd Qu.:  9.83   3rd Qu.: 9.030   3rd Qu.:258.0            3rd Qu.:30.16                    
+ Max.   :100.00   Max.   :31.100   Max.   :343.5            Max.   :36.55                    
+ NA's   :9        NA's   :9                                                                  
+ Indice.de.Shannon Indice.de.Simpson
+ Min.   :-0.060    Min.   :0.1300   
+ 1st Qu.: 1.290    1st Qu.:0.4475   
+ Median : 1.810    Median :1.1000   
+ Mean   : 1.718    Mean   :1.5765   
+ 3rd Qu.: 2.245    3rd Qu.:2.5400   
+ Max.   : 3.150    Max.   :5.9100   
+                                    
+                                                                                                       URL.de.la.recette
+ https://www.marmiton.org/recettes/recette_tourte-de-noel-vegetarienne-de-coralie_15536.aspx                    : 17    
+ https://www.marmiton.org/recettes/recette_burger-vegetarien-aux-lentilles_345408.aspx                          : 15    
+ https://www.marmiton.org/recettes/recette_ragout-vegetarien-aux-legumes_65191.aspx                             : 15    
+ https://www.marmiton.org/recettes/recette_tarte-provencale-fine-light-vegetarienne-economique-rapide_38642.aspx: 15    
+ https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx                                : 14    
+ https://www.marmiton.org/recettes/recette_paella-vegetarienne_47534.aspx                                       : 14    
+ (Other)                                                                                                        :244    
+ 
+```{r}
 
 dta_top <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Top/top_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_top)
@@ -30,6 +68,7 @@ summary(dta_dessert)
 
 dta_ratatouille <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Ratatouille/Ratatouille.tsv", header=TRUE, sep="\t")
 ```
+
 
 ## removing "g" from "Matière_sèche" column
 ```{r}
