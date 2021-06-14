@@ -1,7 +1,8 @@
 ---
 title: "New recipes analysis"
 Author: "Tommaso"
-output: rmarkdown::github_document
+output:
+  keep_md: true
 ---
 # Import libraries
 ```{r}
