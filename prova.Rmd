@@ -1,8 +1,8 @@
 ---
 title: "New recipes analysis"
 Author: "Tommaso"
-output: 
-  keep_md: true
+output:
+ keep_md: true
 ---
 
 # Import libraries
@@ -17,7 +17,7 @@ library(dplyr)
 dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_vege)
 ```
-                                                           Recette            Ingrédient 
+                                                           <!-- Recette            Ingrédient  -->
  Tourte de Noël végétarienne de Coralie                        : 17   Poivre       : 21  
  Burger végétarien aux lentilles                               : 15   Oignon       : 19  
  Ragoût végétarien aux légumes                                 : 15   Sel          : 19  
