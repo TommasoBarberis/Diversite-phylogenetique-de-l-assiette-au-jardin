@@ -1,18 +1,22 @@
 ---
 title: "New recipes analysis"
-output: html_document
-editor_options:
-  chunk_output_type: console
+Author: "Tommaso"
+output: 
+  html_document:
+    keep_md: yes
+    knit: (function(inputFile, encoding) {
+  ofi <- paste0(gsub(".Rmd","",inputFile),"_.md");
+  rmarkdown::render(inputFile, encoding=encoding, output_file=ofi) })
 ---
 # Import libraries
-```{r include=TRUE}
+```{r}
 library(naniar)
 library(tidyr)
 library(dplyr)
 ```
 
 # Collect data
-```{r include=TRUE}
+```{r}
 dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_vege)
 
