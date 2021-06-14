@@ -41,7 +41,26 @@ Hachis Parmentier;https://www.marmiton.org/recettes/recette_hachis-parmentier_17
 Boeuf Bourguignon rapide;https://www.marmiton.org/recettes/recette_boeuf-bourguignon-rapide_19218.aspx
 La Vraie Moussaka Grecque;https://www.marmiton.org/recettes/recette_la-vraie-moussaka-grecque_72593.aspx
 Amour de saumon en papillote;https://www.marmiton.org/recettes/recette_amour-de-saumon-en-papillote_21494.aspx
-
+Velouté de champignons;https://www.marmiton.org/recettes/recette_veloute-de-champignons_26749.aspx
+Poulet à la moutarde, à l'estragon et aux champignons;https://www.marmiton.org/recettes/recette_poulet-a-la-moutarde-a-l-estragon-et-aux-champignons_19374.aspx
+Filet mignon de porc au Maroilles;https://www.marmiton.org/recettes/recette_filet-mignon-de-porc-au-maroilles_12734.aspx
+Chili con carne facile;https://www.marmiton.org/recettes/recette_chili-con-carne-facile_15415.aspx
+Couscous poulet et merguez facile;https://www.marmiton.org/recettes/recette_couscous-poulet-et-merguez-facile_17751.aspx
+Carbonades flamandes traditionnelles;https://www.marmiton.org/recettes/recette_carbonades-flamandes-traditionnelles_29711.aspx
+Quiche lorraine;https://www.marmiton.org/recettes/recette_quiche-lorraine_30283.aspx
+Endive jambon;https://www.marmiton.org/recettes/recette_endive-jambon_19848.aspx
+Poulet basquaise;https://www.marmiton.org/recettes/recette_poulet-basquaise_16969.aspx
+Tarte thon, tomate et moutarde;https://www.marmiton.org/recettes/recette_tarte-thon-tomate-et-moutarde_17226.aspx
+Lapin à la moutarde maison;https://www.marmiton.org/recettes/recette_lapin-a-la-moutarde-maison_15983.aspx
+Quiche tatin;https://www.marmiton.org/recettes/recette_quiche-tatin_14309.aspx
+Boeuf braisé aux carottes;https://www.marmiton.org/recettes/recette_boeuf-braise-aux-carottes_13296.aspx
+Chili con carne express;https://www.marmiton.org/recettes/recette_chili-con-carne-express_14369.aspx
+Tatin de magret de canard au foie gras;https://www.marmiton.org/recettes/recette_tatin-de-magret-de-canard-au-foie-gras_17047.aspx
+Rôti de porc de Dijon;https://www.marmiton.org/recettes/recette_roti-de-porc-de-dijon_12145.aspx
+Tajine d'agneau aux pruneaux;https://www.marmiton.org/recettes/recette_tajine-d-agneau-aux-pruneaux_13086.aspx
+Poulet curry et oignons facile;https://www.marmiton.org/recettes/recette_poulet-curry-et-oignons-facile_13026.aspx
+Blanc de poulet aux endives, champignons et lardons;https://www.marmiton.org/recettes/recette_blanc-de-poulet-aux-endives-champignons-et-lardons_35733.aspx
+Rôti de cheval au vin rouge;https://www.marmiton.org/recettes/recette_roti-de-cheval-au-vin-rouge_44643.aspx
 
 ## top des recettes (desserts):
 Gâteau au yaourt;https://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
