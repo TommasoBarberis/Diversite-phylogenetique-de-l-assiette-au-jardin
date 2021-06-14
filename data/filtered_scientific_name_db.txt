@@ -319,6 +319,7 @@ Citrus limon	Citronnier
 Citrus maxima	shadek
 Citrus reticulata	Mandarine
 Citrus reticulata	Mandarinier
+Citrus sinensis	Jus d'orange
 Citrus sinensis	Orange
 Citrus sinensis	Oranger
 Citrus ×junos	Yuzu
@@ -782,6 +783,7 @@ Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	Sucre
+Saccharum	Sucre en grain
 Saccharum	Sucre en poudre
 Saccharum	Sucre fin
 Saccharum	Sucre semoule
