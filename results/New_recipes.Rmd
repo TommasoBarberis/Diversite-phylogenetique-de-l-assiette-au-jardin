@@ -1,14 +1,8 @@
 ---
 title: "New recipes analysis"
 Author: "Tommaso"
-output:
-  keep_md: true
+output: md_document
 ---
-```{r, echo=FALSE}
-knitr::opts_chunk$set(
-  fig.path = "README_figs/README-"
-)
-```
 
 # Import libraries
 ```{r}
@@ -31,7 +25,7 @@ summary(dta_dessert)
 dta_ratatouille <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Ratatouille/Ratatouille.tsv", header=TRUE, sep="\t")
 ```
 
-## removing "g" from "Matière_sèche" column
+# removing "g" from "Matière_sèche" column
 ```{r}
 remove_grams <- function (d) {
   d$Matière_sèche <- as.numeric(sapply(d$Matière_sèche, sub, pattern=" g", replacement=""))
@@ -42,7 +36,7 @@ dta_top<-remove_grams(dta_top)
 dta_dessert<-remove_grams(dta_dessert)
 ```
 
-## grouping by recipe
+# grouping by recipe
 ```{r}
 vege_by_recipe <- dta_vege %>% group_by(Recette)
 top_by_recipe <- dta_top %>% group_by(Recette)
@@ -87,7 +81,7 @@ par(mfrow=c(1,1), mar=c(4,3,0,0))
 boxplot(vege_simple$Diversité.phylogénétique.pondérée, top_simple$Diversité.phylogénétique.pondérée, dessert_simple$Diversité.phylogénétique.pondérée, col=c("green", "red", "blue"), names=c("Vegetarien", "top", "dessert"))
 ```
 
-## Combining recipes
+# Combining recipes
 ```{r}
 all_simple <- rbind(vege_simple, top_simple, dessert_simple)
 ```
@@ -121,7 +115,7 @@ cor.test(all_simple$Protéines, all_simple$Diversité.phylogénétique)
 cor.test(all_simple$Protéines, all_simple$Diversité.phylogénétique.pondérée)
 ```
 
-## Linear model: can we explain phylogenetic diversity based on composition?
+# Linear model: can we explain phylogenetic diversity based on composition?
 ```{r}
 linear_model <- lm(Diversité.phylogénétique ~ Glucides + Protéines + Lipides, data=all_simple)
 summary(linear_model)
