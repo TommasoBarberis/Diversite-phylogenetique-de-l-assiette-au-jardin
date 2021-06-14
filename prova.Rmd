@@ -1,7 +1,14 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "New recipes analysis"
+Author: "Tommaso"
+output: 
+  keep_md: true
 ---
+```{r, echo=FALSE}
+knitr::opts_chunk$set(
+  fig.path = "README_figs/README-"
+)
+```
 
 # Import libraries
 ```{r}
@@ -11,7 +18,7 @@ library(dplyr)
 ```
 
 # Collect data
-```{r echo=FALSE}
+```{r results='markup'}
 dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_vege)
 
