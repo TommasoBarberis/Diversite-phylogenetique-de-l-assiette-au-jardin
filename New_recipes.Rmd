@@ -3,14 +3,14 @@ title: "New recipes analysis"
 output: html_document
 ---
 # Import libraries
-```{r}
+```{r include=TRUE}
 library(naniar)
 library(tidyr)
 library(dplyr)
 ```
 
 # Collect data
-```{r echo=TRUE}
+```{r include=TRUE}
 dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
 summary(dta_vege)
 
