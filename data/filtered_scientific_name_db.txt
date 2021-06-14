@@ -103,6 +103,7 @@ Asparagus officinalis	Asperge officinale
 Atriplex hortensis	Arroche
 Atriplex hortensis	Arroche des jardins
 Avena sativa	Avoine cultivée
+Avena sativa	Flocons d'avoine
 Averrhoa carambola	Carambole
 Averrhoa carambola	Carambolier
 Averrhoa carambola	Pomme de Goa
@@ -259,6 +260,7 @@ Capsicum annuum	Chili
 Capsicum annuum	Paprika
 Capsicum annuum	Petit piment
 Capsicum annuum	Piment
+Capsicum annuum	Piment de cayenne
 Capsicum annuum	Piment ornemental
 Capsicum annuum	Poivron
 Capsicum annuum	Poivron rouge
@@ -340,6 +342,7 @@ Columba palumbus	Viande de pigeon
 Conopodium majus	Châtaigne de terre
 Corchorus olitorius	corète potagère
 Coriandrum sativum	Coriandre
+Coriandrum sativum	Graines de coriandre
 Corylus avellana	Noisetier
 Corylus avellana	Noisette
 Corylus avellana	poudre de noisette
@@ -363,6 +366,7 @@ Cucurbita pepo	Courgette
 Cucurbita pepo	Courgettes
 Cucurbita pepo	Pâtisson
 Cuminum cyminum	Cumin
+Cuminum cyminum	Cumin en poudre
 Cuminum cyminum	Cumin noir
 Curcuma longa	Curcuma
 Curcuma longa	safran des Indes
@@ -453,8 +457,11 @@ Garcinia mangostana	Mangoustan
 Garcinia mangostana	mangoustanier
 Gaylussacia baccata	gaylussaquier à fruits bacciformes
 Ginkgo biloba	noyer du Japon
+Glycine max	Protéine de soja
 Glycine max	Sauce soja
 Glycine max	Soja
+Glycine max	Tofu
+Glycine max	Vermicelles de soja
 Glycine max	sauce soja
 Grifola frondosa	Polypore en touffes
 Gundelia tournefortii	Gundelia
@@ -469,6 +476,7 @@ Hibiscus	Fleur d'hibiscus
 Hibiscus sabdariffa	oseille de Guinée
 Hippoglossus hippoglossus	Flétan
 Hippophae rhamnoides	Saule épineux
+Hordeum vulgare	Orge
 Hordeum vulgare	Orge à quatre rangs
 Hosta plantaginea	Hosta
 Houttuynia cordata	Houttuynia
@@ -487,6 +495,7 @@ Ipomoea batatas	Patate douce
 Ipomoea reptans	Liseron d'eau
 Juglans cinerea	noyer cendré
 Juglans nigra	noyer noir d'Amérique
+Juglans regia	Cerneau de noix
 Juglans regia	Noix
 Juglans regia	Noyer commun
 Juniperus communis	Genièvre
@@ -615,7 +624,9 @@ Oryctolagus cuniculus	Râble de lapin
 Oryctolagus cuniculus	Saucisse de lapin
 Oryctolagus cuniculus	Viande de lapin
 Oryctolagus cuniculus	Émincé de lapin
+Oryza	Feuille de riz
 Oryza	Riz rond
+Oryza	Vinaigre de riz
 Oryza sativa	Riz
 Oryza sativa	riz rond
 Ovis aries	Agneau
@@ -693,14 +704,17 @@ Phytolacca americana	Vigne de Judée
 Pimenta dioica	Grand piment
 Pimpinella anisum	Anis vert
 Pimpinella anisum	Boucage anis
+Pinus	Pignons
 Pinus pinea	Pignons de pin
 Piper nigrum	Poivre
 Piper nigrum	Poivre de cayenne
 Piper nigrum	Poivre noir
+Piper nigrum	Poivre...
 Pistacia vera	Pistache
 Pistacia vera	Pistachier
 Pisum sativum	Petit Pois Sucres
 Pisum sativum	Petit pois
+Pisum sativum	Petits pois
 Pisum sativum	Pois
 Pisum sativum	petits pois
 Pithecellobium dulce	Tamarin d'inde
@@ -809,6 +823,7 @@ Secale cereale	Seigle
 Sechium edule	Chayote
 Sechium edule	Chayotte
 Sechium edule	Christofine
+Sesamum indicum	Huile de sésame
 Sesamum indicum	sésame
 Sinapis alba	Moutarde blanche
 Sium sisarum	Chervis
@@ -837,6 +852,7 @@ Solanum melongena	Aubergines
 Solanum melongena	Marignan
 Solanum muricatum	Pepino
 Solanum tuberosum	Fécule
+Solanum tuberosum	Fécule de pomme de terre
 Solanum tuberosum	Pomme de terre
 Solanum tuberosum	Pommes de terre
 Solanum tuberosum	Purée
@@ -931,6 +947,7 @@ Trapa natans	Mâcre nageante
 Trichosanthes cucumerina	Serpent végétal
 Trigonella foenum-graecum	Fenugrec
 Trigonella foenum-graecum	Trigonelle Fenugrec
+Triticum	Semoule
 Triticum	farine de blé
 Triticum aestivum	Farine
 Triticum durum	Boulgour
@@ -973,6 +990,7 @@ Vigna umbellata	haricot riz
 Vigna unguiculata	Niébé
 Vigna unguiculata	Pois Manger Cochon
 Vigna unguiculata sesquipedalis	Dolique asperge
+Vitis	Raisins secs
 Vitis	Vin blanc
 Vitis	Vin blanc sec
 Vitis	Vin rouge
@@ -986,6 +1004,7 @@ Vitis vinifera	Vinaigre
 Vitis vinifera	raisins secs
 Wasabia japonica	Raifort Japonais
 Zea mays	Maïs
+Zea mays	Maïzena
 Zea mays	blé d’Inde
 Zea mays	maïzena
 Zeus faber	Saint-Pierre
