@@ -158,16 +158,6 @@ def format_float(input_string):
         return input_string.replace("< ", "").replace(",", ".")
 
 
-def nut_printer(nut_dict):
-    print('{:10.20}'.format("Database name"), '{:10.15}'.format("Water (%)"),'{:10.15}'.format("Glucides (%)"), \
-        '{:10.15}'.format("Lipides (%)"), '{:10.15}'.format("Proteins (%)"), sep="\t \t")
-    for names in nut_dict:
-        if nut_dict[names] != []:
-            for element in nut_dict[names]:
-                print('{:10.15}'.format(element), end= "\t \t")
-            print("")
-
-
 def write_tsv(file_name, recipes_dict):
     list_column = ["Recette", "Ingrédient", "Espèce", "Quantité ", "Matière_sèche", "Eau", "Glucides", \
         "Lipides", "Protéines", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
