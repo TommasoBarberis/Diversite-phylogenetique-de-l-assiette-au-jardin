@@ -1,4 +1,7 @@
 import lib.get_ing as gi 
+import bs4
+import requests
+from urllib.parse import urlparse
 
 
 def test_process():
@@ -25,3 +28,13 @@ def test_searchDefaultMass():
     ingredients = {'poivre': [['poivre', 'poivre'], '1', ['', '']]}
     new_ingredients = gi.search_in_default_mass(ingredients)
     assert isinstance(new_ingredients, dict)
+
+
+def test_getMarmiton():
+    url = "https://www.marmiton.org/recettes/recette_tartiflette-en-gratin_529817.aspx"
+    req = requests.get(url)
+    domain = urlparse(url).netloc
+    soup = bs4.BeautifulSoup(req.content, 'html.parser')
+    ingredients = gi.get_marmiton(soup)
+
+    assert isinstance(ingredients, dict)

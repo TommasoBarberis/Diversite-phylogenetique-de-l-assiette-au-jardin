@@ -1,0 +1,103 @@
+    # # First parser
+    # try:
+    #     html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-sm-3"}) # select html tag with this class in recipe web page
+    #     for i in html_ingredients_list:
+        
+    #         first_level = i.find("div")
+    #         info_div = first_level.findAll("div")[1]
+    #         qty_unit_span = info_div.find("span")
+    #         qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ')
+            
+    #         if qty_unit_span == '':
+    #             qty = "NA"
+    #             unit = ["", ""]
+    #         else:
+    #             c = 0 # counter
+    #             qty = ""
+
+    #             while True:
+    #                 if qty_unit_span[c] == " ":
+    #                     break
+    #                 else:
+    #                     qty += qty_unit_span[c]
+    #                     c += 1
+                
+    #             unit = qty_unit_span[c+1:len(qty_unit_span)]
+    #             unit = [unit, unit]
+
+    #         ing_span = first_level.findAll("span")[1]
+    #         ing_span = ing_span.get_text()
+    #         ing = [ing_span, ing_span]
+
+    #         val = [ing, qty, unit]
+    #         ingredients[ing[0]] = val
+
+    #     ingredients = search_in_default_mass(ingredients)
+            
+    #     assert len(ingredients) != 0
+    #     for ing in ingredients:
+    #         if ing.isnumeric():
+    #             del ingredients[ing]    
+    #     logger.debug("Ingredient parsing, parser 1, DONE")
+    #     return ing_complete(soup, ingredients)
+    # except Exception:
+    #     logger.exception("Error in ingredient parsing, parser 1 failed")
+    
+    # # Second parser
+    # try:
+    #     html_ingredients_list = soup.find("div", {"class": "ingredient-list__ingredient-group"}) # select html tag with this class in recipe web page
+    #     li_tags = html_ingredients_list.findAll("li") # object with all ingredients and quantities for the recipe
+        
+    #     for i in range(0,len(li_tags)):
+    #         ing = [li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular"), li_tags[i].find("div", \
+    #             {"class": "ingredient-data"}).get("data-plural")]
+    #         qty = li_tags[i].find("div", {"class": "quantity-data"}).get_text()
+    #         unit = [li_tags[i].find("div", {"class": "unit-data"}).get("data-singular"), li_tags[i].find("div", \
+    #             {"class": "unit-data"}).get("data-plural")]
+    #         val = [ing, qty, unit]
+    #         ingredients[li_tags[i].find("div", {"class": "ingredient-data"}).get("data-singular")] = val
+
+    #     ingredients = search_in_default_mass(ingredients)
+
+    #     assert len(ingredients) != 0
+    #     for ing in ingredients:
+    #         if ing.isnumeric():
+    #             del ingredients[ing]    
+    #     logger.debug("Ingredient parsing, parser 2, DONE")
+    #     return ing_complete(soup, ingredients)
+    # except Exception:
+    #     logger.exception("Error in ingredient parsing, parser 2 failed")
+
+    # # Third parser
+    # try:
+    #     html_ingredients_list = soup.findAll("div", {"class": "MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4 MuiGrid-grid-md-3"}) # select html tag with this class in recipe web page
+
+    #     for i in html_ingredients_list:
+    #         first_level = i.find("div")
+    #         info_div = first_level.findAll("div")[1]
+
+    #         qty_unit_span = info_div.find("span")
+    #         qty_unit_span = qty_unit_span.get_text().replace(u'\xa0', ' ').replace(' ', '*')
+
+    #         if qty_unit_span == '':
+    #             qty = "NA"
+    #             unit = ["", ""]
+    #         else:
+    #             qty_unit_span = qty_unit_span.split("*")
+    #             qty = qty_unit_span[0]
+    #             unit = [qty_unit_span[1], qty_unit_span[1]]
+
+    #         ing_span = first_level.findAll("span")[1]
+    #         ing_span = ing_span.get_text().replace(u'\xa0', '')
+    #         ing = [ing_span, ing_span]
+
+    #         val = [ing, qty, unit]
+    #         ingredients[ing[0]] = val
+
+    #     ingredients = search_in_default_mass(ingredients)
+
+    #     assert len(ingredients) != 0  
+    #     logger.debug("Ingredient parsing, parser 3, DONE")
+    #     return ing_complete(soup, ingredients)
+    # except Exception:
+    #     logger.exception("Error in ingredient parsing, parser 3 failed")
