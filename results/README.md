@@ -185,8 +185,11 @@ grouping by recipe
         Glucides = weighted.mean(x=Glucides, w=Matière_sèche, na.rm = T),
         Lipides = weighted.mean(x=Lipides, w=Matière_sèche, na.rm = T),
         Protéines = weighted.mean(x=Protéines, w=Matière_sèche, na.rm = T),
-        Diversité.phylogénétique = mean(Diversité.phylogénétique, w=Matière_sèche, na.rm = T),
-        Diversité.phylogénétique.pondérée = mean(Diversité.phylogénétique.pondérée, w=Matière_sèche, na.rm = T)
+        Richesse = length(unique(Espèce)),
+        Diversité.phylogénétique = mean(Diversité.phylogénétique, na.rm = T),
+        Diversité.phylogénétique.pondérée = mean(Diversité.phylogénétique.pondérée, na.rm = T), 
+        Indice.de.Shannon = mean(Indice.de.Shannon, na.rm=T),
+        Indice.de.Simpson = mean(Indice.de.Simpson, na.rm=T),
       )
       )
     }
@@ -225,7 +228,7 @@ Combining recipes
 
     all_simple <- rbind(vege_simple, top_simple, dessert_simple)
 
-### Plot wheighted phylogenetic diversity by nutritional values
+### Plot weighted phylogenetic diversity by nutritional values
 
     par(mfrow=c(3,1), mar=c(4,3,0,0))
     plot(all_simple$Glucides, all_simple$Diversité.phylogénétique.pondérée, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Glucides")
@@ -381,3 +384,40 @@ Linear model: can we explain phylogenetic diversity based on composition?
     ##   (9 observations deleted due to missingness)
     ## Multiple R-squared:  0.196,  Adjusted R-squared:  0.1647 
     ## F-statistic: 6.257 on 3 and 77 DF,  p-value: 0.0007397
+
+
+
+Link between phylogenetic diversity and richness
+plot(vege_simple$Richesse, vege_simple$Diversité.phylogénétique, pch=20, col="green", ylab="Diversité Phylogénétique", xlab="Richesse"  )
+abline(lm(vege_simple$Diversité.phylogénétique ~ vege_simple$Richesse), col="green")
+points(top_simple$Richesse, top_simple$Diversité.phylogénétique, pch=20, col="red" )
+abline(lm(top_simple$Diversité.phylogénétique ~ top_simple$Richesse), col="red")
+points(dessert_simple$Richesse, dessert_simple$Diversité.phylogénétique, pch=20, col="blue")
+abline(lm(dessert_simple$Diversité.phylogénétique ~ dessert_simple$Richesse), col="blue")
+
+plot(vege_simple$Richesse, vege_simple$Diversité.phylogénétique.pondérée, pch=20, col="green", ylab="Diversité Phylogénétique pondérée", xlab="Richesse"  )
+abline(lm(vege_simple$Diversité.phylogénétique.pondérée ~ vege_simple$Richesse), col="green")
+points(top_simple$Richesse, top_simple$Diversité.phylogénétique.pondérée, pch=20, col="red" )
+abline(lm(top_simple$Diversité.phylogénétique.pondérée ~ top_simple$Richesse), col="red")
+points(dessert_simple$Richesse, dessert_simple$Diversité.phylogénétique.pondérée, pch=20, col="blue")
+abline(lm(dessert_simple$Diversité.phylogénétique.pondérée ~ dessert_simple$Richesse), col="blue")
+
+
+boxplot(vege_simple$Richesse, top_simple$Richesse, dessert_simple$Richesse)
+boxplot(vege_simple$Diversité.phylogénétique, top_simple$Diversité.phylogénétique, dessert_simple$Diversité.phylogénétique)
+
+boxplot(vege_simple$Diversité.phylogénétique, top_simple$Diversité.phylogénétique, dessert_simple$Diversité.phylogénétique)
+
+par(mar=c(3,3,0,0))
+boxplot(vege_simple$Indice.de.Shannon, top_simple$Indice.de.Shannon, dessert_simple$Indice.de.Shannon)
+
+boxplot(vege_simple$Indice.de.Simpson, top_simple$Indice.de.Simpson, dessert_simple$Indice.de.Simpson)
+
+
+par(mar=c(10,3,0,0))
+plot(vege_simple$Recette, vege_simple$Diversité.phylogénétique, las=2)
+
+plot(vege_simple$Recette, vege_simple$Diversité.phylogénétique.pondérée, las=2)
+
+all_simple$origine <- c(rep(times=30, "Vegetarian"), rep(times=30, "Top"), rep(times=30, "Dessert"))
+
