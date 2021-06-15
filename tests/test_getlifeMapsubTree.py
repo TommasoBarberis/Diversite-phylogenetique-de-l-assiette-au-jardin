@@ -11,6 +11,11 @@ def test_getTaxid():
         assert len(str(sp)) == 5
 
 
+def test_getDriver():
+    driver = lm.get_driver()
+    assert driver is None
+
+    
 def test_buildTree():
     species = {'mâche': 'Valerianella locusta', 'genièvre': 'Juniperus communis'}
     tree = lm.build_tree(species)

@@ -112,7 +112,7 @@ def get_subTree(especes):
     
 
 def subtree_from_newick(tree):
-    tree = ete.Tree(tree, quoted_node_names = True, format = 1)    #'Tree.txt'
+    tree = ete.Tree(tree, quoted_node_names = True, format = 1) 
     ts = ete.TreeStyle()
     ts.show_leaf_name = True
     ts.branch_vertical_margin = 10 # 10 pixels between adjacent branches
