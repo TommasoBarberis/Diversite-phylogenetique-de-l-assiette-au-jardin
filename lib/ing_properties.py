@@ -160,7 +160,7 @@ def format_float(input_string):
 
 def write_tsv(file_name, recipes_dict):
     list_column = ["Recette", "Ingrédient", "Espèce", "Quantité ", "Matière_sèche", "Eau", "Glucides", \
-        "Lipides", "Protéines", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
+        "Lipides", "Protéines", "Richesse", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
         "Indice de Shannon", "Indice de Simpson", "URL de la recette"]
 
     with open(file_name, 'w', newline='') as tsvfile:
@@ -187,6 +187,8 @@ def write_tsv(file_name, recipes_dict):
             species = recipes_dict[recipe][1]
             dict_nut = recipes_dict[recipe][2]
             drym = recipes_dict[recipe][3]
+            richness = int(len(species))
+            
 
             for ing in ingredients:
                 if ing != "":
@@ -205,8 +207,8 @@ def write_tsv(file_name, recipes_dict):
                     proteins = dict_nut[ing.capitalize()][4].replace(",", ".")
 
                     line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(water) \
-                        + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(pd) + "\t" \
-                        + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
+                        + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(richness) \
+                        + "\t" + str(pd) + "\t" + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
 
                     tsvfile.write(line + "\n")
         tsvfile.write("\n")

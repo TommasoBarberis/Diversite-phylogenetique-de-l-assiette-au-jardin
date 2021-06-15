@@ -85,8 +85,8 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
     if len(species) == 0:
         wpd = "NA"
     elif len(species) == 1:
-        for sp in species:
-            wpd = dict_sp_drym[species[ing]][0]
+        # for sp in species:
+        wpd = 1
     else:        
         weight_sum = 0
         for ing in species:
@@ -96,6 +96,7 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
             for leaf in species_list:
                 if species[ing] != leaf:
                     mpd += tree.get_distance(species[ing], leaf)
+                    print(mpd)
             
             try:
                 weight = float(dict_sp_drym[species[ing]][0])
