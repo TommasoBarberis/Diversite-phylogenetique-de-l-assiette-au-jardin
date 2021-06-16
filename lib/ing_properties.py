@@ -66,6 +66,7 @@ def get_nut_info(ing, book):
 
         # In "Table_Ciqual_2020_FR_2020_07_07.xls":
         # name of ingredient:  column 7 
+        # calories (kJ): column 9
         # water (%): column 13
         # proteins (%): column 14
         # glucides (%): column 16
@@ -73,6 +74,7 @@ def get_nut_info(ing, book):
         # sucres (%):column 18
 
         final_nut_info.append(nut_info[7]) # name
+        final_nut_info.append("NA" if (nut_info[9] == "-" or nut_info[9] == "traces") else nut_info[9].replace("<", "")) # calories
         final_nut_info.append("NA" if (nut_info[13] == "-" or nut_info[13] == "traces") else nut_info[13].replace("<", "")) # water
         final_nut_info.append("NA" if (nut_info[16] == "-" or nut_info[16] == "traces") else nut_info[16].replace("<", "")) # glucides
         final_nut_info.append("NA" if (nut_info[17] == "-" or nut_info[17] == "traces") else nut_info[17].replace("<", "")) # lipides
@@ -91,13 +93,31 @@ def get_dict_nut(dict_ing):
         if nut_info != []:
             output[ingredient] = nut_info
         else:
-            output[ingredient] = ["NA", "NA", "NA", "NA", "NA"]
+            output[ingredient] = ["NA", "NA", "NA", "NA", "NA", "NA"]
     return output
+
+
+def convert_to_g(qty, unit):
+    try:
+        qty  = float(qty)
+    except:
+        return "NA"
+
+    if unit == "g" or unit == "ml":
+        pass
+    elif unit == "kg" or unit == "l":
+        qty *= 1000
+    elif unit == "cl":
+        qty *= 10
+    elif unit == "dl":
+        qty *= 100
+    
+    return qty
 
 
 def dry_matter_dict_update(dict_ing, dict_nut):
     dry_matter_dict = {}
-    unit_list = ["g", "kg", "l", "dl", "cl"] # ponderable unit measure
+    unit_list = ["g", "kg", "l", "dl", "cl", "ml"] # ponderable unit measure
     for ing in dict_ing:
 
         # if: l'ingredient est dans le dictionnaire contenant les informations nutritives et que sa quantite est 
@@ -108,27 +128,17 @@ def dry_matter_dict_update(dict_ing, dict_nut):
         and dict_ing[ing][1] is not None:
 
             if "<" in dict_nut[ing.capitalize()][1]:
-                wat = float(format_float(str(dict_nut[ing.capitalize()][1][2:])))
+                wat = float(format_float(str(dict_nut[ing.capitalize()][2][2:])))
             else:
-                wat = float(format_float(str(dict_nut[ing.capitalize()][1])))
+                wat = float(format_float(str(dict_nut[ing.capitalize()][2])))
 
             qtt = str(dict_ing[ing][1])
             unit = dict_ing[ing][2][0]
 
             if qtt != '' and unit in unit_list:
                 
-                qtt  = float(qtt)
-
-                if unit == "g":
-                    pass
-                elif unit == "kg" or unit == "l":
-                    qtt *= 1000
-                elif unit == "cl":
-                    qtt *= 10
-                elif unit == "dl":
-                    qtt += 100
-
-                dry_matter = round(qtt - qtt * wat/100,2)
+                qtt = convert_to_g(qtt, unit)
+                dry_matter = round(qtt - (qtt * (wat / 100)), 2)
                 dry_matter_dict[ing] = [dry_matter, "g"]
             else:
                 with open("filtering/unit_mass.txt", "r") as f:
@@ -159,9 +169,9 @@ def format_float(input_string):
 
 
 def write_tsv(file_name, recipes_dict):
-    list_column = ["Recette", "Ingrédient", "Espèce", "Quantité ", "Matière_sèche", "Eau", "Glucides", \
-        "Lipides", "Protéines", "Richesse", "Diversité phylogénétique", "Diversité phylogénétique pondérée", \
-        "Indice de Shannon", "Indice de Simpson", "URL de la recette"]
+    list_column = ["Recipe", "Ingredient", "Specie", "Quantity", "Dry_matter", "Energy", "Water", "Glucides", \
+        "Lipids", "Proteins", "Richness", "Phylogenetic_diversity", "Wheighted_phylogenetic_diversity", \
+        "Shannon", "Simpson", "URL"]
 
     with open(file_name, 'w', newline='') as tsvfile:
         # Header
@@ -201,14 +211,19 @@ def write_tsv(file_name, recipes_dict):
                     dry_qty = drym[ing]
                     if isinstance(dry_qty, list):
                         dry_qty = str(dry_qty[0]) + " " + dry_qty[1]
-                    water = dict_nut[ing.capitalize()][1].replace(",", ".")
-                    sugars = dict_nut[ing.capitalize()][2].replace(",", ".")
-                    lipides =dict_nut[ing.capitalize()][3].replace(",", ".")
-                    proteins = dict_nut[ing.capitalize()][4].replace(",", ".")
+                    try:
+                        cal = (float(dict_nut[ing.capitalize()][1].replace(",", ".")) * float(convert_to_g(ingredients[ing][1], ingredients[ing][2][0]))) / 100
+                    except:
+                        cal = "NA"
+                    water = dict_nut[ing.capitalize()][2].replace(",", ".")
+                    sugars = dict_nut[ing.capitalize()][3].replace(",", ".")
+                    lipides =dict_nut[ing.capitalize()][4].replace(",", ".")
+                    proteins = dict_nut[ing.capitalize()][5].replace(",", ".")
 
-                    line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(water) \
-                        + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) + "\t" + str(richness) \
-                        + "\t" + str(pd) + "\t" + str(wpd) + "\t" + str(shannon) + "\t" + str(simpson) + "\t" + url
+                    line = name_recipe + "\t" + ing + "\t" + sp + "\t" + str(qty) + "\t" + dry_qty + "\t" + str(cal) \
+                        + "\t" + str(water) + "\t" + str(sugars) + "\t" + str(lipides) + "\t" + str(proteins) \
+                        + "\t" + str(richness) + "\t" + str(pd) + "\t" + str(wpd) + "\t" + str(shannon) \
+                        + "\t" + str(simpson) + "\t" + url
 
                     tsvfile.write(line + "\n")
         tsvfile.write("\n")
@@ -218,6 +233,7 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
     sp = []
     quantities = []
     drym_quantities = []
+    cal = []
     water = []
     sugars = []
     lipides = []
@@ -242,10 +258,17 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
                 drym_quantities.append(str(drym[ing][0]) + " " + drym[ing][1])
 
         if ing.capitalize() in dict_nut.keys():
-            water.append(dict_nut[ing.capitalize()][1])
-            sugars.append(dict_nut[ing.capitalize()][2])
-            lipides.append(dict_nut[ing.capitalize()][3])
-            proteins.append(dict_nut[ing.capitalize()][4])
+            try:
+                qtt = convert_to_g(ingredients[ing][1], ingredients[ing][2][0])
+                cal_val = (float(dict_nut[ing.capitalize()][1]) * float(qtt)) / 100
+            except:
+                cal_val = "NA"
+                    
+            cal.append(cal_val)
+            water.append(dict_nut[ing.capitalize()][2])
+            sugars.append(dict_nut[ing.capitalize()][3])
+            lipides.append(dict_nut[ing.capitalize()][4])
+            proteins.append(dict_nut[ing.capitalize()][5])
         else:
             water.append("NA")
             sugars.append("NA")
@@ -256,8 +279,8 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
     ingredients = list(ingredients.keys())
 
     table = go.Figure(data = [go.Table(header = dict(values = ["Ingrédient", "Espèce", "Quantité", \
-        "Qté de matière\n sèche (g)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18, height = 60), \
-        cells = dict(values = [ingredients, species, quantities, drym_quantities, water, sugars, lipides, proteins], \
+        "Qté de matière\n sèche (g)", "Énergie (kJ)", "Eau (%)", "Glucides (%)", "Lipides (%)", "Protéines (%)"], font_size = 18, height = 60), \
+        cells = dict(values = [ingredients, species, quantities, drym_quantities, cal, water, sugars, lipides, proteins], \
         font_size = 16, height = 50))], layout = go.Layout(paper_bgcolor = "rgba(0,0,0,0)", height = ((60 * len(ingredients)) + 60), width = 1200, margin = dict(b = 0, t = 0, l = 0, r = 0))) # 
 
 

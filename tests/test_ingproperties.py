@@ -20,7 +20,7 @@ def test_getNutInfo():
     file_path = "data/Table_Ciqual_2020_FR_2020_07_07.xls"
     book = xlrd.open_workbook(file_path)
     ing = "Poivre"
-    assert len(ip.get_nut_info(ing, book)) == 5
+    assert len(ip.get_nut_info(ing, book)) == 6
 
 
 def test_getDictNut():
@@ -28,6 +28,16 @@ def test_getDictNut():
     dict_nut = ip.get_dict_nut(dict_ing)
     assert isinstance(dict_nut, dict)
     assert len(dict_nut) == len(dict_ing)    
+
+
+def test_convertTog():
+    assert ip.convert_to_g("string", "g") == "NA"
+    assert ip.convert_to_g(100, "g") == 100
+    assert ip.convert_to_g(100, "ml") == 100
+    assert ip.convert_to_g(100, "kg") == 100000
+    assert ip.convert_to_g(100, "l") == 100000
+    assert ip.convert_to_g(100, "cl") == 1000
+    assert ip.convert_to_g(100, "dl") == 10000
 
 
 def test_dryMatterDicUpdate():
