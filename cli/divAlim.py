@@ -97,7 +97,7 @@ html_name = sys.argv[3] + "/" + file_name + "/" + file_name + ".html"
 for url in recipes_dict:
     if recipes_dict[url] != []:
         try:
-            ingredients = recipes_dict[url]
+            ingredients = recipes_dict[url][0]
         except:
             pass
 
@@ -126,6 +126,11 @@ for url in recipes_dict:
     
     #generate data
     species = ing_to_esp.recherche_globale(ingredients)
+
+    richness = len(set(species.values()))
+    if "NA" in species.values():
+        richness -= 1            
+
     
     dict_nut = ing_properties.get_dict_nut(ingredients)
     drym = ing_properties.dry_matter_dict_update(ingredients, dict_nut)
@@ -134,6 +139,7 @@ for url in recipes_dict:
     if name_recipe == "\tRecipe title not found":
         name_recipe = url
     ing_properties.build_table(ingredients, species, dict_nut, drym, name_recipe.replace(" ", "_")) 
+
 
     tree = get_lifeMap_subTree.build_tree(species)
     pd = get_dp.phylogenetic_diversity(tree, species)     
@@ -164,7 +170,7 @@ for url in recipes_dict:
     if taxids.endswith(","):
         taxids = taxids[:-1]
 
-    recipes_dict[url] = [name_recipe, ingredients, species, dict_nut, drym, pd, wpd, shannon, simpson, taxids]
+    recipes_dict[url] = [ingredients, species, dict_nut, drym, (pd, wpd, shannon, simpson, richness), name_recipe, taxids]
     logger.info("URL processed, getting ingredient, species, nutrition data and dry matter information")
 
 
@@ -202,8 +208,8 @@ with open(html_name, "w") as html_page:
 
     for url in recipes_dict:
         species_not_found = ""
-        for ing in recipes_dict[url][1]:
-            if ing not in recipes_dict[url][2].keys():
+        for ing in recipes_dict[url][0]:
+            if ing not in recipes_dict[url][1].keys():
                 species_not_found += ing + ", "
         if species_not_found.endswith(",") or species_not_found.endswith(", "):
             index = species_not_found.rfind(",")
@@ -217,18 +223,18 @@ with open(html_name, "w") as html_page:
         os.rename(script_dir + "/assets/figures/"+ name_recipe.replace(" ", "_") + ".png", sys.argv[3] + "/" + file_name + "/assets/" + name_recipe.replace(" ", "_") + ".png")
 
         html_page.write(f"""
-            <div id={recipes_dict[url][0].replace(" ", "-")} class="recipe-info">
-                <p><b>Name of the recipe: </b>{recipes_dict[url][0]}</p>
+            <div id={recipes_dict[url][5].replace(" ", "-")} class="recipe-info">
+                <p><b>Name of the recipe: </b>{recipes_dict[url][5]}</p>
                 <p><b>URL of the recipe: </b>{url}</p>
-                <p><b>Number of ingredients: </b>{len(recipes_dict[url][1])}</p>
-                <p><b>Number of specie found for the ingredients: </b>{len(recipes_dict[url][2])}</p>
+                <p><b>Number of ingredients: </b>{len(recipes_dict[url][0])}</p>
+                <p><b>Number of specie found for the ingredients: </b>{recipes_dict[url][4][4]}</p>
                 <p><b>Ingredients that haven't match with a species: </b>{species_not_found}</p>
                 <img src="{"assets/" + name_recipe.replace(" ", "_") + ".png"}">
-                <p><b>Phylogenetic diversity: </b>{recipes_dict[url][5]}</p>
-                <p><b>Weighted phylogenetic diversity: </b>{recipes_dict[url][6]}</p>
-                <p><b>Shannon's index: </b>{recipes_dict[url][7]}</p>
-                <p><b>Simpson's index: </b>{recipes_dict[url][8]}</p>
-                <iframe src="{script_dir}/cli/lifemap-frame/lifemap.html?lang=en&tid={recipes_dict[url][9]}&zoom=false&markers=true&tree=true&searchbar=false&clickableMarkers=true&zoomButton=true&colorLine=2a9d8f&opacityLine=0.8&weightLine=6" title="LifeMap frame from local file" width="80%" height="60%"></iframe>
+                <p><b>Phylogenetic diversity: </b>{recipes_dict[url][4][0]}</p>
+                <p><b>Weighted phylogenetic diversity: </b>{recipes_dict[url][4][1]}</p>
+                <p><b>Shannon's index: </b>{recipes_dict[url][4][2]}</p>
+                <p><b>Simpson's index: </b>{recipes_dict[url][4][3]}</p>
+                <iframe src="{script_dir}/cli/lifemap-frame/lifemap.html?lang=en&tid={recipes_dict[url][6]}&zoom=false&markers=true&tree=true&searchbar=false&clickableMarkers=true&zoomButton=true&colorLine=2a9d8f&opacityLine=0.8&weightLine=6" title="LifeMap frame from local file" width="80%" height="60%"></iframe>
             </div>
         """)
     
@@ -237,6 +243,8 @@ with open(html_name, "w") as html_page:
     </html>
 """)
 
+file_name = file_name[1:] + "/data.tsv"
+ing_properties.write_tsv(file_name, recipes_dict)
 
 # keep only last 1000 lines of the log file
 try:

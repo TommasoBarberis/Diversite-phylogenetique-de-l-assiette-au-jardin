@@ -124,8 +124,8 @@ def dry_matter_dict_update(dict_ing, dict_nut):
         # non nulle et que la quantite d'eau est non nulle c'est alors possible de calculer la quantite de 
         # matiere seche
 
-        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][1] != 'NA' \
-        and dict_ing[ing][1] is not None:
+        if ing.capitalize() in dict_nut and dict_ing[ing][1] != 0 and dict_nut[ing.capitalize()][2] != 'NA' \
+        and dict_ing[ing][1] is not None:            
 
             if "<" in dict_nut[ing.capitalize()][1]:
                 wat = float(format_float(str(dict_nut[ing.capitalize()][2][2:])))
@@ -186,6 +186,7 @@ def write_tsv(file_name, recipes_dict):
         # Recipe scope
         for recipe in recipes_dict:
             name_recipe = recipes_dict[recipe][5]
+            
             pd = recipes_dict[recipe][4][0]
             wpd = recipes_dict[recipe][4][1]
             shannon = recipes_dict[recipe][4][2]
@@ -197,8 +198,9 @@ def write_tsv(file_name, recipes_dict):
             species = recipes_dict[recipe][1]
             dict_nut = recipes_dict[recipe][2]
             drym = recipes_dict[recipe][3]
-            richness = int(len(species))
-            
+            richness = len(set(species.values()))
+            if "NA" in species.values():
+                richness -= 1            
 
             for ing in ingredients:
                 if ing != "":

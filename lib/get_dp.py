@@ -96,7 +96,6 @@ def weighted_phylogenetic_diversity(tree, species, dict_sp_drym):
             for leaf in species_list:
                 if species[ing] != leaf:
                     mpd += tree.get_distance(species[ing], leaf)
-                    print(mpd)
             
             try:
                 weight = float(dict_sp_drym[species[ing]][0])

@@ -1,4 +1,4 @@
-recipe_name	ingredients	quantity	unit	url
+recipe_name	ingredients	quantity	unit	URL de la recette
 Lasagnes végétariennes (facile)	Tomate	700	g	https://www.marmiton.org/recettes/recette_lasagnes-vegetariennes-facile_10527.aspx
 Lasagnes végétariennes (facile)	Courgette	500	g	https://www.marmiton.org/recettes/recette_lasagnes-vegetariennes-facile_10527.aspx
 Lasagnes végétariennes (facile)	Poivre	1	g	https://www.marmiton.org/recettes/recette_lasagnes-vegetariennes-facile_10527.aspx
@@ -131,3 +131,205 @@ Tarte provençale fine, light, végétarienne, économique, rapide	Salade	20	g	h
 Tarte provençale fine, light, végétarienne, économique, rapide	Comté	60	g	https://www.marmiton.org/recettes/recette_tarte-provencale-fine-light-vegetarienne-economique-rapide_38642.aspx
 Tarte provençale fine, light, végétarienne, économique, rapide	Pain pour hamburger	200	g	https://www.marmiton.org/recettes/recette_tarte-provencale-fine-light-vegetarienne-economique-rapide_38642.aspx
 Tarte provençale fine, light, végétarienne, économique, rapide	Mayonnaise	30	g	https://www.marmiton.org/recettes/recette_tarte-provencale-fine-light-vegetarienne-economique-rapide_38642.aspx
+Nems végétariens	Carotte	360	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Ail	120	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Huile	30	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Poivre	1	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Vinaigre de riz	15	cl	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Huile de sésame	10	cl	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Feuille de riz	20	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Oignon	120	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Vermicelles de soja	200	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Protéine de soja	30	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Sauce soja	30	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Nems végétariens	Coulis de tomate	80	g	https://www.marmiton.org/recettes/recette_nems-vegetariens_26829.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Carotte	600	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Courgette	450	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Piment	30	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Poivre	1	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Sel	1	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Brocoli	200	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Crème liquide	30	cl	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de légumes (carotte, courgette, brocoli)	Oeuf	320	g	https://www.marmiton.org/recettes/recette_terrine-de-legumes-carotte-courgette-brocoli_38155.aspx
+Terrine de lentilles	Lentilles	150	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Carotte	120	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Huile d'olive	45	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Orge	50	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Échalote	80	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Poivron rouge	60	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Oeuf	80	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Terrine de lentilles	Fromage de chèvre	60	g	https://www.marmiton.org/recettes/recette_terrine-de-lentilles_12862.aspx
+Cappuccino de champignons	Champignon de paris	500	g	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Cappuccino de champignons	Champignon	200	g	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Cappuccino de champignons	Citron	15	cl	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Cappuccino de champignons	Vin blanc	20	cl	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Cappuccino de champignons	Oignon	120	g	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Cappuccino de champignons	Crème	20	cl	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Cappuccino de champignons	Cerfeuil	5	g	https://www.marmiton.org/recettes/recette_cappuccino-de-champignons_14048.aspx
+Gratin de courgettes rapide	Courgette	600	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Sel	1	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Poivre	1	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Oignon	360	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Gruyère râpé	100	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Oeuf	160	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Crème fraîche	30	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Gratin de courgettes rapide	Beurre	50	g	https://www.marmiton.org/recettes/recette_gratin-de-courgettes-rapide_17071.aspx
+Galettes de pomme de terre	Pomme de terre	700	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Galettes de pomme de terre	Farine	45	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Galettes de pomme de terre	Poivre	1	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Galettes de pomme de terre	Sel	1	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Galettes de pomme de terre	Huile	30	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Galettes de pomme de terre	Oignon	360	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Galettes de pomme de terre	Oeuf	80	g	https://www.marmiton.org/recettes/recette_galettes-de-pomme-de-terre_14072.aspx
+Riz et petits légumes au safran	Riz	150	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Eau	60	cl	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Courgette	150	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Safran	1	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Huile d'olive	15	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Oignon	120	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Poivron rouge	120	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Riz et petits légumes au safran	Petits pois	200	g	https://www.marmiton.org/recettes/recette_riz-et-petits-legumes-au-safran_38173.aspx
+Nouilles chinoises aux légumes et aux épices	Poireau	130	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Carotte	90	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Courgette	300	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Champignon de paris	250	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Huile	45	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Oignon	120	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Poivron rouge	120	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Nouilles chinoises	100	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Mélange 5 épices	5	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+Nouilles chinoises aux légumes et aux épices	Sauce soja	45	g	https://www.marmiton.org/recettes/recette_nouilles-chinoises-aux-legumes-et-aux-epices_21482.aspx
+gratin de brocolis	Farine	40	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Lait	50	cl	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Ail	80	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Poivre	1	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Sel	1	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Brocoli	1	kg	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Beurre	40	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Coulis de tomate	15	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Oeuf	240	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Crème fraîche	10	cl	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+gratin de brocolis	Chapelure	30	g	https://www.marmiton.org/recettes/recette_gratin-de-brocolis_22413.aspx
+Couscous végétarien facile	Pois chiches	150	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Carotte	360	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Tomate	400	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Courgette	300	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Ail	80	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Huile d'olive	30	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Curcuma	2	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Graines de coriandre	10	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Poivre	1	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Sel	1	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Semoule	150	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Navet	400	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Oignon	240	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Couscous végétarien facile	Margarine	100	g	https://www.marmiton.org/recettes/recette_couscous-vegetarien-facile_62233.aspx
+Lasagnes de chou vert frisé	Tomate	300	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Champignon de paris	360	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Concentré de tomates	15	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Ail	80	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Lait	25	cl	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Maïzena	45	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Huile d'olive	5	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Épices	5	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Chou	500	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Tofu	150	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Oignon	120	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Crème fraîche épaisse	30	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Lasagnes de chou vert frisé	Fromage râpé	80	g	https://www.marmiton.org/recettes/recette_lasagnes-de-chou-vert-frise_36756.aspx
+Poivrons farcis riz et épices (végétarien)	Poivron	400	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Aubergine	150	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Pignons	50	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Raisins secs	80	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Riz	150	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Cannelle	3	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Curry	3	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Piment de cayenne	3	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Ketchup	30	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Oignon	120	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Poivrons farcis riz et épices (végétarien)	Mélange 4 épices	3	g	https://www.marmiton.org/recettes/recette_poivrons-farcis-riz-et-epices-vegetarien_39545.aspx
+Steaks végétariens	Poivron	100	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Courgette	150	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Pomme de terre	200	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Carotte	100	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Champignon	100	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Maïs	200	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Poivre	1	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Sel	1	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Persil	5	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Ail	40	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Farine	15	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Huile	15	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Oignon	120	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Steaks végétariens	Oeuf	80	g	https://www.marmiton.org/recettes/recette_steaks-vegetariens_13685.aspx
+Aubergines farcies à la mozzarella	Aubergine	600	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Tomate	150	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Huile d'olive	30	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Poivre	1	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Sel	1	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Thym	3	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Basilic	3	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Persil	3	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Aubergines farcies à la mozzarella	Mozzarella	450	g	https://www.marmiton.org/recettes/recette_aubergines-farcies-a-la-mozzarella_24336.aspx
+Risotto au taleggio	Riz pour risotto	500	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Bouillon de légumes	50	cl	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Noisettes	100	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Vin blanc	20	cl	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Huile d'olive	15	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Sel	1	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Poivre	1	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Oignon	120	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Risotto au taleggio	Taleggio	400	g	https://www.marmiton.org/recettes/recette_risotto-au-taleggio_383608.aspx
+Tarte verte	Pâte feuilletée	200	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Poireau	200	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Céleri	100	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Huile d'olive	15	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Cumin en poudre	5	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Aneth	3	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Poivre	1	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Sel	1	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Laitue	150	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Oeuf	240	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Tarte verte	Crème fraîche	30	g	https://www.marmiton.org/recettes/recette_tarte-verte_29762.aspx
+Flan de poireaux au basilic	Poireau	1500	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Basilic	5	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Poivre	1	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Sel	1	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Margarine	25	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Oeuf	240	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Crème fraîche	125	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Flan de poireaux au basilic	Fromage râpé	75	g	https://www.marmiton.org/recettes/recette_flan-de-poireaux-au-basilic_20885.aspx
+Pâtes aux noix et à la sauge	Lait	50	cl	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Pain de mie	100	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Ail	40	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Parmesan	40	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Sauge	5	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Cerneau de noix	50	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Poivre	1	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Sel	1	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Farfalle	300	g	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+Pâtes aux noix et à la sauge	Crème fraîche	20	cl	https://www.marmiton.org/recettes/recette_pates-aux-noix-et-a-la-sauge_35514.aspx
+gnocchi de patate douce	Farine de blé	140	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Fécule de pomme de terre	90	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Muscade	5	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Parmesan râpé	50	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Basilic	5	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Sel	1	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Poivre	1	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Patate douce	500	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Jaune d'oeuf	35	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Crème fraîche	60	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+gnocchi de patate douce	Beurre	50	g	https://www.marmiton.org/recettes/recette_gnocchi-de-patate-douce_392192.aspx
+Beignets végétariens à la tomate	Poivre	1	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Sel	1	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Flocons d'avoine	200	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Farine	30	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Lait	25	cl	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Persil	5	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Épices	5	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Sucre	20	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Herbes de provence	5	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Huile d'olive	30	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Oeuf	160	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Brique	100	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx
+Beignets végétariens à la tomate	Oignon	240	g	https://www.marmiton.org/recettes/recette_beignets-vegetariens-a-la-tomate_53417.aspx

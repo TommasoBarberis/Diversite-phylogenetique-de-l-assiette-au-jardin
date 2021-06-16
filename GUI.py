@@ -120,6 +120,7 @@ class MainWindow(tk.Tk):
             
             if file_name != ():
                 # parse the TSV file; TODO: control point
+
                 with open(file_name, "r", encoding="utf-8") as f:
                     lines = f.readlines()[1:] # skip the header
                     n_fields = len(lines[0].split("\t"))
@@ -963,11 +964,12 @@ class Results:
 
         # missing species
             missing_species_lb_frame = tk.Frame(info_frame, bg = "#2a9d8f")
-            found = 0
-            for sp in species.values():
-                if sp != "NA":
-                    found += 1
-            found_species = tk.Label(missing_species_lb_frame, text = str(found), font = ("Open Sans", 18, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
+
+            richness = len(set(species.values()))
+            if "NA" in species.values():
+                richness -= 1            
+
+            found_species = tk.Label(missing_species_lb_frame, text = str(richness), font = ("Open Sans", 18, "bold"), bg = "#2a9d8f", fg = "#f0efeb")
             found_species.grid(row = 0, column = 0, padx = 2)
             missing_species_lb_frame.grid_columnconfigure(1, weight = 1)
             
@@ -1157,13 +1159,13 @@ class Results:
             hover_color = "#B7B7A4", text_color = "#2c4160", command = lambda: self.copy_newick(var, recipes_dict, titles, ncbi))
         newick.pack(anchor = "center", pady = 10)
 
-        global_frame.update_idletasks()       
         global_frame.configure(width = main_canvas.winfo_reqwidth())
-        global_frame.pack(fill = "both", expand = 1, anchor = "center")
+        global_frame.pack(fill = "both", expand = 1, anchor = "center", pady = 20)
         main_canvas.configure(yscrollcommand = y_scrollbar.set, highlightthickness = 0)
 
     # Mousewheel
         global_frame.bind('<Configure>', lambda event: main_canvas.configure(scrollregion = main_canvas.bbox("all")))
+
         # LinuxOS
         global_frame.bind_all('<Button-4>', lambda event: main_canvas.yview('scroll', -1, 'units'))
         global_frame.bind_all('<Button-5>', lambda event: main_canvas.yview('scroll', 1, 'units'))
