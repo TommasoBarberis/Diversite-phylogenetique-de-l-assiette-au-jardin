@@ -1,0 +1,270 @@
+---
+title: "New recipes analysis"
+Author: "Tommaso"
+output: md_document
+---
+
+# Import libraries
+```{r include=FALSE}
+library(naniar)
+library(tidyr)
+library(dplyr)
+```
+
+# Collect data
+
+### Vegetarian
+```{r}
+dta_vege <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Vegetarian/vegetarian_results.tsv", header=TRUE, sep="\t", fill=T)
+summary(dta_vege)
+```
+
+### Top
+```{r}
+dta_top <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Top/top_results.tsv", header=TRUE, sep="\t", fill=T)
+summary(dta_top)
+```
+
+### Dessert
+```{r}
+dta_dessert <- read.csv("/home/tommaso/diversite-phylogenetique-de-l-assiette-au-jardin/results/Dessert/dessert_results.tsv", header=TRUE, sep="\t", fill=T)
+summary(dta_dessert)
+```
+
+# Removing "g" from "dry_matter" column
+```{r}
+remove_grams <- function (d) {
+  d$Dry_matter <- as.numeric(sapply(d$Dry_matter, sub, pattern=" g", replacement=""))
+  return(d)
+}
+dta_vege <- remove_grams(dta_vege)
+dta_top <- remove_grams(dta_top)
+dta_dessert <- remove_grams(dta_dessert)
+```
+
+# Trim and grouping by recipe
+```{r}
+trim_group_data <- function (d) {
+  return(
+    subset(d, Richness > 2) %>% group_by(Recipe)
+  )
+}
+
+vege_by_recipe <- trim_group_data(dta_vege)
+top_by_recipe <- trim_group_data(dta_top)
+dessert_by_recipe <- trim_group_data(dta_dessert)
+```
+
+# Summarize of recipes
+```{r}
+summarise_by_mean <- function (d) {
+  return( d %>% summarise(
+    Water = weighted.mean(x=Water, w=Dry_matter, na.rm = T), 
+    Glucides = weighted.mean(x=Glucides, w=Dry_matter, na.rm = T),
+    Lipids = weighted.mean(x=Lipids, w=Dry_matter, na.rm = T),
+    Proteins = weighted.mean(x=Proteins, w=Dry_matter, na.rm = T),
+    Phylogenetic_diversity = mean(Phylogenetic_diversity, na.rm = T),
+    Weighted_phylogenetic_diversity = mean(Weighted_phylogenetic_diversity, na.rm = T),
+    Richness = mean(Richness, na.rm = T),
+    Shannon = mean(Shannon, na.rm = T),
+    Simpson = mean(Simpson, na.rn = T)
+  )
+  )
+}
+
+vege_simple <- summarise_by_mean(vege_by_recipe)
+vege_simple$type <- "Vegetarian"
+top_simple <- summarise_by_mean(top_by_recipe)
+top_simple$type <- "Top"
+dessert_simple <- summarise_by_mean(dessert_by_recipe)
+dessert_simple$type <- "Dessert"
+```
+
+# Histograms
+
+### Phylogenetic diversity
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+hist(vege_simple$Phylogenetic_diversity, ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3))
+hist(top_simple$Phylogenetic_diversity, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Top")
+hist(dessert_simple$Phylogenetic_diversity, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Desserts")
+```
+
+### Weighted phylogenetic diversity
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+hist(vege_simple$Weighted_phylogenetic_diversity, ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3))
+hist(top_simple$Weighted_phylogenetic_diversity, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Top")
+hist(dessert_simple$Weighted_phylogenetic_diversity, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Desserts")
+```
+
+### Richness
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+bins <- seq(0, 20, by=2)
+hist(vege_simple$Richness, ylim=c(0, 20), xlim=c(0, 20), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3), breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20), labels=c(0,10,20))
+hist(top_simple$Richness, col=rgb(1, 0, 0, 0.3), ylim=c(0, 20), xlim=c(0, 20), main="", xlab="Top", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20), labels=c(0,10,20))
+hist(dessert_simple$Richness, col=rgb(0, 0, 1, 0.3), ylim=c(0, 20), xlim=c(0, 20), main="", xlab="Desserts", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20), labels=c(0,10,20))
+```
+
+### Shannon
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+bins <- seq(-10, 5, by=1)
+hist(vege_simple$Shannon, ylim=c(0, 20), xlim=c(-10, 5), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3), breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20), labels=c(0,10,20))
+
+hist(top_simple$Shannon, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(-10, 5), main="", xlab="Top", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20), labels=c(0,10,20))
+
+hist(dessert_simple$Shannon, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(-10, 5), main="", xlab="Desserts", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20), labels=c(0,10,20))
+```
+
+### Simpson
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+bins <- seq(0, 30, by=2)
+hist(vege_simple$Simpson, ylim=c(0, 30), xlim=c(0, 30), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3), breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20,30), labels=c(0,10,20,30))
+
+hist(top_simple$Simpson, col=rgb(1, 0, 0, 0.3), ylim=c(0, 30), xlim=c(0, 30), main="", xlab="Top", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20,30), labels=c(0,10,20,30))
+
+hist(dessert_simple$Simpson, col=rgb(0, 0, 1, 0.3), ylim=c(0, 30), xlim=c(0, 30), main="", xlab="Desserts", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,10,20,30), labels=c(0,10,20,30))
+```
+
+# Boxplot
+
+### Phylognetic diversity
+```{r}
+par(mfrow=c(1,1), mar=c(4,3,0,0))
+boxplot(vege_simple$Phylogenetic_diversity, top_simple$Phylogenetic_diversity, dessert_simple$Phylogenetic_diversity, col=c("green", "red", "blue"), names=c("Vegetarien", "top", "dessert"))
+```
+
+### Weighted phylogenetic diversity
+```{r}
+par(mfrow=c(1,1), mar=c(4,3,0,0))
+boxplot(vege_simple$Weighted_phylogenetic_diversity, top_simple$Weighted_phylogenetic_diversity, dessert_simple$Weighted_phylogenetic_diversity, col=c("green", "red", "blue"), names=c("Vegetarien", "top", "dessert"))
+```
+
+### Richness
+```{r}
+par(mfrow=c(1,1), mar=c(4,3,0,0))
+boxplot(vege_simple$Richness, top_simple$Richness, dessert_simple$Richness, col=c("green", "red", "blue"), names=c("Vegetarien", "top", "dessert"))
+```
+
+### Shannon
+```{r}
+par(mfrow=c(1,1), mar=c(4,3,0,0))
+boxplot(vege_simple$Shannon, top_simple$Shannon, dessert_simple$Shannon, col=c("green", "red", "blue"), names=c("Vegetarien", "top", "dessert"))
+```
+
+### Simpson
+```{r}
+par(mfrow=c(1,1), mar=c(4,3,0,0))
+boxplot(vege_simple$Simpson, top_simple$Simpson, dessert_simple$Simpson, col=c("green", "red", "blue"), names=c("Vegetarien", "top", "dessert"))
+```
+
+# Combining recipes
+```{r}
+all_simple <- rbind(vege_simple, top_simple, dessert_simple)
+```
+
+### Plot wheighted phylogenetic diversity by nutritional values
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+plot(all_simple$Glucides, all_simple$Weighted_phylogenetic_diversity, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Glucides")
+abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Glucides), lty=2, col="grey")
+plot(all_simple$Lipids, all_simple$Weighted_phylogenetic_diversity, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Lipides")
+abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Lipids), lty=2, col="grey")
+plot(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Protéines")
+abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Proteins), lty=2, col="grey")
+```
+
+### Correlation with sugars
+```{r}
+cor.test(all_simple$Glucides, all_simple$Phylogenetic_diversity)
+cor.test(all_simple$Glucides, all_simple$Weighted_phylogenetic_diversity)
+```
+
+### Correlation with lipides
+```{r}
+cor.test(all_simple$Lipids, all_simple$Phylogenetic_diversity)
+cor.test(all_simple$Lipids, all_simple$Weighted_phylogenetic_diversity)
+```
+
+### Correlation with proteins
+```{r}
+cor.test(all_simple$Proteins, all_simple$Phylogenetic_diversity)
+cor.test(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity)
+```
+
+# Linear model: can we explain phylogenetic diversity based on composition?
+```{r}
+linear_model <- lm(Phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
+summary(linear_model)
+```
+
+```{r}
+linear_model.p <- lm(Weighted_phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
+summary(linear_model.p)
+```
+
+# Link between phylogenetic diversity and richness
+```{r}
+plot(vege_simple$Richness, vege_simple$Phylogenetic_diversity, pch=20, col="green", ylab="Diversité Phylogénétique", xlab="Richesse"  )
+abline(lm(vege_simple$Phylogenetic_diversity ~ vege_simple$Richness), col="green")
+points(top_simple$Richness, top_simple$Phylogenetic_diversity, pch=20, col="red" )
+abline(lm(top_simple$Phylogenetic_diversity ~ top_simple$Richness), col="red")
+points(dessert_simple$Richness, dessert_simple$Phylogenetic_diversity, pch=20, col="blue")
+abline(lm(dessert_simple$Phylogenetic_diversity ~ dessert_simple$Richness), col="blue")
+```
+
+# Link between weighted phylogenetic diversity and richness
+```{r}
+plot(vege_simple$Richness, vege_simple$Weighted_phylogenetic_diversity, pch=20, col="green", ylab="Diversité Phylogénétique pondérée", xlab="Richesse")
+abline(lm(vege_simple$Weighted_phylogenetic_diversity ~ vege_simple$Richness), col="green")
+points(top_simple$Richness, top_simple$Weighted_phylogenetic_diversity, pch=20, col="red" )
+abline(lm(top_simple$Weighted_phylogenetic_diversity ~ top_simple$Richness), col="red")
+points(dessert_simple$Richness, dessert_simple$Weighted_phylogenetic_diversity, pch=20, col="blue")
+abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Richness), col="blue")
+```
+
+# Other plots
+
+### Vegetarian
+```{r}
+plot(vege_simple$Recipe, vege_simple$Weighted_phylogenetic_diversity, las=2)
+```
+
+### Top
+```{r}
+plot(top_simple$Recipe, top_simple$Weighted_phylogenetic_diversity, las=2)
+```
+
+### Dessert
+```{r}
+plot(dessert_simple$Recipe, dessert_simple$Weighted_phylogenetic_diversity, las=2)
+```
+
+## All samples
+```{r}
+plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type))
+legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
+```
+
+

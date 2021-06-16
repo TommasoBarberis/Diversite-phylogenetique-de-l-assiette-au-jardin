@@ -1,4 +1,4 @@
-Recipe	Ingredient	Specie	Quantity	Dry_matter	Energy	Water	Glucides	Lipids	Proteins	Richness	Phylogenetic_diversity	Wheighted_phylogenetic_diversity	Shannon	Simpson	URL
+Recipe	Ingredient	Specie	Quantity	Dry_matter	Energy	Water	Glucides	Lipids	Proteins	Richness	Phylogenetic_diversity	Weighted_phylogenetic_diversity	Shannon	Simpson	URL
 Gâteau au yaourt	Levure chimique	NA	3 g	2.84 g	NA	5.4	33.2	0.2	1.96	5	156.0	27.33	-8.0	27.86	https://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
 Gâteau au yaourt	Huile de colza	Brassica napus	50 cl	500.0 g	18500.0	0	0	100	0	5	156.0	27.33	-8.0	27.86	https://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
 Gâteau au yaourt	Sucre semoule	Saccharum	100 g	99.83 g	NA	0.17	99.8	0	0	5	156.0	27.33	-8.0	27.86	https://www.marmiton.org/recettes/recette_gateau-au-yaourt_12719.aspx
@@ -157,4 +157,3 @@ Clafoutis aux cerises express	Mascarpone	NA	200 g	97.0 g	NA	51.5	4	39	4.38	3	34.
 Clafoutis aux cerises express	Fromage blanc	NA	400 g	74.0 g	1472.0	81.5	5.68	4.31	7.1	3	34.0	11.55	1.02	0.19	https://www.marmiton.org/recettes/recette_clafoutis-aux-cerises-express_17365.aspx
 Clafoutis aux cerises express	Framboise	Rubus idaeus	150 g	19.8 g	309.0	86.8	5.83	0.8	1.19	3	34.0	11.55	1.02	0.19	https://www.marmiton.org/recettes/recette_clafoutis-aux-cerises-express_17365.aspx
 Clafoutis aux cerises express	Pêche	Prunus persica	200 g	22.8 g	NA	88.6	9	0.33	1.08	3	34.0	11.55	1.02	0.19	https://www.marmiton.org/recettes/recette_clafoutis-aux-cerises-express_17365.aspx
-

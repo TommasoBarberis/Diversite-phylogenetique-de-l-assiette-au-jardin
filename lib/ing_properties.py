@@ -170,7 +170,7 @@ def format_float(input_string):
 
 def write_tsv(file_name, recipes_dict):
     list_column = ["Recipe", "Ingredient", "Specie", "Quantity", "Dry_matter", "Energy", "Water", "Glucides", \
-        "Lipids", "Proteins", "Richness", "Phylogenetic_diversity", "Wheighted_phylogenetic_diversity", \
+        "Lipids", "Proteins", "Richness", "Phylogenetic_diversity", "Weighted_phylogenetic_diversity", \
         "Shannon", "Simpson", "URL"]
 
     with open(file_name, 'w', newline='') as tsvfile:

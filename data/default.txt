@@ -111,3 +111,7 @@ extrait de vanille/3063
 fromage blanc/2005
 coulis de fruits rouges/828
 alcool de poire/2511
+bar/1688
+chili/404
+pilon de poulet/1346
+rôti de porc/1196
