@@ -182,9 +182,9 @@ with open(html_name, "w") as html_page:
     <html>
         <head>
             <meta charset="utf-8">
-            <title>{html_name.replace("_", " ")}</title>
-            <link rel="stylesheet" href="{script_dir}/cli/css/style.css"> 
-            <script type="text/javascript" src="{script_dir}/cli/js/script.js"></script>
+            <title>{file_name.replace("_", " ")}</title>
+            <link rel="stylesheet" href="../cli/css/style.css"> 
+            <script type="text/javascript" src="../cli/js/script.js"></script>
         </head>
 
         <body onload="onLoad()">
@@ -192,13 +192,13 @@ with open(html_name, "w") as html_page:
                 <h1 id="page-title"> Diversité phylogénétique de l'assiette 
                     <div class="top-buttons-div">
                         <button type="button" class="btn" id="gitlab_button">
-                            <img src="{script_dir}/assets/gitlab.png" width="80%" height="80%">
+                            <img src="../assets/gitlab.png" width="80%" height="80%">
                         </button>
                         <button type="button" class="btn" id="ucbl_button">
-                            <img src="{script_dir}/assets/ucbl.png" width="80%" height="80%">
+                            <img src="../assets/ucbl.png" width="80%" height="80%">
                         </button>
                         <button type="button" class="btn" id="marmiton_button">
-                            <img src="{script_dir}/assets/marmiton.png" width="80%" height="80%">
+                            <img src="../assets/marmiton.png" width="80%" height="80%">
                         </button>
                     </div>
                 </h1>
@@ -234,7 +234,7 @@ with open(html_name, "w") as html_page:
                 <p><b>Weighted phylogenetic diversity: </b>{recipes_dict[url][4][1]}</p>
                 <p><b>Shannon's index: </b>{recipes_dict[url][4][2]}</p>
                 <p><b>Simpson's index: </b>{recipes_dict[url][4][3]}</p>
-                <iframe src="{script_dir}/cli/lifemap-frame/lifemap.html?lang=en&tid={recipes_dict[url][6]}&zoom=false&markers=true&tree=true&searchbar=false&clickableMarkers=true&zoomButton=true&colorLine=2a9d8f&opacityLine=0.8&weightLine=6" title="LifeMap frame from local file" width="80%" height="60%"></iframe>
+                <iframe src="../cli/lifemap-frame/lifemap.html?lang=en&tid={recipes_dict[url][6]}&zoom=false&markers=true&tree=true&searchbar=false&clickableMarkers=true&zoomButton=true&colorLine=2a9d8f&opacityLine=0.8&weightLine=6" title="LifeMap frame from local file" width="80%" height="60%"></iframe>
             </div>
         """)
     

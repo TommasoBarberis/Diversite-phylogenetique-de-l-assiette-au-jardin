@@ -50,11 +50,13 @@ Anas platyrhynchos	Confit de canard
 Anas platyrhynchos	Cou du canard
 Anas platyrhynchos	Cuisses de canard
 Anas platyrhynchos	Filet de canard
+Anas platyrhynchos	Foie gras
 Anas platyrhynchos	Foie gras de canard
 Anas platyrhynchos	Graisse de canard
 Anas platyrhynchos	Gésier de canard
 Anas platyrhynchos	Gésiers de canard
 Anas platyrhynchos	Magret de canard
+Anas platyrhynchos	Magret de canard fumé
 Anas platyrhynchos	Magrets de canard
 Anas platyrhynchos	Manchon de canard
 Anas platyrhynchos	Manchons de canard
@@ -77,6 +79,7 @@ Anser anser domesticus	Oie
 Anser anser domesticus	Viande d'oie
 Anthemis nobilis	Camomille romaine
 Anthriscus cerefolium	Cerfeuil
+Apis	Miel
 Apios americana	Glycine tubéreuse
 Apium graveolens	Céleri
 Apium graveolens	Céleri-rave
@@ -126,6 +129,7 @@ Beta vulgaris	Côte de bette
 Blitum bonus-henricus	Chénopode bon-Henri
 Borago officinalis	Bourrache
 Bos taurus	Bavette de boeuf
+Bos taurus	Béchamel
 Bos taurus	Beurre
 Bos taurus	Beurre doux
 Bos taurus	Beurre tendre
@@ -134,9 +138,13 @@ Bos taurus	Boeuf
 Bos taurus	Boeuf haché
 Bos taurus	Bœuf
 Bos taurus	Collier de veau
+Bos taurus	Comté
 Bos taurus	Crème
 Bos taurus	Crème fraiche
 Bos taurus	Crème fraîche
+Bos taurus	Crème fraîche allégée
+Bos taurus	Crème fraîche épaisse
+Bos taurus	Crème liquide
 Bos taurus	Côte de boeuf
 Bos taurus	Côte découverte de veau
 Bos taurus	Côte première de veau
@@ -154,9 +162,11 @@ Bos taurus	Filet de veau
 Bos taurus	Filet mignon
 Bos taurus	Filet mignon de boeuf
 Bos taurus	Flanchet de veau
+Bos taurus	Fromage blanc
 Bos taurus	Fromage râpé
 Bos taurus	Gîte de boeuf
 Bos taurus	Gîte de veau
+Bos taurus	Gruyère râpé
 Bos taurus	Hampe
 Bos taurus	Jarret de veau
 Bos taurus	Joue de boeuf
@@ -166,6 +176,8 @@ Bos taurus	Langue de boeuf
 Bos taurus	Langue de veau
 Bos taurus	Longe de veau
 Bos taurus	Longe filet de veau
+Bos taurus	Mascarpone
+Bos taurus	Maroilles
 Bos taurus	Mozzarella
 Bos taurus	Noix de veau
 Bos taurus	Noix pâtissière de veau
@@ -173,6 +185,7 @@ Bos taurus	Nous-noix de veau
 Bos taurus	Onglet de boeuf
 Bos taurus	Paleron de boeuf
 Bos taurus	Parmesan
+Bos taurus	Parmesan râpé
 Bos taurus	Poitrine de veau
 Bos taurus	Quasi de veau
 Bos taurus	Queue de boeuf
@@ -184,6 +197,7 @@ Bos taurus	Rôti de boeuf
 Bos taurus	Sauté de veau
 Bos taurus	Steak de boeuf
 Bos taurus	Steak haché de boeuf
+Bos taurus	Taleggio
 Bos taurus	Tende de tranche
 Bos taurus	Tendron de veau
 Bos taurus	Tendrons de veau
@@ -200,10 +214,13 @@ Bos taurus	beurre tendre
 Bos taurus	blanquette de veau
 Bos taurus	boeuf haché
 Bos taurus	lait demi-écrémé
-Bos taurus	yaourt
+Bos taurus	Yaourt
+Bos taurus	Yaourt nature
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
 Brassica juncea	Moutarde
+Brassica juncea	Moutarde de Djion
+Brassica juncea	Moutarde de djion
 Brassica juncea	Moutarde de Sarepta
 Brassica napus	Chou-navet
 Brassica napus	Colza
@@ -425,6 +442,7 @@ Gallus gallus	Aiguillette de poulet
 Gallus gallus	Aiguillettes de poulet
 Gallus gallus	Aileron de poulet
 Gallus gallus	Blanc d'oeuf
+Gallus gallus	Blanc de poulet
 Gallus gallus	Blancs de poulet
 Gallus gallus	Chapon
 Gallus gallus	Coquelet
@@ -637,6 +655,7 @@ Ovis aries	Collier d'agneau
 Ovis aries	Côtelette d'agneau
 Ovis aries	Côtelettes d'agneau
 Ovis aries	Feta
+Ovis aries	Fromage de chèvre
 Ovis aries	Filet d'agneau
 Ovis aries	Gigot d'agneau
 Ovis aries	Gigot raccourci
@@ -648,6 +667,7 @@ Ovis aries	Selle d'agneau
 Ovis aries	Souris d'agneau
 Ovis aries	Viande d'agneau
 Ovis aries	Viande de mouton
+Ovis aries	Épaule d'agneau
 Ovis aries	épaule d'agneau
 Ovis aries	épigramme
 Oxalis tuberosa	Oca du Pérou
@@ -683,10 +703,14 @@ Phaseolus multiflorus	Haricot écarlate
 Phaseolus vulgaris	Haricot
 Phaseolus vulgaris	Haricots de Bourbon
 Phaseolus vulgaris	Haricots verts
-Phaseolus vulgaris	haricot vert
-Phaseolus vulgaris	haricot verts
-Phaseolus vulgaris	haricots vert
-Phaseolus vulgaris	haricots verts
+Phaseolus vulgaris	Haricot vert
+Phaseolus vulgaris	Haricot verts
+Phaseolus vulgaris	Haricots vert
+Phaseolus vulgaris	Haricots verts
+Phaseolus vulgaris	Haricot rouge
+Phaseolus vulgaris	Haricots rouges
+Phaseolus vulgaris	haricots rouge
+Phaseolus vulgaris	Haricot rouges
 Phasianus colchicus	Faisan
 Phasianus colchicus	Poitrine de poule faisane
 Phasianus colchicus	Poule faisane
@@ -782,13 +806,15 @@ Saccharina latissima	Kombu
 Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
+Saccharum	Sirop de sucre de canne
 Saccharum	Sucre
 Saccharum	Sucre en grain
 Saccharum	Sucre en poudre
 Saccharum	Sucre fin
 Saccharum	Sucre semoule
 Saccharum	Sucre vanillé
-Saccharum	sucre
+Saccharum	Sucre
+Saccharum	Sucre glace
 Saccharum	sucre en poudre
 Saccharum	sucre fin
 Saccharum	sucre semoule
@@ -844,6 +870,7 @@ Solanum lycopersicum	Tomates
 Solanum lycopersicum	Tomates cerise
 Solanum lycopersicum	Tomates cerises
 Solanum lycopersicum	Tomates concassées
+Solanum lycopersicum	Tomates pelées
 Solanum lycopersicum	concentré de tomates
 Solanum lycopersicum	coulis de tomate
 Solanum lycopersicum	purée de tomate
@@ -875,6 +902,7 @@ Struthio camelus camelus	Autruche
 Struthio camelus camelus	Viande de autruche
 Sus scrofa	Bacon
 Sus scrofa	Chair à saucisse
+Sus scrofa	Lard fumé
 Sus scrofa	Lardons fumés
 Sus scrofa	Rôti de porc
 Sus scrofa	Sanglier
@@ -935,6 +963,7 @@ Tetragonia tetragonioides	Épinard de (la) Nouvelle-Zélande
 Theobroma cacao	Cacao
 Theobroma cacao	Cacao amer
 Theobroma cacao	Chocolat
+Theobroma cacao	Chocolat noir
 Theobroma cacao	Fève de cacao
 Theobroma cacao	cacaoyer
 Theragra chalcogramma	Colin
@@ -949,8 +978,19 @@ Trapa natans	Mâcre nageante
 Trichosanthes cucumerina	Serpent végétal
 Trigonella foenum-graecum	Fenugrec
 Trigonella foenum-graecum	Trigonelle Fenugrec
+Triticum	Biscuit
+Triticum	Biscuits
+Triticum	Biscuit à la cuillère
+Triticum	Chapelure
+Triticum	Farfalle
+Triticum	Farfalles
 Triticum	Semoule
-Triticum	farine de blé
+Triticum	Lasagnes
+Triticum	Farine de blé
+Triticum	Pain d'épices
+Triticum	Pain de mie
+Triticum	Pain pour hamburger
+Triticum	Pâte feuilletée
 Triticum aestivum	Farine
 Triticum durum	Boulgour
 Triticum turgidum	Farine de blé
@@ -997,6 +1037,7 @@ Vitis	Vin blanc
 Vitis	Vin blanc sec
 Vitis	Vin rouge
 Vitis	Vinaigre balsamique
+Vitis	Vinaigre de xérès
 Vitis	vin rouge
 Vitis rotundifolia	Raisin
 Vitis rotundifolia	Vigne à feuilles rondes

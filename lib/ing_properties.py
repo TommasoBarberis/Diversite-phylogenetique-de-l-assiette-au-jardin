@@ -214,7 +214,7 @@ def write_tsv(file_name, recipes_dict):
                     if isinstance(dry_qty, list):
                         dry_qty = str(dry_qty[0]) + " " + dry_qty[1]
                     try:
-                        cal = (float(dict_nut[ing.capitalize()][1].replace(",", ".")) * float(convert_to_g(ingredients[ing][1], ingredients[ing][2][0]))) / 100
+                        cal = float(dict_nut[ing.capitalize()][1].replace(",", ".")) # * float(convert_to_g(ingredients[ing][1], ingredients[ing][2][0]))) / 100
                     except:
                         cal = "NA"
                     water = dict_nut[ing.capitalize()][2].replace(",", ".")
@@ -262,7 +262,7 @@ def build_table(ingredients, species, dict_nut, drym, recipe_title):
         if ing.capitalize() in dict_nut.keys():
             try:
                 qtt = convert_to_g(ingredients[ing][1], ingredients[ing][2][0])
-                cal_val = (float(dict_nut[ing.capitalize()][1]) * float(qtt)) / 100
+                cal_val = float(dict_nut[ing.capitalize()][1]) #* float(qtt)) / 100
             except:
                 cal_val = "NA"
                     

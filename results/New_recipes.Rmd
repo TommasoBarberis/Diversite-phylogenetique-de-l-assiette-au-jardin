@@ -59,10 +59,11 @@ dessert_by_recipe <- trim_group_data(dta_dessert)
 ```{r}
 summarise_by_mean <- function (d) {
   return( d %>% summarise(
-    Water = weighted.mean(x=Water, w=Dry_matter, na.rm = T), 
+    Water = mean(x=Water, na.rm = T), 
     Glucides = weighted.mean(x=Glucides, w=Dry_matter, na.rm = T),
     Lipids = weighted.mean(x=Lipids, w=Dry_matter, na.rm = T),
     Proteins = weighted.mean(x=Proteins, w=Dry_matter, na.rm = T),
+    Energy =  weighted.mean(x=Energy, w=Dry_matter, na.rm = T), 
     Phylogenetic_diversity = mean(Phylogenetic_diversity, na.rm = T),
     Weighted_phylogenetic_diversity = mean(Weighted_phylogenetic_diversity, na.rm = T),
     Richness = mean(Richness, na.rm = T),
@@ -213,6 +214,15 @@ cor.test(all_simple$Proteins, all_simple$Phylogenetic_diversity)
 cor.test(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity)
 ```
 
+
+
+### Correlation with energy
+```{r}
+cor.test(all_simple$Energy, all_simple$Phylogenetic_diversity)
+cor.test(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity)
+```
+
+
 # Linear model: can we explain phylogenetic diversity based on composition?
 ```{r}
 linear_model <- lm(Phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
@@ -223,6 +233,13 @@ summary(linear_model)
 linear_model.p <- lm(Weighted_phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
 summary(linear_model.p)
 ```
+
+```{r}
+all_simple$type <- as.factor(all_simple$type)
+linear_model <- lm(Weighted_phylogenetic_diversity ~ Water + Glucides + Proteins + Lipids + Energy + type, data=all_simple)
+summary(linear_model)
+```
+
 
 # Link between phylogenetic diversity and richness
 ```{r}

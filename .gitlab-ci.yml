@@ -6,13 +6,26 @@ before_script:
   
 # different stages in the pipeline
 stages:
-  - Test
+  - test
+  - deploy
   
 pytest:
-  stage: Test
+  stage: test
   script:
   - pip3 install -r requirements.txt
   - export PYTHONPATH="$PYTHONPATH:."
   - python -c "import sys;print(sys.path)"
   - coverage run -m pytest
   - coverage report
+
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+     - public
+  only:
+   - dev
