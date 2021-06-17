@@ -243,8 +243,29 @@ with open(html_name, "w") as html_page:
     </html>
 """)
 
-file_name = file_name[1:] + "/data.tsv"
-ing_properties.write_tsv(file_name, recipes_dict)
+
+# create tsv file
+if "/" in file_name:
+    tsv_file = file_name[1:] + "/data.tsv"
+else:
+    tsv_file = file_name + "/data.tsv"
+
+ing_properties.write_tsv(tsv_file, recipes_dict)
+
+
+# create Newick file
+if "/" in file_name:
+    newick_file = file_name[1:] + "/Tree.txt"
+else:
+    newick_file = file_name + "/Tree.txt"
+
+for recipe in recipes_dict:
+    list_ID = recipes_dict[recipe][6].split(",")
+    header = "> " +  recipes_dict[recipe][5]
+    tree = get_lifeMap_subTree.build_tree_output(list_ID)
+    with open(newick_file, "a") as t:
+        t.write(header + "\n" + tree + "\n\n")
+
 
 # keep only last 1000 lines of the log file
 try:

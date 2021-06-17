@@ -125,6 +125,11 @@ def build_tree(species):
     tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
     return tree
 
+def build_tree_output(list_ID):
+    tree = ncbi.get_topology((list_ID), intermediate_nodes = False)
+    tree = tree.write(format = 100, features = ["sci_name"]).replace('[&&NHX:sci_name=', '').replace(']', '')
+    return tree
+
 
 if  __name__ == "__main__":
     species = {"boeuf": "Bos taurus", "poulet":"Gallus gallus", "poivre": "Piper nigrum"}

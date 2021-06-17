@@ -21,3 +21,9 @@ def test_buildTree():
     tree = lm.build_tree(species)
     assert isinstance(tree, str)
     assert ";" in tree
+
+def test_buildTreeOutput():
+    species = [4681, 9913, 39350, 13216, 4113]
+    tree = lm.build_tree_output(species)
+    assert isinstance(tree, str)
+    assert ";" in tree
