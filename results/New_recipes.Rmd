@@ -86,17 +86,32 @@ dessert_simple$type <- "Dessert"
 ### Phylogenetic diversity
 ```{r}
 par(mfrow=c(3,1), mar=c(4,3,0,0))
-hist(vege_simple$Phylogenetic_diversity, ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3))
-hist(top_simple$Phylogenetic_diversity, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Top")
-hist(dessert_simple$Phylogenetic_diversity, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Desserts")
+bins <- seq(0, 500, by=50)
+hist(vege_simple$Phylogenetic_diversity, ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3), breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,5,10,15), labels=c(0,5,10,15))
+hist(top_simple$Phylogenetic_diversity, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Top", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,5,10,15), labels=c(0,5,10,15))
+hist(dessert_simple$Phylogenetic_diversity, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(50, 350), main="", xlab="Desserts", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,5,10,15), labels=c(0,5,10,15))
+
 ```
 
 ### Weighted phylogenetic diversity
 ```{r}
 par(mfrow=c(3,1), mar=c(4,3,0,0))
-hist(vege_simple$Weighted_phylogenetic_diversity, ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3))
-hist(top_simple$Weighted_phylogenetic_diversity, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Top")
-hist(dessert_simple$Weighted_phylogenetic_diversity, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Desserts")
+bins <- seq(0, 50, by=5)
+hist(vege_simple$Weighted_phylogenetic_diversity, ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3), breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,5,10,15), labels=c(0,5,10,15))
+hist(top_simple$Weighted_phylogenetic_diversity, col=rgb(1, 0, 0, 0.3), ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Top", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,5,10,15), labels=c(0,5,10,15))
+hist(dessert_simple$Weighted_phylogenetic_diversity, col=rgb(0, 0, 1, 0.3), ylim=c(0, 15), xlim=c(0, 60), main="", xlab="Desserts", breaks=bins, axes=F)
+axis(side=1, at=bins, labels=bins)
+axis(side=2, at=c(0,5,10,15), labels=c(0,5,10,15))
 ```
 
 ### Richness
