@@ -1,0 +1,135 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+vege <- read.csv("../results/Vegetarian/vegetarian_results.tsv", sep="\t", h=T, fill=T)
+dessert <- read.csv("../results/Dessert/dessert_results.tsv", sep="\t", h=T, fill=T)
+top <- read.csv("../results/Top/top_results.tsv", sep="\t", h=T, fill=T)
+
+
+
+```
+
+```{r}
+
+library(naniar)
+library(tidyr)
+
+#vege <- vege %>% replace_with_na(replace = list(Matière.sèche..g.="-", Eau....="-", Glucides....="-", Lipides....="-", Protéines....="-"))
+
+```
+
+# Remove "g" from Matière_sèche
+
+```{r}
+remove_grams <- function (d) {
+d$Matière_sèche <- as.numeric(sapply(d$Matière_sèche, sub, pattern=" g", replacement=""))
+return(d)
+}
+```
+
+```{r}
+vege<-remove_grams(vege)
+top<-remove_grams(top)
+dessert<-remove_grams(dessert)
+```
+
+
+```{r}
+summary(vege)
+```
+
+
+# Grouping by recipe
+```{r}
+library(dplyr)
+vege_by_recipe <- vege %>% group_by(Recette)
+top_by_recipe <- top %>% group_by(Recette)
+dessert_by_recipe <- dessert %>% group_by(Recette)
+```
+
+
+```{r}
+summarise_by_mean <- function (d) {
+return( d %>% summarise(
+  Eau = weighted.mean(x=Eau, w=Matière_sèche, na.rm = T), 
+  Glucides = weighted.mean(x=Glucides, w=Matière_sèche, na.rm = T),
+  Lipides = weighted.mean(x=Lipides, w=Matière_sèche, na.rm = T),
+  Protéines = weighted.mean(x=Protéines, w=Matière_sèche, na.rm = T),
+  Diversité.phylogénétique = mean(Diversité.phylogénétique, w=Matière_sèche, na.rm = T)
+)
+)
+}
+```
+
+```{r}
+vege_simple <- summarise_by_mean(vege_by_recipe)
+dessert_simple <- summarise_by_mean(dessert_by_recipe)
+top_simple <- summarise_by_mean(top_by_recipe)
+```
+
+
+
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+hist(vege_simple$Diversité.phylogénétique, ylim=c(0, 8), xlim=c(50, 350), main="", xlab="Vegetarian", col=rgb(0,1,0,0.3))
+hist(top_simple$Diversité.phylogénétique, col=rgb(1, 0, 0, 0.3), ylim=c(0, 8), xlim=c(50, 350), main="", xlab="Top")
+hist(dessert_simple$Diversité.phylogénétique, col=rgb(0, 0, 1, 0.3), ylim=c(0, 8), xlim=c(50, 350), main="", xlab="Desserts")
+```
+
+```{r}
+boxplot(vege_simple$Diversité.phylogénétique, top$Diversité.phylogénétique, dessert$Diversité.phylogénétique, label=c("Vegetarien", "top", "dessert"), col=c("green", "red", "blue"))
+```
+# Trouver une valeur particulière : 
+
+```{r}
+vege_simple$Recette[which(vege_simple$Diversité.phylogénétique > 300)]
+```
+
+
+# Combining recipes
+
+```{r}
+all_simple <- rbind(vege_simple, top_simple, dessert_simple)
+```
+
+
+
+```{r}
+par(mfrow=c(3,1), mar=c(4,3,0,0))
+plot(all_simple$Glucides, all_simple$Diversité.phylogénétique, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique", main="", xlab="Glucides")
+abline(lm(all_simple$Diversité.phylogénétique ~ all_simple$Glucides), lty=2, col="grey")
+plot(all_simple$Lipides, all_simple$Diversité.phylogénétique, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique", main="", xlab="Lipides")
+plot(all_simple$Protéines, all_simple$Diversité.phylogénétique, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique", main="", xlab="Protéines")
+```
+```{r}
+cor.test (all_simple$Glucides, all_simple$Diversité.phylogénétique)
+```
+
+# Linear model: can we explain phylogenetic diversity based on composition?
+
+```{r}
+linear_model <- lm(Diversité.phylogénétique ~ Glucides + Protéines + Lipides, data=all_simple)
+summary(linear_model)
+```
+
+
+
+
+```{r}
+plot(vege_simple$Protéines...., vege_simple$Diversité.phylogénétique, pch=20, col=rgb(0,0,0, 0.3))
+
+```
+
+```{r}
+cor.test(vege_simple$Glucides...., vege_simple$Protéines....)
+```
+
+# Not found ingredients
+```{r}
+
+```
+
+
