@@ -348,13 +348,25 @@ Combining recipes
 
 ### Plot wheighted phylogenetic diversity by nutritional values
 
-    par(mfrow=c(3,1), mar=c(4,3,0,0))
-    plot(all_simple$Glucides, all_simple$Weighted_phylogenetic_diversity, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Glucides")
+    par(mfrow=c(3,2), mar=c(4,3,0,0))
+
+    plot(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), main="", xlab="Energy")
+    abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Energy), lty=2, col="grey")
+
+    plot(all_simple$Water, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), main="", xlab="Water")
     abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Glucides), lty=2, col="grey")
-    plot(all_simple$Lipids, all_simple$Weighted_phylogenetic_diversity, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Lipides")
+
+    plot(all_simple$Glucides, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), main="", xlab="Glucides")
     abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Lipids), lty=2, col="grey")
-    plot(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity, pch=20, col=rgb(0,0,0, 0.3), ylab="Diversité phylogénétique pondérée", main="", xlab="Protéines")
+
+    plot(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Diversité phylogénétique pondérée", main="", xlab="Proteins")
     abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Proteins), lty=2, col="grey")
+
+    plot(all_simple$Lipids, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), main="", xlab="Lipids")
+    abline(lm(all_simple$Weighted_phylogenetic_diversity ~ all_simple$Lipids), lty=2, col="grey")
+
+    plot.new()
+    legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
 
 ![](New_recipes_files/figure-markdown_strict/unnamed-chunk-19-1.png)
 
