@@ -224,6 +224,18 @@ plot.new()
 legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
 ```
 
+### Correlation with energy
+```{r}
+cor.test(all_simple$Energy, all_simple$Phylogenetic_diversity)
+cor.test(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity)
+```
+
+### Correlation with watere
+```{r}
+cor.test(all_simple$Water, all_simple$Phylogenetic_diversity)
+cor.test(all_simple$Water, all_simple$Weighted_phylogenetic_diversity)
+```
+
 ### Correlation with sugars
 ```{r}
 cor.test(all_simple$Glucides, all_simple$Phylogenetic_diversity)
@@ -242,13 +254,6 @@ cor.test(all_simple$Proteins, all_simple$Phylogenetic_diversity)
 cor.test(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity)
 ```
 
-
-
-### Correlation with energy
-```{r}
-cor.test(all_simple$Energy, all_simple$Phylogenetic_diversity)
-cor.test(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity)
-```
 
 
 # Linear model: can we explain phylogenetic diversity based on composition?

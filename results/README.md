@@ -370,6 +370,66 @@ Combining recipes
 
 ![](New_recipes_files/figure-markdown_strict/unnamed-chunk-19-1.png)
 
+### Correlation with energy
+
+    cor.test(all_simple$Energy, all_simple$Phylogenetic_diversity)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  all_simple$Energy and all_simple$Phylogenetic_diversity
+    ## t = 0.14135, df = 78, p-value = 0.888
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.2044332  0.2348935
+    ## sample estimates:
+    ##        cor 
+    ## 0.01600252
+
+    cor.test(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  all_simple$Energy and all_simple$Weighted_phylogenetic_diversity
+    ## t = 1.0248, df = 70, p-value = 0.309
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.1132858  0.3435655
+    ## sample estimates:
+    ##       cor 
+    ## 0.1215734
+
+### Correlation with watere
+
+    cor.test(all_simple$Water, all_simple$Phylogenetic_diversity)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  all_simple$Water and all_simple$Phylogenetic_diversity
+    ## t = 0.94234, df = 84, p-value = 0.3487
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.1120240  0.3074908
+    ## sample estimates:
+    ##       cor 
+    ## 0.1022789
+
+    cor.test(all_simple$Water, all_simple$Weighted_phylogenetic_diversity)
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  all_simple$Water and all_simple$Weighted_phylogenetic_diversity
+    ## t = -1.7626, df = 76, p-value = 0.08198
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  -0.40293918  0.02547591
+    ## sample estimates:
+    ##        cor 
+    ## -0.1981784
+
 ### Correlation with sugars
 
     cor.test(all_simple$Glucides, all_simple$Phylogenetic_diversity)
@@ -459,36 +519,6 @@ Combining recipes
     ## sample estimates:
     ##        cor 
     ## 0.06206846
-
-### Correlation with energy
-
-    cor.test(all_simple$Energy, all_simple$Phylogenetic_diversity)
-
-    ## 
-    ##  Pearson's product-moment correlation
-    ## 
-    ## data:  all_simple$Energy and all_simple$Phylogenetic_diversity
-    ## t = 0.14135, df = 78, p-value = 0.888
-    ## alternative hypothesis: true correlation is not equal to 0
-    ## 95 percent confidence interval:
-    ##  -0.2044332  0.2348935
-    ## sample estimates:
-    ##        cor 
-    ## 0.01600252
-
-    cor.test(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity)
-
-    ## 
-    ##  Pearson's product-moment correlation
-    ## 
-    ## data:  all_simple$Energy and all_simple$Weighted_phylogenetic_diversity
-    ## t = 1.0248, df = 70, p-value = 0.309
-    ## alternative hypothesis: true correlation is not equal to 0
-    ## 95 percent confidence interval:
-    ##  -0.1132858  0.3435655
-    ## sample estimates:
-    ##       cor 
-    ## 0.1215734
 
 Linear model: can we explain phylogenetic diversity based on composition?
 =========================================================================
@@ -586,7 +616,7 @@ Link between phylogenetic diversity and richness
     points(dessert_simple$Richness, dessert_simple$Phylogenetic_diversity, pch=20, col="blue")
     abline(lm(dessert_simple$Phylogenetic_diversity ~ dessert_simple$Richness), col="blue")
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-27-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
 
 Link between weighted phylogenetic diversity and richness
 =========================================================
@@ -598,7 +628,7 @@ Link between weighted phylogenetic diversity and richness
     points(dessert_simple$Richness, dessert_simple$Weighted_phylogenetic_diversity, pch=20, col="blue")
     abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Richness), col="blue")
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-1.png)
 
 Other plots
 ===========
@@ -607,19 +637,19 @@ Other plots
 
     plot(vege_simple$Recipe, vege_simple$Weighted_phylogenetic_diversity, las=2)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-30-1.png)
 
 ### Top
 
     plot(top_simple$Recipe, top_simple$Weighted_phylogenetic_diversity, las=2)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-30-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-31-1.png)
 
 ### Dessert
 
     plot(dessert_simple$Recipe, dessert_simple$Weighted_phylogenetic_diversity, las=2)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-31-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-32-1.png)
 
 All samples
 -----------
@@ -627,4 +657,4 @@ All samples
     plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type), ylab="Weighted phylogenetic diversity")
     legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-32-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-33-1.png)
