@@ -295,7 +295,7 @@ plot(dessert_simple$Recipe, dessert_simple$Weighted_phylogenetic_diversity, las=
 
 ## All samples
 ```{r}
-plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type))
+plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type), ylab="Weighted phylogenetic diversity")
 legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
 ```
 

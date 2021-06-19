@@ -612,7 +612,7 @@ Other plots
 All samples
 -----------
 
-    plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type))
+    plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type), ylab="Weighted phylogenetic diversity")
     legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
 
 ![](New_recipes_files/figure-markdown_strict/unnamed-chunk-32-1.png)
