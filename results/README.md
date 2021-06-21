@@ -558,96 +558,10 @@ Combining recipes
 Linear model: can we explain phylogenetic diversity based on composition?
 =========================================================================
 
-    linear_model <- lm(Phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
-    summary(linear_model)
-
-    ## 
-    ## Call:
-    ## lm(formula = Phylogenetic_diversity ~ Glucides + Proteins + Lipids, 
-    ##     data = all_simple)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -104.917  -42.580   -7.903   39.044  119.525 
-    ## 
-    ## Coefficients:
-    ##              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept) 215.89201   23.25585   9.283 4.86e-14 ***
-    ## Glucides     -0.42513    0.36592  -1.162    0.249    
-    ## Proteins      0.06126    1.51208   0.041    0.968    
-    ## Lipids       -0.51211    0.56238  -0.911    0.365    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 56.67 on 74 degrees of freedom
-    ##   (8 observations deleted due to missingness)
-    ## Multiple R-squared:  0.03011,    Adjusted R-squared:  -0.009207 
-    ## F-statistic: 0.7658 on 3 and 74 DF,  p-value: 0.5168
-
-    linear_model.p <- lm(Weighted_phylogenetic_diversity ~ Energy + Water + Glucides + Proteins + Lipids + type, data=all_simple)
-    summary(linear_model.p)
-
-    ## 
-    ## Call:
-    ## lm(formula = Weighted_phylogenetic_diversity ~ Energy + Water + 
-    ##     Glucides + Proteins + Lipids + type, data = all_simple)
-    ## 
-    ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -11.957  -4.421   0.744   4.775   9.709 
-    ## 
-    ## Coefficients:
-    ##                  Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)     43.965547   7.547805   5.825 2.20e-07 ***
-    ## Energy           0.001455   0.002243   0.649 0.518853    
-    ## Water           -0.031896   0.083224  -0.383 0.702841    
-    ## Glucides        -0.176164   0.077170  -2.283 0.025884 *  
-    ## Proteins         0.356276   0.210972   1.689 0.096293 .  
-    ## Lipids          -0.115770   0.106973  -1.082 0.283339    
-    ## typeTop        -13.233486   3.282596  -4.031 0.000154 ***
-    ## typeVegetarian -13.505177   2.495194  -5.412 1.07e-06 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 5.614 on 62 degrees of freedom
-    ##   (16 observations deleted due to missingness)
-    ## Multiple R-squared:  0.3815, Adjusted R-squared:  0.3117 
-    ## F-statistic: 5.464 on 7 and 62 DF,  p-value: 6.404e-05
-
-    linear_model.p <- lm(Phylogenetic_diversity ~ Energy + Water + Glucides + Proteins + Lipids + type, data=all_simple)
-    summary(linear_model.p)
-
-    ## 
-    ## Call:
-    ## lm(formula = Phylogenetic_diversity ~ Energy + Water + Glucides + 
-    ##     Proteins + Lipids + type, data = all_simple)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -106.736  -43.274   -0.055   41.223  103.902 
-    ## 
-    ## Coefficients:
-    ##                 Estimate Std. Error t value Pr(>|t|)  
-    ## (Intercept)    145.68979   67.81927   2.148   0.0352 *
-    ## Energy           0.03165    0.02078   1.523   0.1322  
-    ## Water            0.36643    0.72497   0.505   0.6148  
-    ## Glucides        -0.02163    0.72205  -0.030   0.9762  
-    ## Proteins        -0.12523    1.76614  -0.071   0.9437  
-    ## Lipids          -1.45234    0.99377  -1.461   0.1484  
-    ## typeTop         33.73761   27.20449   1.240   0.2191  
-    ## typeVegetarian  35.62184   21.06972   1.691   0.0953 .
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 55.81 on 70 degrees of freedom
-    ##   (8 observations deleted due to missingness)
-    ## Multiple R-squared:  0.1101, Adjusted R-squared:  0.02116 
-    ## F-statistic: 1.238 on 7 and 70 DF,  p-value: 0.2942
-
     keep <- subset(all_simple, select=c("Weighted_phylogenetic_diversity", "Energy", "Water", "Glucides", "Lipids", "Proteins"))
     plot(keep)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-25-1.png)
 
     linear_model <- lm(Weighted_phylogenetic_diversity ~Water + Glucides + Proteins + Lipids + Energy + type, data=all_simple)
     summary(linear_model)
@@ -679,9 +593,25 @@ Linear model: can we explain phylogenetic diversity based on composition?
     ## Multiple R-squared:  0.3815, Adjusted R-squared:  0.3117 
     ## F-statistic: 5.464 on 7 and 62 DF,  p-value: 6.404e-05
 
+    confint(linear_model, conf.level=0.95)
+
+    ##                        2.5 %       97.5 %
+    ## (Intercept)     28.877699169 59.053395460
+    ## Water           -0.198259634  0.134467007
+    ## Glucides        -0.330425757 -0.021902526
+    ## Proteins        -0.065450121  0.778002431
+    ## Lipids          -0.329604615  0.098065504
+    ## Energy          -0.003028228  0.005938656
+    ## typeTop        -19.795301417 -6.671669677
+    ## typeVegetarian -18.492999999 -8.517354977
+
+    plot(linear_model$residuals, pch=16, col="red")
+
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-25-2.png)
+
     plot(linear_model)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-2.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-3.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-4.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-5.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-25-3.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-25-4.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-25-5.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-25-6.png)
 
     linear_model <- lm(Weighted_phylogenetic_diversity ~ type, data=all_simple)
     summary(linear_model)
@@ -707,21 +637,29 @@ Linear model: can we explain phylogenetic diversity based on composition?
     ## Multiple R-squared:  0.2902, Adjusted R-squared:  0.2713 
     ## F-statistic: 15.34 on 2 and 75 DF,  p-value: 2.609e-06
 
-    plot(linear_model)
+    plot(linear_model$residuals)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-1.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-2.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-3.png)![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-4.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-26-1.png)
 
 Link between phylogenetic diversity and richness
 ================================================
 
     plot(all_simple$Richness, all_simple$Phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Diversité Phylogénétique", xlab="Richesse"  )
+
     abline(lm(vege_simple$Phylogenetic_diversity ~ vege_simple$Richness), col="green")
-    #points(top_simple$Richness, top_simple$Phylogenetic_diversity, pch=20, col="red" )
     abline(lm(top_simple$Phylogenetic_diversity ~ top_simple$Richness), col="red")
-    #points(dessert_simple$Richness, dessert_simple$Phylogenetic_diversity, pch=20, col="blue")
     abline(lm(dessert_simple$Phylogenetic_diversity ~ dessert_simple$Richness), col="black")
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-30-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-27-1.png) \#
+Link between phylogenetic diversity and weighted phylogenetic diversity
+
+    plot(all_simple$Phylogenetic_diversity, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Weighted phylogenetic diversity", xlab="Phylogenetic diversity")
+
+    abline(lm(vege_simple$Weighted_phylogenetic_diversity ~ vege_simple$Phylogenetic_diversity), col="green")
+    abline(lm(top_simple$Weighted_phylogenetic_diversity ~ top_simple$Phylogenetic_diversity), col="red")
+    abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Phylogenetic_diversity), col="black")
+
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
 
 Link between weighted phylogenetic diversity and richness
 =========================================================
@@ -733,7 +671,7 @@ Link between weighted phylogenetic diversity and richness
     #points(dessert_simple$Richness, dessert_simple$Weighted_phylogenetic_diversity, pch=20, col="blue")
     abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Richness), col="black")
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-31-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-29-1.png)
 
 Other plots
 ===========
@@ -742,19 +680,19 @@ Other plots
 
     plot(vege_simple$Recipe, vege_simple$Weighted_phylogenetic_diversity, las=2)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-32-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-30-1.png)
 
 ### Top
 
     plot(top_simple$Recipe, top_simple$Weighted_phylogenetic_diversity, las=2)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-33-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-31-1.png)
 
 ### Dessert
 
     plot(dessert_simple$Recipe, dessert_simple$Weighted_phylogenetic_diversity, las=2)
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-34-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-32-1.png)
 
 All samples
 -----------
@@ -762,4 +700,4 @@ All samples
     plot(all_simple$Weighted_phylogenetic_diversity, col=factor(all_simple$type), ylab="Weighted phylogenetic diversity")
     legend(x="bottomright", legend=unique(all_simple$type), fill=c("green", "red", "black"))
 
-![](New_recipes_files/figure-markdown_strict/unnamed-chunk-35-1.png)
+![](New_recipes_files/figure-markdown_strict/unnamed-chunk-33-1.png)

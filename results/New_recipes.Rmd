@@ -259,46 +259,44 @@ cor.test(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity)
 
 # Linear model: can we explain phylogenetic diversity based on composition?
 ```{r}
-linear_model <- lm(Phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
-summary(linear_model)
-```
-
-```{r} 
-linear_model.p <- lm(Weighted_phylogenetic_diversity ~ Energy + Water + Glucides + Proteins + Lipids + type, data=all_simple)
-summary(linear_model.p)
-```
-```{r}
-linear_model.p <- lm(Phylogenetic_diversity ~ Energy + Water + Glucides + Proteins + Lipids + type, data=all_simple)
-summary(linear_model.p)
-```
-
-
-```{r}
 keep <- subset(all_simple, select=c("Weighted_phylogenetic_diversity", "Energy", "Water", "Glucides", "Lipids", "Proteins"))
 plot(keep)
+
 linear_model <- lm(Weighted_phylogenetic_diversity ~Water + Glucides + Proteins + Lipids + Energy + type, data=all_simple)
 summary(linear_model)
+confint(linear_model, conf.level=0.95)
+plot(linear_model$residuals, pch=16, col="red")
 
 plot(linear_model)
 ```
+
+
 
 ```{r}
 linear_model <- lm(Weighted_phylogenetic_diversity ~ type, data=all_simple)
 summary(linear_model)
 
-plot(linear_model)
+plot(linear_model$residuals)
 ```
 
 
 # Link between phylogenetic diversity and richness
 ```{r}
 plot(all_simple$Richness, all_simple$Phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Diversité Phylogénétique", xlab="Richesse"  )
+
 abline(lm(vege_simple$Phylogenetic_diversity ~ vege_simple$Richness), col="green")
-#points(top_simple$Richness, top_simple$Phylogenetic_diversity, pch=20, col="red" )
 abline(lm(top_simple$Phylogenetic_diversity ~ top_simple$Richness), col="red")
-#points(dessert_simple$Richness, dessert_simple$Phylogenetic_diversity, pch=20, col="blue")
 abline(lm(dessert_simple$Phylogenetic_diversity ~ dessert_simple$Richness), col="black")
 ```
+# Link between phylogenetic diversity and weighted phylogenetic diversity
+```{r}
+plot(all_simple$Phylogenetic_diversity, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Weighted phylogenetic diversity", xlab="Phylogenetic diversity")
+
+abline(lm(vege_simple$Weighted_phylogenetic_diversity ~ vege_simple$Phylogenetic_diversity), col="green")
+abline(lm(top_simple$Weighted_phylogenetic_diversity ~ top_simple$Phylogenetic_diversity), col="red")
+abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Phylogenetic_diversity), col="black")
+```
+
 
 # Link between weighted phylogenetic diversity and richness
 ```{r}
