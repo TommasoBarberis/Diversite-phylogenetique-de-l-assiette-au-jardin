@@ -199,6 +199,7 @@ boxplot(vege_simple$Simpson, top_simple$Simpson, dessert_simple$Simpson, col=c("
 ```{r}
 all_simple <- rbind(vege_simple, top_simple, dessert_simple)
 all_simple$type <- as.factor(all_simple$type)
+summary(all_simple)
 ```
 
 ### Plot wheighted phylogenetic diversity by nutritional values
@@ -231,7 +232,7 @@ cor.test(all_simple$Energy, all_simple$Phylogenetic_diversity)
 cor.test(all_simple$Energy, all_simple$Weighted_phylogenetic_diversity)
 ```
 
-### Correlation with watere
+### Correlation with water
 ```{r}
 cor.test(all_simple$Water, all_simple$Phylogenetic_diversity)
 cor.test(all_simple$Water, all_simple$Weighted_phylogenetic_diversity)
@@ -254,7 +255,6 @@ cor.test(all_simple$Lipids, all_simple$Weighted_phylogenetic_diversity)
 cor.test(all_simple$Proteins, all_simple$Phylogenetic_diversity)
 cor.test(all_simple$Proteins, all_simple$Weighted_phylogenetic_diversity)
 ```
-
 
 
 # Linear model: can we explain phylogenetic diversity based on composition?

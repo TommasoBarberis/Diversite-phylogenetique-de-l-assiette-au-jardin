@@ -346,6 +346,40 @@ Combining recipes
 
     all_simple <- rbind(vege_simple, top_simple, dessert_simple)
     all_simple$type <- as.factor(all_simple$type)
+    summary(all_simple)
+
+    ##                                 Recipe       Water           Glucides     
+    ##  Aubergines farcies à la mozzarella: 1   Min.   : 9.357   Min.   : 1.179  
+    ##  Beignets végétariens à la tomate  : 1   1st Qu.:37.479   1st Qu.: 5.681  
+    ##  Burger végétarien aux lentilles   : 1   Median :46.750   Median :13.463  
+    ##  Cappuccino de champignons         : 1   Mean   :47.176   Mean   :21.111  
+    ##  Couscous végétarien facile        : 1   3rd Qu.:53.822   3rd Qu.:35.551  
+    ##  Curry de légumes végétarien       : 1   Max.   :85.083   Max.   :74.068  
+    ##  (Other)                           :80                    NA's   :8       
+    ##      Lipids          Proteins          Energy       Phylogenetic_diversity
+    ##  Min.   : 2.062   Min.   : 2.085   Min.   : 296.2   Min.   :102.0         
+    ##  1st Qu.:13.685   1st Qu.: 4.819   1st Qu.: 938.2   1st Qu.:159.3         
+    ##  Median :19.500   Median : 7.122   Median :1320.2   Median :194.5         
+    ##  Mean   :21.034   Mean   : 8.092   Mean   :1328.7   Mean   :200.2         
+    ##  3rd Qu.:27.918   3rd Qu.:10.380   3rd Qu.:1703.8   3rd Qu.:237.5         
+    ##  Max.   :64.369   Max.   :25.721   Max.   :3155.2   Max.   :409.4         
+    ##  NA's   :8        NA's   :8        NA's   :6                              
+    ##  Weighted_phylogenetic_diversity    Richness         Shannon       
+    ##  Min.   :16.71                   Min.   : 3.000   Min.   :-7.7400  
+    ##  1st Qu.:28.09                   1st Qu.: 4.000   1st Qu.: 0.0225  
+    ##  Median :32.35                   Median : 6.000   Median : 1.0300  
+    ##  Mean   :31.74                   Mean   : 6.349   Mean   : 0.5215  
+    ##  3rd Qu.:37.09                   3rd Qu.: 7.000   3rd Qu.: 1.6975  
+    ##  Max.   :42.73                   Max.   :15.000   Max.   : 3.3700  
+    ##  NA's   :8                                        NA's   :8        
+    ##     Simpson               type   
+    ##  Min.   : 0.110   Dessert   :26  
+    ##  1st Qu.: 0.920   Top       :30  
+    ##  Median : 2.100   Vegetarian:30  
+    ##  Mean   : 3.970                  
+    ##  3rd Qu.: 4.305                  
+    ##  Max.   :27.880                  
+    ##  NA's   :8
 
 ### Plot wheighted phylogenetic diversity by nutritional values
 
@@ -401,7 +435,7 @@ Combining recipes
     ##       cor 
     ## 0.1215734
 
-### Correlation with watere
+### Correlation with water
 
     cor.test(all_simple$Water, all_simple$Phylogenetic_diversity)
 
