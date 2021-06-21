@@ -198,6 +198,7 @@ boxplot(vege_simple$Simpson, top_simple$Simpson, dessert_simple$Simpson, col=c("
 # Combining recipes
 ```{r}
 all_simple <- rbind(vege_simple, top_simple, dessert_simple)
+all_simple$type <- as.factor(all_simple$type)
 ```
 
 ### Plot wheighted phylogenetic diversity by nutritional values
@@ -262,36 +263,51 @@ linear_model <- lm(Phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=a
 summary(linear_model)
 ```
 
+```{r} 
+linear_model.p <- lm(Weighted_phylogenetic_diversity ~ Energy + Water + Glucides + Proteins + Lipids + type, data=all_simple)
+summary(linear_model.p)
+```
 ```{r}
-linear_model.p <- lm(Weighted_phylogenetic_diversity ~ Glucides + Proteins + Lipids, data=all_simple)
+linear_model.p <- lm(Phylogenetic_diversity ~ Energy + Water + Glucides + Proteins + Lipids + type, data=all_simple)
 summary(linear_model.p)
 ```
 
+
 ```{r}
-all_simple$type <- as.factor(all_simple$type)
-linear_model <- lm(Weighted_phylogenetic_diversity ~ Water + Glucides + Proteins + Lipids + Energy + type, data=all_simple)
+keep <- subset(all_simple, select=c("Weighted_phylogenetic_diversity", "Energy", "Water", "Glucides", "Lipids", "Proteins"))
+plot(keep)
+linear_model <- lm(Weighted_phylogenetic_diversity ~Water + Glucides + Proteins + Lipids + Energy + type, data=all_simple)
 summary(linear_model)
+
+plot(linear_model)
+```
+
+```{r}
+linear_model <- lm(Weighted_phylogenetic_diversity ~ type, data=all_simple)
+summary(linear_model)
+
+plot(linear_model)
 ```
 
 
 # Link between phylogenetic diversity and richness
 ```{r}
-plot(vege_simple$Richness, vege_simple$Phylogenetic_diversity, pch=20, col="green", ylab="Diversité Phylogénétique", xlab="Richesse"  )
+plot(all_simple$Richness, all_simple$Phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Diversité Phylogénétique", xlab="Richesse"  )
 abline(lm(vege_simple$Phylogenetic_diversity ~ vege_simple$Richness), col="green")
-points(top_simple$Richness, top_simple$Phylogenetic_diversity, pch=20, col="red" )
+#points(top_simple$Richness, top_simple$Phylogenetic_diversity, pch=20, col="red" )
 abline(lm(top_simple$Phylogenetic_diversity ~ top_simple$Richness), col="red")
-points(dessert_simple$Richness, dessert_simple$Phylogenetic_diversity, pch=20, col="blue")
-abline(lm(dessert_simple$Phylogenetic_diversity ~ dessert_simple$Richness), col="blue")
+#points(dessert_simple$Richness, dessert_simple$Phylogenetic_diversity, pch=20, col="blue")
+abline(lm(dessert_simple$Phylogenetic_diversity ~ dessert_simple$Richness), col="black")
 ```
 
 # Link between weighted phylogenetic diversity and richness
 ```{r}
-plot(vege_simple$Richness, vege_simple$Weighted_phylogenetic_diversity, pch=20, col="green", ylab="Diversité Phylogénétique pondérée", xlab="Richesse")
+plot(all_simple$Richness, all_simple$Weighted_phylogenetic_diversity, pch=20, col=factor(all_simple$type), ylab="Diversité phylogénétique pondérée", xlab="Richesse")
 abline(lm(vege_simple$Weighted_phylogenetic_diversity ~ vege_simple$Richness), col="green")
-points(top_simple$Richness, top_simple$Weighted_phylogenetic_diversity, pch=20, col="red" )
+#points(top_simple$Richness, top_simple$Weighted_phylogenetic_diversity, pch=20, col="red" )
 abline(lm(top_simple$Weighted_phylogenetic_diversity ~ top_simple$Richness), col="red")
-points(dessert_simple$Richness, dessert_simple$Weighted_phylogenetic_diversity, pch=20, col="blue")
-abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Richness), col="blue")
+#points(dessert_simple$Richness, dessert_simple$Weighted_phylogenetic_diversity, pch=20, col="blue")
+abline(lm(dessert_simple$Weighted_phylogenetic_diversity ~ dessert_simple$Richness), col="black")
 ```
 
 # Other plots
