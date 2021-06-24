@@ -43,7 +43,7 @@ elif sys.argv[1] == "-u":
 elif sys.argv[1] == "-t":
     file_name = sys.argv[2]
 
-    with open(sys.argv[2], "r", encoding="utf-8") as f:
+    def parse_tsv(f):
         lines = f.readlines()[1:] # skip the header
         n_fields = len(lines[0].split("\t"))
         if n_fields == 5:
@@ -74,6 +74,18 @@ elif sys.argv[1] == "-t":
             prev_key = key
 
         recipes_dict[prev_key] = ingredients
+        return recipes_dict
+    
+    try:
+        with open(sys.argv[2], "r", encoding="utf-8") as f:
+            recipes_dict = parse_tsv(f)
+    except:
+        try:
+            with open(sys.argv[2], "r") as f:
+                recipes_dict = parse_tsv(f)
+        except Exception:
+            logger.exception("Impossible to process {}".format(file_name))
+        
 
     if "." in file_name:
         file_name = file_name[:file_name.rfind(".")]
@@ -93,13 +105,15 @@ os.makedirs(sys.argv[3] + "/" + file_name + "/assets")
 
 html_name = sys.argv[3] + "/" + file_name + "/" + file_name + ".html"
 
-
 for url in recipes_dict:
     if recipes_dict[url] != []:
         try:
             ingredients = recipes_dict[url][0]
         except:
-            pass
+            try:
+                ingredients = recipes_dict[url]
+            except:
+                pass
 
         recipes_dict[url] = []
     else:
@@ -177,7 +191,7 @@ for url in recipes_dict:
 # create a html page to display results
 script_dir = sys.argv[4]
 
-with open(html_name, "w") as html_page:
+with open(html_name, "w", encoding="utf-8") as html_page:
     html_page.write(f"""
     <html>
         <head>
@@ -241,7 +255,7 @@ with open(html_name, "w") as html_page:
     html_page.write(""" 
         </body>
     </html>
-""")
+    """)
 
 
 # create tsv file

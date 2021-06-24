@@ -79,8 +79,8 @@ Anser anser domesticus	Oie
 Anser anser domesticus	Viande d'oie
 Anthemis nobilis	Camomille romaine
 Anthriscus cerefolium	Cerfeuil
-Apis	Miel
 Apios americana	Glycine tubéreuse
+Apis	Miel
 Apium graveolens	Céleri
 Apium graveolens	Céleri-rave
 Arachis hypogaea	Arachide
@@ -129,13 +129,13 @@ Beta vulgaris	Côte de bette
 Blitum bonus-henricus	Chénopode bon-Henri
 Borago officinalis	Bourrache
 Bos taurus	Bavette de boeuf
-Bos taurus	Béchamel
 Bos taurus	Beurre
 Bos taurus	Beurre doux
 Bos taurus	Beurre tendre
 Bos taurus	Blanquette de veau
 Bos taurus	Boeuf
 Bos taurus	Boeuf haché
+Bos taurus	Béchamel
 Bos taurus	Bœuf
 Bos taurus	Collier de veau
 Bos taurus	Comté
@@ -164,9 +164,9 @@ Bos taurus	Filet mignon de boeuf
 Bos taurus	Flanchet de veau
 Bos taurus	Fromage blanc
 Bos taurus	Fromage râpé
+Bos taurus	Gruyère râpé
 Bos taurus	Gîte de boeuf
 Bos taurus	Gîte de veau
-Bos taurus	Gruyère râpé
 Bos taurus	Hampe
 Bos taurus	Jarret de veau
 Bos taurus	Joue de boeuf
@@ -176,8 +176,8 @@ Bos taurus	Langue de boeuf
 Bos taurus	Langue de veau
 Bos taurus	Longe de veau
 Bos taurus	Longe filet de veau
-Bos taurus	Mascarpone
 Bos taurus	Maroilles
+Bos taurus	Mascarpone
 Bos taurus	Mozzarella
 Bos taurus	Noix de veau
 Bos taurus	Noix pâtissière de veau
@@ -209,19 +209,19 @@ Bos taurus	Veau de lait
 Bos taurus	Viande de veau
 Bos taurus	Viande des Grisons
 Bos taurus	Viande hachée
+Bos taurus	Yaourt
+Bos taurus	Yaourt nature
 Bos taurus	beurre doux
 Bos taurus	beurre tendre
 Bos taurus	blanquette de veau
 Bos taurus	boeuf haché
 Bos taurus	lait demi-écrémé
-Bos taurus	Yaourt
-Bos taurus	Yaourt nature
 Brassica campestris	Navette d'été
 Brassica hirta	Moutarde blanche
 Brassica juncea	Moutarde
 Brassica juncea	Moutarde de Djion
-Brassica juncea	Moutarde de djion
 Brassica juncea	Moutarde de Sarepta
+Brassica juncea	Moutarde de djion
 Brassica napus	Chou-navet
 Brassica napus	Colza
 Brassica napus	Huile de colza
@@ -655,8 +655,8 @@ Ovis aries	Collier d'agneau
 Ovis aries	Côtelette d'agneau
 Ovis aries	Côtelettes d'agneau
 Ovis aries	Feta
-Ovis aries	Fromage de chèvre
 Ovis aries	Filet d'agneau
+Ovis aries	Fromage de chèvre
 Ovis aries	Gigot d'agneau
 Ovis aries	Gigot raccourci
 Ovis aries	Haut de côtes d'agneau
@@ -701,16 +701,14 @@ Phaseolus lunatus	Haricot de Lima
 Phaseolus lunatus	Pois De Sept Ans
 Phaseolus multiflorus	Haricot écarlate
 Phaseolus vulgaris	Haricot
-Phaseolus vulgaris	Haricots de Bourbon
-Phaseolus vulgaris	Haricots verts
+Phaseolus vulgaris	Haricot rouge
+Phaseolus vulgaris	Haricot rouges
 Phaseolus vulgaris	Haricot vert
 Phaseolus vulgaris	Haricot verts
-Phaseolus vulgaris	Haricots vert
-Phaseolus vulgaris	Haricots verts
-Phaseolus vulgaris	Haricot rouge
+Phaseolus vulgaris	Haricots de Bourbon
 Phaseolus vulgaris	Haricots rouges
+Phaseolus vulgaris	Haricots vert
 Phaseolus vulgaris	haricots rouge
-Phaseolus vulgaris	Haricot rouges
 Phasianus colchicus	Faisan
 Phasianus colchicus	Poitrine de poule faisane
 Phasianus colchicus	Poule faisane
@@ -807,14 +805,12 @@ Saccharina latissima	Konbu
 Saccharomyces cerevisiae	Levure
 Saccharomyces cerevisiae	levure de bière
 Saccharum	Sirop de sucre de canne
-Saccharum	Sucre
 Saccharum	Sucre en grain
 Saccharum	Sucre en poudre
 Saccharum	Sucre fin
+Saccharum	Sucre glace
 Saccharum	Sucre semoule
 Saccharum	Sucre vanillé
-Saccharum	Sucre
-Saccharum	Sucre glace
 Saccharum	sucre en poudre
 Saccharum	sucre fin
 Saccharum	sucre semoule
@@ -865,6 +861,7 @@ Solanum lycopersicum	Coulis de tomate
 Solanum lycopersicum	Pomme d'amour
 Solanum lycopersicum	Pulpe de tomate
 Solanum lycopersicum	Purée de tomate
+Solanum lycopersicum	Sauce tomate
 Solanum lycopersicum	Tomate
 Solanum lycopersicum	Tomates
 Solanum lycopersicum	Tomates cerise
@@ -979,18 +976,18 @@ Trichosanthes cucumerina	Serpent végétal
 Trigonella foenum-graecum	Fenugrec
 Trigonella foenum-graecum	Trigonelle Fenugrec
 Triticum	Biscuit
-Triticum	Biscuits
 Triticum	Biscuit à la cuillère
+Triticum	Biscuits
 Triticum	Chapelure
 Triticum	Farfalle
 Triticum	Farfalles
-Triticum	Semoule
-Triticum	Lasagnes
 Triticum	Farine de blé
+Triticum	Lasagnes
 Triticum	Pain d'épices
 Triticum	Pain de mie
 Triticum	Pain pour hamburger
 Triticum	Pâte feuilletée
+Triticum	Semoule
 Triticum aestivum	Farine
 Triticum durum	Boulgour
 Triticum turgidum	Farine de blé
