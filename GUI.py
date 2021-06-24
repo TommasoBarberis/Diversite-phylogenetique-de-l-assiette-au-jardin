@@ -259,7 +259,11 @@ class MainWindow(tk.Tk):
                 try:
                     ingredients = recipes_dict[url][0]
                 except:
-                    pass
+                    try:
+                        ingredients = recipes_dict[url]
+                    except Exception:
+                        logger.exception(Exception)
+
 
                 recipes_dict[url] = []
             else:
