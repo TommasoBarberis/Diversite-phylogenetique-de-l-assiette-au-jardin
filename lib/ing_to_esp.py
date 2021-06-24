@@ -75,7 +75,6 @@ def recherche_globale(dicto_ing):
     correspondences = db_to_dicto("data/filtered_scientific_name_db.txt")
     dicto_esp = {}
     liste_ing = []
-    print(dicto_ing)
     for k in dicto_ing.keys():
         liste_ing.append(k)
     dicto_esp = search_in_dict(correspondences, dicto_esp, liste_ing)    
