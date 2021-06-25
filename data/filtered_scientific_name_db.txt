@@ -143,6 +143,7 @@ Bos taurus	Crème
 Bos taurus	Crème fraiche
 Bos taurus	Crème fraîche
 Bos taurus	Crème fraîche allégée
+Bos taurus	Crème fraîche liquide
 Bos taurus	Crème fraîche épaisse
 Bos taurus	Crème liquide
 Bos taurus	Côte de boeuf
@@ -152,6 +153,7 @@ Bos taurus	Côtes de veau
 Bos taurus	Côtes premières de veau
 Bos taurus	Côtes secondes de veau
 Bos taurus	Découpe du boeuf
+Bos taurus	Emmental
 Bos taurus	Entrecôte de boeuf
 Bos taurus	Epaule de veau
 Bos taurus	Escalope de veau

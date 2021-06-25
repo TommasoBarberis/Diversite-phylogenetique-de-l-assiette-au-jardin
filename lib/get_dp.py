@@ -19,7 +19,8 @@ def phylogenetic_diversity (tree, species):
     dans la recette avec la metrique MDP proposee par Webb en 2002.
     """
 
-    species = list(filter(("NA").__ne__, species.values()))
+    species = list(set(filter(("NA").__ne__, species.values())))
+
     for sp in species:
         sp_id = lm.get_taxid({"key": sp})
         if sp_id == []:

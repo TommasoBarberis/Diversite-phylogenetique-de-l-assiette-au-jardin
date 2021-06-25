@@ -1035,7 +1035,11 @@ class Results:
             for ing in species.keys():
                 if species[ing] != "NA":
                     if ing in dry_matter_dico.keys() and dry_matter_dico[ing] != "NA":
-                        dict_sp_drym[species[ing]] = dry_matter_dico[ing]
+                        if species[ing] in dict_sp_drym:
+                            val = [float(dict_sp_drym[species[ing]][0]) + float(dry_matter_dico[ing][0]), "g"]
+                            dict_sp_drym[species[ing]] = val
+                        else:
+                            dict_sp_drym[species[ing]] = dry_matter_dico[ing]
                     else:
                         bool_var = False
                         break
